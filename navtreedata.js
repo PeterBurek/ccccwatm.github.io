@@ -1,11 +1,6 @@
 var NAVTREE =
 [
   [ "CWATM", "index.html", [
-    [ "IIASA Community Water Model (CWATM)", "index.html", [
-      [ "Introduction", "index.html#intro", null ],
-      [ "Requirements", "index.html#require", null ],
-      [ "Schematic View", "index.html#scheme", null ]
-    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -15,6 +10,9 @@ var NAVTREE =
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ]
       ] ]
+    ] ],
+    [ "Files", null, [
+      [ "File List", "files.html", "files" ]
     ] ]
   ] ]
 ];

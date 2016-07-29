@@ -1,3 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classglobal__modules_1_1zusatz_1_1_dynamic_framework.html" title="global_modules.zusatz.Dynamic\lFramework" alt="" coords="5,5,216,47"/>
+<area shape="rect" id="node2" href="$classhydrological__modules_1_1capillar_rise_1_1capillar_rise.html" title="hydrological_modules.capillar\lRise.capillarRise" alt="" coords="169,5,361,47"/>
+<area shape="rect" id="node3" href="$classhydrological__modules_1_1groundwater_1_1groundwater.html" title="hydrological_modules.groundwater.groundwater" alt="" coords="118,71,413,98"/>
+<area shape="rect" id="node4" href="$classhydrological__modules_1_1inflow_1_1inflow.html" title="hydrological_modules.inflow.inflow" alt="" coords="156,122,375,149"/>
+<area shape="rect" id="node5" href="$classhydrological__modules_1_1landcover_type_1_1landcover_type.html" title="hydrological_modules.landcover\lType.landcoverType" alt="" coords="163,173,368,215"/>
+<area shape="rect" id="node6" href="$classhydrological__modules_1_1misc_initial_1_1misc_initial.html" title="Miscellaneous repeatedly used expressions. " alt="" coords="176,239,355,280"/>
+<area shape="rect" id="node7" href="$classhydrological__modules_1_1readmeteo_1_1readmeteo.html" title="hydrological_modules.readmeteo.readmeteo" alt="" coords="127,305,404,331"/>
+<area shape="rect" id="node8" href="$classhydrological__modules_1_1snow__frost_1_1snow.html" title="hydrological_modules.snow\l_frost.snow" alt="" coords="175,356,356,397"/>
+<area shape="rect" id="node9" href="$classhydrological__modules_1_1soil_1_1soil.html" title="hydrological_modules.soil.soil" alt="" coords="168,422,363,449"/>
+<area shape="rect" id="node10" href="$classhydrological__modules_1_1waterdemand_1_1waterdemand.html" title="hydrological_modules.waterdemand.waterdemand" alt="" coords="111,473,420,499"/>
 </map>

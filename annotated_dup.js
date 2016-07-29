@@ -1,109 +1,56 @@
 var annotated_dup =
 [
-    [ "global_modules", null, [
-      [ "output", null, [
-        [ "outputTssMap", "classglobal__modules_1_1output_1_1output_tss_map.html", "classglobal__modules_1_1output_1_1output_tss_map" ]
-      ] ],
-      [ "stateVar", null, [
-        [ "stateVar", "classglobal__modules_1_1state_var_1_1state_var.html", "classglobal__modules_1_1state_var_1_1state_var" ]
-      ] ],
-      [ "zusatz", null, [
-        [ "DynamicFramework", "classglobal__modules_1_1zusatz_1_1_dynamic_framework.html", "classglobal__modules_1_1zusatz_1_1_dynamic_framework" ],
-        [ "EnsKalmanFilterFramework", "classglobal__modules_1_1zusatz_1_1_ens_kalman_filter_framework.html", null ],
-        [ "LisfloodError", "classglobal__modules_1_1zusatz_1_1_lisflood_error.html", "classglobal__modules_1_1zusatz_1_1_lisflood_error" ],
-        [ "LisfloodFileError", "classglobal__modules_1_1zusatz_1_1_lisflood_file_error.html", "classglobal__modules_1_1zusatz_1_1_lisflood_file_error" ],
-        [ "LisfloodRunInfo", "classglobal__modules_1_1zusatz_1_1_lisflood_run_info.html", "classglobal__modules_1_1zusatz_1_1_lisflood_run_info" ],
-        [ "LisfloodWarning", "classglobal__modules_1_1zusatz_1_1_lisflood_warning.html", "classglobal__modules_1_1zusatz_1_1_lisflood_warning" ],
-        [ "TimeoutputTimeseries", "classglobal__modules_1_1zusatz_1_1_timeoutput_timeseries.html", "classglobal__modules_1_1zusatz_1_1_timeoutput_timeseries" ]
-      ] ]
+    [ "cwatm", null, [
+      [ "CWATModel", "classcwatm_1_1_c_w_a_t_model.html", null ]
+    ] ],
+    [ "cwatm_dynamic", null, [
+      [ "CWATModel_dyn", "classcwatm__dynamic_1_1_c_w_a_t_model__dyn.html", "classcwatm__dynamic_1_1_c_w_a_t_model__dyn" ]
+    ] ],
+    [ "cwatm_initial", null, [
+      [ "CWATModel_ini", "classcwatm__initial_1_1_c_w_a_t_model__ini.html", "classcwatm__initial_1_1_c_w_a_t_model__ini" ]
     ] ],
     [ "hydrological_modules", null, [
-      [ "evapowater", null, [
-        [ "evapowater", "classhydrological__modules_1_1evapowater_1_1evapowater.html", "classhydrological__modules_1_1evapowater_1_1evapowater" ]
-      ] ],
-      [ "frost", null, [
-        [ "frost", "classhydrological__modules_1_1frost_1_1frost.html", "classhydrological__modules_1_1frost_1_1frost" ]
+      [ "capillarRise", null, [
+        [ "capillarRise", "classhydrological__modules_1_1capillar_rise_1_1capillar_rise.html", "classhydrological__modules_1_1capillar_rise_1_1capillar_rise" ]
       ] ],
       [ "groundwater", null, [
         [ "groundwater", "classhydrological__modules_1_1groundwater_1_1groundwater.html", "classhydrological__modules_1_1groundwater_1_1groundwater" ]
       ] ],
-      [ "indicatorcalc", null, [
-        [ "indicatorcalc", "classhydrological__modules_1_1indicatorcalc_1_1indicatorcalc.html", "classhydrological__modules_1_1indicatorcalc_1_1indicatorcalc" ]
-      ] ],
       [ "inflow", null, [
         [ "inflow", "classhydrological__modules_1_1inflow_1_1inflow.html", "classhydrological__modules_1_1inflow_1_1inflow" ]
       ] ],
-      [ "lakes", null, [
-        [ "lakes", "classhydrological__modules_1_1lakes_1_1lakes.html", "classhydrological__modules_1_1lakes_1_1lakes" ]
-      ] ],
-      [ "landusechange", null, [
-        [ "landusechange", "classhydrological__modules_1_1landusechange_1_1landusechange.html", "classhydrological__modules_1_1landusechange_1_1landusechange" ]
-      ] ],
-      [ "leafarea", null, [
-        [ "leafarea", "classhydrological__modules_1_1leafarea_1_1leafarea.html", "classhydrological__modules_1_1leafarea_1_1leafarea" ]
+      [ "landcoverType", null, [
+        [ "landcoverType", "classhydrological__modules_1_1landcover_type_1_1landcover_type.html", "classhydrological__modules_1_1landcover_type_1_1landcover_type" ]
       ] ],
       [ "miscInitial", null, [
         [ "miscInitial", "classhydrological__modules_1_1misc_initial_1_1misc_initial.html", "classhydrological__modules_1_1misc_initial_1_1misc_initial" ]
       ] ],
-      [ "opensealed", null, [
-        [ "opensealed", "classhydrological__modules_1_1opensealed_1_1opensealed.html", "classhydrological__modules_1_1opensealed_1_1opensealed" ]
-      ] ],
-      [ "polder", null, [
-        [ "polder", "classhydrological__modules_1_1polder_1_1polder.html", "classhydrological__modules_1_1polder_1_1polder" ]
-      ] ],
       [ "readmeteo", null, [
         [ "readmeteo", "classhydrological__modules_1_1readmeteo_1_1readmeteo.html", "classhydrological__modules_1_1readmeteo_1_1readmeteo" ]
       ] ],
-      [ "reservoir", null, [
-        [ "reservoir", "classhydrological__modules_1_1reservoir_1_1reservoir.html", "classhydrological__modules_1_1reservoir_1_1reservoir" ]
+      [ "snow_frost", null, [
+        [ "snow", "classhydrological__modules_1_1snow__frost_1_1snow.html", "classhydrological__modules_1_1snow__frost_1_1snow" ]
       ] ],
-      [ "riceirrigation", null, [
-        [ "riceirrigation", "classhydrological__modules_1_1riceirrigation_1_1riceirrigation.html", "classhydrological__modules_1_1riceirrigation_1_1riceirrigation" ]
+      [ "soil", null, [
+        [ "soil", "classhydrological__modules_1_1soil_1_1soil.html", "classhydrological__modules_1_1soil_1_1soil" ]
       ] ],
-      [ "routing", null, [
-        [ "routing", "classhydrological__modules_1_1routing_1_1routing.html", "classhydrological__modules_1_1routing_1_1routing" ]
-      ] ],
-      [ "snow", null, [
-        [ "snow", "classhydrological__modules_1_1snow_1_1snow.html", "classhydrological__modules_1_1snow_1_1snow" ]
-      ] ],
-      [ "soilloop", null, [
-        [ "soilloop", "classhydrological__modules_1_1soilloop_1_1soilloop.html", "classhydrological__modules_1_1soilloop_1_1soilloop" ]
-      ] ],
-      [ "structures", null, [
-        [ "structures", "classhydrological__modules_1_1structures_1_1structures.html", "classhydrological__modules_1_1structures_1_1structures" ]
-      ] ],
-      [ "surface_routing", null, [
-        [ "surface_routing", "classhydrological__modules_1_1surface__routing_1_1surface__routing.html", "classhydrological__modules_1_1surface__routing_1_1surface__routing" ]
-      ] ],
-      [ "transmission", null, [
-        [ "transmission", "classhydrological__modules_1_1transmission_1_1transmission.html", "classhydrological__modules_1_1transmission_1_1transmission" ]
-      ] ],
-      [ "waterabstraction", null, [
-        [ "waterabstraction", "classhydrological__modules_1_1waterabstraction_1_1waterabstraction.html", "classhydrological__modules_1_1waterabstraction_1_1waterabstraction" ]
-      ] ],
-      [ "waterbalance", null, [
-        [ "waterbalance", "classhydrological__modules_1_1waterbalance_1_1waterbalance.html", "classhydrological__modules_1_1waterbalance_1_1waterbalance" ]
-      ] ],
-      [ "waterlevel", null, [
-        [ "waterlevel", "classhydrological__modules_1_1waterlevel_1_1waterlevel.html", "classhydrological__modules_1_1waterlevel_1_1waterlevel" ]
-      ] ],
-      [ "wateruse", null, [
-        [ "wateruse", "classhydrological__modules_1_1wateruse_1_1wateruse.html", "classhydrological__modules_1_1wateruse_1_1wateruse" ]
+      [ "waterdemand", null, [
+        [ "waterdemand", "classhydrological__modules_1_1waterdemand_1_1waterdemand.html", "classhydrological__modules_1_1waterdemand_1_1waterdemand" ]
       ] ]
     ] ],
-    [ "lisf1", null, [
-      [ "LisfloodModel", "classlisf1_1_1_lisflood_model.html", null ]
-    ] ],
-    [ "Lisflood_dynamic", null, [
-      [ "LisfloodModel_dyn", "class_lisflood__dynamic_1_1_lisflood_model__dyn.html", "class_lisflood__dynamic_1_1_lisflood_model__dyn" ]
-    ] ],
-    [ "Lisflood_EnKF", null, [
-      [ "LisfloodModel_EnKF", "class_lisflood___en_k_f_1_1_lisflood_model___en_k_f.html", "class_lisflood___en_k_f_1_1_lisflood_model___en_k_f" ]
-    ] ],
-    [ "Lisflood_initial", null, [
-      [ "LisfloodModel_ini", "class_lisflood__initial_1_1_lisflood_model__ini.html", "class_lisflood__initial_1_1_lisflood_model__ini" ]
-    ] ],
-    [ "Lisflood_monteCarlo", null, [
-      [ "LisfloodModel_monteCarlo", "class_lisflood__monte_carlo_1_1_lisflood_model__monte_carlo.html", "class_lisflood__monte_carlo_1_1_lisflood_model__monte_carlo" ]
+    [ "management_modules", null, [
+      [ "configuration", null, [
+        [ "ExtParser", "classmanagement__modules_1_1configuration_1_1_ext_parser.html", "classmanagement__modules_1_1configuration_1_1_ext_parser" ]
+      ] ],
+      [ "improvepcraster", null, [
+        [ "DynamicFramework", "classmanagement__modules_1_1improvepcraster_1_1_dynamic_framework.html", "classmanagement__modules_1_1improvepcraster_1_1_dynamic_framework" ],
+        [ "TimeoutputTimeseries", "classmanagement__modules_1_1improvepcraster_1_1_timeoutput_timeseries.html", "classmanagement__modules_1_1improvepcraster_1_1_timeoutput_timeseries" ]
+      ] ],
+      [ "messages", null, [
+        [ "CWATMError", "classmanagement__modules_1_1messages_1_1_c_w_a_t_m_error.html", "classmanagement__modules_1_1messages_1_1_c_w_a_t_m_error" ],
+        [ "CWATMFileError", "classmanagement__modules_1_1messages_1_1_c_w_a_t_m_file_error.html", "classmanagement__modules_1_1messages_1_1_c_w_a_t_m_file_error" ],
+        [ "CWATMRunInfo", "classmanagement__modules_1_1messages_1_1_c_w_a_t_m_run_info.html", "classmanagement__modules_1_1messages_1_1_c_w_a_t_m_run_info" ],
+        [ "CWATMWarning", "classmanagement__modules_1_1messages_1_1_c_w_a_t_m_warning.html", "classmanagement__modules_1_1messages_1_1_c_w_a_t_m_warning" ]
+      ] ]
     ] ]
 ];
