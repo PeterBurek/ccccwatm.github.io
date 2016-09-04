@@ -1,20 +1,20 @@
 cwatm module
 ============
 
-.. image:: _static/CWATM.jpg
 
-.. inheritance-diagram:: cwatm.CWATModel
-   :parts: 1
+.. Note:: Inheritance
+    
 
-.. Note::
-    blabla
-	
 .. inheritance-diagram:: cwatm
    :parts: 1
 
-	
+.. Note:: blabla
+
+.. inheritance-diagram:: cwatm_initial.CWATModel_ini
+
 
 .. automodule:: cwatm
     :members:
     :undoc-members:
+    :inherited-members:
     :show-inheritance:

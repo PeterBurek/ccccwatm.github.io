@@ -15,7 +15,7 @@ Requirements are a 64 bit `Python 2.7.x version <https://www.python.org/download
 
 and two external libraries are needed:
 
-* `Numpy <numpy http://www.numpy.org>`_
+* `Numpy <http://www.numpy.org>`_
 * `netCDF4 <https://pypi.python.org/pypi/netCDF4>`_
 
 
@@ -68,7 +68,8 @@ example::
     -h --noheader    .tss file have no header and start immediately with the time series
     -t --printtime   the computation time for hydrological modules are printed
 
-
+.. _rst_metadata:
+	
 NetCDF meta data
 ****************
 
@@ -160,9 +161,10 @@ The modeling area can be defined by:
 * a mask map
 * coordinates 
 
-.. note:: The mask map can be a PCraster or a netCDF format
+.. note:: 
 
-	The coordinates have the format: Number of Cols, Number of rows, cellsize, upper left corner X, upper left corner Y 
+    The mask map can be a PCraster or a netCDF format
+	| The coordinates have the format: Number of Cols, Number of rows, cellsize, upper left corner X, upper left corner Y 
 
 
 .. literalinclude:: _static/settings1.ini
@@ -182,7 +184,7 @@ Spin-up time is the time for warming up (results will be stored after the spin-u
 .. note:: 
 
     The time can be given as date: dd/mm/yyyy 
-	or as relative date: number (but then CalendarDayStart has to be defined)
+	|or as relative date: number (but then CalendarDayStart has to be defined)
 
 .. note:: Spin-up time can be given as date or number 
 	
@@ -217,32 +219,94 @@ Either as numbers or references to maps (PCraster or netCDF)
     :linenos:
     :lineno-match:
     :language: ini
-    :lines: 290-294
+    :lines: 287-292
+
+
+Output
+***************************
+
+Output can be spatial/time as netCDF4 map stacks
+  | and/or time series at specified points
+
+Output can be as maps and time series:
+
+* per day
+* total month, average month, end of month
+* total year, average year, end of year 
+
+For each of the following sections output can be defined for different variables:
+
+* Meteo
+* Snow
+* Soil for different land cover (forest, grassland, irrigated land, paddy irrigated)
+* Water demand
+* Groundwater
+* River routing
+* Lakes and reservoirs
+
+An output directory can be defined and for each sort of output the variable(s) can be set
+As example output for precipitation, temperature and discharge is shown here::
+
+   # OUTPUT maps and timeseries
+   OUT_Dir = $(FILE_PATHS:PathOut)
+   OUT_MAP_Daily = 
+   OUT_MAP_MonthEnd = 
+   OUT_MAP_MonthTot = Precipitation, Tavg
+   OUT_MAP_MonthAvg = 
+
+   OUT_TSS_MonthTot = Precipitation, Tavg
+
+
+::
+   
+   # OUTPUT maps and timeseries
+   OUT_Dir = $(FILE_PATHS:PathOut)
+   OUT_MAP_Daily = discharge
+   OUT_MAP_MonthEnd = 
+   OUT_MAP_MonthTot = ] 
+
+   OUT_TSS_Daily = discharge
+   OUT_TSS_MonthEnd = discharge
+   OUT_TSS_AnnualEnd = discharge
+
+.. note:: For each variable the meta data information can be defined in :ref:`rst_metadata`
+
+
+Reading information
+***************************
+
+Information will be read in from values in the settings file
+Here the value definitions for [SNOW] is shown:	
+
+.. literalinclude:: _static/settings1.ini
+    :linenos:
+    :lineno-match:
+    :language: ini
+    :lines: 166-190
+	
+.. note:: TemperatureLapseRate = 0.0065
+     | for the variable TemperatureLapseRate the value of 0.0065 is set	
+
+Variables can also be defined by spatial maps or map stacks
+	
+::
+
+   tanslope = $(PathTopo)\tanslope.map
+   forest_coverFractionNC   = $(PathForest)\coverFractionInputForest366days.nc
+
+.. note:: suffix can be .map, but if there is no PCraster map it will look automatically for netCDF .nc
+	
+.. warning:: in most cases values can be replaced by map
+
 	
 | ____________________________________________________________________________________________________________
 | 
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-	
-
 	
 	
 .. _rst_setting:	
 
 Complete settings file
-**********************
+======================
 
 Example of a settings file:
 

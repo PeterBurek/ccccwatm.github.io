@@ -2,11 +2,14 @@
 Features of the Model
 #####################
 
-Community
-=============
+.. contents:: 
+    :depth: 3
+
+Community Model
+===============
 
 
-.. csv-table:: **COMMUNITY** Water Model
+.. csv-table:: 
    :header: "Feature", "Description"
    :widths: 40, 50 
 
@@ -21,7 +24,7 @@ Water Model
 =============
 
 
-.. csv-table:: **COMMUNITY** Water Model
+.. csv-table::
    :header: "Feature", "Description"
    :widths: 40, 50 
 
@@ -35,7 +38,11 @@ Water Model
    
 
 
-Demos  of results   
-*****************
+Demo of first results   
+=====================
+
+Here are some first demonstration of the model run:
 
 :ref:`rst_demo`
+
+

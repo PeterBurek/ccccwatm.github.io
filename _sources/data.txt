@@ -59,7 +59,6 @@ Temporal data for each year
 Crop coefficient
 ----------------
 
-
 Continous temporal data
 =======================
 
