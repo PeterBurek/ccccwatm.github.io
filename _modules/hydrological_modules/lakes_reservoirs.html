@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hydrological_modules.lakes_reservoirs &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for hydrological_modules.lakes_reservoirs</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -------------------------------------------------------------------------</span>
+<span class="c1"># Name:        Lakes and reservoirs module</span>
+<span class="c1"># Purpose:</span>
+<span class="c1">#</span>
+<span class="c1"># Author:      PB</span>
+<span class="c1">#</span>
+<span class="c1"># Created:     01/08/2016</span>
+<span class="c1"># Copyright:   (c) PB 2016</span>
+<span class="c1"># -------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="lakes_reservoirs"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs">[docs]</a><span class="k">class</span> <span class="nc">lakes_reservoirs</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    # ************************************************************</span>
+<span class="sd">    # ***** LAKES AND RESERVOIRS      ****************************</span>
+<span class="sd">    # ************************************************************</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lakes_reservoirs_variable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">lakes_reservoirs_variable</span>
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="lakes_reservoirs.initial"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; initial part of the lakes + reservoirs module</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fractionWater</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbody_file</span> <span class="o">=</span> <span class="n">binding</span><span class="p">[</span><span class="s1">&#39;waterBodyInputNC&#39;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeLakes</span> <span class="o">=</span> <span class="s2">&quot;True&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeReservoirs</span> <span class="o">=</span> <span class="s2">&quot;True&quot;</span>
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">]:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minResvrFrac</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;minResvrFrac&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxResvrFrac</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;maxResvrFrac&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minWeirWidth</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;minWeirWidth&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span>
+
+
+        <span class="c1"># initial conditions</span>
+
+        <span class="c1"># lake and reservoir storages = waterBodyStorage (m3)</span>
+        <span class="c1"># - values are given for the entire lake / reservoir cells</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s1">&#39;waterBodyStorage&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s1">&#39;avgInflowLakeReserv&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s1">&#39;avgOutflowDischarge&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span>
+
+
+
+        <span class="n">i</span>  <span class="o">=</span> <span class="mi">1</span></div>
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="lakes_reservoirs.getParameterFiles"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs.getParameterFiles">[docs]</a>    <span class="k">def</span> <span class="nf">getParameterFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1">#           self.var.cellArea    self.var..Ldd self.var.cellLength    ,self.var.cellSize</span>
+        <span class="c1"># parameters for Water Bodies: fracWat</span>
+        <span class="c1">#                              waterBodyIds</span>
+        <span class="c1">#                              waterBodyOut</span>
+        <span class="c1">#                              waterBodyArea</span>
+        <span class="c1">#                              waterBodyTyp</span>
+        <span class="c1">#                              waterBodyCap</span>
+
+
+        <span class="c1">#    fracWat = fraction of surface water bodies</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracWat</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOut</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTyp</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyArea</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># waterBody surface areas</span>
+
+
+        <span class="c1">#self.var.waterBodyOut = pcr.boolean(0)  # waterBody outlets</span>
+        <span class="c1">#self.var.waterBodyArea = pcr.scalar(0.)  # waterBody surface areas</span>
+        <span class="c1"># d.astype(np.int32) , d.astype(np.bool8)</span>
+
+
+        <span class="c1">#if option[&#39;includeWaterBodies&#39;]:</span>
+            <span class="c1">#waterBodyIdsPcr = nominal(0)</span>
+            <span class="c1">#waterBodyOutPcr = boolean(0)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracWat</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbody_file</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="s2">&quot;yearly&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span> <span class="s1">&#39;fracWaterInp&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracWat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracWat</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracWat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracWat</span><span class="p">)</span>
+
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeLakes</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeReservoirs</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span><span class="p">:</span>
+            <span class="c1"># water body ids</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbody_file</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="s2">&quot;yearly&quot;</span><span class="p">,</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;waterBodyIds&#39;</span><span class="p">)</span>
+            <span class="c1">#Adding 1 to make sure that no waterbody has ID = 0</span>
+            <span class="c1"># missing value for pcraster</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span>
+            <span class="n">waterBodyIdsPcr</span> <span class="o">=</span> <span class="n">decompress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span><span class="p">)</span>
+            <span class="c1">##self.var.waterBodyIds = np.where( self.var.waterBodyIds &gt; 0., pcr.nominal(self.var.waterBodyIds))</span>
+
+
+            <span class="c1"># Pcraster</span>
+            <span class="c1"># water body outlets:</span>
+            <span class="c1"># PB calculate for each lake/reservoir the outlet cell</span>
+            <span class="c1"># e.g. lake Victory has many aterBodyIds (with same id) but only 1 cell where the lakecatchment = max -&gt; outlet</span>
+            <span class="n">wbCatchment</span> <span class="o">=</span> <span class="n">catchmenttotal</span><span class="p">(</span><span class="n">scalar</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Ldd</span><span class="p">)</span>
+            <span class="c1"># = outlet ids</span>
+            <span class="n">waterBodyOutPcr</span> <span class="o">=</span> <span class="n">ifthen</span><span class="p">(</span><span class="n">wbCatchment</span> <span class="o">==</span> <span class="n">areamaximum</span><span class="p">(</span><span class="n">wbCatchment</span><span class="p">,</span> <span class="n">nominal</span><span class="p">(</span><span class="n">waterBodyIdsPcr</span><span class="p">)),</span> <span class="n">waterBodyIdsPcr</span><span class="p">)</span>
+
+            <span class="c1"># this fill ups</span>
+            <span class="n">waterBodyOutPcr</span> <span class="o">=</span> <span class="n">ifthen</span><span class="p">(</span><span class="n">waterBodyIdsPcr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">waterBodyOutPcr</span><span class="p">)</span>
+
+            <span class="c1"># correcting water body ids</span>
+            <span class="n">waterBodyIdsPcr</span> <span class="o">=</span> <span class="n">ifthen</span><span class="p">(</span><span class="n">waterBodyIdsPcr</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">subcatchment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Ldd</span><span class="p">,</span> <span class="n">nominal</span><span class="p">(</span><span class="n">waterBodyOutPcr</span><span class="p">)))</span>
+
+            <span class="c1"># boolean map for water body outlets:</span>
+            <span class="n">waterBodyOutPcr</span> <span class="o">=</span> <span class="n">ifthenelse</span><span class="p">(</span> <span class="n">waterBodyOutPcr</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">,</span><span class="n">scalar</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+            <span class="c1"># boolean map for water body outlets:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">scalar</span><span class="p">(</span><span class="n">waterBodyIdsPcr</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOut</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">scalar</span><span class="p">(</span><span class="n">waterBodyOutPcr</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOut</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOut</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOut</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIndexC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">fracWatC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracWat</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellAreaC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">)</span>
+
+
+            <span class="c1">#np.put(self.var.waterBodyIds, waterBodyIndexC,waterBodyIdsC)</span>
+
+
+            <span class="c1">#self.var.waterBodyIds = self.var.waterBodyIds.astype(np.int32)</span>
+            <span class="c1">#self.var.waterBodyOut = self.var.waterBodyOut.astype(np.bool)</span>
+
+
+
+
+            <span class="c1"># reservoir surface area (m2):</span>
+            <span class="n">resSfArea</span> <span class="o">=</span> <span class="mf">1000.</span> <span class="o">*</span> <span class="mf">1000.</span> <span class="o">*</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbody_file</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="s2">&quot;yearly&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;resSfAreaInp&#39;</span><span class="p">)</span>
+            <span class="n">resSfAreaC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="n">resSfArea</span><span class="p">)</span>
+            <span class="n">resSfAreaC</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span><span class="n">resSfAreaC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span><span class="p">)</span>
+
+
+            <span class="c1"># water body surface area (m2): (lakes and reservoirs)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyAreaC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">npareatotal</span><span class="p">(</span><span class="n">fracWatC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellAreaC</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span><span class="p">),</span>
+                                        <span class="n">npareaaverage</span><span class="p">(</span> <span class="n">resSfAreaC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span><span class="p">))</span>
+
+
+
+            <span class="c1"># Todo at the very end here correct ids, out, area</span>
+            <span class="c1">#  correcting water body ids and outlets (excluding all water bodies with surfaceArea = 0)            #</span>
+            <span class="c1"># correcting water body ids and outlets (excluding all water bodies with surfaceArea = 0)</span>
+
+
+
+        <span class="c1"># water body types:</span>
+        <span class="c1"># - 2 = reservoirs (regulated discharge)</span>
+        <span class="c1"># - 1 = lakes (weirFormula)</span>
+        <span class="c1"># - 0 = non lakes or reservoirs (e.g. wetland)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeLakes</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeReservoirs</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span><span class="p">:</span>
+            <span class="n">waterBodyTyp</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbody_file</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="s2">&quot;yearly&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;waterBodyTyp&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="n">waterBodyTyp</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1">#self.var.waterBodyTyp = compressArray(areamajority(decompress(self.var.waterBodyTyp), decompress(self.var.waterBodyIds)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span> <span class="o">=</span> <span class="n">npareamajority</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span><span class="p">)</span>
+
+            <span class="c1"># TODO at then end</span>
+            <span class="c1"># correcting water body ids and outlets:</span>
+            <span class="c1">#self.var.waterBodyIds = np.where(self.var.waterBodyTyp &gt; 0, self.var.waterBodyIds,0)</span>
+            <span class="c1">#self.var.waterBodyOut = np.where(self.var.waterBodyIds &gt; 0, self.var.waterBodyOut, False)</span>
+
+
+        <span class="c1"># correcting water bodies attributes if reservoirs are ignored (for natural runs):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeLakes</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeReservoirs</span> <span class="o">==</span> <span class="s2">&quot;False&quot;</span><span class="p">:</span>
+            <span class="c1"># correcting fracWat</span>
+            <span class="c1">#reservoirExcluded = globals.inZero.copy()</span>
+            <span class="n">reservoirExcluded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">maxWaterBodyAreaExcluded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">reservoirExcluded</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyAreaC</span> <span class="o">/</span> \
+                                 <span class="n">npareatotal</span><span class="p">(</span><span class="n">reservoirExcluded</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span><span class="p">))</span>
+            <span class="n">maxfractionWaterExcluded</span> <span class="o">=</span> <span class="n">maxWaterBodyAreaExcluded</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellAreaC</span>
+            <span class="n">maxfractionWaterExcluded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">maxfractionWaterExcluded</span><span class="p">)</span>
+            <span class="n">maxfractionWaterExcluded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">fracWatC</span><span class="p">,</span> <span class="n">maxfractionWaterExcluded</span><span class="p">)</span>
+
+            <span class="n">fracWatC</span> <span class="o">=</span> <span class="n">fracWatC</span> <span class="o">-</span> <span class="n">maxfractionWaterExcluded</span>
+            <span class="n">fracWatC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracWat</span><span class="p">)</span>
+            <span class="n">fracWatC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracWat</span><span class="p">)</span>
+
+
+            <span class="c1"># to check afterwards</span>
+            <span class="c1">#self.var.waterBodyArea = np.where(self.var.waterBodyTyp &lt; 2,self.var.waterBodyArea, 0.)</span>
+            <span class="c1">#self.var.waterBodyTyp = np.where(self.var.waterBodyTyp &lt; 2, self.var.waterBodyTyp, 0)</span>
+            <span class="c1">#self.var.waterBodyIds = np.where(self.var.waterBodyTyp &gt; 0, self.var.waterBodyIds, 0)</span>
+            <span class="c1">#self.var.waterBodyOut = np.where(self.var.waterBodyIds &gt; 0, self.var.waterBodyOut, False)</span>
+
+        <span class="c1"># reservoir maximum capacity (m3):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resMaxCapC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeReservoirs</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span><span class="p">:</span>
+
+            <span class="c1"># reservoir maximum capacity (m3):</span>
+            <span class="n">resMaxCap</span> <span class="o">=</span> <span class="mf">1000.</span> <span class="o">*</span> <span class="mf">1000.</span> <span class="o">*</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbody_file</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="s2">&quot;yearly&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;resMaxCapInp&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resMaxCapC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="n">resMaxCap</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resMaxCapC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resMaxCapC</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resMaxCapC</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resMaxCapC</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resMaxCapC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span><span class="p">)</span>
+
+            <span class="c1"># water body capacity (m3): (lakes and reservoirs)</span>
+            <span class="c1"># Note: Most of lakes have capacities &gt; 0.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resMaxCapC</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+            <span class="c1"># correcting water body types:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span><span class="p">,</span> \
+                     <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span><span class="p">))</span>
+
+        <span class="c1"># todo final correxction</span>
+        <span class="c1"># final corrections:</span>
+        <span class="c1">#self.var.waterBodyTyp = np.where(self.var.waterBodyArea &gt; 0., self.var.waterBodyTyp, 0)</span>
+        <span class="c1">#self.var.waterBodyIds = np.where(self.var.waterBodyTyp &gt; 0, self.var.waterBodyIds, 0)</span>
+        <span class="c1">#self.var.waterBodyOut = np.where(self.var.waterBodyIds &gt; 0, self.var.waterBodyOut, False)</span>
+
+
+
+        <span class="c1"># For each new reservoir (introduced at the beginning of the year)</span>
+        <span class="c1"># initiating storage, average inflow and outflow:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorage</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorage</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorage</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflow</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflow</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflow</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflow</span> <span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorage</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflow</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflow</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minResvrFracC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minResvrFrac</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxResvrFracC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxResvrFrac</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minWeirWidthC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minWeirWidth</span><span class="p">)</span>
+
+
+
+
+
+
+        <span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIndexC</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOut</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIndexC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutC</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOut</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOut</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+
+        <span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTyp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIndexC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTyp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIndexC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="lakes_reservoirs.moveFromChannelToWaterBody"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs.moveFromChannelToWaterBody">[docs]</a>    <span class="k">def</span> <span class="nf">moveFromChannelToWaterBody</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newStorageAtLakeAndReservoirs</span><span class="p">,</span> <span class="n">timestepsToAvgDischarge</span><span class="p">,</span> <span class="n">maxTimestepsToAvgDischargeShort</span><span class="p">):</span>
+
+
+        <span class="c1"># new lake and/or reservoir storages (m3)</span>
+        <span class="n">newStorageAtLakeAndReservoirs</span> <span class="o">=</span> <span class="n">npareatotal</span><span class="p">(</span><span class="n">newStorageAtLakeAndReservoirs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span><span class="p">)</span>
+
+        <span class="c1"># inflow (m3/day)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">inflowC</span> <span class="o">=</span> <span class="n">newStorageAtLakeAndReservoirs</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span>
+
+        <span class="c1"># inflowInM3PerSec (m3/s)</span>
+        <span class="n">inflowInM3PerSec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">inflowC</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>
+
+        <span class="c1"># updating average (short term) inflow (m3/s)</span>
+        <span class="c1"># - needed to constrain lake outflow:</span>
+
+        <span class="c1"># ~ self.var.avgInflow = np.maximum(0.,</span>
+        <span class="c1"># ~ (self.var.avgInflow * \</span>
+        <span class="c1"># ~ (np.minimum(maxTimestepsToAvgDischargeShort,</span>
+        <span class="c1"># ~ timestepsToAvgDischarge)- 1.) + \</span>
+        <span class="c1"># ~ (inflowInM3PerSec /\</span>
+        <span class="c1"># ~ vos.secondsPerDay()) * 1.) / \</span>
+        <span class="c1"># ~ (np.minimum(maxTimestepsToAvgDischargeShort,</span>
+        <span class="c1"># ~ timestepsToAvgDischarge)))         # Edwin&#39;s old formula</span>
+<span class="c1">#</span>
+        <span class="n">deltaInflow</span> <span class="o">=</span> <span class="n">inflowInM3PerSec</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflowC</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflowC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflowC</span> <span class="o">+</span> <span class="n">deltaInflow</span> <span class="o">/</span> \
+                 <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">maxTimestepsToAvgDischargeShort</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">timestepsToAvgDischarge</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflowC</span><span class="p">)</span>
+
+        <span class="c1"># updating waterBodyStorage (m3)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">=</span> <span class="n">newStorageAtLakeAndReservoirs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+
+        <span class="c1"># --------------------------------------------------------------------------</span>
+        <span class="c1"># --------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="lakes_reservoirs.weirFormula"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs.weirFormula">[docs]</a>    <span class="k">def</span> <span class="nf">weirFormula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">waterHeight</span><span class="p">,</span> <span class="n">weirWidth</span><span class="p">):</span>  <span class="c1"># Unit: m3/s</span>
+
+        <span class="n">sillElev</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">weirCoef</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">weirFormula</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.7</span> <span class="o">*</span> <span class="n">weirCoef</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">waterHeight</span> <span class="o">-</span> <span class="n">sillElev</span><span class="p">)</span> <span class="o">**</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">weirWidth</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">weirFormula</span><span class="p">)</span></div>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="c1"># --------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="lakes_reservoirs.getLakeOutflow"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs.getLakeOutflow">[docs]</a>    <span class="k">def</span> <span class="nf">getLakeOutflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">avgChannelDischarge</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="c1"># waterHeight (m): temporary variable, a function of storage:</span>
+        <span class="n">minWaterHeight</span> <span class="o">=</span> <span class="mf">0.000</span>  <span class="c1"># (m) Rens used 0.001 m</span>
+        <span class="n">waterHeight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">minWaterHeight</span><span class="p">,</span>
+                                 <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyAreaC</span><span class="p">)</span>
+
+        <span class="c1"># weirWidth (m) : estimated from avgOutflow (m3/s)</span>
+        <span class="n">avgOutflowC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflowC</span>
+
+        <span class="k">if</span> <span class="n">avgChannelDischarge</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">avgOutflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">avgOutflowC</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">avgOutflowC</span><span class="p">,</span> <span class="n">avgChannelDischarge</span><span class="p">)</span>
+            <span class="n">avgOutflowC</span> <span class="o">=</span> <span class="n">npareamaximum</span><span class="p">(</span><span class="n">avgOutflowC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIds</span><span class="p">)</span>
+        <span class="n">bankfullWidth</span> <span class="o">=</span> <span class="mf">4.8</span> <span class="o">*</span> <span class="p">(</span><span class="n">avgOutflowC</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">weirWidthUsed</span> <span class="o">=</span> <span class="n">bankfullWidth</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">weirWidthUsed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">weirWidthUsed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minWeirWidthC</span><span class="p">)</span>
+
+        <span class="c1"># TODO: minWeirWidth based on the GRanD database</span>
+        <span class="n">weirWidthUsed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">weirWidthUsed</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+
+        <span class="c1"># lakeOutflow = weirFormula &gt;= avgInflow &lt;= waterBodyStorage  # m3/day</span>
+        <span class="n">lakeOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span><span class="o">.</span><span class="n">weirFormula</span><span class="p">(</span><span class="n">waterHeight</span><span class="p">,</span> <span class="n">weirWidthUsed</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflowC</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>
+        <span class="n">lakeOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span><span class="p">,</span> <span class="n">lakeOutflow</span><span class="p">)</span>
+
+        <span class="c1"># m3/day</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">lakeOutflow</span><span class="p">)</span></div>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="c1"># --------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="lakes_reservoirs.getReservoirOutflow"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs.getReservoirOutflow">[docs]</a>    <span class="k">def</span> <span class="nf">getReservoirOutflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">avgChannelDischarge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">downstreamDemand</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="n">minWaterHeight</span> <span class="o">=</span> <span class="mf">0.000</span>  <span class="c1"># (m) Rens used 0.001 m</span>
+        <span class="n">reservoirWaterHeight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">minWaterHeight</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyAreaC</span><span class="p">)</span>
+
+        <span class="c1"># avgOutflow (m3/s)</span>
+        <span class="n">avgOutflowC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflowC</span>
+        <span class="k">if</span> <span class="n">avgChannelDischarge</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">avgOutflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">avgOutflowC</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">avgOutflowC</span><span class="p">,</span> <span class="n">avgChannelDischarge</span><span class="p">)</span>
+            <span class="n">avgOutflowC</span> <span class="o">=</span> <span class="n">npareamaximum</span><span class="p">(</span><span class="n">avgOutflowC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyIdsC</span><span class="p">)</span>
+
+
+        <span class="c1"># calculate resvOutflow (based on reservoir storage and avgDischarge):</span>
+        <span class="c1"># - unit: m3/day (Note that avgDischarge is given in m3/s)</span>
+        <span class="c1"># - using reductionFactor in such a way that:</span>
+        <span class="c1">#   - if relativeCapacity &lt; minResvrFrac : release is terminated</span>
+        <span class="c1">#   - if relativeCapacity &gt; maxResvrFrac : longterm Average</span>
+        <span class="n">reductionFactor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minResvrFracC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span><span class="p">)</span> <span class="o">/</span> \
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxResvrFracC</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minResvrFracC</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span><span class="p">)</span>
+        <span class="c1"># m3/day</span>
+        <span class="n">resvOutflow</span> <span class="o">=</span> <span class="n">reductionFactor</span> <span class="o">*</span> <span class="n">avgOutflowC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>
+
+        <span class="c1"># maximum release &lt;= average inflow (especially during dry condition) # m3/day</span>
+        <span class="n">resvOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">resvOutflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgInflowC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span><span class="p">))</span>
+
+        <span class="c1"># downstream demand (m3/day)</span>
+        <span class="k">if</span> <span class="n">downstreamDemand</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">downstreamDemand</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We still have to define downstreamDemand.&quot;</span><span class="p">)</span>
+        <span class="c1"># reduce demand if storage &lt; lower limit</span>
+        <span class="n">reductionFactor</span> <span class="o">=</span> <span class="n">getValDivZero</span><span class="p">(</span><span class="n">downstreamDemand</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minResvrFracC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">39</span><span class="p">)</span>
+        <span class="n">downstreamDemand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">downstreamDemand</span><span class="p">,</span> <span class="n">downstreamDemand</span> <span class="o">*</span> <span class="n">reductionFactor</span><span class="p">)</span>
+        <span class="c1"># resvOutflow &gt; downstreamDemand # m3/day</span>
+        <span class="n">resvOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">resvOutflow</span><span class="p">,</span> <span class="n">downstreamDemand</span><span class="p">)</span>
+
+        <span class="c1"># additional release if storage &gt; upper limit</span>
+        <span class="n">ratioQBankfull</span> <span class="o">=</span> <span class="mf">2.3</span>
+        <span class="n">estmStorage</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">-</span> <span class="n">resvOutflow</span><span class="p">)</span>
+
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">estmStorage</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxResvrFracC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span><span class="p">)</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxResvrFracC</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">):</span>
+            <span class="n">a3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">a2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span><span class="n">a1</span><span class="o">/</span><span class="n">a2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="n">a4</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ratioQBankfull</span> <span class="o">*</span> <span class="n">avgOutflowC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">-</span> <span class="n">resvOutflow</span><span class="p">)</span>
+
+        <span class="n">floodOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">estmStorage</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span><span class="p">)</span> <span class="o">+</span> <span class="n">a3</span> <span class="o">*</span> <span class="n">a4</span>
+
+        <span class="n">floodOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span>
+                                  <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">floodOutflow</span><span class="p">,</span> <span class="n">estmStorage</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxResvrFracC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span><span class="p">))</span>
+        <span class="n">resvOutflow</span> <span class="o">=</span> <span class="n">resvOutflow</span> <span class="o">+</span> <span class="n">floodOutflow</span>
+
+        <span class="c1"># maximum release if storage &gt; upper limit</span>
+        <span class="n">resvOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxResvrFracC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span><span class="p">,</span> \
+                               <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">resvOutflow</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">-</span> \
+                               <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxResvrFracC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyCapC</span><span class="p">)),</span><span class="n">resvOutflow</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">resvOutflow</span><span class="p">)</span>  <span class="c1"># unit: m3/day</span></div>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="c1"># --------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="lakes_reservoirs.getWaterBodyOutflow"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs.getWaterBodyOutflow">[docs]</a>    <span class="k">def</span> <span class="nf">getWaterBodyOutflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxTimestepsToAvgDischargeLong</span><span class="p">,</span> <span class="n">downstreamDemand</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">avgChannelDischarge</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="c1"># outflow from water bodies with lake type (m3/day):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeLakes</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span><span class="p">:</span>
+            <span class="n">lakeOutflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span><span class="o">.</span><span class="n">getLakeOutflow</span><span class="p">(</span><span class="n">avgChannelDischarge</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lakeOutflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span><span class="p">)</span>
+
+            <span class="c1"># outflow from water bodies with reservoir type (m3/day):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeReservoirs</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span><span class="p">:</span>
+            <span class="n">reservoirOutflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span><span class="o">.</span><span class="n">getReservoirOutflow</span><span class="p">(</span><span class="n">avgChannelDischarge</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyTypC</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="n">reservoirOutflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span><span class="p">)</span>
+
+        <span class="c1"># limit outflow to available storage # unit: m3/day</span>
+        <span class="c1"># to avoid flip flop</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="mf">0.33</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span><span class="p">)</span>
+        <span class="n">waterBodyOutflowInM3PerSec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>  <span class="c1"># unit: m3/s</span>
+
+        <span class="c1"># update average discharge (outflow) m3/s</span>
+        <span class="c1"># ~ self.var.avgOutflow = (self.var.avgOutflow * \</span>
+        <span class="c1"># ~ (np.minimum(maxTimestepsToAvgDischargeLong,</span>
+        <span class="c1"># ~ self.var.timestepsToAvgDischarge)- 1.) + \</span>
+        <span class="c1"># ~ (waterBodyOutflowInM3PerSec /\</span>
+        <span class="c1"># ~ vos.secondsPerDay()) * 1.) / \</span>
+        <span class="c1"># ~ (np.minimum(maxTimestepsToAvgDischargeLong,</span>
+        <span class="c1"># ~ self.var.timestepsToAvgDischarge))         # Edwin&#39;s old formula</span>
+
+        <span class="n">deltaOutflow</span> <span class="o">=</span> <span class="n">waterBodyOutflowInM3PerSec</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflowC</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflowC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflowC</span> <span class="o">+</span> <span class="n">deltaOutflow</span> <span class="o">/</span> \
+                      <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">maxTimestepsToAvgDischargeLong</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">timestepsToAvgDischarge</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgOutflowC</span><span class="p">)</span>
+
+        <span class="c1"># update waterBodyStorage (after outflow):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span></div>
+
+        <span class="c1"># --------------------------------------------------------------------------</span>
+        <span class="c1"># --------------------------------------------------------------------------</span>
+
+
+
+
+
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="lakes_reservoirs.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">storageAtLakeAndReservoirs</span><span class="p">,</span> <span class="n">downstreamDemand</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">avgChannelDischarge</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; dynamic part of the lakes and reservoirs module</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">#self.var.WaterBodies.dynamic(storageAtLakeAndReservoirs)</span>
+        <span class="c1">#    self.var.timestepsToAvgDischarge, self.var.maxTimestepsToAvgDischargeShort, self.var.maxTimestepsToAvgDischargeLong)</span>
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prestorReservoirC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># unit: m3/s</span>
+        <span class="n">storageAtLakeAndReservoirsC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="n">storageAtLakeAndReservoirs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compressID</span><span class="p">,</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeLakes</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeReservoirs</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span><span class="p">:</span>
+            <span class="c1"># obtain inflow (and update storage)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span><span class="o">.</span><span class="n">moveFromChannelToWaterBody</span><span class="p">(</span><span class="n">storageAtLakeAndReservoirsC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">timestepsToAvgDischarge</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxTimestepsToAvgDischargeShort</span><span class="p">)</span>
+
+            <span class="c1"># calculate outflow (and update storage)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span><span class="o">.</span><span class="n">getWaterBodyOutflow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxTimestepsToAvgDischargeLong</span><span class="p">,</span> <span class="n">downstreamDemand</span><span class="p">,</span> <span class="n">avgChannelDischarge</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">]:</span>
+            <span class="c1"># self.var.waterBodyAreaC</span>
+            <span class="c1">#np.put(self.var.waterBodyOut, self.var.waterBodyIndexC, self.var.waterBodyOutC)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">inflowC</span><span class="p">],</span>            <span class="c1"># In</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOutflowC</span><span class="p">],</span>           <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prestorReservoirC</span><span class="p">],</span>                                  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyStorageC</span><span class="p">],</span>
+                <span class="s2">&quot;LakesRes&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div></div>
+
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settings.html">4. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">5. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">7. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source.html">8. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

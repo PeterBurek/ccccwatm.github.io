@@ -1,0 +1,853 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>management_modules.data_handling &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for management_modules.data_handling</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -------------------------------------------------------------------------</span>
+<span class="c1"># Name:        Data handling</span>
+<span class="c1"># Purpose:     Transforming netcdf to numpy arrays, checking mask file</span>
+<span class="c1">#</span>
+<span class="c1"># Author:      PB</span>
+<span class="c1">#</span>
+<span class="c1"># Created:     13/07/2016</span>
+<span class="c1"># Copyright:   (c) PB 2016</span>
+<span class="c1"># -------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">calendar</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">globals</span>
+<span class="kn">from</span> <span class="nn">management_modules.checks</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">management_modules.timestep</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">management_modules.replace_pcr</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">management_modules.messages</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">pcraster</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pcraster.framework</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span><span class="p">,</span><span class="n">num2date</span><span class="p">,</span><span class="n">date2num</span><span class="p">,</span><span class="n">date2index</span>
+
+
+<div class="viewcode-block" id="valuecell"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.valuecell">[docs]</a><span class="k">def</span> <span class="nf">valuecell</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">coordx</span><span class="p">,</span> <span class="n">coordstr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    to put a value into a pcraster map -&gt; invert of cellvalue</span>
+<span class="sd">    pcraster map is converted into a numpy array first</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coord</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="n">coordx</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">coord</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">xy</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Gauges: &quot;</span> <span class="o">+</span> <span class="n">xy</span> <span class="o">+</span> <span class="s2">&quot; in &quot;</span> <span class="o">+</span> <span class="n">coordstr</span> <span class="o">+</span> <span class="s2">&quot; is not a coordinate&quot;</span>
+            <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="n">null</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">nrRows</span><span class="p">(),</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">nrCols</span><span class="p">()))</span>
+    <span class="n">null</span><span class="p">[</span><span class="n">null</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)):</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">west</span><span class="p">())</span> <span class="o">/</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">cellSize</span><span class="p">())</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">north</span><span class="p">()</span> <span class="o">-</span> <span class="n">coord</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">cellSize</span><span class="p">())</span>
+        <span class="c1">#if col &gt;= 0 and row &gt;= 0 and col &lt; pcraster.clone().nrCols() and row &lt; pcraster.clone().nrRows():</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">row</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">nrCols</span><span class="p">()</span> <span class="ow">and</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">nrRows</span><span class="p">():</span>
+            <span class="n">null</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Coordinates: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+                <span class="n">coord</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; to put value in is outside mask map - col,row: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="nb">map</span> <span class="o">=</span> <span class="n">numpy2pcr</span><span class="p">(</span><span class="n">Nominal</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">map</span></div>
+
+
+<div class="viewcode-block" id="loadsetclone"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.loadsetclone">[docs]</a><span class="k">def</span> <span class="nf">loadsetclone</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    load the maskmap and set as clone</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">binding</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">coord</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="c1"># changed order of x, y i- in setclone y is first in CWATM</span>
+        <span class="c1"># settings x is first</span>
+        <span class="c1"># setclone row col cellsize xupleft yupleft</span>
+        <span class="n">setclone</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
+        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+        <span class="c1">#mapnp[mapnp == 0] = 1</span>
+        <span class="nb">map</span> <span class="o">=</span> <span class="n">numpy2pcr</span><span class="p">(</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># try to read a pcraster map</span>
+            <span class="n">setclone</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="nb">map</span> <span class="o">=</span> <span class="n">boolean</span><span class="p">(</span><span class="n">readmap</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="n">flagmap</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">pcr2numpy</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="n">name</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.nc&#39;</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
+
+            <span class="n">x1</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">x2</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">xlast</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">y1</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ylast</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">cellSize</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
+            <span class="n">nrRows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ylast</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="n">cellSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">nrCols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xlast</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="n">cellSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">cellSize</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">cellSize</span> <span class="o">/</span> <span class="mi">2</span>
+
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">nrRows</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">nrCols</span><span class="p">])</span>
+            <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+            <span class="c1"># setclone  row col cellsize xupleft yupleft</span>
+            <span class="n">setclone</span><span class="p">(</span><span class="n">nrRows</span><span class="p">,</span><span class="n">nrCols</span><span class="p">,</span> <span class="n">cellSize</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="nb">map</span> <span class="o">=</span> <span class="n">numpy2pcr</span><span class="p">(</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="c1">#map = boolean(map)</span>
+            <span class="n">flagmap</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+            <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="n">flagmap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Maskmap: &quot;</span> <span class="o">+</span> <span class="n">Mask</span> <span class="o">+</span> \
+            <span class="s2">&quot; is not a valid mask map nor valid coordinates&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="c1"># Definition of cellsize, coordinates of the meteomaps and maskmap</span>
+    <span class="c1"># need some love for error handling</span>
+    <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">west</span><span class="p">()</span>
+    <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">north</span><span class="p">()</span>
+    <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;col&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">nrCols</span><span class="p">()</span>
+    <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;row&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">nrRows</span><span class="p">()</span>
+    <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">cellSize</span><span class="p">()</span>
+
+
+    <span class="c1"># put in the ldd map</span>
+    <span class="c1"># if there is no ldd at a cell, this cell should be excluded from modelling</span>
+    <span class="n">ldd</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;Ldd&#39;</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">maskldd</span> <span class="o">=</span> <span class="n">pcr2numpy</span><span class="p">(</span><span class="n">ldd</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">maskarea</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bool8</span><span class="p">(</span><span class="n">mapnp</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">maskldd</span><span class="p">,</span><span class="n">maskarea</span><span class="p">))</span>
+
+<span class="c1">#    mask=np.isnan(mapnp)</span>
+<span class="c1">#    mask[mapnp==0] = True # all 0 become mask out</span>
+    <span class="n">mapC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">compressed</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="n">mask</span><span class="p">))</span>
+
+    <span class="c1"># Definition of compressed array and info how to blow it up again</span>
+    <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">mask</span>
+    <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskflat&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">mask</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>    <span class="c1"># map to 1D not compresses</span>
+    <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shapeflat&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskflat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>   <span class="c1">#length of the 1D array</span>
+    <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">mapC</span><span class="o">.</span><span class="n">shape</span>                        <span class="c1"># length of the compressed 1D array</span>
+    <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskall&#39;</span><span class="p">]</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shapeflat&#39;</span><span class="p">])</span>  <span class="c1"># empty map 1D but with mask</span>
+    <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskflat&#39;</span><span class="p">]</span>
+
+    <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="nb">map</span></div>
+
+
+<div class="viewcode-block" id="loadmap"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.loadmap">[docs]</a><span class="k">def</span> <span class="nf">loadmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lddflag</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    load a static map either value or pcraster map or netcdf</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">binding</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="n">pcrmap</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">try</span><span class="p">:</span>  <span class="c1"># loading an integer or float but not a map</span>
+        <span class="n">mapC</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">flagmap</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">load</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">pcr</span><span class="p">:</span> <span class="nb">map</span><span class="o">=</span><span class="n">mapC</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>  <span class="c1"># try to read a pcraster map</span>
+            <span class="nb">map</span> <span class="o">=</span> <span class="n">readmap</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">flagmap</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">load</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">pcrmap</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">load</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">load</span> <span class="ow">and</span> <span class="n">pcrmap</span><span class="p">:</span>  <span class="c1"># test if map is same size as clone map, if not it will make an error</span>
+        <span class="k">try</span><span class="p">:</span>
+           <span class="n">test</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span> <span class="o">+</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+           <span class="n">msg</span> <span class="o">=</span> <span class="n">value</span> <span class="o">+</span><span class="s2">&quot; might be of a different size than clone size &quot;</span>
+           <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">load</span><span class="p">):</span>   <span class="c1"># read a netcdf  (single one not a stack)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">value</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.nc&#39;</span>
+         <span class="c1"># get mapextend of netcdf map and calculate the cutting</span>
+        <span class="n">cut0</span><span class="p">,</span> <span class="n">cut1</span><span class="p">,</span> <span class="n">cut2</span><span class="p">,</span> <span class="n">cut3</span> <span class="o">=</span> <span class="n">mapattrNetCDF</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+        <span class="c1"># load netcdf map but only the rectangle needed</span>
+        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">timestepInit</span><span class="p">:</span>
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">cut2</span><span class="p">:</span><span class="n">cut3</span><span class="p">,</span> <span class="n">cut0</span><span class="p">:</span><span class="n">cut1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;time&#39;</span> <span class="ow">in</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+                <span class="n">timestepI</span> <span class="o">=</span> <span class="n">Calendar</span><span class="p">(</span><span class="n">timestepInit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">timestepI</span><span class="p">)</span> <span class="ow">is</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">:</span>
+                    <span class="n">timestepI</span> <span class="o">=</span> <span class="n">date2num</span><span class="p">(</span><span class="n">timestepI</span><span class="p">,</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span> <span class="n">timestepI</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestepI</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span>
+
+                <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">timestepI</span> <span class="ow">in</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][:]):</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;time step &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timestepI</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; not stored in &quot;</span><span class="o">+</span> <span class="n">filename</span>
+                    <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="n">itime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][:]</span> <span class="o">==</span> <span class="n">timestepI</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">itime</span><span class="p">,</span><span class="n">cut2</span><span class="p">:</span><span class="n">cut3</span><span class="p">,</span> <span class="n">cut0</span><span class="p">:</span><span class="n">cut1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">cut2</span><span class="p">:</span><span class="n">cut3</span><span class="p">,</span> <span class="n">cut0</span><span class="p">:</span><span class="n">cut1</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">):</span> <span class="n">mapnp</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span> <span class="n">x</span><span class="o">=</span><span class="mi">1</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># if a map should be pcraster</span>
+        <span class="k">if</span> <span class="n">pcr</span><span class="p">:</span>
+            <span class="c1"># check if integer map (like outlets, lakes etc</span>
+            <span class="n">checkint</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">mapnp</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">checkint</span><span class="o">==</span><span class="s2">&quot;int16&quot;</span> <span class="ow">or</span> <span class="n">checkint</span><span class="o">==</span><span class="s2">&quot;int32&quot;</span><span class="p">:</span>
+                <span class="n">mapnp</span><span class="p">[</span><span class="n">mapnp</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span><span class="o">=-</span><span class="mi">9999</span>
+                <span class="nb">map</span> <span class="o">=</span> <span class="n">numpy2pcr</span><span class="p">(</span><span class="n">Nominal</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">checkint</span><span class="o">==</span><span class="s2">&quot;int8&quot;</span><span class="p">:</span>
+                <span class="n">mapnp</span><span class="p">[</span><span class="n">mapnp</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span><span class="o">=-</span><span class="mi">9999</span>
+                <span class="nb">map</span> <span class="o">=</span> <span class="n">numpy2pcr</span><span class="p">(</span><span class="n">Nominal</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mapnp</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mapnp</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span>
+                <span class="nb">map</span> <span class="o">=</span> <span class="n">numpy2pcr</span><span class="p">(</span><span class="n">Scalar</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+
+            <span class="c1"># if the map is a ldd</span>
+            <span class="c1">#if value.split(&#39;.&#39;)[0][:3] == &#39;ldd&#39;:</span>
+            <span class="k">if</span> <span class="n">lddflag</span><span class="p">:</span> <span class="nb">map</span> <span class="o">=</span> <span class="n">ldd</span><span class="p">(</span><span class="n">nominal</span><span class="p">(</span><span class="nb">map</span><span class="p">))</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">flagmap</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># pcraster map but it has to be an array</span>
+    <span class="k">if</span> <span class="n">pcrmap</span> <span class="ow">and</span> <span class="ow">not</span><span class="p">(</span><span class="n">pcr</span><span class="p">):</span>
+        <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+
+        <span class="nb">print</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename</span>
+        <span class="k">if</span> <span class="n">flagmap</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span> <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapC</span><span class="p">,</span> <span class="n">flagmap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">pcr</span><span class="p">:</span> <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="n">flagmap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="n">name</span><span class="p">,</span> <span class="n">mapC</span><span class="o">.</span><span class="n">size</span>
+            <span class="k">if</span> <span class="n">mapC</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="nb">map</span><span class="o">=</span> <span class="n">decompress</span><span class="p">(</span><span class="n">mapC</span><span class="p">)</span>
+                <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="n">flagmap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pcr</span><span class="p">:</span>  <span class="k">return</span> <span class="nb">map</span>
+    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">mapC</span></div>
+
+
+<span class="c1"># -----------------------------------------------------------------------</span>
+<span class="c1"># Compressing to 1-dimensional numpy array</span>
+<span class="c1"># -----------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="compressArray"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.compressArray">[docs]</a><span class="k">def</span> <span class="nf">compressArray</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">pcr</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pcr</span><span class="p">:</span>
+        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">pcr2numpy</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">mapnp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mapnp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">])</span>
+    <span class="n">mapC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">compressed</span><span class="p">(</span><span class="n">mapnp1</span><span class="p">)</span>
+    <span class="c1"># if fill: mapC[np.isnan(mapC)]=0</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mapC</span><span class="p">)):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; has less valid pixels than area or ldd </span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="c1"># test if map has less valid pixel than area.map (or ldd)</span>
+    <span class="k">return</span> <span class="n">mapC</span></div>
+
+<div class="viewcode-block" id="decompress"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.decompress">[docs]</a><span class="k">def</span> <span class="nf">decompress</span><span class="p">(</span><span class="nb">map</span><span class="p">):</span>
+    <span class="c1"># dmap=np.ma.masked_all(maskinfo[&#39;shapeflat&#39;], dtype=map.dtype)</span>
+    <span class="n">dmap</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">dmap</span><span class="p">[</span><span class="o">~</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskflat&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">map</span><span class="p">[:]</span>
+    <span class="n">dmap</span> <span class="o">=</span> <span class="n">dmap</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span>
+
+    <span class="c1"># check if integer map (like outlets, lakes etc</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">checkint</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">map</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">checkint</span> <span class="o">=</span> <span class="s2">&quot;x&quot;</span>
+
+    <span class="k">if</span> <span class="n">checkint</span> <span class="o">==</span> <span class="s2">&quot;int16&quot;</span> <span class="ow">or</span> <span class="n">checkint</span> <span class="o">==</span> <span class="s2">&quot;int32&quot;</span><span class="p">:</span>
+        <span class="n">dmap</span><span class="p">[</span><span class="n">dmap</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span>
+        <span class="nb">map</span> <span class="o">=</span> <span class="n">numpy2pcr</span><span class="p">(</span><span class="n">Nominal</span><span class="p">,</span> <span class="n">dmap</span><span class="p">,</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">checkint</span> <span class="o">==</span> <span class="s2">&quot;int8&quot;</span><span class="p">:</span>
+        <span class="n">dmap</span><span class="p">[</span><span class="n">dmap</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span>
+        <span class="nb">map</span> <span class="o">=</span> <span class="n">numpy2pcr</span><span class="p">(</span><span class="n">Nominal</span><span class="p">,</span> <span class="n">dmap</span><span class="p">,</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dmap</span><span class="p">[</span><span class="n">dmap</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span>
+        <span class="nb">map</span> <span class="o">=</span> <span class="n">numpy2pcr</span><span class="p">(</span><span class="n">Scalar</span><span class="p">,</span> <span class="n">dmap</span><span class="p">,</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">map</span></div>
+
+
+
+
+<span class="c1"># -----------------------------------------------------------------------</span>
+<span class="c1"># NETCDF</span>
+<span class="c1"># -----------------------------------------------------------------------</span>
+
+
+
+<div class="viewcode-block" id="metaNetCDF"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.metaNetCDF">[docs]</a><span class="k">def</span> <span class="nf">metaNetCDF</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    get the map metadata from netcdf</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+           <span class="n">metadataNCDF</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">__dict__</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Trying to get metadata from netcdf </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">],</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="mapattrNetCDF"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.mapattrNetCDF">[docs]</a><span class="k">def</span> <span class="nf">mapattrNetCDF</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    get the map attributes like col, row etc from a ntcdf map</span>
+<span class="sd">    and define the rectangular of the mask map inside the netcdf map</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.nc&#39;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking netcdf map </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="n">x1</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">xlast</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">ylast</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">cellSize</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">nrRows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ylast</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="n">cellSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">nrCols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xlast</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="n">cellSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">cellSize</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">cellSize</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">cut0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">])</span>
+    <span class="n">cut1</span> <span class="o">=</span> <span class="n">cut0</span> <span class="o">+</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;col&#39;</span><span class="p">]</span>
+    <span class="n">cut2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">])</span>
+    <span class="n">cut3</span> <span class="o">=</span> <span class="n">cut2</span> <span class="o">+</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;row&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">cellSize</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Cell size different in maskmap: &quot;</span> <span class="o">+</span> \
+            <span class="n">binding</span><span class="p">[</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; and: &quot;</span> <span class="o">+</span> <span class="n">filename</span>
+        <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">cut0</span><span class="p">,</span> <span class="n">cut1</span><span class="p">,</span> <span class="n">cut2</span><span class="p">,</span> <span class="n">cut3</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="readnetcdf"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.readnetcdf">[docs]</a><span class="k">def</span> <span class="nf">readnetcdf</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      load stack of maps 1 at each timestamp in netcdf format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#filename = name + &quot;.nc&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.nc&#39;</span>
+    <span class="c1"># value = os.path.basename(name)</span>
+
+    <span class="n">number</span> <span class="o">=</span> <span class="n">time</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">try</span><span class="p">:</span>
+       <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf map stacks: </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
+    <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span>
+        <span class="n">number</span><span class="p">,</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="c1">#map = decompress(mapC)</span>
+    <span class="c1">#report(map, &#39;C:\work\output\out2.map&#39;)</span>
+
+
+    <span class="n">timename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+       <span class="nb">map</span> <span class="o">=</span> <span class="n">decompress</span><span class="p">(</span><span class="n">mapC</span><span class="p">)</span>
+       <span class="n">checkmap</span><span class="p">(</span><span class="n">timename</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mapC</span></div>
+
+
+<div class="viewcode-block" id="readnetcdf2"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.readnetcdf2">[docs]</a><span class="k">def</span> <span class="nf">readnetcdf2</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">useDaily</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      load stack of maps 1 at each timestamp in netcdf format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#filename = name + &quot;.nc&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+
+    <span class="k">try</span><span class="p">:</span>
+       <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf map stacks: </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
+
+
+    <span class="c1"># date if used daily, monthly or yearly or day of year</span>
+    <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;DOY&quot;</span><span class="p">:</span>  <span class="c1"># day of year 1-366</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">date</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;month&quot;</span><span class="p">:</span>
+           <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+           <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;yearly&quot;</span><span class="p">:</span>
+              <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+           <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;monthly&quot;</span><span class="p">:</span>
+              <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+           <span class="c1"># A netCDF time variable object  - time index (in the netCDF file)</span>
+           <span class="n">nctime</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+           <span class="n">idx</span> <span class="o">=</span> <span class="n">date2index</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">nctime</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
+    <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mapC</span></div>
+
+
+<div class="viewcode-block" id="readnetcdfWithoutTime"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.readnetcdfWithoutTime">[docs]</a><span class="k">def</span> <span class="nf">readnetcdfWithoutTime</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      load stack of maps in netcdf format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">filename</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+       <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf map stacks: </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
+
+    <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mapC</span></div>
+
+
+
+<div class="viewcode-block" id="readnetcdfInitial"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.readnetcdfInitial">[docs]</a><span class="k">def</span> <span class="nf">readnetcdfInitial</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span><span class="n">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      load initial condition from netcdf format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+       <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf Initial file: </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1">#mapnp = nf1.variables[value][cutmap[2]:cutmap[3], cutmap[0]:cutmap[1]]</span>
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][:]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+            <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mapC</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Initial value: &quot;</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s2">&quot; is has not the same shape as the mask map&quot;</span>
+            <span class="nb">print</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Initial value: &quot;</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s2">&quot; is not included in: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; - using default: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="n">CWATMWarning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">default</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="getmeta"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.getmeta">[docs]</a><span class="k">def</span> <span class="nf">getmeta</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">varname</span><span class="p">,</span><span class="n">alternative</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    get the meta data information for the netcdf output from the global</span>
+<span class="sd">    variable metaNetcdfVar</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">alternative</span>
+    <span class="k">if</span> <span class="n">varname</span> <span class="ow">in</span> <span class="n">metaNetcdfVar</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">metaNetcdfVar</span><span class="p">[</span><span class="n">varname</span><span class="p">]:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">metaNetcdfVar</span><span class="p">[</span><span class="n">varname</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------------------------</span>
+
+<span class="c1">#def writenet(flag, inputmap, netfile, timestep, value_standard_name, value_long_name, value_unit, fillval, startdate, flagTime=True):</span>
+<div class="viewcode-block" id="writenetcdf"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.writenetcdf">[docs]</a><span class="k">def</span> <span class="nf">writenetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span><span class="n">varname</span><span class="p">,</span><span class="n">varunits</span><span class="p">,</span><span class="n">inputmap</span><span class="p">,</span> <span class="n">timeStamp</span><span class="p">,</span> <span class="n">posCnt</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span><span class="n">flagTime</span><span class="p">,</span> <span class="n">nrdays</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    write a netcdf stack</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;NETCDF4&#39;</span><span class="p">)</span>
+
+        <span class="c1"># general Attributes</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">settingsfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">date_created</span> <span class="o">=</span> <span class="n">xtime</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="n">xtime</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">Source_Software</span> <span class="o">=</span> <span class="s1">&#39;CWATM Python&#39;</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">institution</span> <span class="o">=</span> <span class="n">binding</span> <span class="p">[</span><span class="s2">&quot;institution&quot;</span><span class="p">]</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">binding</span> <span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="s1">&#39;CWATM output maps&#39;</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">Conventions</span> <span class="o">=</span> <span class="s1">&#39;CF-1.6&#39;</span>
+
+        <span class="c1"># put the additional genaral meta data information from the xml file into the netcdf file</span>
+        <span class="c1"># infomation from the settingsfile comes first</span>
+
+        <span class="k">if</span> <span class="n">varname</span> <span class="ow">in</span> <span class="n">metaNetcdfVar</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">metaNetcdfVar</span><span class="p">[</span><span class="n">varname</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">nf1</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">,</span> <span class="s2">&quot;standard_name&quot;</span><span class="p">]):</span>
+                        <span class="n">nf1</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">metaNetcdfVar</span><span class="p">[</span><span class="n">varname</span><span class="p">][</span><span class="n">key</span><span class="p">])</span>
+
+
+
+
+            <span class="c1"># Dimension</span>
+        <span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">lon</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>  <span class="c1"># x 1000</span>
+            <span class="n">longitude</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]:</span>
+                <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;longitude.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;lon&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">lon</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+            <span class="n">longitude</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">,))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]:</span>
+                <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;longitude.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">lat</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>  <span class="c1"># x 950</span>
+            <span class="n">latitude</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]:</span>
+                <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;latitude.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;lat&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">lat</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>  <span class="c1"># x 950</span>
+            <span class="n">latitude</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]:</span>
+                <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;latitude.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="c1"># projection</span>
+        <span class="k">if</span> <span class="s1">&#39;laea&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">proj</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;laea&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;laea&#39;</span><span class="p">]:</span>
+                <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;proj.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;laea&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;lambert_azimuthal_equal_area&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">proj</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;lambert_azimuthal_equal_area&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lambert_azimuthal_equal_area&#39;</span><span class="p">]:</span>
+                <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span>
+                    <span class="s2">&quot;proj.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lambert_azimuthal_equal_area&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+
+        <span class="c1"># Fill variables</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">cellSize</span><span class="p">(),</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">xl</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">west</span><span class="p">()</span> <span class="o">+</span> <span class="n">cell</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">xr</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">xl</span> <span class="o">+</span> <span class="n">col</span> <span class="o">*</span> <span class="n">cell</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">yu</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">north</span><span class="p">()</span> <span class="o">-</span> <span class="n">cell</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">yd</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">yu</span> <span class="o">-</span> <span class="n">row</span> <span class="o">*</span> <span class="n">cell</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span>
+        <span class="c1">#lats = np.arange(yu, yd, -cell)</span>
+        <span class="c1">#lons = np.arange(xl, xr, cell)</span>
+        <span class="n">lats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">yu</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">lons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">latitude</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">lats</span>
+        <span class="n">longitude</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">lons</span>
+
+        <span class="k">if</span> <span class="n">flagTime</span><span class="p">:</span>
+            <span class="n">nf1</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="c1">#nf1.createDimension(&#39;time&#39;, nrdays)</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">))</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">standard_name</span> <span class="o">=</span> <span class="s1">&#39;time&#39;</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;Days since 1901-01-01&#39;</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">calendar</span> <span class="o">=</span> <span class="s1">&#39;standard&#39;</span>
+
+
+            <span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+               <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">zlib</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fill_value</span><span class="o">=</span><span class="mi">1</span><span class="n">e20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;lon&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+               <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">zlib</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">1</span><span class="n">e20</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+          <span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+              <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">zlib</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fill_value</span><span class="o">=</span><span class="mi">1</span><span class="n">e20</span><span class="p">)</span>
+          <span class="k">if</span> <span class="s1">&#39;lon&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+              <span class="c1"># for world lat/lon coordinates</span>
+              <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">zlib</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">1</span><span class="n">e20</span><span class="p">)</span>
+
+
+        <span class="n">value</span><span class="o">.</span><span class="n">standard_name</span><span class="o">=</span> <span class="n">getmeta</span><span class="p">(</span><span class="s2">&quot;standard_name&quot;</span><span class="p">,</span><span class="n">varname</span><span class="p">,</span><span class="n">varname</span><span class="p">)</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">long_name</span><span class="o">=</span> <span class="n">getmeta</span><span class="p">(</span><span class="s2">&quot;long_name&quot;</span><span class="p">,</span><span class="n">varname</span><span class="p">,</span><span class="n">varname</span><span class="p">)</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">units</span><span class="o">=</span> <span class="n">getmeta</span><span class="p">(</span><span class="s2">&quot;unit&quot;</span><span class="p">,</span><span class="n">varname</span><span class="p">,</span><span class="n">varunits</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="s2">&quot;esri_pe_string&quot;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">value</span><span class="o">.</span><span class="n">esri_pe_string</span> <span class="o">=</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s1">&#39;esri_pe_string&#39;</span><span class="p">]</span>
+
+
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">flagTime</span><span class="p">:</span>
+        <span class="n">date_time</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][</span><span class="n">posCnt</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">date2num</span><span class="p">(</span><span class="n">timeStamp</span><span class="p">,</span> <span class="n">date_time</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">date_time</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
+
+
+
+    <span class="n">mapnp</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">mapnp</span><span class="p">[</span><span class="o">~</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskflat&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">inputmap</span><span class="p">[:]</span>
+    <span class="c1">#mapnp = mapnp.reshape(maskinfo[&#39;shape&#39;]).data</span>
+    <span class="n">mapnp</span> <span class="o">=</span> <span class="n">mapnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span>
+
+    <span class="c1">#date_time[posCnt] = date2num(timeStamp, date_time.units, date_time.calendar)</span>
+
+
+    <span class="k">if</span> <span class="n">flagTime</span><span class="p">:</span>
+        <span class="c1">#nf1.variables[prefix][flag, :, :] = mapnp</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">varname</span><span class="p">][</span><span class="n">posCnt</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">mapnp</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># without timeflag</span>
+        <span class="c1">#nf1.variables[prefix][:, :] = mapnp</span>
+        <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">varname</span><span class="p">][:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">mapnp</span><span class="p">)</span>
+
+    <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">flag</span></div>
+
+
+<span class="c1"># --------------------------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="writeIniNetcdf"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.writeIniNetcdf">[docs]</a><span class="k">def</span> <span class="nf">writeIniNetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span><span class="n">varlist</span><span class="p">,</span> <span class="n">inputlist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    write variables to netcdf init file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;NETCDF4&#39;</span><span class="p">)</span>
+
+    <span class="c1"># general Attributes</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">settingsfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">date_created</span> <span class="o">=</span> <span class="n">xtime</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="n">xtime</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">Source_Software</span> <span class="o">=</span> <span class="s1">&#39;CWATM Python&#39;</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">institution</span> <span class="o">=</span> <span class="n">binding</span> <span class="p">[</span><span class="s2">&quot;institution&quot;</span><span class="p">]</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">binding</span> <span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="s1">&#39;CWATM initial conditions maps&#39;</span>
+    <span class="n">nf1</span><span class="o">.</span><span class="n">Conventions</span> <span class="o">=</span> <span class="s1">&#39;CF-1.6&#39;</span>
+
+    <span class="c1"># put the additional genaral meta data information from the xml file into the netcdf file</span>
+    <span class="c1"># infomation from the settingsfile comes first</span>
+
+    <span class="k">if</span> <span class="s2">&quot;initcondition&quot;</span> <span class="ow">in</span> <span class="n">metaNetcdfVar</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">metaNetcdfVar</span><span class="p">[</span><span class="s2">&quot;initcondition&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">nf1</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+               <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">,</span> <span class="s2">&quot;standard_name&quot;</span><span class="p">]):</span>
+                   <span class="n">nf1</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">metaNetcdfVar</span><span class="p">[</span><span class="s2">&quot;initcondition&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">])</span>
+
+
+    <span class="c1"># Dimension</span>
+    <span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>  <span class="c1"># x 1000</span>
+        <span class="n">longitude</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]:</span>
+            <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;longitude.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s1">&#39;lon&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+        <span class="n">longitude</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">,))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]:</span>
+            <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;longitude.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s1">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>  <span class="c1"># x 950</span>
+        <span class="n">latitude</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]:</span>
+            <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;latitude.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s1">&#39;lat&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>  <span class="c1"># x 950</span>
+        <span class="n">latitude</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]:</span>
+            <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;latitude.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># projection</span>
+    <span class="k">if</span> <span class="s1">&#39;laea&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">proj</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;laea&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;laea&#39;</span><span class="p">]:</span>
+            <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;proj.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;laea&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s1">&#39;lambert_azimuthal_equal_area&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">proj</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;lambert_azimuthal_equal_area&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lambert_azimuthal_equal_area&#39;</span><span class="p">]:</span>
+            <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;proj.&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">metadataNCDF</span><span class="p">[</span><span class="s1">&#39;lambert_azimuthal_equal_area&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># Fill variables</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">cellSize</span><span class="p">(),</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">xl</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">west</span><span class="p">()</span> <span class="o">+</span> <span class="n">cell</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">xr</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">xl</span> <span class="o">+</span> <span class="n">col</span> <span class="o">*</span> <span class="n">cell</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">yu</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">north</span><span class="p">()</span> <span class="o">-</span> <span class="n">cell</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">yd</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">yu</span> <span class="o">-</span> <span class="n">row</span> <span class="o">*</span> <span class="n">cell</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span>
+    <span class="c1">#lats = np.arange(yu, yd, -cell)</span>
+    <span class="c1">#lons = np.arange(xl, xr, cell)</span>
+    <span class="n">lats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">yu</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">lons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">latitude</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">lats</span>
+    <span class="n">longitude</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">lons</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">varname</span> <span class="ow">in</span> <span class="n">varlist</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">zlib</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fill_value</span><span class="o">=</span><span class="mi">1</span><span class="n">e20</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;lon&#39;</span> <span class="ow">in</span> <span class="n">metadataNCDF</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="c1"># for world lat/lon coordinates</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">zlib</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">1</span><span class="n">e20</span><span class="p">)</span>
+
+        <span class="n">value</span><span class="o">.</span><span class="n">standard_name</span><span class="o">=</span> <span class="n">getmeta</span><span class="p">(</span><span class="s2">&quot;standard_name&quot;</span><span class="p">,</span><span class="n">varname</span><span class="p">,</span><span class="n">varname</span><span class="p">)</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">long_name</span><span class="o">=</span> <span class="n">getmeta</span><span class="p">(</span><span class="s2">&quot;long_name&quot;</span><span class="p">,</span><span class="n">varname</span><span class="p">,</span><span class="n">varname</span><span class="p">)</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">units</span><span class="o">=</span> <span class="n">getmeta</span><span class="p">(</span><span class="s2">&quot;unit&quot;</span><span class="p">,</span><span class="n">varname</span><span class="p">,</span><span class="s2">&quot;undefined&quot;</span><span class="p">)</span>
+
+
+        <span class="c1"># write values</span>
+
+        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">mapnp</span><span class="p">[</span><span class="o">~</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskflat&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">inputlist</span><span class="p">[</span><span class="n">i</span><span class="p">][:]</span>
+        <span class="c1">#mapnp = mapnp.reshape(maskinfo[&#39;shape&#39;]).data</span>
+        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">mapnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span>
+
+        <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">varname</span><span class="p">][:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">mapnp</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+
+    <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="getValDivZero"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.getValDivZero">[docs]</a><span class="k">def</span> <span class="nf">getValDivZero</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y_lim</span><span class="p">,</span><span class="n">z_def</span><span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
+  <span class="c1">#-returns the result of a division that possibly involves a zero</span>
+  <span class="c1"># denominator; in which case, a default value is substituted:</span>
+  <span class="c1"># x/y= z in case y &gt; y_lim,</span>
+  <span class="c1"># x/y= z_def in case y &lt;= y_lim, where y_lim -&gt; 0.</span>
+  <span class="c1"># z_def is set to zero if not otherwise specified</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">y_lim</span><span class="p">,</span><span class="n">x</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">y_lim</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">z_def</span><span class="p">)</span></div>
+
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settings.html">4. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">5. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">7. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source.html">8. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

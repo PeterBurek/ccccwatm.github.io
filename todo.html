@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7. TODO &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="next" title="8. Source code" href="source.html" />
+    <link rel="prev" title="6. Demo of the model" href="results.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="source.html" title="8. Source code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="results.html" title="6. Demo of the model"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="todo">
+<h1>7. TODO<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="structural-improvements">
+<h2>Structural improvements<a class="headerlink" href="#structural-improvements" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">This has to be done. Importance: 1 to be changed first .. 3 to be changed later</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="24%" />
+<col width="29%" />
+<col width="18%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Topic</th>
+<th class="head">TODO</th>
+<th class="head">Description</th>
+<th class="head">Importance</th>
+<th class="head">DONE</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Documentation</td>
+<td>Documentation</td>
+<td>start writing a user manual</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Documentation</td>
+<td>Source code documentation</td>
+<td>Improve comment-lines in the code and include them in the autodocu sphinx</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-even"><td>Documentation</td>
+<td>Include log file/change log</td>
+<td>document the changes in the code/settings</td>
+<td>2</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Output</td>
+<td>GAMS output</td>
+<td>output/input in GAMS (gdx -files)</td>
+<td>2</td>
+<td>.</td>
+</tr>
+<tr class="row-even"><td>Output</td>
+<td>Extent output possibilities</td>
+<td>Output as e.g. yearly areatotal, catchment total as maps, as time series</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Handling</td>
+<td>Improve error handling</td>
+<td>more messages for users if something goes wrong</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-even"><td>Handling</td>
+<td>Checks maps</td>
+<td>include a pre-run, where input data are checked for plausibility</td>
+<td>2</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Handling</td>
+<td>Load multiple netcd files</td>
+<td>read meteo input netcdf from split files</td>
+<td>2</td>
+<td>.</td>
+</tr>
+<tr class="row-even"><td>Coding</td>
+<td>Soil variable names</td>
+<td>change soil variable names</td>
+<td>1</td>
+<td>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="model-improvements">
+<h2>Model improvements<a class="headerlink" href="#model-improvements" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="33%" />
+<col width="27%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">TODO</th>
+<th class="head">Description</th>
+<th class="head">Importance</th>
+<th class="head">DONE</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Frost</td>
+<td>include frost routine (no soil movement during strong frost)</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Snow</td>
+<td>include more than 3 vertical layers (make it flexible)</td>
+<td>2</td>
+<td>X</td>
+</tr>
+<tr class="row-even"><td>Runoff concentration</td>
+<td>include a 1st routing to the edge of a grid cell</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Include water &amp; sealed land cover</td>
+<td>include 2 more land cover types (water covered area, sealed area)</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-even"><td>Preferential flow</td>
+<td>include preferential flow to soil layers</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>soil depend on land cover</td>
+<td>include hydropedo transfer function landcover -&gt; soil</td>
+<td>2</td>
+<td>.</td>
+</tr>
+<tr class="row-even"><td>Calculate Evaporation on PM</td>
+<td>include Penman Monteith ET routine</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Reduce reading of time series maps</td>
+<td>e.g. interception maps only 1 per month</td>
+<td>2</td>
+<td>.</td>
+</tr>
+<tr class="row-even"><td>Kinematic wave</td>
+<td>Add another way of routing</td>
+<td>2</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Improve lakes&amp; reservoirs</td>
+<td>Add another way of including lakes/reservoirs</td>
+<td>2</td>
+<td>.</td>
+</tr>
+<tr class="row-even"><td>Inflow points</td>
+<td>add points where water can be added/substracted</td>
+<td>1</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Include Environmental flow</td>
+<td>use environmental flow concept on the fly not only post-processing</td>
+<td>2</td>
+<td>.</td>
+</tr>
+<tr class="row-even"><td>Water allocation</td>
+<td>include water demand &lt;-&gt; water supply functionality</td>
+<td>2-3</td>
+<td>.</td>
+</tr>
+<tr class="row-odd"><td>Include EPIC approach</td>
+<td>to be in line with ESM include the EPIC approach</td>
+<td>3</td>
+<td>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">4. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">5. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. TODO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structural-improvements">Structural improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-improvements">Model improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">8. <strong>Source code</strong></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="results.html"
+                        title="previous chapter">6. Demo of the model</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="source.html"
+                        title="next chapter">8. <strong>Source code</strong></a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="source.html" title="8. Source code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="results.html" title="6. Demo of the model"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

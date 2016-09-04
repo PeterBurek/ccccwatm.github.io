@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>source &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="source">
+<h1>source<a class="headerlink" href="#source" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nexus.html#link-to-integrated-solutions-project">Link to Integrated Solutions Project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community.html#community">Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community.html#water-model">Water Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="community.html#demos-of-results">Demos  of results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">4. Running the model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#start-the-model">Start the model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#flags">Flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#netcdf-meta-data">NetCDF meta data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#post-processing">Post processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#settings-file">Settings file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#general-flags">General flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#path-of-data-output">Path of data, output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#defining-the-modeling-area">Defining the modeling area</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#defining-the-time">Defining the time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#initial-conditions">Initial conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#complete-settings-file">Complete settings file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#output-meta-netcdf-information">Output Meta NetCDF information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">8. <strong>Source code</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cwatm.html">cwatm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cwatm_dynamic.html">cwatm_dynamic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cwatm_initial.html">cwatm_initial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html">hydrological_modules package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.capillarRise">hydrological_modules.capillarRise module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.evaporation">hydrological_modules.evaporation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.groundwater">hydrological_modules.groundwater module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.inflow">hydrological_modules.inflow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.initcondition">hydrological_modules.initcondition module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.interception">hydrological_modules.interception module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#hydrological-modules-lakes-reservoirs-module">hydrological_modules.lakes_reservoirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.landcoverType">hydrological_modules.landcoverType module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.miscInitial">hydrological_modules.miscInitial module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.readmeteo">hydrological_modules.readmeteo module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#hydrological-modules-routing-module">hydrological_modules.routing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.snow_frost">hydrological_modules.snow_frost module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.soil">hydrological_modules.soil module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.waterbalance">hydrological_modules.waterbalance module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.waterdemand">hydrological_modules.waterdemand module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html">management_modules package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.checks">management_modules.checks module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.configuration">management_modules.configuration module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.data_handling">management_modules.data_handling module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.globals">management_modules.globals module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.improvepcraster">management_modules.improvepcraster module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.messages">management_modules.messages module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.output">management_modules.output module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.replace_pcr">management_modules.replace_pcr module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.timestep">management_modules.timestep module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cwatm.html">cwatm module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cwatm_dynamic.html">cwatm_dynamic module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cwatm_initial.html">cwatm_initial module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hydrological_modules.html">hydrological_modules package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.capillarRise">hydrological_modules.capillarRise module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.evaporation">hydrological_modules.evaporation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.groundwater">hydrological_modules.groundwater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.inflow">hydrological_modules.inflow module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.initcondition">hydrological_modules.initcondition module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.interception">hydrological_modules.interception module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#hydrological-modules-lakes-reservoirs-module">hydrological_modules.lakes_reservoirs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.landcoverType">hydrological_modules.landcoverType module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.miscInitial">hydrological_modules.miscInitial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.readmeteo">hydrological_modules.readmeteo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#hydrological-modules-routing-module">hydrological_modules.routing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.snow_frost">hydrological_modules.snow_frost module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.soil">hydrological_modules.soil module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.waterbalance">hydrological_modules.waterbalance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.waterdemand">hydrological_modules.waterdemand module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="management_modules.html">management_modules package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules.checks">management_modules.checks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules.configuration">management_modules.configuration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules.data_handling">management_modules.data_handling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules.globals">management_modules.globals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules.improvepcraster">management_modules.improvepcraster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules.messages">management_modules.messages module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules.output">management_modules.output module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules.replace_pcr">management_modules.replace_pcr module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules.timestep">management_modules.timestep module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="management_modules.html#module-management_modules">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">4. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">5. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">7. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">8. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

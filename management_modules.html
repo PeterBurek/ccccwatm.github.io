@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>management_modules package &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="up" title="7. Source code" href="source.html" />
+    <link rel="prev" title="hydrological_modules package" href="hydrological_modules.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hydrological_modules.html" title="hydrological_modules package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">7. <strong>Source code</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="management-modules-package">
+<h1>management_modules package<a class="headerlink" href="#management-modules-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-management_modules.checks">
+<span id="management-modules-checks-module"></span><h2>management_modules.checks module<a class="headerlink" href="#module-management_modules.checks" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="management_modules.checks.checkmap">
+<code class="descclassname">management_modules.checks.</code><code class="descname">checkmap</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#checkmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.checkmap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.checks.counted">
+<code class="descclassname">management_modules.checks.</code><code class="descname">counted</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#counted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.counted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-management_modules.configuration">
+<span id="management-modules-configuration-module"></span><h2>management_modules.configuration module<a class="headerlink" href="#module-management_modules.configuration" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="management_modules.configuration.ExtParser">
+<em class="property">class </em><code class="descclassname">management_modules.configuration.</code><code class="descname">ExtParser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ConfigParser.SafeConfigParser</span></code></p>
+<dl class="method">
+<dt id="management_modules.configuration.ExtParser.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>raw=False</em>, <em>vars=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.configuration.parse_configuration">
+<code class="descclassname">management_modules.configuration.</code><code class="descname">parse_configuration</code><span class="sig-paren">(</span><em>settingsFileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#parse_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.parse_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.configuration.read_metanetcdf">
+<code class="descclassname">management_modules.configuration.</code><code class="descname">read_metanetcdf</code><span class="sig-paren">(</span><em>metaxml</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#read_metanetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.read_metanetcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>read the metadata for netcdf output files
+unit, long name, standard name and additional information</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-management_modules.data_handling">
+<span id="management-modules-data-handling-module"></span><h2>management_modules.data_handling module<a class="headerlink" href="#module-management_modules.data_handling" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="management_modules.data_handling.compressArray">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">compressArray</code><span class="sig-paren">(</span><em>map</em>, <em>pcr=True</em>, <em>name='None'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#compressArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.compressArray" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.decompress">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">decompress</code><span class="sig-paren">(</span><em>map</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.decompress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.getValDivZero">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">getValDivZero</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>y_lim</em>, <em>z_def=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#getValDivZero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.getValDivZero" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.getmeta">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">getmeta</code><span class="sig-paren">(</span><em>key</em>, <em>varname</em>, <em>alternative</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#getmeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.getmeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the meta data information for the netcdf output from the global
+variable metaNetcdfVar</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.loadmap">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadmap</code><span class="sig-paren">(</span><em>name</em>, <em>pcr=False</em>, <em>lddflag=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#loadmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.loadmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>load a static map either value or pcraster map or netcdf</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.loadsetclone">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadsetclone</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#loadsetclone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.loadsetclone" title="Permalink to this definition">¶</a></dt>
+<dd><p>load the maskmap and set as clone</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.mapattrNetCDF">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrNetCDF</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#mapattrNetCDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.mapattrNetCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the map attributes like col, row etc from a ntcdf map
+and define the rectangular of the mask map inside the netcdf map</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.metaNetCDF">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">metaNetCDF</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#metaNetCDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.metaNetCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the map metadata from netcdf</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.readnetcdf">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf</code><span class="sig-paren">(</span><em>name</em>, <em>time</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.readnetcdf2">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf2</code><span class="sig-paren">(</span><em>name</em>, <em>date</em>, <em>useDaily='daily'</em>, <em>value='None'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdf2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdf2" title="Permalink to this definition">¶</a></dt>
+<dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.readnetcdfInitial">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfInitial</code><span class="sig-paren">(</span><em>name</em>, <em>value</em>, <em>default=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdfInitial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdfInitial" title="Permalink to this definition">¶</a></dt>
+<dd><p>load initial condition from netcdf format</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.readnetcdfWithoutTime">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfWithoutTime</code><span class="sig-paren">(</span><em>name</em>, <em>value='None'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdfWithoutTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdfWithoutTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>load stack of maps in netcdf format</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.valuecell">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">valuecell</code><span class="sig-paren">(</span><em>mask</em>, <em>coordx</em>, <em>coordstr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#valuecell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.valuecell" title="Permalink to this definition">¶</a></dt>
+<dd><p>to put a value into a pcraster map -&gt; invert of cellvalue
+pcraster map is converted into a numpy array first</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.writeIniNetcdf">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">writeIniNetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>varlist</em>, <em>inputlist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#writeIniNetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.writeIniNetcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>write variables to netcdf init file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.writenetcdf">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">writenetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>varname</em>, <em>varunits</em>, <em>inputmap</em>, <em>timeStamp</em>, <em>posCnt</em>, <em>flag</em>, <em>flagTime</em>, <em>nrdays=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#writenetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.writenetcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>write a netcdf stack</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-management_modules.globals">
+<span id="management-modules-globals-module"></span><h2>management_modules.globals module<a class="headerlink" href="#module-management_modules.globals" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="management_modules.globals.globalFlags">
+<code class="descclassname">management_modules.globals.</code><code class="descname">globalFlags</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/globals.html#globalFlags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.globals.globalFlags" title="Permalink to this definition">¶</a></dt>
+<dd><p>read flags - according to the flags the output is adjusted
+quiet,veryquiet, loud, checkfiles, noheader,printtime</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-management_modules.improvepcraster">
+<span id="management-modules-improvepcraster-module"></span><h2>management_modules.improvepcraster module<a class="headerlink" href="#module-management_modules.improvepcraster" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="management_modules.improvepcraster.DynamicFramework2">
+<em class="property">class </em><code class="descclassname">management_modules.improvepcraster.</code><code class="descname">DynamicFramework2</code><span class="sig-paren">(</span><em>userModel</em>, <em>lastTimeStep=0</em>, <em>firstTimestep=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/improvepcraster.html#DynamicFramework2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pcraster.framework.dynamicFramework.DynamicFramework</span></code></p>
+<p>Framework class for dynamic models.
+<cite>userModel</cite>
+Instance that models the <span class="xref std std-ref">Dynamic Model Concept</span>.
+<cite>lastTimeStep</cite>   Last timestep to run.
+<cite>firstTimestep</cite>  Sets the starting timestep of the model (optional, default is 1).
+Updated by improvepcraster.py</p>
+<dl class="attribute">
+<dt id="management_modules.improvepcraster.DynamicFramework2.rquiet">
+<code class="descname">rquiet</code><em class="property"> = False</em><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2.rquiet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="management_modules.improvepcraster.DynamicFramework2.rtrace">
+<code class="descname">rtrace</code><em class="property"> = False</em><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2.rtrace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="management_modules.improvepcraster.DynamicFramework2.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/improvepcraster.html#DynamicFramework2.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the dynamic user model.</p>
+<p>This method depends on the filter frameworks concept. Shouldn&#8217;t its run
+method call _runSuspend()?</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="management_modules.improvepcraster.TimeoutputTimeseries2">
+<em class="property">class </em><code class="descclassname">management_modules.improvepcraster.</code><code class="descname">TimeoutputTimeseries2</code><span class="sig-paren">(</span><em>tssFilename</em>, <em>model</em>, <em>idMap=None</em>, <em>noHeader=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/improvepcraster.html#TimeoutputTimeseries2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.improvepcraster.TimeoutputTimeseries2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pcraster.framework.Timeoutput.TimeoutputTimeseries</span></code></p>
+<p>Class to create pcrcalc timeoutput style timeseries
+Updated py improvepcraster.py</p>
+<dl class="method">
+<dt id="management_modules.improvepcraster.TimeoutputTimeseries2.firstout">
+<code class="descname">firstout</code><span class="sig-paren">(</span><em>expression</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/improvepcraster.html#TimeoutputTimeseries2.firstout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.improvepcraster.TimeoutputTimeseries2.firstout" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the first cell as output value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="management_modules.improvepcraster.TimeoutputTimeseries2.sample2">
+<code class="descname">sample2</code><span class="sig-paren">(</span><em>expression</em>, <em>daymonthyear</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/improvepcraster.html#TimeoutputTimeseries2.sample2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.improvepcraster.TimeoutputTimeseries2.sample2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sampling the current values of &#8216;expression&#8217; at the given locations for the current timestep</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-management_modules.messages">
+<span id="management-modules-messages-module"></span><h2>management_modules.messages module<a class="headerlink" href="#module-management_modules.messages" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="management_modules.messages.CWATMError">
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+<p>the error handling class
+prints out an error</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="management_modules.messages.CWATMFileError">
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMFileError</code><span class="sig-paren">(</span><em>filename</em>, <em>msg=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMFileError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMFileError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-class docutils literal"><span class="pre">management_modules.messages.CWATMError</span></code></a></p>
+<p>the error handling class
+prints out an error</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="management_modules.messages.CWATMRunInfo">
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMRunInfo</code><span class="sig-paren">(</span><em>outputDir</em>, <em>Steps=1</em>, <em>ensMembers=1</em>, <em>Cores=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMRunInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMRunInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Warning</span></code></p>
+<p>prints out an error</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="management_modules.messages.CWATMWarning">
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMWarning</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Warning</span></code></p>
+<p>the error handling class
+prints out an error</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-management_modules.output">
+<span id="management-modules-output-module"></span><h2>management_modules.output module<a class="headerlink" href="#module-management_modules.output" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="management_modules.output.outputTssMap">
+<em class="property">class </em><code class="descclassname">management_modules.output.</code><code class="descname">outputTssMap</code><span class="sig-paren">(</span><em>out_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p># <strong>********************************************************</strong>
+# <strong>*</strong> Output of time series (.tss) and maps*****************
+# <strong>********************************************************</strong></p>
+<dl class="method">
+<dt id="management_modules.output.outputTssMap.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>dynamic part of the output module</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="management_modules.output.outputTssMap.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>initial part of the output module</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-management_modules.replace_pcr">
+<span id="management-modules-replace-pcr-module"></span><h2>management_modules.replace_pcr module<a class="headerlink" href="#module-management_modules.replace_pcr" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="management_modules.replace_pcr.npareaaverage">
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareaaverage</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareaaverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareaaverage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.replace_pcr.npareamajority">
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamajority</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamajority"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamajority" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.replace_pcr.npareamaximum">
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamaximum</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamaximum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamaximum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.replace_pcr.npareatotal">
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareatotal</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareatotal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareatotal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-management_modules.timestep">
+<span id="management-modules-timestep-module"></span><h2>management_modules.timestep module<a class="headerlink" href="#module-management_modules.timestep" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="management_modules.timestep.Calendar">
+<code class="descclassname">management_modules.timestep.</code><code class="descname">Calendar</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#Calendar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.Calendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the date from CalendarDayStart in the settings xml</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.timestep.checkifDate">
+<code class="descclassname">management_modules.timestep.</code><code class="descname">checkifDate</code><span class="sig-paren">(</span><em>start</em>, <em>end</em>, <em>spinup</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#checkifDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.checkifDate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.timestep.datetoInt">
+<code class="descclassname">management_modules.timestep.</code><code class="descname">datetoInt</code><span class="sig-paren">(</span><em>dateIn</em>, <em>begin</em>, <em>both=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#datetoInt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.datetoInt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.timestep.timemeasure">
+<code class="descclassname">management_modules.timestep.</code><code class="descname">timemeasure</code><span class="sig-paren">(</span><em>name</em>, <em>loops=0</em>, <em>update=False</em>, <em>sample=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#timemeasure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.timemeasure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.timestep.timestep_dynamic">
+<code class="descclassname">management_modules.timestep.</code><code class="descname">timestep_dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#timestep_dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.timestep_dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of setting the date
+Current date is increasing, checking if beginning of month, year,</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-management_modules">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-management_modules" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">4. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">5. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">7. <strong>Source code</strong></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hydrological_modules.html"
+                        title="previous chapter">hydrological_modules package</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hydrological_modules.html" title="hydrological_modules package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="source.html" >7. <strong>Source code</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

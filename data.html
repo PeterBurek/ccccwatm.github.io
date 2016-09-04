@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5. Data &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="next" title="6. Demo of the model" href="results.html" />
+    <link rel="prev" title="4. Running the model" href="settings.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="results.html" title="6. Demo of the model"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="settings.html" title="4. Running the model"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="data">
+<h1><a class="toc-backref" href="#id1">5. Data</a><a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#data" id="id1">Data</a><ul>
+<li><a class="reference internal" href="#data-requirements" id="id2">Data requirements</a></li>
+<li><a class="reference internal" href="#data-format" id="id3">Data format</a></li>
+<li><a class="reference internal" href="#data-storage-structure" id="id4">Data storage structure</a></li>
+<li><a class="reference internal" href="#static-data" id="id5">Static data</a><ul>
+<li><a class="reference internal" href="#network" id="id6">Network</a></li>
+<li><a class="reference internal" href="#soil" id="id7">Soil</a></li>
+<li><a class="reference internal" href="#groundwater" id="id8">Groundwater</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#temporal-data-for-each-year" id="id9">Temporal data for each year</a><ul>
+<li><a class="reference internal" href="#crop-coefficient" id="id10">Crop coefficient</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#continous-temporal-data" id="id11">Continous temporal data</a><ul>
+<li><a class="reference internal" href="#meteorological-data" id="id12">Meteorological data</a></li>
+<li><a class="reference internal" href="#meteorological-data-for-calculation-pot-evaporation" id="id13">Meteorological data for calculation pot. evaporation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="data-requirements">
+<h2><a class="toc-backref" href="#id2">Data requirements</a><a class="headerlink" href="#data-requirements" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="data-format">
+<h2><a class="toc-backref" href="#id3">Data format</a><a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>netCDF</li>
+<li>PCRaster maps</li>
+</ul>
+</div>
+<div class="section" id="data-storage-structure">
+<h2><a class="toc-backref" href="#id4">Data storage structure</a><a class="headerlink" href="#data-storage-structure" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-rest"><div class="highlight"><pre><span></span>project
+│-  README.md
+│-  file001.txt
+│
+└───folder1
+│   │-  file011.txt
+│   │-  file012.txt
+│   │
+│   └───subfolder1
+│       │-  file111.txt
+│       │-  file112.txt
+│       │   ...
+│
+└───folder2
+    │-  file021.txt
+    │-  file022.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="static-data">
+<h2><a class="toc-backref" href="#id5">Static data</a><a class="headerlink" href="#static-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="network">
+<h3><a class="toc-backref" href="#id6">Network</a><a class="headerlink" href="#network" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="soil">
+<h3><a class="toc-backref" href="#id7">Soil</a><a class="headerlink" href="#soil" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="groundwater">
+<h3><a class="toc-backref" href="#id8">Groundwater</a><a class="headerlink" href="#groundwater" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="temporal-data-for-each-year">
+<h2><a class="toc-backref" href="#id9">Temporal data for each year</a><a class="headerlink" href="#temporal-data-for-each-year" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="crop-coefficient">
+<h3><a class="toc-backref" href="#id10">Crop coefficient</a><a class="headerlink" href="#crop-coefficient" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="continous-temporal-data">
+<h2><a class="toc-backref" href="#id11">Continous temporal data</a><a class="headerlink" href="#continous-temporal-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="meteorological-data">
+<h3><a class="toc-backref" href="#id12">Meteorological data</a><a class="headerlink" href="#meteorological-data" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Precipitation</li>
+<li>Temperature</li>
+<li>Potential evaration</li>
+</ul>
+</div>
+<div class="section" id="meteorological-data-for-calculation-pot-evaporation">
+<h3><a class="toc-backref" href="#id13">Meteorological data for calculation pot. evaporation</a><a class="headerlink" href="#meteorological-data-for-calculation-pot-evaporation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>max, min temperature</li>
+<li>humidity</li>
+<li>radiation</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">4. Running the model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-requirements">Data requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-format">Data format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-storage-structure">Data storage structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#static-data">Static data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#temporal-data-for-each-year">Temporal data for each year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#continous-temporal-data">Continous temporal data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">7. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">8. <strong>Source code</strong></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="settings.html"
+                        title="previous chapter">4. Running the model</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="results.html"
+                        title="next chapter">6. Demo of the model</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="results.html" title="6. Demo of the model"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="settings.html" title="4. Running the model"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

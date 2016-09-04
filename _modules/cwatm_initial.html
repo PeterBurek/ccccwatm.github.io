@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cwatm_initial &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for cwatm_initial</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -------------------------------------------------------------------------</span>
+<span class="c1"># Name:       CWATM Initial</span>
+<span class="c1"># Purpose:</span>
+<span class="c1">#</span>
+<span class="c1"># Author:      PB</span>
+<span class="c1">#</span>
+<span class="c1"># Created:     16/05/2016</span>
+<span class="c1"># Copyright:   (c) PB 2016</span>
+<span class="c1"># -------------------------------------------------------------------------</span>
+
+
+<span class="kn">from</span> <span class="nn">hydrological_modules.miscInitial</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.initcondition</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">hydrological_modules.readmeteo</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.inflow</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.snow_frost</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.soil</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.landcoverType</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.evaporation</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.groundwater</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.waterdemand</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.capillarRise</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.interception</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.routing</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.lakes_reservoirs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.waterbalance</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1"># --------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">pcraster</span> <span class="k">import</span><span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pcraster.framework</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">management_modules.output</span> <span class="k">import</span> <span class="o">*</span>
+
+
+
+<div class="viewcode-block" id="CWATModel_ini"><a class="viewcode-back" href="../cwatm_initial.html#cwatm_initial.CWATModel_ini">[docs]</a><span class="k">class</span> <span class="nc">CWATModel_ini</span><span class="p">(</span><span class="n">DynamicModel</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot; CWATN initial part</span>
+<span class="sd">        this part is to initialize the variables</span>
+<span class="sd">        it will call the initial part of the hydrological modules</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; init part of the initial part</span>
+<span class="sd">            defines the mask map and the outlet points</span>
+<span class="sd">            initialization of the hydrological modules</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">DynamicModel</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1">## MaskMap: the maskmap is flexible e.g. col,row,x1,y1  or x1,x2,y1,y2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MaskMap</span> <span class="o">=</span> <span class="n">loadsetclone</span><span class="p">(</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">)</span>
+
+
+        <span class="c1"># get the extent of the maps from the precipitation input maps</span>
+        <span class="c1"># and the modelling extent from the MaskMap</span>
+        <span class="c1"># cutmap[] defines the MaskMap inside the precipitation map</span>
+        <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span>
+            <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapattrNetCDF</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;E0Maps&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;writeNetcdfStack&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;writeNetcdf&#39;</span><span class="p">]:</span>
+            <span class="c1"># if NetCDF is writen, the pr.nc is read to get the metadata</span>
+            <span class="c1"># like projection</span>
+            <span class="n">metaNetCDF</span><span class="p">()</span>
+
+        <span class="c1"># ----------------------------------------</span>
+        <span class="c1"># include output of tss and maps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_module</span> <span class="o">=</span> <span class="n">outputTssMap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># include all the hydrological modules</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">misc_module</span> <span class="o">=</span> <span class="n">miscInitial</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_module</span> <span class="o">=</span> <span class="n">initcondition</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">waterbalance_module</span> <span class="o">=</span> <span class="n">waterbalance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">readmeteo_module</span> <span class="o">=</span> <span class="n">readmeteo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inflow_module</span> <span class="o">=</span> <span class="n">inflow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">snowfrost_module</span> <span class="o">=</span> <span class="n">snow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soil_module</span> <span class="o">=</span> <span class="n">soil</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span> <span class="o">=</span> <span class="n">landcoverType</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaporation_module</span> <span class="o">=</span> <span class="n">evaporation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">groundwater_module</span> <span class="o">=</span> <span class="n">groundwater</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">waterdemand_module</span> <span class="o">=</span> <span class="n">waterdemand</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capillarRise_module</span> <span class="o">=</span> <span class="n">capillarRise</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interception_module</span> <span class="o">=</span> <span class="n">interception</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">routing_module</span> <span class="o">=</span> <span class="n">routing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span> <span class="o">=</span> <span class="n">lakes_reservoirs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># include output of tss and maps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_module</span> <span class="o">=</span> <span class="n">outputTssMap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------------</span>
+
+
+
+        <span class="c1"># run intial misc to get all global variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">misc_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">inflow_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">snowfrost_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soil_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">groundwater_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">routing_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">waterdemand_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="c1"># calculate initial amount of water in the catchment</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+
+<span class="c1"># ----------------------------------------------------------------</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        # include output of tss and maps</span>
+<span class="sd">        self.output_module = outputTssMap(self)</span>
+
+<span class="sd">        MMaskMap = self.MaskMap</span>
+<span class="sd">        # for checking maps</span>
+
+<span class="sd">        self.ReportSteps = ReportSteps[&#39;rep&#39;]</span>
+
+<span class="sd">        self.waterbalance_module.initial()</span>
+<span class="sd">        # calculate initial amount of water in the catchment</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+<span class="c1"># ====== INITIAL ================================</span>
+<div class="viewcode-block" id="CWATModel_ini.initial"><a class="viewcode-back" href="../cwatm_initial.html#cwatm_initial.CWATModel_ini.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">misc_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">inflow_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">snowfrost_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">routing_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+		
+	<span class="sd">&quot;&quot;&quot; Initial part of LISFLOOD</span>
+<span class="sd">            calls the initial part of the hydrological modules</span>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">4. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data.html">5. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../todo.html">7. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source.html">8. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

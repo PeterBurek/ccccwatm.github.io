@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cwatm_initial module &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="up" title="7. Source code" href="source.html" />
+    <link rel="next" title="hydrological_modules package" href="hydrological_modules.html" />
+    <link rel="prev" title="cwatm_dynamic module" href="cwatm_dynamic.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hydrological_modules.html" title="hydrological_modules package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">7. <strong>Source code</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cwatm-initial-module">
+<h1>cwatm_initial module<a class="headerlink" href="#cwatm-initial-module" title="Permalink to this headline">¶</a></h1>
+<img src="_images/inheritance-d7e0ae39c7d981ba6ad5db9ca1aac7b5e5e64a50.png" alt="Inheritance diagram of cwatm_initial" usemap="#inheritance2ea4237f1b" class="inheritance"/>
+<map id="inheritance2ea4237f1b" name="inheritance2ea4237f1b">
+<area shape="rect" id="node1" href="#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="312,5,427,31"/>
+<area shape="rect" id="node3" title="Base class for DynamicModel framework class." alt="" coords="5,5,108,31"/>
+</map>
+<img src="_images/inheritance-1eb1fc97e167dc6a0c3f22e619d4cd8f8ee6dd98.png" alt="Inheritance diagram of cwatm_dynamic" usemap="#inheritancea7c11522e7" class="inheritance"/>
+<map id="inheritancea7c11522e7" name="inheritancea7c11522e7">
+<area shape="rect" id="node1" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" target="_top" title="CWATModel_dyn" alt="" coords="312,5,435,31"/>
+<area shape="rect" id="node3" title="Base class for DynamicModel framework class." alt="" coords="5,5,108,31"/>
+</map>
+<span class="target" id="module-cwatm_initial"></span><dl class="class">
+<dt id="cwatm_initial.CWATModel_ini">
+<em class="property">class </em><code class="descclassname">cwatm_initial.</code><code class="descname">CWATModel_ini</code><a class="reference internal" href="_modules/cwatm_initial.html#CWATModel_ini"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm_initial.CWATModel_ini" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pcraster.framework.dynamicPCRasterBase.DynamicModel</span></code></p>
+<p>CWATN initial part
+this part is to initialize the variables
+it will call the initial part of the hydrological modules</p>
+<dl class="method">
+<dt id="cwatm_initial.CWATModel_ini.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm_initial.html#CWATModel_ini.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm_initial.CWATModel_ini.initial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">4. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">5. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">7. <strong>Source code</strong></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cwatm_dynamic.html"
+                        title="previous chapter">cwatm_dynamic module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hydrological_modules.html"
+                        title="next chapter">hydrological_modules package</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hydrological_modules.html" title="hydrological_modules package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="source.html" >7. <strong>Source code</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

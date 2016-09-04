@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cwatm &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for cwatm</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1">#  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span>
+
+<span class="sd">&quot;&quot;&quot;## -------------------------------------------------</span>
+<span class="sd"> ######## ##          ##  ####  ######  ##    ##</span>
+<span class="sd"> ##       ##          ## ##  ##   ##   ####  ####</span>
+<span class="sd"> ##        ##        ##  ##  ##   ##   ## #### ##</span>
+<span class="sd"> ##        ##   ##   ## ########  ##  ##   ##   ##</span>
+<span class="sd"> ##         ## #### ##  ##    ##  ##  ##        ##</span>
+<span class="sd"> ##         ####  #### ##      ## ## ##          ##</span>
+<span class="sd"> ##########  ##    ##  ##      ## ## ##          ##</span>
+
+<span class="sd"> Community WATer Model</span>
+<span class="sd"># --------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__authors__</span> <span class="o">=</span> <span class="s2">&quot;Peter Burek IIASA&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;Version: 0.99&quot;</span>
+<span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;16/05/2016&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2016, IIASA&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Peter Burek&quot;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Development&quot;</span>
+
+
+<span class="c1">#  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span>
+<span class="c1">#  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span>
+
+<span class="c1"># to work with the new grid engine  - a workaround with pyexpat is needed</span>
+<span class="kn">import</span> <span class="nn">xml.dom.minidom</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">pcraster</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pcraster.framework</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">management_modules.configuration</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">management_modules.messages</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1"># ---------------------------</span>
+
+<span class="kn">from</span> <span class="nn">cwatm_initial</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">cwatm_dynamic</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="CWATModel"><a class="viewcode-back" href="../cwatm.html#cwatm.CWATModel">[docs]</a><span class="k">class</span> <span class="nc">CWATModel</span><span class="p">(</span><span class="n">CWATModel_ini</span><span class="p">,</span> <span class="n">CWATModel_dyn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Initial and dynamic part of the CWat model</span>
+<span class="sd">	    initial part takes care of all the non temporal initialiation procedures</span>
+<span class="sd">		dynamic part loops over time</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+<span class="c1"># ==================================================</span>
+
+<div class="viewcode-block" id="CWATMexe"><a class="viewcode-back" href="../cwatm.html#cwatm.CWATMexe">[docs]</a><span class="k">def</span> <span class="nf">CWATMexe</span><span class="p">():</span>
+
+    <span class="n">parse_configuration</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="c1">#print option</span>
+    <span class="c1">#print binding</span>
+    <span class="c1"># read all the possible option for modelling and for generating output</span>
+    <span class="c1"># read the settings file with all information about the catchments(s)</span>
+
+    <span class="c1"># read the meta data information for netcdf outputfiles</span>
+    <span class="n">read_metanetcdf</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;metaNetcdfFile&#39;</span><span class="p">])</span>
+
+
+    <span class="c1">### bindkey = sorted(binding.keys())</span>
+
+    <span class="c1">#os.chdir(outputDir[0])</span>
+    <span class="c1"># this prevent from using relative path in settings!</span>
+
+    <span class="n">checkifDate</span><span class="p">(</span><span class="s1">&#39;StepStart&#39;</span><span class="p">,</span><span class="s1">&#39;StepEnd&#39;</span><span class="p">,</span><span class="s1">&#39;SpinUp&#39;</span><span class="p">)</span>
+    <span class="c1"># checks if end date is later than start date and puts both in modelSteps</span>
+
+    <span class="c1">#if option[&#39;InitCWATM&#39;]: print &quot;INITIALISATION RUN&quot;</span>
+    <span class="c1">#print &quot;Start - End: &quot;,modelSteps[0],&quot; - &quot;, modelSteps[1]</span>
+    <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;loud&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="s2">&quot;</span><span class="si">%-6s</span><span class="s2"> </span><span class="si">%10s</span><span class="s2"> </span><span class="si">%11s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="s2">&quot;Step&quot;</span><span class="p">,</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span><span class="s2">&quot;Discharge&quot;</span><span class="p">),</span>
+
+    <span class="n">CWATM</span> <span class="o">=</span> <span class="n">CWATModel</span><span class="p">()</span>
+    <span class="n">stCWATM</span> <span class="o">=</span> <span class="n">DynamicFramework2</span><span class="p">(</span><span class="n">CWATM</span><span class="p">,</span> <span class="n">firstTimestep</span><span class="o">=</span><span class="n">dateVar</span><span class="p">[</span><span class="s2">&quot;intStart&quot;</span><span class="p">],</span> <span class="n">lastTimeStep</span><span class="o">=</span><span class="n">dateVar</span><span class="p">[</span><span class="s2">&quot;intEnd&quot;</span><span class="p">])</span>
+    <span class="n">stCWATM</span><span class="o">.</span><span class="n">rquiet</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">stCWATM</span><span class="o">.</span><span class="n">rtrace</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ----------------------------------------------</span>
+<span class="sd">    Deterministic run</span>
+<span class="sd">    ----------------------------------------------</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span> <span class="n">CWATMRunInfo</span><span class="p">(</span><span class="n">outputDir</span> <span class="o">=</span> <span class="n">outputDir</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">stCWATM</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+		<span class="c1"># cProfile.run(&#39;stLisflood.run()&#39;)</span>
+    <span class="c1"># python -m cProfile -o  l1.pstats lisf1.py settingsNew3.xml</span>
+    <span class="c1"># gprof2dot -f pstats l1.pstats | dot -Tpng -o callgraph.png</span>
+
+    <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;printtime&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Time profiling&quot;</span>
+        <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%2s</span><span class="s2"> </span><span class="si">%-17s</span><span class="s2"> </span><span class="si">%10s</span><span class="s2"> </span><span class="si">%8s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="s2">&quot;No&quot;</span><span class="p">,</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span><span class="s2">&quot;time[s]&quot;</span><span class="p">,</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
+        <span class="n">div</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">timeSum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">timeMesSum</span><span class="p">)</span>
+        <span class="n">timePrint</span> <span class="o">=</span> <span class="n">timeSum</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">timePrint</span><span class="p">)):</span>
+            <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%2i</span><span class="s2"> </span><span class="si">%-17s</span><span class="s2"> </span><span class="si">%10.2f</span><span class="s2"> </span><span class="si">%8.1f</span><span class="s2">&quot;</span>  <span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">timeMesString</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">timePrint</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">100</span> <span class="o">*</span> <span class="n">timePrint</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">timePrint</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">current_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="n">start_time</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="n">current_time</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span></div>
+
+<span class="c1"># ==================================================</span>
+<span class="c1"># ============== USAGE ==============================</span>
+<span class="c1"># ==================================================</span>
+
+
+<div class="viewcode-block" id="usage"><a class="viewcode-back" href="../cwatm.html#cwatm.usage">[docs]</a><span class="k">def</span> <span class="nf">usage</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; prints some lines describing how to use this program</span>
+<span class="sd">        which arguments and parameters it accepts, etc</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span> <span class="s1">&#39;CWatM - Community Water model&#39;</span>
+    <span class="nb">print</span> <span class="s1">&#39;Authors: &#39;</span><span class="p">,</span> <span class="n">__authors__</span>
+    <span class="nb">print</span> <span class="s1">&#39;Version: &#39;</span><span class="p">,</span> <span class="n">__version__</span>
+    <span class="nb">print</span> <span class="s1">&#39;Date: &#39;</span><span class="p">,</span> <span class="n">__date__</span>
+    <span class="nb">print</span> <span class="s1">&#39;Status: &#39;</span><span class="p">,</span> <span class="n">__status__</span>
+    <span class="nb">print</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Arguments list:</span>
+<span class="s2">    settings.ini     settings file</span>
+
+<span class="s2">    -q --quiet       output progression given as .</span>
+<span class="s2">    -v --veryquiet   no output progression is given</span>
+<span class="s2">    -l --loud        output progression given as time step, date and discharge</span>
+<span class="s2">    -c --check       input maps and stack maps are checked, output for each input map BUT no model run</span>
+<span class="s2">    -h --noheader    .tss file have no header and start immediately with the time series</span>
+<span class="s2">    -t --printtime   the computation time for hydrological modules are printed</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="headerinfo"><a class="viewcode-back" href="../cwatm.html#cwatm.headerinfo">[docs]</a><span class="k">def</span> <span class="nf">headerinfo</span><span class="p">():</span>
+
+   <span class="nb">print</span> <span class="s2">&quot;CWATM - Community Water Model &quot;</span><span class="p">,</span><span class="n">__version__</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="n">__date__</span><span class="p">,</span>
+   <span class="nb">print</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Community Water Model</span>
+<span class="s2">International Institute of Applied Systems Analysis (IIASA)</span>
+<span class="s2">----------------------------------------------------------&quot;&quot;&quot;</span></div>
+<span class="n">current_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span> <span class="n">current_time</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="c1"># ============== MAIN ==============================</span>
+<span class="c1"># ==================================================</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">usage</span><span class="p">()</span>
+
+    <span class="n">CWatM_Path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">CWatM_Path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">CWatM_Path</span><span class="p">)</span>
+    <span class="n">optionxml</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">CWatM_Path</span> <span class="o">+</span> <span class="s2">&quot;/OptionTserieMaps.xml&quot;</span><span class="p">)</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>    <span class="c1"># setting.ini file</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="n">globalFlags</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="c1"># setting of global flag e.g checking input maps, producing more output information</span>
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;veryquiet&#39;</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;quiet&#39;</span><span class="p">])</span> <span class="p">:</span> <span class="n">headerinfo</span><span class="p">()</span>
+    <span class="n">CWATMexe</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">4. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data.html">5. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../todo.html">7. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source.html">8. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

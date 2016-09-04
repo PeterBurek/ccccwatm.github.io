@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cwatm module &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="up" title="7. Source code" href="source.html" />
+    <link rel="next" title="cwatm_dynamic module" href="cwatm_dynamic.html" />
+    <link rel="prev" title="7. Source code" href="source.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="source.html" title="7. Source code"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">7. <strong>Source code</strong></a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cwatm-module">
+<h1>cwatm module<a class="headerlink" href="#cwatm-module" title="Permalink to this headline">¶</a></h1>
+<img alt="_images/CWATM.jpg" src="_images/CWATM.jpg" />
+<img src="_images/inheritance-5c596322dcd7dedddb410214f348bf0ce9d145d4.png" alt="Inheritance diagram of cwatm.CWATModel" usemap="#inheritancee2caac668d" class="inheritance"/>
+<map id="inheritancee2caac668d" name="inheritancee2caac668d">
+<area shape="rect" id="node1" href="#cwatm.CWATModel" target="_top" title="Initial and dynamic part of the CWat model" alt="" coords="483,31,577,56"/>
+<area shape="rect" id="node2" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="316,5,431,31"/>
+<area shape="rect" id="node3" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" target="_top" title="CWATModel_dyn" alt="" coords="312,55,435,80"/>
+<area shape="rect" id="node5" title="Base class for DynamicModel framework class." alt="" coords="5,31,108,56"/>
+</map>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">blabla</p>
+</div>
+<img src="_images/inheritance-21849bef610a45b24d3b21450ae98587f37054df.png" alt="Inheritance diagram of cwatm" usemap="#inheritance71a609caa7" class="inheritance"/>
+<map id="inheritance71a609caa7" name="inheritance71a609caa7">
+<area shape="rect" id="node1" href="#cwatm.CWATModel" target="_top" title="Initial and dynamic part of the CWat model" alt="" coords="483,31,577,56"/>
+<area shape="rect" id="node2" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="316,5,431,31"/>
+<area shape="rect" id="node3" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" target="_top" title="CWATModel_dyn" alt="" coords="312,55,435,80"/>
+<area shape="rect" id="node5" title="Base class for DynamicModel framework class." alt="" coords="5,31,108,56"/>
+</map>
+<span class="target" id="module-cwatm"></span><dl class="docutils">
+<dt>## &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-</dt>
+<dd><p class="first">######## ##          ##  ####  ######  ##    ##
+##       ##          ## ##  ##   ##   ####  ####
+##        ##        ##  ##  ##   ##   ## #### ##
+##        ##   ##   ## ########  ##  ##   ##   ##
+##         ## #### ##  ##    ##  ##  ##        ##
+##         ####  #### ##      ## ## ##          ##
+##########  ##    ##  ##      ## ## ##          ##</p>
+<p class="last">Community WATer Model</p>
+</dd>
+</dl>
+<p># &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<dl class="function">
+<dt id="cwatm.CWATMexe">
+<code class="descclassname">cwatm.</code><code class="descname">CWATMexe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm.html#CWATMexe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.CWATMexe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="cwatm.CWATModel">
+<em class="property">class </em><code class="descclassname">cwatm.</code><code class="descname">CWATModel</code><a class="reference internal" href="_modules/cwatm.html#CWATModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.CWATModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" title="cwatm_initial.CWATModel_ini"><code class="xref py py-class docutils literal"><span class="pre">cwatm_initial.CWATModel_ini</span></code></a>, <a class="reference internal" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" title="cwatm_dynamic.CWATModel_dyn"><code class="xref py py-class docutils literal"><span class="pre">cwatm_dynamic.CWATModel_dyn</span></code></a></p>
+<p>Initial and dynamic part of the CWat model
+initial part takes care of all the non temporal initialiation procedures</p>
+<blockquote>
+<div>dynamic part loops over time</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="cwatm.headerinfo">
+<code class="descclassname">cwatm.</code><code class="descname">headerinfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm.html#headerinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.headerinfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cwatm.usage">
+<code class="descclassname">cwatm.</code><code class="descname">usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm.html#usage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints some lines describing how to use this program
+which arguments and parameters it accepts, etc</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">4. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">5. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">7. <strong>Source code</strong></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="source.html"
+                        title="previous chapter">7. <strong>Source code</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cwatm_dynamic.html"
+                        title="next chapter">cwatm_dynamic module</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="source.html" title="7. Source code"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="source.html" >7. <strong>Source code</strong></a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

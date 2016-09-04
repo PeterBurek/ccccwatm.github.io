@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>management_modules.output &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for management_modules.output</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -------------------------------------------------------------------------</span>
+<span class="c1"># Name:        Output</span>
+<span class="c1"># Purpose:     Output as timeseries, netcdf, pcraster</span>
+<span class="c1">#</span>
+<span class="c1"># Author:      PB</span>
+<span class="c1">#</span>
+<span class="c1"># Created:     5/08/2016</span>
+<span class="c1"># Copyright:   (c) PB 2016</span>
+<span class="c1"># -------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">globals</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+
+
+<span class="kn">from</span> <span class="nn">management_modules.improvepcraster</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">management_modules.checks</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">management_modules.replace_pcr</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">messages</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">pcraster</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pcraster.framework</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span><span class="p">,</span><span class="n">num2date</span><span class="p">,</span><span class="n">date2num</span><span class="p">,</span><span class="n">date2index</span>
+
+
+
+<div class="viewcode-block" id="outputTssMap"><a class="viewcode-back" href="../../management_modules.html#management_modules.output.outputTssMap">[docs]</a><span class="k">class</span> <span class="nc">outputTssMap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    # ************************************************************</span>
+<span class="sd">    # ***** Output of time series (.tss) and maps*****************</span>
+<span class="sd">    # ************************************************************</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_variable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">out_variable</span>
+
+
+
+<div class="viewcode-block" id="outputTssMap.initial"><a class="viewcode-back" href="../../management_modules.html#management_modules.output.outputTssMap.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; initial part of the output module</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">appendinfo</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">sec</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">ismap</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Append info to PCraster TimeoutTimeseries (tss) class</span>
+<span class="sd">            :param out:  map or tss, info of variable, output location</span>
+<span class="sd">            :param sec:  Section of settingsfile</span>
+<span class="sd">            :param name: variable name</span>
+<span class="sd">            :param type: daily or monthly or avergae monthly etc.</span>
+<span class="sd">            :param ismap: if map = True , if timeserie = False</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">key</span> <span class="o">=</span> <span class="n">sec</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="nb">type</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">out</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">out</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                        <span class="n">info</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outDir</span><span class="p">[</span><span class="n">sec</span><span class="p">]):</span>
+                            <span class="k">if</span> <span class="n">ismap</span><span class="p">:</span>
+                                <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outDir</span><span class="p">[</span><span class="n">sec</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">type</span> <span class="o">+</span> <span class="s2">&quot;.nc&quot;</span><span class="p">))</span>
+                                <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">var</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                                <span class="c1"># creates a var to sum/ average the results e.g. self.var.Precipitation_monthtot</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="c1"># TimeoutputTimeseries(binding[tss], self.var, outpoints, noHeader=Flags[&#39;noheader&#39;])</span>
+                                <span class="c1">#info.append(os.path.join(outDir[sec], str(var) + &quot;_daily.tss&quot;))</span>
+                                <span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outDir</span><span class="p">[</span><span class="n">sec</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span><span class="o">+</span> <span class="nb">type</span> <span class="o">+</span> <span class="s2">&quot;.tss&quot;</span><span class="p">)</span>
+                                <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TimeoutputTimeseries2</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">,</span> <span class="n">outpoints</span><span class="p">,</span> <span class="n">noHeader</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking output file path </span><span class="se">\n</span><span class="s2">&quot;</span>
+                            <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">outDir</span><span class="p">[</span><span class="n">sec</span><span class="p">],</span> <span class="n">msg</span><span class="p">)</span>
+                        <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+                        <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="n">out</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span>
+                        <span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
+
+
+        <span class="c1"># ------------------------------------------------------------------------------</span>
+        <span class="n">where</span> <span class="o">=</span> <span class="s2">&quot;Gauges&quot;</span>
+        <span class="n">outpoints</span> <span class="o">=</span> <span class="n">binding</span><span class="p">[</span><span class="n">where</span><span class="p">]</span>
+
+        <span class="n">coord</span> <span class="o">=</span> <span class="n">binding</span><span class="p">[</span><span class="n">where</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># could be gauges, sites, lakeSites etc.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">outpoints</span> <span class="o">=</span> <span class="n">valuecell</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">MaskMap</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">outpoints</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outpoints</span><span class="p">):</span>
+                <span class="n">outpoints</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="n">where</span><span class="p">,</span> <span class="n">pcr</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking output points file path </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">outpoints</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+        <span class="c1"># self.var.Tss[tss] = TimeoutputTimeseries(binding[tss], self.var, outpoints, noHeader=Flags[&#39;noheader&#39;])</span>
+
+
+
+
+
+        <span class="c1"># ------------------------------------------------------------------------------</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;reportTss&#39;</span><span class="p">]:</span>
+            <span class="c1"># loop through all the section with output variables</span>
+            <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="n">outsection</span><span class="p">:</span>
+                <span class="k">for</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">outputTypTss</span><span class="p">:</span>
+                    <span class="n">appendinfo</span><span class="p">(</span><span class="n">outTss</span><span class="p">,</span> <span class="n">sec</span><span class="p">,</span> <span class="s2">&quot;_out_tss_&quot;</span><span class="p">,</span><span class="nb">type</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;reportMap&#39;</span><span class="p">]:</span>
+            <span class="c1"># load netcdf metadata from precipitation</span>
+            <span class="n">metaNetCDF</span><span class="p">()</span>
+
+            <span class="c1"># loop through all the section with output variables</span>
+            <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="n">outsection</span><span class="p">:</span>
+                <span class="c1"># daily output, monthly total monthly average,</span>
+                <span class="k">for</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">outputTypMap</span><span class="p">:</span>
+                    <span class="c1"># map or tss, section, type = daily, monthly ....</span>
+                    <span class="n">appendinfo</span><span class="p">(</span><span class="n">outMap</span><span class="p">,</span><span class="n">sec</span><span class="p">,</span> <span class="s2">&quot;_out_map_&quot;</span><span class="p">,</span><span class="nb">type</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="outputTssMap.dynamic"><a class="viewcode-back" href="../../management_modules.html#management_modules.output.outputTssMap.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; dynamic part of the output module</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># ************************************************************</span>
+        <span class="c1"># ***** WRITING RESULTS: TIME SERIES *************************</span>
+        <span class="c1"># ************************************************************</span>
+
+        <span class="c1"># xxx=catchmenttotal(self.var.SurfaceRunForest * self.var.PixelArea, self.var.Ldd) * self.var.InvUpArea</span>
+        <span class="c1"># self.var.Tss[&#39;DisTS&#39;].sample(xxx)</span>
+        <span class="c1"># self.report(self.Precipitation,binding[&#39;TaMaps&#39;])</span>
+
+
+
+
+        <span class="c1"># ************************************************************</span>
+        <span class="c1"># ***** WRITING RESULTS: MAPS   ******************************</span>
+        <span class="c1"># ************************************************************</span>
+
+        <span class="c1"># print &#39;----------------#&#39;</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;reportMap&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;curr&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;intSpin&#39;</span><span class="p">]</span>  <span class="p">:</span>
+            <span class="k">for</span> <span class="nb">map</span> <span class="ow">in</span> <span class="n">outMap</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">]</span><span class="o">.</span><span class="n">__len__</span><span class="p">()):</span>
+                    <span class="k">if</span> <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
+
+                        <span class="n">netfile</span> <span class="o">=</span> <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">flag</span> <span class="o">=</span> <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+                        <span class="c1"># flag to create netcdf or to write</span>
+                        <span class="n">varname</span> <span class="o">=</span> <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="n">inputmap</span> <span class="o">=</span> <span class="s1">&#39;self.var.&#39;</span> <span class="o">+</span> <span class="n">varname</span>
+
+                        <span class="k">if</span> <span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;daily&quot;</span><span class="p">:</span>
+                            <span class="c1"># writenetcdf(netfile, varname, varunits, inputmap, timeStamp, posCnt, flag, flagTime=True):</span>
+                            <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">writenetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="n">varname</span><span class="p">,</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="nb">eval</span><span class="p">(</span><span class="n">inputmap</span><span class="p">),</span>  <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currwrite&#39;</span><span class="p">],</span> <span class="n">flag</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;diffdays&#39;</span><span class="p">])</span>
+
+
+                        <span class="k">if</span> <span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;monthend&quot;</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;checked&#39;</span><span class="p">][</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currwrite&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                                    <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">writenetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="n">varname</span><span class="o">+</span> <span class="s2">&quot;_monthend&quot;</span><span class="p">,</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="nb">eval</span><span class="p">(</span><span class="n">inputmap</span><span class="p">),</span>  <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currMonth&#39;</span><span class="p">],</span> <span class="n">flag</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;diffMonth&#39;</span><span class="p">])</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;monthtot&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;monthavg&quot;</span><span class="p">):</span>
+                                <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">varname</span> <span class="o">+</span> <span class="s2">&quot;_monthtot&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">varname</span><span class="p">]</span>
+                                <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;checked&#39;</span><span class="p">][</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currwrite&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;monthtot&quot;</span><span class="p">):</span>
+                                        <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">writenetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="n">varname</span><span class="o">+</span><span class="s2">&quot;monthtot&quot;</span><span class="p">,</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="nb">eval</span><span class="p">(</span><span class="n">inputmap</span><span class="o">+</span> <span class="s2">&quot;_monthtot&quot;</span><span class="p">),</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currMonth&#39;</span><span class="p">],</span> <span class="n">flag</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;diffMonth&#39;</span><span class="p">])</span>
+                                    <span class="k">if</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;monthavg&quot;</span><span class="p">):</span>
+                                        <span class="n">avgmap</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">varname</span> <span class="o">+</span> <span class="s2">&quot;_monthtot&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">30</span>
+                                        <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">writenetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="n">varname</span><span class="o">+</span><span class="s2">&quot;monthavg&quot;</span><span class="p">,</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="n">avgmap</span><span class="p">,</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currMonth&#39;</span><span class="p">],</span> <span class="n">flag</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;diffMonth&#39;</span><span class="p">])</span>
+                                    <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">varname</span><span class="o">+</span><span class="s2">&quot;monthtot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+                        <span class="k">if</span> <span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;annualend&quot;</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;checked&#39;</span><span class="p">][</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currwrite&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                                    <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">writenetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="n">varname</span><span class="o">+</span><span class="s2">&quot;_annualend&quot;</span><span class="p">,</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="nb">eval</span><span class="p">(</span><span class="n">inputmap</span><span class="p">),</span>  <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currYear&#39;</span><span class="p">],</span> <span class="n">flag</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;diffYear&#39;</span><span class="p">])</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;annualtot&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;annualavg&quot;</span><span class="p">):</span>
+                                <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">varname</span> <span class="o">+</span> <span class="s2">&quot;_annualtot&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">varname</span><span class="p">]</span>
+                                <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;checked&#39;</span><span class="p">][</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currwrite&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;annualtot&quot;</span><span class="p">):</span>
+                                        <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">writenetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="n">varname</span><span class="o">+</span><span class="s2">&quot;annualtot&quot;</span><span class="p">,</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="nb">eval</span><span class="p">(</span><span class="n">inputmap</span><span class="o">+</span> <span class="s2">&quot;_annualtot&quot;</span><span class="p">),</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currYear&#39;</span><span class="p">],</span> <span class="n">flag</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;diffYear&#39;</span><span class="p">])</span>
+                                    <span class="k">if</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;annualavg&quot;</span><span class="p">):</span>
+                                        <span class="n">avgmap</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">varname</span> <span class="o">+</span> <span class="s2">&quot;_monthtot&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">365</span>
+                                        <span class="n">outMap</span><span class="p">[</span><span class="nb">map</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">writenetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span> <span class="n">varname</span><span class="o">+</span><span class="s2">&quot;annualavg&quot;</span><span class="p">,</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="n">avgmap</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currYear&#39;</span><span class="p">],</span> <span class="n">flag</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;diffYear&#39;</span><span class="p">])</span>
+                                    <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">varname</span><span class="o">+</span><span class="s2">&quot;annualtot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+
+        <span class="c1"># ************************************************************</span>
+        <span class="c1"># ***** WRITING RESULTS: TIME SERIES *************************</span>
+        <span class="c1"># ************************************************************</span>
+
+        <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;loud&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;reportTss&#39;</span><span class="p">]:</span>
+            <span class="c1"># print the discharge of the first output map loc</span>
+            <span class="c1"># print &quot; %10.2f&quot;  %cellvalue(maptotal(decompress(eval(&#39;self.var.&#39; + reportTimeSerieAct[&quot;DisTS&quot;][&#39;outputVar&#39;][0]))),1,1)[0]</span>
+            <span class="c1"># print &quot; %10.2f&quot; % self.var.Tss[&quot;DisTS&quot;].firstout(decompress(self.var.ChanQAvg))</span>
+            <span class="nb">print</span> <span class="s2">&quot; </span><span class="si">%10.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">outTss</span><span class="p">[</span><span class="s1">&#39;routing_out_tss_daily&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">firstout</span><span class="p">(</span><span class="n">decompress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;reportTss&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">tss</span> <span class="ow">in</span> <span class="n">outTss</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">outTss</span><span class="p">[</span><span class="n">tss</span><span class="p">]</span><span class="o">.</span><span class="n">__len__</span><span class="p">()):</span>
+                    <span class="c1"># loop for each variable in a section</span>
+                    <span class="k">if</span> <span class="n">outTss</span><span class="p">[</span><span class="n">tss</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
+                        <span class="n">what</span> <span class="o">=</span> <span class="s1">&#39;self.var.&#39;</span> <span class="o">+</span> <span class="n">outTss</span><span class="p">[</span><span class="n">tss</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">tss</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;daily&quot;</span><span class="p">:</span>
+                            <span class="c1"># what = &#39;self.var.&#39; + reportTimeSerieAct[tss][&#39;outputVar&#39;][0]</span>
+                            <span class="c1"># how = reportTimeSerieAct[outTss[tss][0][0]][&#39;operation&#39;][0]</span>
+                            <span class="c1"># if how == &#39;mapmaximum&#39;:</span>
+                            <span class="c1"># changed = compressArray(mapmaximum(decompress(eval(what))))</span>
+                            <span class="c1"># what = &#39;changed&#39;</span>
+                            <span class="c1"># if how == &#39;total&#39;:</span>
+                            <span class="c1"># changed = compressArray(catchmenttotal(decompress(eval(what)) * self.var.PixelAreaPcr,self.var.Ldd) * self.var.InvUpArea)</span>
+                            <span class="c1"># what = &#39;changed&#39;</span>
+                            <span class="c1"># print i, outTss[tss][i][1], what</span>
+                            <span class="n">outTss</span><span class="p">[</span><span class="n">tss</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="n">decompress</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">what</span><span class="p">)),</span> <span class="mi">0</span> <span class="p">)</span>
+
+                        <span class="k">if</span> <span class="n">tss</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;monthend&quot;</span><span class="p">:</span>
+                            <span class="c1"># reporting at the end of the month:</span>
+                            <span class="n">outTss</span><span class="p">[</span><span class="n">tss</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="n">decompress</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">what</span><span class="p">)),</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">tss</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;monthtot&quot;</span><span class="p">:</span>
+                            <span class="c1"># reporting at the end of the month:</span>
+                            <span class="n">outTss</span><span class="p">[</span><span class="n">tss</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="n">decompress</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">what</span><span class="o">+</span> <span class="s2">&quot;_monthtot&quot;</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span>
+
+
+
+                        <span class="k">if</span> <span class="n">tss</span><span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;annualend&quot;</span><span class="p">:</span>
+                            <span class="c1"># reporting at the end of the month:</span>
+                            <span class="n">outTss</span><span class="p">[</span><span class="n">tss</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="n">decompress</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">what</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span></div></div>
+
+
+
+
+
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settings.html">4. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">5. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">7. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source.html">8. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>
