@@ -47,49 +47,56 @@
           <div class="body" role="main">
             
   <h1>Source code for hydrological_modules.evaporation</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -------------------------------------------------------------------------</span>
-<span class="c1"># Name:        Evaporation module</span>
-<span class="c1"># Purpose:</span>
-<span class="c1">#</span>
-<span class="c1"># Author:      PB</span>
-<span class="c1">#</span>
-<span class="c1"># Created:     01/08/2016</span>
-<span class="c1"># Copyright:   (c) PB 2016</span>
-<span class="c1"># -------------------------------------------------------------------------</span>
+<span></span><span class="c1">## @package evaporation</span>
+<span class="c1"># Module documentation</span>
 
 <span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
 
 
 <div class="viewcode-block" id="evaporation"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.evaporation.evaporation">[docs]</a><span class="k">class</span> <span class="nc">evaporation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    # ************************************************************</span>
-<span class="sd">    # ***** Potential and actual Evaporation *********************</span>
-<span class="sd">    # ************************************************************</span>
+    <span class="sd">&quot;&quot;&quot; @brief Evaporation module</span>
+<span class="sd">    @details Calculate actual evapotranspiration</span>
+<span class="sd">    @author  PB</span>
+<span class="sd">    @date  01/08/2016</span>
+<span class="sd">    @copyright  PB 2016</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evaporation_variable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The constructor evaporation&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">evaporation_variable</span>
+
+
 
 <span class="c1"># --------------------------------------------------------------------------</span>
 <span class="c1"># --------------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="evaporation.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.evaporation.evaporation.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coverType</span><span class="p">,</span> <span class="n">No</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; dynamic part of the soil module - potET</span>
-<span class="sd">         calculating potential Evaporation for each land cover class</span>
-<span class="sd">         get crop coefficient, use potential ET, calculate potential bare soil evaporation and transpiration</span>
+        <span class="sd">&quot;&quot;&quot; Dynamic part of the soil module - potET</span>
+<span class="sd">        calculating potential Evaporation for each land cover class with kc factor</span>
+<span class="sd">        get crop coefficient, use potential ET, calculate potential bare soil evaporation and transpiration</span>
+<span class="sd">        @param coverType (string) land cover type: forest, grassland ..</span>
+<span class="sd">        @param No [int] Number of land cover type: forest = 0, grassland = 1 ...</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># get crop coefficient:</span>
+        <span class="c1"># get crop coefficient</span>
+        <span class="c1"># to get ETc from ET0 x kc factor  ((see http://www.fao.org/docrep/X0490E/x0490e04.htm#TopOfPage figure 4:)</span>
+        <span class="c1"># crop coefficient read for forest and grassland from file</span>
+
+        <span class="c1">## self.var.cropKC: crop coefficient read for forest and grassland from file</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="n">coverType</span> <span class="o">+</span> <span class="s1">&#39;_cropCoefficientNC&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;doy&#39;</span><span class="p">],</span> <span class="s2">&quot;DOY&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minCropKC</span><span class="p">[</span><span class="n">No</span><span class="p">])</span>
 
-        <span class="c1"># calculate potential ET:</span>
+        <span class="c1"># calculate potential ET</span>
+        <span class="c1">##  self.var.totalPotET total potential evapotranspiration for a reference crop for a land cover class</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ETRef</span>
 
         <span class="c1"># calculate potential bare soil evaporation and transpiration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potBareSoilEvap</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minCropKC</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ETRef</span>
+        <span class="c1">## potTranspiration: Transpiration for each land cover class</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potTranspiration</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ETRef</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potBareSoilEvap</span><span class="p">[</span><span class="n">No</span><span class="p">]</span></div></div>
+
+        <span class="c1"># evaporation from bare soil for each land cover class</span>
 
 
 </pre></div>

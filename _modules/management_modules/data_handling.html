@@ -57,6 +57,8 @@
 <span class="c1"># Copyright:   (c) PB 2016</span>
 <span class="c1"># -------------------------------------------------------------------------</span>
 
+
+
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">calendar</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -69,6 +71,8 @@
 <span class="kn">from</span> <span class="nn">pcraster</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">pcraster.framework</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span><span class="p">,</span><span class="n">num2date</span><span class="p">,</span><span class="n">date2num</span><span class="p">,</span><span class="n">date2index</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 
 <div class="viewcode-block" id="valuecell"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.valuecell">[docs]</a><span class="k">def</span> <span class="nf">valuecell</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">coordx</span><span class="p">,</span> <span class="n">coordstr</span><span class="p">):</span>
@@ -260,6 +264,7 @@
 
         <span class="c1"># if a map should be pcraster</span>
         <span class="k">if</span> <span class="n">pcr</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
             <span class="c1"># check if integer map (like outlets, lakes etc</span>
             <span class="n">checkint</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">mapnp</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">checkint</span><span class="o">==</span><span class="s2">&quot;int16&quot;</span> <span class="ow">or</span> <span class="n">checkint</span><span class="o">==</span><span class="s2">&quot;int32&quot;</span><span class="p">:</span>
@@ -275,7 +280,7 @@
             <span class="c1"># if the map is a ldd</span>
             <span class="c1">#if value.split(&#39;.&#39;)[0][:3] == &#39;ldd&#39;:</span>
             <span class="k">if</span> <span class="n">lddflag</span><span class="p">:</span> <span class="nb">map</span> <span class="o">=</span> <span class="n">ldd</span><span class="p">(</span><span class="n">nominal</span><span class="p">(</span><span class="nb">map</span><span class="p">))</span>
-
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">flagmap</span> <span class="o">=</span> <span class="kc">True</span>
@@ -434,7 +439,7 @@
     <span class="k">return</span> <span class="n">mapC</span></div>
 
 
-<div class="viewcode-block" id="readnetcdf2"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.readnetcdf2">[docs]</a><span class="k">def</span> <span class="nf">readnetcdf2</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">useDaily</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="readnetcdf2"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.readnetcdf2">[docs]</a><span class="k">def</span> <span class="nf">readnetcdf2</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">useDaily</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">      load stack of maps 1 at each timestamp in netcdf format</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -453,21 +458,29 @@
     <span class="c1"># date if used daily, monthly or yearly or day of year</span>
     <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;DOY&quot;</span><span class="p">:</span>  <span class="c1"># day of year 1-366</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="n">date</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;month&quot;</span><span class="p">:</span>
-           <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-           <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;yearly&quot;</span><span class="p">:</span>
-              <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-           <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;monthly&quot;</span><span class="p">:</span>
-              <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-           <span class="c1"># A netCDF time variable object  - time index (in the netCDF file)</span>
-           <span class="n">nctime</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
-           <span class="n">idx</span> <span class="o">=</span> <span class="n">date2index</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">nctime</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;10day&quot;</span><span class="p">:</span>  <span class="c1"># every 10 days</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">date</span>
+    <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;month&quot;</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;yearly&quot;</span><span class="p">:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">useDaily</span> <span class="o">==</span> <span class="s2">&quot;monthly&quot;</span><span class="p">:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">useDaily</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;monthly&quot;</span><span class="p">,</span><span class="s2">&quot;yearly&quot;</span><span class="p">,</span><span class="s2">&quot;daily&quot;</span><span class="p">]:</span>
+        <span class="c1"># A netCDF time variable object  - time index (in the netCDF file)</span>
+        <span class="n">nctime</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">date2index</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">nctime</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
+
     <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># add zero values to maps in order to supress missing values</span>
+    <span class="k">if</span> <span class="n">addZeros</span><span class="p">:</span> <span class="n">mapnp</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mapnp</span><span class="p">)]</span> <span class="o">=</span> <span class="n">zeros</span>
+
 
     <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mapC</span></div>

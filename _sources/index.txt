@@ -5,17 +5,17 @@
 
 
    
-#######################
+########################
 Community Water Model
-#######################
+########################
 
 
 .. figure:: _static/iiasa.jpg
     :width: 800px
 
 :Copyright: IIASA WAT Program
-:Authors: Peter Burek, Yusuke Satoh
-:Version: 0.99.1  
+:Authors: :ref:`rst_developer`
+:Version: -1.1  
 :Version Date: |today|
 
 **Content:**

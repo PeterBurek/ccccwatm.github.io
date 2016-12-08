@@ -80,9 +80,13 @@
         <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;includeWaterDemandDomInd&#39;</span><span class="p">]:</span>
            <span class="c1">#self.var.recessionCoeff = loadmap(&#39;recessionCoeff&#39;)</span>
 
-           <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span></div>
            <span class="c1"># TODO : add  zones at which water allocation (surface and groundwater allocation) is determined</span>
            <span class="c1">#  landSurface.py lines 317ff</span>
+           <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;usingAllocSegments&#39;</span><span class="p">]:</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSegments</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;allocSegments&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">segmentArea</span> <span class="o">=</span> <span class="n">npareatotal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSegments</span><span class="p">)</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span></div>
 
 
 
@@ -122,36 +126,39 @@
         <span class="c1"># Inge&#39;s principle: partitioning based on local average baseflow (m3/s) and upstream average discharge (m3/s)</span>
 
         <span class="c1"># estimates of fractions of groundwater and surface water abstractions</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        averageBaseflowInput = routing.avgBaseflow</span>
-<span class="sd">        averageUpstreamInput = pcr.upstream(routing.lddMap, routing.avgDischarge)</span>
 
-<span class="sd">        if self.var.usingAllocSegments:</span>
-<span class="sd">            averageBaseflowInput = np.maximum(0.0, pcr.ifthen(self.varlandmask, averageBaseflowInput))</span>
-<span class="sd">            averageUpstreamInput = np.maximum(0.0, pcr.ifthen(self.var.landmask, averageUpstreamInput))</span>
-<span class="sd">            averageBaseflowInput = pcr.cover(pcr.areaaverage(pcr.cover(averageBaseflowInput, 0.0), self.var.allocSegments), 0.0)</span>
-<span class="sd">            averageUpstreamInput = pcr.cover(pcr.areamaximum(pcr.cover(averageUpstreamInput, 0.0), self.var.allocSegments), 0.0)</span>
+        <span class="n">averageBaseflowInput</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgBaseflow</span><span class="p">)</span>
+        <span class="n">averageUpstreamInput</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">downstruct</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">avgDischarge</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># this function replace the pcraster function upstream</span>
+        <span class="c1"># averageUpstreamInput = upstream(self.var.Ldd, decompress(self.var.avgDischarge))</span>
 
-<span class="sd">        else:</span>
-<span class="sd">             print(&quot;WARNING! Water demand can only be satisfied by local source.&quot;)</span>
+        <span class="n">averageUpstreamInput</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">averageUpstreamInput</span><span class="p">)</span>
 
-<span class="sd">        swAbstractionFraction = np.maximum(0.0, np.minimum(1.0,averageUpstreamInput / np.maximum(1e-20,averageUpstreamInput + averageBaseflowInput)))</span>
-<span class="sd">        swAbstractionFraction = pcr.cover(swAbstractionFraction, 0.0)</span>
-<span class="sd">        swAbstractionFraction = pcr.roundup(swAbstractionFraction * 100.) / 100.</span>
-<span class="sd">        swAbstractionFraction = np.maximum(0.0, swAbstractionFraction)</span>
-<span class="sd">        swAbstractionFraction = np.minimum(1.0, swAbstractionFraction)</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;usingAllocSegments&#39;</span><span class="p">]:</span>
+        <span class="c1">#if self.var.usingAllocSegments:</span>
+            <span class="n">averageBaseflowInput</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span><span class="n">averageBaseflowInput</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSegments</span><span class="p">)</span>
+            <span class="n">averageUpstreamInput</span> <span class="o">=</span> <span class="n">npareamaximum</span><span class="p">(</span><span class="n">averageUpstreamInput</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSegments</span><span class="p">)</span>
 
-<span class="sd">        gwAbstractionFraction = 1.0 - swAbstractionFraction</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span> <span class="o">=</span> <span class="mf">0.5</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwAbstractionFraction</span> <span class="o">=</span> <span class="mf">0.5</span></div>
+        <span class="c1">#else:</span>
+        <span class="c1">#     print(&quot;WARNING! Water demand can only be satisfied by local source.&quot;)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="n">averageUpstreamInput</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="n">averageUpstreamInput</span> <span class="o">+</span> <span class="n">averageBaseflowInput</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwAbstractionFraction</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span></div>
+
+        <span class="c1">#self.var.swAbstractionFraction = 0.5</span>
+        <span class="c1">#self.var.gwAbstractionFraction = 0.5</span>
+
+        <span class="c1"># report(decompress(self.var.discharge), &quot;C:\work\output/q1.map&quot;)</span>
 
 <div class="viewcode-block" id="waterdemand.dynamic_waterdemand"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.waterdemand.waterdemand.dynamic_waterdemand">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic_waterdemand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">coverType</span><span class="p">,</span> <span class="n">No</span><span class="p">):</span>
 
         <span class="c1"># ------------------------------------------</span>
         <span class="c1"># non irrigation water demand</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrGrossDemand</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potentialNonIrrGrossWaterDemand</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrGrossDemand</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potentialNonIrrGrossWaterDemand</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="c1"># irrigation water demand for paddy and non-paddy (m)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">irrGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -172,100 +179,67 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">irrGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">irrGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">InvCellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">irrGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
 
         <span class="c1"># totalGrossDemand (m): total maximum (potential) water demand: irrigation and non irrigation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotentialGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrGrossDemand</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">irrGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-
-
-<span class="c1">#        self.var.totalPotentialGrossDemand[No] = globals.inZero.copy()</span>
+        <span class="n">totalGrossDemand</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrGrossDemand</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">irrGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotentialGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">totalGrossDemand</span> <span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># self.var.totalPotentialGrossDemand[No] = globals.inZero.copy()</span>
 
 
         <span class="c1"># surface water abstraction that can be extracted to fulfil totalGrossDemand</span>
         <span class="c1"># - based on readAvlChannelStorage</span>
         <span class="c1"># - and swAbstractionFraction * totalPotGrossDemand</span>
         <span class="c1">#</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        if self.var.usingAllocSegments:  # using zone/segment at which supply network is defined</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;usingAllocSegments&#39;</span><span class="p">]:</span>
+            <span class="c1"># using zone/segment at which supply network is defined</span>
 
-<span class="sd">            allocSegments = pcr.ifthen(self.var.landmask, allocSegments)</span>
+            <span class="c1"># gross demand volume in each cell (unit: m3)</span>
+            <span class="n">cellVolGrossDemand</span> <span class="o">=</span> <span class="n">totalGrossDemand</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
+            <span class="c1"># total gross demand volume in each segment/zone (unit: m3)</span>
+            <span class="n">segTtlGrossDemand</span> <span class="o">=</span> <span class="n">npareatotal</span><span class="p">(</span><span class="n">cellVolGrossDemand</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSegments</span><span class="p">)</span>
 
-<span class="sd">            # gross demand volume in each cell (unit: m3)</span>
-<span class="sd">            cellVolGrossDemand = totalGrossDemand * routing.cellArea</span>
+            <span class="c1"># total available surface water volume in each segment/zone  (unit: m3)</span>
+            <span class="n">segAvlSurfaceWater</span> <span class="o">=</span> <span class="n">npareatotal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">readAvlChannelStorage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSegments</span><span class="p">)</span>
 
-<span class="sd">            # total gross demand volume in each segment/zone (unit: m3)</span>
-<span class="sd">            segTtlGrossDemand = pcr.areatotal(pcr.cover(cellVolGrossDemand, 0), allocSegments)</span>
+            <span class="c1"># total actual surface water abstraction volume in each segment/zone (unit: m3)</span>
+            <span class="c1"># scale (if available water is limited)</span>
+            <span class="n">ADJUST</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span> <span class="o">*</span> <span class="n">segTtlGrossDemand</span>
+            <span class="n">ADJUST</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ADJUST</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">segAvlSurfaceWater</span><span class="p">)</span> <span class="o">/</span> <span class="n">ADJUST</span><span class="p">),</span> <span class="mf">0.</span><span class="p">)</span>
+            <span class="n">segActSurWaterAbs</span> <span class="o">=</span> <span class="n">ADJUST</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span> <span class="o">*</span> <span class="n">segTtlGrossDemand</span>
 
-<span class="sd">            # total available surface water volume in each segment/zone  (unit: m3)</span>
-<span class="sd">            segAvlSurfaceWater = pcr.areatotal(pcr.cover(routing.readAvlChannelStorage, 0), allocSegments)</span>
+            <span class="c1"># actual surface water abstraction volume in each cell (unit: m3)</span>
+            <span class="n">volActSurfaceWaterAbstract</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">segAvlSurfaceWater</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">readAvlChannelStorage</span> <span class="o">/</span> <span class="n">segAvlSurfaceWater</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">segActSurWaterAbs</span>
+            <span class="n">volActSurfaceWaterAbstract</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">readAvlChannelStorage</span><span class="p">,</span> <span class="n">volActSurfaceWaterAbstract</span><span class="p">)</span>
+            <span class="c1"># avoid small values (to avoid rounding error)</span>
+            <span class="n">volActSurfaceWaterAbstract</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">volActSurfaceWaterAbstract</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">volActSurfaceWaterAbstract</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-<span class="sd">            # total actual surface water abstraction volume in each segment/zone (unit: m3)</span>
-<span class="sd">            #</span>
-<span class="sd">            swAbstractionFraction = np.minimum(1.0, swAbstractionFraction)</span>
-<span class="sd">            #</span>
-<span class="sd">            # scale (if available water is limited)</span>
-<span class="sd">            ADJUST = swAbstractionFraction * segTtlGrossDemand</span>
-<span class="sd">            ADJUST = np.where(ADJUST &gt; 0.0, \</span>
-<span class="sd">                                    np.minimum(1.0, np.maximum(0.0, segAvlSurfaceWater) / ADJUST), 0.)</span>
-<span class="sd">            #</span>
-<span class="sd">            ADJUST = pcr.rounddown(ADJUST * 100.) / 100.</span>
-<span class="sd">            ADJUST = np.maximum(0.0, ADJUST)</span>
-<span class="sd">            ADJUST = np.minimum(1.0, ADJUST)</span>
-<span class="sd">            #</span>
-<span class="sd">            segActSurWaterAbs = ADJUST * swAbstractionFraction * segTtlGrossDemand  # unit: m3</span>
+            <span class="c1"># actual surface water abstraction volume in meter (unit: m)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">volActSurfaceWaterAbstract</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
+            <span class="c1"># total actual surface water abstraction volume in each segment/zone (unit: m3) - recalculated to avoid rounding error</span>
+            <span class="n">segActSurWaterAbs</span> <span class="o">=</span> <span class="n">npareatotal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSegments</span><span class="p">)</span>
 
-<span class="sd">            # actual surface water abstraction volume in each cell (unit: m3)</span>
-<span class="sd">            volActSurfaceWaterAbstract = np.where(segAvlSurfaceWater &gt; 0.0, \</span>
-<span class="sd">                                                        routing.readAvlChannelStorage / \</span>
-<span class="sd">                                                        segAvlSurfaceWater, 0.0) * \</span>
-<span class="sd">                                         (segActSurWaterAbs)</span>
-<span class="sd">            volActSurfaceWaterAbstract = np.minimum(routing.readAvlChannelStorage, volActSurfaceWaterAbstract)  # unit: m3</span>
-<span class="sd">            # avoid small values (to avoid rounding error)</span>
-<span class="sd">            volActSurfaceWaterAbstract = np.where(volActSurfaceWaterAbstract &gt; 1.0, volActSurfaceWaterAbstract, 0)</span>
-<span class="sd">            volActSurfaceWaterAbstract = pcr.cover(volActSurfaceWaterAbstract, 0.0)</span>
+            <span class="c1"># allocation surface water abstraction volume to each cell (unit: m3)</span>
+            <span class="n">volAllocSurfaceWaterAbstract</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">segTtlGrossDemand</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">cellVolGrossDemand</span> <span class="o">/</span> <span class="n">segTtlGrossDemand</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">segActSurWaterAbs</span>
+            <span class="c1"># allocation surface water abstraction in meter (unit: m)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">volAllocSurfaceWaterAbstract</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
 
-<span class="sd">            # actual surface water abstraction volume in meter (unit: m)</span>
-<span class="sd">            self.var.actSurfaceWaterAbstract = pcr.ifthen(self.var.landmask, volActSurfaceWaterAbstract) / \</span>
-<span class="sd">                                           routing.cellArea  # unit: m</span>
+            <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">]:</span>
+                <span class="n">abstraction</span> <span class="o">=</span> <span class="n">npareatotal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actSurfaceWaterAbstract</span> <span class="o">*</span>  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSegments</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">segmentArea</span>
+                <span class="n">allocation</span> <span class="o">=</span> <span class="n">npareatotal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSurfaceWaterAbstract</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSegments</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">segmentArea</span>
 
-<span class="sd">            # total actual surface water abstraction volume in each segment/zone (unit: m3) - recalculated to avoid rounding error</span>
-<span class="sd">            segActSurWaterAbs = pcr.areatotal(self.var.actSurfaceWaterAbstract * routing.cellArea,</span>
-<span class="sd">                                              allocSegments)  # unit: m3</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">abstraction</span><span class="p">],</span>  <span class="c1"># In</span>
+                    <span class="p">[</span><span class="n">allocation</span><span class="p">],</span>  <span class="c1"># Out</span>
+                    <span class="p">[</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">],</span>
+                    <span class="p">[</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">],</span>
+                    <span class="s2">&quot;surface water allocation per zone/segments&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
-<span class="sd">            # allocation surface water abstraction volume to each cell (unit: m3)</span>
-<span class="sd">            self.var.volAllocSurfaceWaterAbstract = np.where(segTtlGrossDemand &gt; 0.0,</span>
-<span class="sd">                                                               cellVolGrossDemand / segTtlGrossDemand, 0.0) * \</span>
-<span class="sd">                                                segActSurWaterAbs  # unit: m3</span>
-<span class="sd">            self.var.volAllocSurfaceWaterAbstract = pcr.cover(self.var.volAllocSurfaceWaterAbstract,</span>
-<span class="sd">                                                          0.0)  # TODO: Do we really have to cover?</span>
 
-<span class="sd">            # allocation surface water abstraction in meter (unit: m)</span>
-<span class="sd">            self.var.allocSurfaceWaterAbstract = pcr.ifthen(self.var.landmask, self.var.volAllocSurfaceWaterAbstract) / \</span>
-<span class="sd">                                             routing.cellArea  # unit: m</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># only local surface water abstraction is allowed (network is only within a cell) # unit: m</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">readAvlChannelStorage</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">InvCellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotentialGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
 
-<span class="sd">            if self.var.debugWaterBalance == str(&#39;True&#39;):</span>
-<span class="sd">                abstraction = pcr.cover(pcr.areatotal(pcr.cover(self.var.actSurfaceWaterAbstract * routing.cellArea, 0.0),</span>
-<span class="sd">                                                      self.var.allocSegments) / self.var.segmentArea, 0.0)</span>
-<span class="sd">                allocation = pcr.cover(pcr.areatotal(pcr.cover(self.var.allocSurfaceWaterAbstract * routing.cellArea, 0.0),</span>
-<span class="sd">                                                     self.var.allocSegments) / self.var.segmentArea, 0.0)</span>
 
-<span class="sd">                vos.waterBalanceCheck([abstraction], \</span>
-<span class="sd">                                      [allocation], \</span>
-<span class="sd">                                      [pcr.scalar(0.0)], \</span>
-<span class="sd">                                      [pcr.scalar(0.0)], \</span>
-<span class="sd">                                      &#39;surface water allocation per zone/segment in land cover level (PS: Error here may be caused by rounding error.)&#39;, \</span>
-<span class="sd">                                      True, \</span>
-<span class="sd">                                      &quot;&quot;, threshold=5e-3)</span>
-
-<span class="sd">        else:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># allocation has to be done!! TODO</span>
-
-        <span class="c1"># only local surface water abstraction is allowed (network is only within a cell) # unit: m</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">readAvlChannelStorage</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">InvCellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">swAbstractionFraction</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotentialGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">])</span>
-        <span class="n">allocSurfaceWaterAbstract</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
-
-        <span class="c1"># end of else</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potGroundwaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotentialGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">-</span> <span class="n">allocSurfaceWaterAbstract</span><span class="p">)</span>  <span class="c1"># unit: m</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potGroundwaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotentialGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">])</span>  <span class="c1"># unit: m</span>
 
 
         <span class="c1"># if limitAbstraction == &#39;True&#39;</span>
@@ -275,41 +249,28 @@
 
         <span class="c1"># variable to reduce/limit groundwater abstraction (&gt; 0 if limitAbstraction = True)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">reducedGroundWaterAbstraction</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="c1">#</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        if self.var.limitAbstraction == &#39;True&#39;:</span>
 
-<span class="sd">            print (&#39;Fossil groundwater abstractions are NOT allowed.&#39;)</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;limitAbstraction&#39;</span><span class="p">]:</span>
 
-<span class="sd">            # calculate renewableAvlWater (non-fossil groundwater and channel)</span>
-<span class="sd">            #</span>
-<span class="sd">            renewableAvlWater = groundwater.readAvlStorGroundwater + self.var.allocSurfaceWaterAbstract</span>
+            <span class="c1">#print (&#39;Fossil groundwater abstractions are NOT allowed.&#39;)</span>
+            <span class="c1"># calculate renewableAvlWater (non-fossil groundwater and channel)</span>
+            <span class="n">renewableAvlWater</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">readAvlStorGroundwater</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
 
-<span class="sd">            # reducing nonIrrGrossDemand if renewableAvlWater &lt; maxGrossDemand</span>
-<span class="sd">            #</span>
-<span class="sd">            self.var.nonIrrGrossDemand = \</span>
-<span class="sd">                np.where(totalGrossDemand &gt; 0.0, \</span>
-<span class="sd">                               np.minimum(1.0, np.maximum(0.0, \</span>
-<span class="sd">                                                    vos.getValDivZero(renewableAvlWater, totalGrossDemand,</span>
-<span class="sd">                                                                      vos.smallNumber))) * self.var.nonIrrGrossDemand, 0.0)</span>
+            <span class="c1"># reducing nonIrrGrossDemand if renewableAvlWater &lt; maxGrossDemand</span>
+            <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">):</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">totalGrossDemand</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">renewableAvlWater</span><span class="o">/</span><span class="n">totalGrossDemand</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrGrossDemand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">totalGrossDemand</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrGrossDemand</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="c1"># reducing irrGrossWaterDemand if maxGrossDemand &lt; renewableAvlWater</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">irrGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">totalGrossDemand</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">irrGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">)</span>
 
-<span class="sd">            # reducing irrGrossWaterDemand if maxGrossDemand &lt; renewableAvlWater</span>
-<span class="sd">            #</span>
-<span class="sd">            self.var.irrGrossDemand = \</span>
-<span class="sd">                np.where(totalGrossDemand &gt; 0.0, \</span>
-<span class="sd">                               np.minimum(1.0, np.maximum(0.0, \</span>
-<span class="sd">                                                    vos.getValDivZero(renewableAvlWater, totalGrossDemand,</span>
-<span class="sd">                                                                      vos.smallNumber))) * self.var.irrGrossDemand, 0.0)</span>
 
-<span class="sd">            # potential groundwater abstraction (must be equal to actual no fossil groundwater abstraction)</span>
-<span class="sd">            self.var.potGroundwaterAbstract = self.var.nonIrrGrossDemand + self.var.irrGrossDemand - self.var.allocSurfaceWaterAbstract</span>
+            <span class="c1"># potential groundwater abstraction (must be equal to actual no fossil groundwater abstraction)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potGroundwaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrGrossDemand</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">irrGrossDemand</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">allocSurfaceWaterAbstract</span><span class="p">[</span><span class="n">No</span><span class="p">]</span></div></div>
+            <span class="c1"># variable to reduce/limit gw abstraction (to ensure that there are enough water for supplying nonIrrGrossDemand + irrGrossDemand)</span>
+<span class="c1">#            self.var.reducedGroundWaterAbstraction[No] = self.var.potGroundwaterAbstract[No].copy()</span>
 
-<span class="sd">            # variable to reduce/limit gw abstraction (to ensure that there are enough water for supplying nonIrrGrossDemand + irrGrossDemand)</span>
-<span class="sd">            self.var.reducedGroundWaterAbstraction = self.var.potGroundwaterAbstract</span>
-
-<span class="sd">        else:</span>
-<span class="sd">            print (&#39;Fossil groundwater abstractions are allowed.&#39;)</span>
-<span class="sd">        &quot;&quot;&quot;</span></div></div>
+        <span class="c1">#else:</span>
+        <span class="c1">#    print (&#39;Fossil groundwater abstractions are allowed.&#39;)</span>
 
 
 

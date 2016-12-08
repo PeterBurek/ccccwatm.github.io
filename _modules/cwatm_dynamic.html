@@ -72,11 +72,11 @@
 
 
 
-<div class="viewcode-block" id="CWATModel_dyn"><a class="viewcode-back" href="../cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn">[docs]</a><span class="k">class</span> <span class="nc">CWATModel_dyn</span><span class="p">(</span><span class="n">DynamicModel</span><span class="p">):</span>
+<div class="viewcode-block" id="CWATModel_dyn"><a class="viewcode-back" href="../cwatm_dynamic.html#cwatm.CWATModel_dyn">[docs]</a><span class="k">class</span> <span class="nc">CWATModel_dyn</span><span class="p">(</span><span class="n">DynamicModel</span><span class="p">):</span>
 
     <span class="c1"># =========== DYNAMIC ====================================================</span>
 
-<div class="viewcode-block" id="CWATModel_dyn.dynamic"><a class="viewcode-back" href="../cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CWATModel_dyn.dynamic"><a class="viewcode-back" href="../cwatm_dynamic.html#cwatm.CWATModel_dyn.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Dynamic part of LISFLOOD</span>
 <span class="sd">            calls the dynamic part of the hydrological modules</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -108,33 +108,36 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">readmeteo_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
         <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Read meteo&quot;</span><span class="p">)</span> <span class="c1"># 1. timing after read input maps</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaporationPot_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;ET pot&quot;</span><span class="p">)</span> <span class="c1"># 2. timing after read input maps</span>
+
         <span class="c1">#if Flags[&#39;check&#39;]: return  # if check than finish here</span>
 
         <span class="sd">&quot;&quot;&quot; Here it starts with hydrological modules:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># ***** RAIN AND SNOW *****************************************</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">snowfrost_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Snow&quot;</span><span class="p">)</span>  <span class="c1"># 2. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Snow&quot;</span><span class="p">)</span>  <span class="c1"># 3. timing</span>
 
         <span class="c1"># ***** READ land use fraction maps***************************</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic_fracIrrigation</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">capillarRise_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Soil 1.Part&quot;</span><span class="p">)</span>  <span class="c1"># 3. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Soil 1.Part&quot;</span><span class="p">)</span>  <span class="c1"># 4. timing</span>
 
         <span class="c1"># *********  WATER Demand   *************************</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">waterdemand_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Water demand&quot;</span><span class="p">)</span>  <span class="c1"># 4. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Water demand&quot;</span><span class="p">)</span>  <span class="c1"># 5. timing</span>
 
         <span class="c1"># *********  Soil splitted in different land cover fractions *************</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Soil main&quot;</span><span class="p">)</span>  <span class="c1"># 5. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Soil main&quot;</span><span class="p">)</span>  <span class="c1"># 6. timing</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">groundwater_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Groundwater&quot;</span><span class="p">)</span>  <span class="c1"># 6. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Groundwater&quot;</span><span class="p">)</span>  <span class="c1"># 7. timing</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">routing_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Routing&quot;</span><span class="p">)</span>  <span class="c1"># 7. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Routing&quot;</span><span class="p">)</span>  <span class="c1"># 8. timing</span>
 
         <span class="c1"># *******  Calculate CUMULATIVE MASS BALANCE ERROR  **********</span>
         <span class="c1"># self.waterbalance_module.dynamic()</span>
@@ -144,10 +147,10 @@
         <span class="c1"># ------------------------------------------------------</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">checkWaterSoilGround</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Waterbalance&quot;</span><span class="p">)</span>  <span class="c1"># 8. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Waterbalance&quot;</span><span class="p">)</span>  <span class="c1"># 9. timing</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">output_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Output&quot;</span><span class="p">)</span>  <span class="c1"># 9. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Output&quot;</span><span class="p">)</span>  <span class="c1"># 10. timing</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
 

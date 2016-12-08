@@ -62,6 +62,7 @@
 <span class="kn">from</span> <span class="nn">hydrological_modules.initcondition</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="kn">from</span> <span class="nn">hydrological_modules.readmeteo</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.evaporationPot</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">hydrological_modules.inflow</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">hydrological_modules.snow_frost</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">hydrological_modules.soil</span> <span class="k">import</span> <span class="o">*</span>
@@ -76,14 +77,14 @@
 <span class="kn">from</span> <span class="nn">hydrological_modules.waterbalance</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="c1"># --------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">pcraster</span> <span class="k">import</span><span class="o">*</span>
-<span class="kn">from</span> <span class="nn">pcraster.framework</span> <span class="k">import</span> <span class="o">*</span>
+<span class="c1">#from pcraster import*</span>
+<span class="c1">#from pcraster.framework import *</span>
 <span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">management_modules.output</span> <span class="k">import</span> <span class="o">*</span>
 
 
 
-<div class="viewcode-block" id="CWATModel_ini"><a class="viewcode-back" href="../cwatm_initial.html#cwatm_initial.CWATModel_ini">[docs]</a><span class="k">class</span> <span class="nc">CWATModel_ini</span><span class="p">(</span><span class="n">DynamicModel</span><span class="p">):</span>
+<div class="viewcode-block" id="CWATModel_ini"><a class="viewcode-back" href="../cwatm_initial.html#cwatm.CWATModel_ini">[docs]</a><span class="k">class</span> <span class="nc">CWATModel_ini</span><span class="p">(</span><span class="n">DynamicModel</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot; CWATN initial part</span>
 <span class="sd">        this part is to initialize the variables</span>
@@ -97,7 +98,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">DynamicModel</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-        <span class="c1">## MaskMap: the maskmap is flexible e.g. col,row,x1,y1  or x1,x2,y1,y2</span>
+        <span class="c1">## MakMap: the maskmap is flexible e.g. col,row,x1,y1  or x1,x2,y1,y2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">MaskMap</span> <span class="o">=</span> <span class="n">loadsetclone</span><span class="p">(</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">)</span>
 
 
@@ -122,6 +123,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">waterbalance_module</span> <span class="o">=</span> <span class="n">waterbalance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">readmeteo_module</span> <span class="o">=</span> <span class="n">readmeteo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaporationPot_module</span> <span class="o">=</span> <span class="n">evaporationPot</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inflow_module</span> <span class="o">=</span> <span class="n">inflow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">snowfrost_module</span> <span class="o">=</span> <span class="n">snow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">soil_module</span> <span class="o">=</span> <span class="n">soil</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -146,6 +148,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">inflow_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaporationPot_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">snowfrost_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">soil_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
@@ -175,15 +178,8 @@
 <span class="sd">        # calculate initial amount of water in the catchment</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 <span class="c1"># ====== INITIAL ================================</span>
-<div class="viewcode-block" id="CWATModel_ini.initial"><a class="viewcode-back" href="../cwatm_initial.html#cwatm_initial.CWATModel_ini.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">misc_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">inflow_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">snowfrost_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">routing_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
-		
-	<span class="sd">&quot;&quot;&quot; Initial part of LISFLOOD</span>
+<div class="viewcode-block" id="CWATModel_ini.initial"><a class="viewcode-back" href="../cwatm_initial.html#cwatm.CWATModel_ini.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initial part of LISFLOOD</span>
 <span class="sd">            calls the initial part of the hydrological modules</span>
 <span class="sd">        &quot;&quot;&quot;</span></div></div>
 </pre></div>
