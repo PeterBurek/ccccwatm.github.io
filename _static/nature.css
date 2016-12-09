@@ -60,15 +60,15 @@ div.footer a {
 }
  
 div.related {
-    background-color: #749ac7;
-    line-height: 40px;
+    background-color: #6BA81E;
+    line-height: 32px;
     color: #fff;
-    text-shadow: 0px 0px 0 #fff;
-    font-size: 1.1em;
+    text-shadow: 0px 1px 0 #444;
+    font-size: 0.9em;
 }
  
 div.related a {
-    color: #FFFFFF;
+    color: #E2F3CC;
 }
  
 div.sphinxsidebar {

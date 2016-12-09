@@ -36,9 +36,6 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -60,156 +57,18 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Inheritance</p>
 </div>
-<img src="_images/inheritance-21849bef610a45b24d3b21450ae98587f37054df.png" alt="Inheritance diagram of cwatm" usemap="#inheritance71a609caa7" class="inheritance"/>
-<map id="inheritance71a609caa7" name="inheritance71a609caa7">
-<area shape="rect" id="node1" href="#cwatm.CWATModel" target="_top" title="Initial and dynamic part of the CWat model" alt="" coords="483,31,577,56"/>
-<area shape="rect" id="node2" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="316,5,431,31"/>
-<area shape="rect" id="node3" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" target="_top" title="CWATModel_dyn" alt="" coords="312,55,435,80"/>
-<area shape="rect" id="node5" title="Base class for DynamicModel framework class." alt="" coords="5,31,108,56"/>
-</map>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">blabla1</p>
 </div>
-<img src="_images/inheritance-b6bb31977789b4ba9e6314f627af6a508ebecee4.png" alt="Inheritance diagram of cwatm_initial.CWATModel_ini" usemap="#inheritancea6f9efa807" class="inheritance"/>
-<map id="inheritancea6f9efa807" name="inheritancea6f9efa807">
-<area shape="rect" id="node1" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="608,4,764,24"/>
-<area shape="rect" id="node3" title="Base class for DynamicModel framework class." alt="" coords="4,4,244,24"/>
-</map>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">blabla2</p>
 </div>
-<img src="_images/inheritance-175b26a15c7dd416f5855085872b1ba561c5de5f.png" alt="Inheritance diagram of hydrological_modules.groundwater.groundwater, hydrological_modules.inflow.inflow" usemap="#inheritance14745111ce" class="inheritance"/>
-<map id="inheritance14745111ce" name="inheritance14745111ce">
-<area shape="rect" id="node1" href="hydrological_modules.html#hydrological_modules.groundwater.groundwater" target="_top" title="# ************************************************************" alt="" coords="5,55,300,80"/>
-<area shape="rect" id="node2" href="hydrological_modules.html#hydrological_modules.inflow.inflow" target="_top" title="# ************************************************************" alt="" coords="43,5,262,31"/>
-</map>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">End</p>
 </div>
-<span class="target" id="module-cwatm"></span><dl class="docutils">
-<dt>## &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-</dt>
-<dd><p class="first">######## ##          ##  ####  ######  ##    ##
-##       ##          ## ##  ##   ##   ####  ####
-##        ##        ##  ##  ##   ##   ## #### ##
-##        ##   ##   ## ########  ##  ##   ##   ##
-##         ## #### ##  ##    ##  ##  ##        ##
-##         ####  #### ##      ## ## ##          ##
-##########  ##    ##  ##      ## ## ##          ##</p>
-<p class="last">Community WATer Model</p>
-</dd>
-</dl>
-<p># &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
-<dl class="function">
-<dt id="cwatm.CWATMexe">
-<code class="descclassname">cwatm.</code><code class="descname">CWATMexe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm.html#CWATMexe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.CWATMexe" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="cwatm.CWATModel">
-<em class="property">class </em><code class="descclassname">cwatm.</code><code class="descname">CWATModel</code><a class="reference internal" href="_modules/cwatm.html#CWATModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.CWATModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" title="cwatm_initial.CWATModel_ini"><code class="xref py py-class docutils literal"><span class="pre">cwatm_initial.CWATModel_ini</span></code></a>, <a class="reference internal" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" title="cwatm_dynamic.CWATModel_dyn"><code class="xref py py-class docutils literal"><span class="pre">cwatm_dynamic.CWATModel_dyn</span></code></a></p>
-<p>Initial and dynamic part of the CWat model
-initial part takes care of all the non temporal initialiation procedures</p>
-<blockquote>
-<div>dynamic part loops over time</div></blockquote>
-<dl class="method">
-<dt id="cwatm.CWATModel.currentTimeStep">
-<code class="descname">currentTimeStep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.currentTimeStep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the current time step in the range from firstTimeStep to nrTimeSteps.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of LISFLOOD
-calls the dynamic part of the hydrological modules</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.firstTimeStep">
-<code class="descname">firstTimeStep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.firstTimeStep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return first timestep of a model.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of LISFLOOD
-calls the initial part of the hydrological modules</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.nrTimeSteps">
-<code class="descname">nrTimeSteps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.nrTimeSteps" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of time steps</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.readmap">
-<code class="descname">readmap</code><span class="sig-paren">(</span><em>name</em>, <em>style=1</em><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.readmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read map data from disk.</p>
-<dl class="docutils">
-<dt><cite>name</cite></dt>
-<dd>Name used as filename. Use filename with less than eight characters
-and without extension. File extension for dynamic models is &#8221;.map&#8221;
-in initial section and the 8.3 style format name in the dynamic
-section. File extensions will be appended automatically.</dd>
-</dl>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last"><cite>style</cite> argument is not used.</p>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.report">
-<code class="descname">report</code><span class="sig-paren">(</span><em>variable</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.report" title="Permalink to this definition">¶</a></dt>
-<dd><p>Storing map data to disk</p>
-<dl class="docutils">
-<dt><cite>variable</cite></dt>
-<dd>Variable containing the PCRaster map data</dd>
-<dt><cite>name</cite></dt>
-<dd>Name used as filename. Use a filename with less than eight
-characters and without extension. File extension for dynamic models
-is &#8221;.map&#8221; in the initial section and the 8.3 style format name in
-the dynamic section. File extensions will be appended automatically.</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.setDebug">
-<code class="descname">setDebug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.setDebug" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.setQuiet">
-<code class="descname">setQuiet</code><span class="sig-paren">(</span><em>quiet=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.setQuiet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Disables the progress display of timesteps.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.timeSteps">
-<code class="descname">timeSteps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.timeSteps" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of time steps configured</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="cwatm.headerinfo">
-<code class="descclassname">cwatm.</code><code class="descname">headerinfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm.html#headerinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.headerinfo" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="cwatm.usage">
-<code class="descclassname">cwatm.</code><code class="descname">usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm.html#usage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.usage" title="Permalink to this definition">¶</a></dt>
-<dd><p>prints some lines describing how to use this program
-which arguments and parameters it accepts, etc</p>
-</dd></dl>
-
 </div>
 
 
@@ -256,9 +115,6 @@ which arguments and parameters it accepts, etc</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li class="right" >
           <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
              >next</a> |</li>
