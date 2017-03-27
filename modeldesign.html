@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4. Model design and processes &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="next" title="5. Setup the model" href="setup.html" />
+    <link rel="prev" title="3. Features of the Model" href="community.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="setup.html" title="5. Setup the model"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="community.html" title="3. Features of the Model"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="model-design-and-processes">
+<h1>4. Model design and processes<a class="headerlink" href="#model-design-and-processes" title="Permalink to this headline">¶</a></h1>
+<p>The Community Water Model (CWATM) will be designed for the purpose to assess water availability, water demand and environmental needs. It includes an accounting of how future water demands will evolve in response to socioeconomic change and how water availability will change in response to climate.</p>
+<a class="reference internal image-reference" href="_images/processes.jpg"><img alt="_images/processes.jpg" src="_images/processes.jpg" style="width: 600px;" /></a>
+<p>Figure 3: CWATM - Water related processes included in the model design</p>
+<div class="section" id="processes">
+<h2>Processes<a class="headerlink" href="#processes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="calculation-of-potential-evaporation">
+<h3>Calculation of potential Evaporation<a class="headerlink" href="#calculation-of-potential-evaporation" title="Permalink to this headline">¶</a></h3>
+<p>Using Penman-Montheith equations based on FAO 56</p>
+</div>
+<div class="section" id="calculation-of-rain-snow-snowmelt">
+<h3>Calculation of rain, snow, snowmelt<a class="headerlink" href="#calculation-of-rain-snow-snowmelt" title="Permalink to this headline">¶</a></h3>
+<p>Using day-degree approach with up to 7 vertical layers
+Including snow- and glaciwer melt.</p>
+</div>
+<div class="section" id="land-cover">
+<h3>Land cover<a class="headerlink" href="#land-cover" title="Permalink to this headline">¶</a></h3>
+<p>using fraction of 6 different land cover types</p>
+<ul class="simple">
+<li>Forest</li>
+<li>Grassland</li>
+<li>Irrigated land</li>
+<li>Paddy irrigated land</li>
+<li>Sealed areas (urban)</li>
+<li>water</li>
+</ul>
+</div>
+<div class="section" id="water-demand">
+<h3>Water demand<a class="headerlink" href="#water-demand" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>including water demand from industry and domestic land use via precalculated monhly spatial maps</li>
+<li>including agricultural water use from calculation of plant water demand</li>
+<li>Return flows</li>
+</ul>
+</div>
+<div class="section" id="vegetation">
+<h3>Vegetation<a class="headerlink" href="#vegetation" title="Permalink to this headline">¶</a></h3>
+<p>Vegetation taken into account for calculating</p>
+<ul class="simple">
+<li>Albedo</li>
+<li>Transpiration</li>
+<li>Interception</li>
+</ul>
+</div>
+<div class="section" id="soil">
+<h3>Soil<a class="headerlink" href="#soil" title="Permalink to this headline">¶</a></h3>
+<p>Three soil layers for each land cover type including processes:</p>
+<ul class="simple">
+<li>Frost interupting soil processes</li>
+<li>Infiltration</li>
+<li>Preferential flow</li>
+<li>Capillary rise</li>
+<li>Surface runoff</li>
+<li>Interflow</li>
+<li>Percolation into groundwater</li>
+</ul>
+</div>
+<div class="section" id="groundwater">
+<h3>Groundwater<a class="headerlink" href="#groundwater" title="Permalink to this headline">¶</a></h3>
+<p>Groundwater storage is simulated as linear groundwater reservoir</p>
+</div>
+<div class="section" id="lakes-reservoirs">
+<h3>Lakes &amp; Reservoirs<a class="headerlink" href="#lakes-reservoirs" title="Permalink to this headline">¶</a></h3>
+<p>Lakes are simulated with the weir function
+Reservoirs are simulated  as outflow function between three storage limits (conservative, normal,flood) and three outflow functions (minimum, normal, non-damaging)</p>
+</div>
+<div class="section" id="routing">
+<h3>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h3>
+<p>Routing is calculated using the kinematic wave approach</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Model design and processes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#processes">Processes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">5. Setup the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="runmodel.html">6. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settingsfile.html">7. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">8. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postpro.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">11. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">12. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">13. <strong>Source code</strong></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="community.html"
+                        title="previous chapter">3. Features of the Model</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="setup.html"
+                        title="next chapter">5. Setup the model</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="setup.html" title="5. Setup the model"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="community.html" title="3. Features of the Model"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

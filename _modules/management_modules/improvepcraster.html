@@ -33,6 +33,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -55,17 +58,21 @@
 <span class="c1"># -------------------------------------------------------------------------</span>
 
 
-<span class="kn">import</span> <span class="nn">xml.dom.minidom</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">time</span> <span class="k">as</span> <span class="nn">xtime</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">from</span> <span class="nn">pcraster</span> <span class="k">import</span><span class="o">*</span>
-<span class="kn">from</span> <span class="nn">pcraster.framework</span> <span class="k">import</span> <span class="o">*</span>
+<span class="c1">#from pcraster import*</span>
+<span class="c1">#from pcraster.framework import *</span>
+
+
+<span class="kn">from</span> <span class="nn">pcraster2.dynamicFramework</span> <span class="k">import</span> <span class="o">*</span>
+
 
 <span class="kn">from</span> <span class="nn">globals</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">management_modules.timestep</span> <span class="k">import</span> <span class="o">*</span>
 
+<span class="c1"># --------------------------------------------------</span>
 
 <div class="viewcode-block" id="DynamicFramework2"><a class="viewcode-back" href="../../management_modules.html#management_modules.improvepcraster.DynamicFramework2">[docs]</a><span class="k">class</span> <span class="nc">DynamicFramework2</span><span class="p">(</span><span class="n">DynamicFramework</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -77,13 +84,11 @@
 <span class="sd">    Updated by improvepcraster.py</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+
+
 <div class="viewcode-block" id="DynamicFramework2.run"><a class="viewcode-back" href="../../management_modules.html#management_modules.improvepcraster.DynamicFramework2.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run the dynamic user model.</span>
-
-<span class="sd">        .. todo::</span>
-<span class="sd">        This method depends on the filter frameworks concept. Shouldn&#39;t its run</span>
-<span class="sd">        method call _runSuspend()?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_atStartOfScript</span><span class="p">()</span>
         <span class="k">if</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_userModel</span><span class="p">(),</span> <span class="s2">&quot;resume&quot;</span><span class="p">)):</span>
@@ -107,14 +112,19 @@
 
 
 
+    <span class="c1"># Adjusting the def _atStartOfTimeStep defined in DynamicFramework for a real quiet output</span>
 
-    <span class="sd">&quot;&quot;&quot;Adjusting the def _atStartOfTimeStep defined in DynamicFramework</span>
-<span class="sd">       for a real quiet output</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rquiet</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">rtrace</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_atStartOfTimeStep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adjusting the def _atStartOfTimeStep defined in DynamicFramework</span>
+<span class="sd">        for a real quiet output</span>
+
+<span class="sd">        :param step:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_userModel</span><span class="p">()</span><span class="o">.</span><span class="n">_setInTimeStep</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rquiet</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtrace</span><span class="p">:</span>
@@ -125,240 +135,6 @@
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
 
-
-<div class="viewcode-block" id="TimeoutputTimeseries2"><a class="viewcode-back" href="../../management_modules.html#management_modules.improvepcraster.TimeoutputTimeseries2">[docs]</a><span class="k">class</span> <span class="nc">TimeoutputTimeseries2</span><span class="p">(</span><span class="n">TimeoutputTimeseries</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to create pcrcalc timeoutput style timeseries</span>
-<span class="sd">    Updated py improvepcraster.py</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-
-
-    <span class="k">def</span> <span class="nf">_writeFileHeader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputFilename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        writes header part of tss file</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">outputFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
-        <span class="c1"># header</span>
-        <span class="c1">#outputFile.write(&quot;timeseries &quot; + self._spatialDatatype.lower() + &quot;\n&quot;)</span>
-        <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;timeseries &quot;</span> <span class="o">+</span> <span class="s2">&quot; settingsfile: &quot;</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="s2">&quot; date: &quot;</span> <span class="o">+</span> <span class="n">xtime</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="n">xtime</span><span class="o">.</span><span class="n">time</span><span class="p">())</span><span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maxId</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;timestep</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">colId</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxId</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">colId</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">outputFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">_configureOutputFilename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        generates filename</span>
-<span class="sd">        appends timeseries file extension if necessary</span>
-<span class="sd">        prepends sample directory if used in stochastic</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="c1"># test if suffix or path is given</span>
-        <span class="n">head</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;\.tss&quot;</span><span class="p">,</span> <span class="n">tail</span><span class="p">):</span>
-            <span class="c1"># content,sep,comment = filename.partition(&quot;-&quot;)</span>
-            <span class="c1"># filename = content + &quot;Tss&quot; + sep + comment + &quot;.tss&quot;</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">tail</span> <span class="o">+</span> <span class="s2">&quot;.tss&quot;</span>
-
-        <span class="c1"># for stochastic add sample directory</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_userModel</span><span class="p">,</span> <span class="s2">&quot;nrSamples&quot;</span><span class="p">):</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_userModel</span><span class="o">.</span><span class="n">currentSampleNumber</span><span class="p">()),</span> <span class="n">filename</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="k">pass</span>
-
-        <span class="k">return</span> <span class="n">filename</span>
-
-<div class="viewcode-block" id="TimeoutputTimeseries2.sample2"><a class="viewcode-back" href="../../management_modules.html#management_modules.improvepcraster.TimeoutputTimeseries2.sample2">[docs]</a>    <span class="k">def</span> <span class="nf">sample2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">daymonthyear</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sampling the current values of &#39;expression&#39; at the given locations for the current timestep</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;checked&#39;</span><span class="p">][</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currwrite&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">daymonthyear</span><span class="p">:</span>
-          <span class="c1"># using a list with is 1 for monthend and 2 for year end to check for execution</span>
-          <span class="n">arrayRowPos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_userModel</span><span class="o">.</span><span class="n">currentTimeStep</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_userModel</span><span class="o">.</span><span class="n">firstTimeStep</span><span class="p">()</span>
-
-        <span class="c1"># if isinstance(expression, float):</span>
-        <span class="c1">#  expression = pcraster.scalar(expression)</span>
-
-          <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># store the data type for tss file header</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spatialDatatype</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_spatialDatatype</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">expression</span><span class="o">.</span><span class="n">dataType</span><span class="p">())</span>
-          <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">datatype</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Argument must be a PCRaster map, type </span><span class="si">%s</span><span class="s2"> given. If necessary use data conversion functions like scalar()&quot;</span> <span class="o">%</span> <span class="p">(</span>
-            <span class="n">datatype</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-          <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spatialIdGiven</span><span class="p">:</span>
-            <span class="c1">#if expression.dataType() == pcraster.Scalar or expression.dataType() == pcraster.Directional:</span>
-            <span class="c1">#    tmp = pcraster.areaaverage(pcraster.spatial(expression), pcraster.spatial(self._spatialId))</span>
-            <span class="c1">#else:</span>
-            <span class="c1">#    tmp = pcraster.areamajority(pcraster.spatial(expression), pcraster.spatial(self._spatialId))</span>
-
-            <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">cellIndex</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampleAddresses</span><span class="p">:</span>
-                <span class="c1">#value, valid = pcraster.cellvalue(tmp, cellIndex)</span>
-                <span class="n">value</span><span class="p">,</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">cellvalue</span><span class="p">(</span><span class="n">pcraster</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span> <span class="n">cellIndex</span><span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
-                    <span class="n">value</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;NaN&quot;</span><span class="p">)</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">_sampleValues</span><span class="p">[</span><span class="n">arrayRowPos</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-                <span class="n">col</span> <span class="o">+=</span> <span class="mi">1</span>
-          <span class="k">else</span><span class="p">:</span>
-            <span class="c1">#if expression.dataType() == pcraster.Scalar or expression.dataType() == pcraster.Directional:</span>
-            <span class="c1">#    tmp = pcraster.maptotal(pcraster.spatial(expression)) \</span>
-            <span class="c1">#          / pcraster.maptotal(pcraster.scalar(pcraster.defined(pcraster.spatial(expression))))</span>
-            <span class="c1">#else:</span>
-            <span class="c1">#    tmp = pcraster.mapmaximum(pcraster.maptotal(pcraster.areamajority(pcraster.spatial(expression), \</span>
-            <span class="c1">#                    pcraster.spatial( pcraster.nominal(1)))))</span>
-
-            <span class="n">value</span><span class="p">,</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">cellvalue</span><span class="p">(</span><span class="n">pcraster</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;NaN&quot;</span><span class="p">)</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">_sampleValues</span><span class="p">[</span><span class="n">arrayRowPos</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-
-        <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;laststep&#39;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_writeTssFile</span><span class="p">(</span><span class="n">daymonthyear</span><span class="p">)</span></div>
-
-    <span class="k">def</span> <span class="nf">_writeTssFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">daymonthyear</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        writing timeseries to disk</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1">#</span>
-        <span class="n">outputFilename</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_configureOutputFilename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_outputFilename</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_writeHeader</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-             <span class="bp">self</span><span class="o">.</span><span class="n">_writeFileHeader</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">)</span>
-             <span class="n">outputFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-             <span class="n">outputFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
-
-        <span class="k">assert</span> <span class="n">outputFile</span>
-
-
-        <span class="k">for</span> <span class="n">timestep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;intSpin&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;intEnd&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-          <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;checked&#39;</span><span class="p">][</span><span class="n">timestep</span><span class="o">-</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;intSpin&#39;</span><span class="p">]]</span> <span class="o">&gt;=</span> <span class="n">daymonthyear</span><span class="p">:</span>
-            <span class="n">row</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-            <span class="n">row</span> <span class="o">+=</span> <span class="s2">&quot; </span><span class="si">%8g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">timestep</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spatialIdGiven</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">cellId</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxId</span><span class="p">):</span>
-                    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampleValues</span><span class="p">[</span><span class="n">timestep</span> <span class="o">-</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;intStart&#39;</span><span class="p">]][</span><span class="n">cellId</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">):</span>
-                        <span class="n">row</span> <span class="o">+=</span> <span class="s2">&quot;           1e31&quot;</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">row</span> <span class="o">+=</span> <span class="s2">&quot; </span><span class="si">%14g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                <span class="n">row</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampleValues</span><span class="p">[</span><span class="n">timestep</span> <span class="o">-</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;intStart&#39;</span><span class="p">]]</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">):</span>
-                    <span class="n">row</span> <span class="o">+=</span> <span class="s2">&quot;           1e31&quot;</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">row</span> <span class="o">+=</span> <span class="s2">&quot; </span><span class="si">%14g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                <span class="n">row</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-
-            <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-
-        <span class="n">outputFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tssFilename</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">idMap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">noHeader</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tssFilename</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
-                <span class="s2">&quot;timeseries output filename must be of type string&quot;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_outputFilename</span> <span class="o">=</span> <span class="n">tssFilename</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_maxId</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_spatialDatatype</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_spatialIdGiven</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_userModel</span> <span class="o">=</span> <span class="n">model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_writeHeader</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">noHeader</span>
-        <span class="c1"># array to store the timestep values</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_sampleValues</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="n">_idMap</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idMap</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idMap</span><span class="p">,</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">_pcraster</span><span class="o">.</span><span class="n">Field</span><span class="p">):</span>
-            <span class="n">_idMap</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="c1">#nrRows = 10000 - self._userModel.firstTimeStep() + 1</span>
-        <span class="c1">#nrRows = self._userModel.nrTimeSteps() - self._userModel.firstTimeStep() + 1</span>
-
-        <span class="c1"># if header reserve rows from 1 to endstep</span>
-        <span class="c1"># if noheader only from startstep - endstep</span>
-        <span class="c1">#if noHeader:</span>
-        <span class="c1">#    nrRows = int(binding[&#39;StepEnd&#39;]) - int(binding[&#39;StepStart&#39;]) - self._userModel.firstTimeStep() + 2</span>
-        <span class="c1">#else: nrRows = int(binding[&#39;StepEnd&#39;]) - int(binding[&#39;StepStart&#39;]) - self._userModel.firstTimeStep() + 2</span>
-        <span class="k">if</span> <span class="n">noHeader</span><span class="p">:</span>
-            <span class="n">nrRows</span> <span class="o">=</span> <span class="n">datetoInt</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;StepEnd&#39;</span><span class="p">],</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;dateStart&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">datetoInt</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;StepStart&#39;</span><span class="p">],</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;dateStart&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_userModel</span><span class="o">.</span><span class="n">firstTimeStep</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">nrRows</span> <span class="o">=</span> <span class="n">datetoInt</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;StepEnd&#39;</span><span class="p">],</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;dateStart&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">datetoInt</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;StepStart&#39;</span><span class="p">],</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;dateStart&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_userModel</span><span class="o">.</span><span class="n">firstTimeStep</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span>
-
-
-
-        <span class="k">if</span> <span class="n">_idMap</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span> <span class="o">=</span> <span class="n">idMap</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idMap</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">readmap</span><span class="p">(</span><span class="n">idMap</span><span class="p">)</span>
-
-            <span class="n">_allowdDataTypes</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">pcraster</span><span class="o">.</span><span class="n">Nominal</span><span class="p">,</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">Ordinal</span><span class="p">,</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">Boolean</span><span class="p">]</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span><span class="o">.</span><span class="n">dataType</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_allowdDataTypes</span><span class="p">:</span>
-                <span class="c1">#raise Exception(</span>
-
-                <span class="c1">#    &quot;idMap must be of type Nominal, Ordinal or Boolean&quot;)</span>
-                <span class="c1"># changed into creating a nominal map instead of bailing out</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">nominal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span><span class="o">.</span><span class="n">isSpatial</span><span class="p">():</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_maxId</span><span class="p">,</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">cellvalue</span><span class="p">(</span>
-                    <span class="n">pcraster</span><span class="o">.</span><span class="n">mapmaximum</span><span class="p">(</span><span class="n">pcraster</span><span class="o">.</span><span class="n">ordinal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_maxId</span> <span class="o">=</span> <span class="mi">1</span>
-
-            <span class="c1"># cell indices of the sample locations</span>
-
-            <span class="c1"># #self._sampleAddresses = []</span>
-            <span class="c1"># for cellId in range(1, self._maxId + 1):</span>
-            <span class="c1"># self._sampleAddresses.append(self._getIndex(cellId))</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">_sampleAddresses</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maxId</span><span class="p">)]</span>
-            <span class="c1"># init with the left/top cell - could also be 0 but then you have to catch it in</span>
-            <span class="c1"># the sample routine and put an exeption in</span>
-            <span class="n">nrCells</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">nrRows</span><span class="p">()</span> <span class="o">*</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">nrCols</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nrCells</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">pcraster</span><span class="o">.</span><span class="n">cellvalue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span><span class="p">,</span> <span class="n">cell</span><span class="p">)[</span><span class="mi">1</span><span class="p">]):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_sampleAddresses</span><span class="p">[</span>
-                        <span class="n">pcraster</span><span class="o">.</span><span class="n">cellvalue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span><span class="p">,</span> <span class="n">cell</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cell</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">_spatialIdGiven</span> <span class="o">=</span> <span class="kc">True</span>
-
-            <span class="n">nrCols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxId</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_sampleValues</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;NaN&quot;</span><span class="p">)]</span> <span class="o">*</span> <span class="n">nrCols</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">nrRows</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_sampleValues</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;NaN&quot;</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">nrRows</span><span class="p">]</span>
-
-<div class="viewcode-block" id="TimeoutputTimeseries2.firstout"><a class="viewcode-back" href="../../management_modules.html#management_modules.improvepcraster.TimeoutputTimeseries2.firstout">[docs]</a>    <span class="k">def</span> <span class="nf">firstout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">expression</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        returns the first cell as output value</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">cellIndex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampleAddresses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">areaaverage</span><span class="p">(</span><span class="n">pcraster</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spatialId</span><span class="p">))</span>
-            <span class="n">value</span><span class="p">,</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">pcraster</span><span class="o">.</span><span class="n">cellvalue</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">cellIndex</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
-               <span class="n">value</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;NaN&quot;</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;NaN&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">value</span></div></div>
 </pre></div>
 
           </div>
@@ -374,11 +150,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../nexus.html">2. Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../community.html">3. Features of the Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../settings.html">4. Running the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../data.html">5. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../todo.html">7. TODO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../source.html">8. <strong>Source code</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modeldesign.html">4. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">5. Setup the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../runmodel.html">6. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settingsfile.html">7. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata.html">8. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../postpro.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">11. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">12. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source.html">13. <strong>Source code</strong></a></li>
 </ul>
 
         </div>
@@ -391,6 +172,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>

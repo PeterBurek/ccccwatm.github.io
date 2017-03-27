@@ -33,6 +33,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -55,12 +58,6 @@
 <span class="c1"># -------------------------------------------------------------------------</span>
 
 
-<span class="c1">#from global_modules.add1 import *</span>
-<span class="kn">from</span> <span class="nn">pcraster</span> <span class="k">import</span><span class="o">*</span>
-<span class="kn">from</span> <span class="nn">pcraster.framework</span> <span class="k">import</span> <span class="o">*</span>
-
-
-
 <span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">management_modules.improvepcraster</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">management_modules.messages</span> <span class="k">import</span> <span class="o">*</span>
@@ -74,8 +71,17 @@
     <span class="c1"># =========== DYNAMIC ====================================================</span>
 
 <div class="viewcode-block" id="CWATModel_dyn.dynamic"><a class="viewcode-back" href="../cwatm_dynamic.html#cwatm.CWATModel_dyn.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Dynamic part of LISFLOOD</span>
-<span class="sd">            calls the dynamic part of the hydrological modules</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dynamic part of LISFLOOD</span>
+<span class="sd">        calls the dynamic part of the hydrological modules</span>
+<span class="sd">        Looping through time and space</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            if flags set the output on the screen can be changed e.g.</span>
+
+<span class="sd">            * v: no output at all</span>
+<span class="sd">            * l: time and first gauge discharge</span>
+<span class="sd">            * t: timing of different processes at the end</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#self.CalendarDate = dateVar[&#39;dateStart&#39;] + datetime.timedelta(days=dateVar[&#39;curr&#39;])</span>
@@ -98,7 +104,7 @@
                 <span class="k">if</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;quiet&#39;</span><span class="p">]))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;veryquiet&#39;</span><span class="p">])):</span>
                     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currStart&#39;</span><span class="p">])</span>
                     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="nb">print</span>
+                <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;veryquiet&#39;</span><span class="p">])):</span> <span class="nb">print</span>
 
         <span class="c1"># ************************************************************</span>
         <span class="sd">&quot;&quot;&quot; up to here it was fun, now the real stuff starts</span>
@@ -119,7 +125,7 @@
 
         <span class="c1"># ***** READ land use fraction maps***************************</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic_fracIrrigation</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic_fracIrrigation</span><span class="p">(</span><span class="n">init</span> <span class="o">=</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newYear&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">capillarRise_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
         <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Soil 1.Part&quot;</span><span class="p">)</span>  <span class="c1"># 4. timing</span>
 
@@ -134,8 +140,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">groundwater_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
         <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Groundwater&quot;</span><span class="p">)</span>  <span class="c1"># 7. timing</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">routing_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Routing&quot;</span><span class="p">)</span>  <span class="c1"># 8. timing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runoff_concentration_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Runoff conc.&quot;</span><span class="p">)</span>  <span class="c1"># 8. timing</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">routing_kinematic_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Routing_Kin&quot;</span><span class="p">)</span>  <span class="c1"># 9. timing</span>
+
+
+
 
         <span class="c1"># *******  Calculate CUMULATIVE MASS BALANCE ERROR  **********</span>
         <span class="c1"># self.waterbalance_module.dynamic()</span>
@@ -145,10 +157,10 @@
         <span class="c1"># ------------------------------------------------------</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">checkWaterSoilGround</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Waterbalance&quot;</span><span class="p">)</span>  <span class="c1"># 9. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Waterbalance&quot;</span><span class="p">)</span>  <span class="c1"># 10. timing</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">output_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
-        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Output&quot;</span><span class="p">)</span>  <span class="c1"># 10. timing</span>
+        <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Output&quot;</span><span class="p">)</span>  <span class="c1"># 11. timing</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
 
@@ -164,7 +176,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sumsum_Precipitation</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sumsum_gwRecharge</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum_gwRecharge</span>
         <span class="n">runoff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseflow</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum_landSurfaceRunoff</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sumsum_Runoff</span> <span class="o">+=</span> <span class="n">runoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sumsum_Runoff</span> <span class="o">+=</span> <span class="n">runoff</span></div></div>
 
         <span class="c1">#print self.sum_directRunoff,  self.sum_interflowTotal, self.sum_landSurfaceRunoff, self.baseflow, runoff</span>
         <span class="c1">#print self.sumsum_Precipitation, self.sumsum_Runoff</span>
@@ -177,195 +189,7 @@
            <span class="c1">#report(decompress(runoff), &quot;c:\work\output/runoff.map&quot;)</span>
 
 
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        self.landusechange_module.dynamic()</span>
 
-<span class="sd">        # ***** READ LEAF AREA INDEX DATA ****************************</span>
-<span class="sd">        self.leafarea_module.dynamic()</span>
-
-<span class="sd">        # ***** READ variable water fraction ****************************</span>
-<span class="sd">        self.evapowater_module.dynamic_init()</span>
-
-<span class="sd">        # ***** READ INFLOW HYDROGRAPHS (OPTIONAL)****************</span>
-<span class="sd">        self.inflow_module.dynamic()</span>
-<span class="sd">        timemeasure(&quot;Read LAI&quot;) # 2. timing after LAI and inflow</span>
-
-<span class="sd">        # ***** RAIN AND SNOW *****************************************</span>
-<span class="sd">        self.snow_module.dynamic()</span>
-<span class="sd">        timemeasure(&quot;Snow&quot;)  # 3. timing after LAI and inflow</span>
-
-<span class="sd">        # ***** FROST INDEX IN SOIL **********************************</span>
-<span class="sd">        self.frost_module.dynamic()</span>
-<span class="sd">        timemeasure(&quot;Frost&quot;)  # 4. timing after frost index</span>
-
-<span class="sd">        # ************************************************************</span>
-<span class="sd">        # ****Looping soil 2 times - second time for forest fraction *</span>
-<span class="sd">        # ************************************************************</span>
-
-<span class="sd">        for soilLoop in xrange(3):</span>
-<span class="sd">            self.soilloop_module.dynamic(soilLoop)</span>
-<span class="sd">            # soil module is repeated 2 times:</span>
-<span class="sd">            # 1. for remaining areas: no forest, no impervious, no water</span>
-<span class="sd">            # 2. for forested areas</span>
-<span class="sd">            timemeasure(&quot;Soil&quot;,loops = soilLoop + 1) # 5/6 timing after soil</span>
-
-<span class="sd">        # -------------------------------------------------------------------</span>
-<span class="sd">        # -------------------------------------------------------------------</span>
-
-<span class="sd">        # ***** ACTUAL EVAPORATION FROM OPEN WATER AND SEALED SOIL ***</span>
-<span class="sd">        self.opensealed_module.dynamic()</span>
-
-<span class="sd">        # *********  WATER USE   *************************</span>
-<span class="sd">        self.riceirrigation_module.dynamic()</span>
-<span class="sd">        self.waterabstraction_module.dynamic()</span>
-<span class="sd">        timemeasure(&quot;Water abstraction&quot;)</span>
-
-<span class="sd">        # ***** Calculation per Pixel ********************************</span>
-<span class="sd">        self.soil_module.dynamic_perpixel()</span>
-<span class="sd">        timemeasure(&quot;Soil done&quot;)</span>
-
-<span class="sd">        self.groundwater_module.dynamic()</span>
-<span class="sd">        timemeasure(&quot;Groundwater&quot;)</span>
-
-<span class="sd">        # ************************************************************</span>
-<span class="sd">        # ***** STOP if no routing is required    ********************</span>
-<span class="sd">        # ************************************************************</span>
-<span class="sd">        if option[&#39;InitLisfloodwithoutSplit&#39;]:</span>
-<span class="sd">            # InitLisfloodwithoutSplit</span>
-<span class="sd">            # Very fast InitLisflood</span>
-<span class="sd">            # it is only to compute Lzavin.map and skip completely the routing component</span>
-<span class="sd">            self.output_module.dynamic() # only lzavin</span>
-
-<span class="sd">            timemeasure(&quot;After fast init&quot;)</span>
-<span class="sd">            for i in xrange(len(timeMes)):</span>
-<span class="sd">                if self.currentTimeStep() == self.firstTimeStep():</span>
-<span class="sd">                   timeMesSum.append(timeMes[i] - timeMes[0])</span>
-<span class="sd">                else: timeMesSum[i] += timeMes[i] - timeMes[0]</span>
-
-<span class="sd">            return</span>
-
-
-<span class="sd">        # *********  EVAPORATION FROM OPEN WATER *************</span>
-<span class="sd">        self.evapowater_module.dynamic()</span>
-<span class="sd">        timemeasure(&quot;open water eva.&quot;)</span>
-
-<span class="sd">        # ***** ROUTING SURFACE RUNOFF TO CHANNEL ********************</span>
-<span class="sd">        self.surface_routing_module.dynamic()</span>
-<span class="sd">        timemeasure(&quot;Surface routing&quot;)  # 7 timing after surface routing</span>
-
-<span class="sd">        # ***** POLDER INIT **********************************</span>
-<span class="sd">        self.polder_module.dynamic_init()</span>
-
-<span class="sd">        # ***** INLETS INIT **********************************</span>
-<span class="sd">        self.inflow_module.dynamic_init()</span>
-<span class="sd">        timemeasure(&quot;Before routing&quot;)  # 8 timing before channel routing</span>
-
-<span class="sd">        # ************************************************************</span>
-<span class="sd">        # ***** LOOP ROUTING SUB TIME STEP   *************************</span>
-<span class="sd">        # ************************************************************</span>
-<span class="sd">        self.sumDisDay = globals.inZero.copy()</span>
-<span class="sd">        # sums up discharge of the sub steps</span>
-<span class="sd">        for NoRoutingExecuted in xrange(self.NoRoutSteps):</span>
-<span class="sd">            self.routing_module.dynamic(NoRoutingExecuted)</span>
-<span class="sd">            #   routing sub steps</span>
-<span class="sd">        timemeasure(&quot;Routing&quot;,loops = NoRoutingExecuted + 1)  # 9 timing after routing</span>
-
-<span class="sd">        # ----------------------------------------------------------------------</span>
-
-<span class="sd">        if option[&#39;inflow&#39;]:</span>
-<span class="sd">            self.QInM3Old = self.QInM3</span>
-<span class="sd">            # to calculate the parts of inflow for every routing timestep</span>
-<span class="sd">            # for the next timestep the old inflow is preserved</span>
-<span class="sd">            self.sumIn += self.QInDt*self.NoRoutSteps</span>
-
-<span class="sd">        # if option[&#39;simulatePolders&#39;]:</span>
-<span class="sd">        # ChannelToPolderM3=ChannelToPolderM3Old;</span>
-
-<span class="sd">        if option[&#39;InitLisflood&#39;] or (not(option[&#39;SplitRouting&#39;])):</span>
-<span class="sd">            self.ChanM3 = self.ChanM3Kin.copy()</span>
-<span class="sd">                # Total channel storage [cu m], equal to ChanM3Kin</span>
-<span class="sd">        else:</span>
-<span class="sd">            self.ChanM3 = self.ChanM3Kin + self.Chan2M3Kin - self.Chan2M3Start</span>
-<span class="sd">            #self.ChanM3 = self.ChanM3Kin + self.Chan2M3Kin - self.Chan2M3Start</span>
-<span class="sd">                # Total channel storage [cu m], equal to ChanM3Kin</span>
-<span class="sd">                # sum of both lines</span>
-<span class="sd">            #CrossSection2Area = pcraster.max(scalar(0.0), (self.Chan2M3Kin - self.Chan2M3Start) / self.ChanLength)</span>
-
-<span class="sd">        self.sumDis += self.sumDisDay</span>
-<span class="sd">        self.ChanQAvg = self.sumDisDay/self.NoRoutSteps</span>
-<span class="sd">        TotalCrossSectionAreaKin = self.ChanM3 * self.InvChanLength</span>
-<span class="sd">            # New cross section area (kinematic wave)</span>
-<span class="sd">            # This is the value after the kinematic wave, so we use ChanM3Kin here</span>
-<span class="sd">            # (NOT ChanQKin, which is average discharge over whole step, we need state at the end of all iterations!)</span>
-
-<span class="sd">        timemeasure(&quot;After routing&quot;)  # 10 timing after channel routing</span>
-
-<span class="sd">        # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
-<span class="sd">        if not(option[&#39;dynamicWave&#39;]):</span>
-<span class="sd">            # Dummy code if dynamic wave is not used, in which case the total cross-section</span>
-<span class="sd">            # area equals TotalCrossSectionAreaKin, ChanM3 equals ChanM3Kin and</span>
-<span class="sd">            # ChanQ equals ChanQKin</span>
-<span class="sd">            self.TotalCrossSectionArea = TotalCrossSectionAreaKin</span>
-<span class="sd">            # Total cross section area [cu m / s]</span>
-<span class="sd">            WaterLevelDyn = -9999</span>
-<span class="sd">            # Set water level dynamic wave to dummy value (needed</span>
-
-<span class="sd">        if option[&#39;InitLisflood&#39;] or option[&#39;repAverageDis&#39;]:</span>
-<span class="sd">            self.CumQ += self.ChanQ</span>
-<span class="sd">            self.avgdis = self.CumQ/self.TimeSinceStart</span>
-<span class="sd">            # to calculate average discharge</span>
-
-<span class="sd">        self.DischargeM3Out += np.where(self.AtLastPointC ,self.ChanQ * self.DtSec,0)</span>
-<span class="sd">           # Cumulative outflow out of map</span>
-
-<span class="sd">        # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
-<span class="sd">        # Calculate water level</span>
-<span class="sd">        self.waterlevel_module.dynamic()</span>
-
-<span class="sd">        # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
-
-<span class="sd">        # ************************************************************</span>
-<span class="sd">        # *******  Calculate CUMULATIVE MASS BALANCE ERROR  **********</span>
-<span class="sd">        # ************************************************************</span>
-<span class="sd">        self.waterbalance_module.dynamic()</span>
-
-
-
-<span class="sd">        self.indicatorcalc_module.dynamic()</span>
-
-
-
-<span class="sd">        # ************************************************************</span>
-<span class="sd">        # ***** WRITING RESULTS: TIME SERIES AND MAPS ****************</span>
-<span class="sd">        # ************************************************************</span>
-
-<span class="sd">        self.output_module.dynamic()</span>
-<span class="sd">        timemeasure(&quot;Water balance&quot;)</span>
-
-
-
-<span class="sd">        ### Report states if EnKF is used and filter moment</span>
-<span class="sd">        self.stateVar_module.dynamic()</span>
-<span class="sd">        timemeasure(&quot;State report&quot;)</span>
-
-<span class="sd">        timemeasure(&quot;All dynamic&quot;)</span>
-
-
-<span class="sd">        for i in xrange(len(timeMes)):</span>
-<span class="sd">            if self.currentTimeStep() == self.firstTimeStep():</span>
-<span class="sd">                timeMesSum.append(timeMes[i] - timeMes[0])</span>
-<span class="sd">            else: timeMesSum[i] += timeMes[i] - timeMes[0]</span>
-
-
-
-<span class="sd">        self.indicatorcalc_module.dynamic_setzero()</span>
-<span class="sd">           # setting monthly and yearly dindicator to zero at the end of the month (year)</span>
-
-
-
-
-
-<span class="sd">        &quot;&quot;&quot;</span></div></div>
 		
 </pre></div>
 
@@ -382,11 +206,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nexus.html">2. Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">3. Features of the Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../settings.html">4. Running the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data.html">5. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../todo.html">7. TODO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../source.html">8. <strong>Source code</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeldesign.html">4. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">5. Setup the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../runmodel.html">6. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settingsfile.html">7. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metadata.html">8. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../postpro.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results.html">11. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../todo.html">12. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source.html">13. <strong>Source code</strong></a></li>
 </ul>
 
         </div>
@@ -399,6 +228,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
       </ul>

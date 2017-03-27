@@ -33,6 +33,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -55,6 +58,17 @@
 <span class="c1"># -------------------------------------------------------------------------</span>
 
 <span class="kn">import</span> <span class="nn">getopt</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">import</span> <span class="nn">numpy.ctypeslib</span> <span class="k">as</span> <span class="nn">npct</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># for detecting on which system it is running</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="kn">from</span> <span class="nn">management_modules.messages</span> <span class="k">import</span> <span class="o">*</span>
+
 
 <span class="k">global</span> <span class="n">maskinfo</span><span class="p">,</span><span class="n">zeromap</span><span class="p">,</span><span class="n">modelSteps</span><span class="p">,</span><span class="n">xmlstring</span>
 <span class="n">maskinfo</span> <span class="o">=</span> <span class="p">{}</span>
@@ -114,6 +128,64 @@
 <span class="n">timeMesString</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># name of the time measure - filled in dynamic</span>
 <span class="n">timeMesSum</span> <span class="o">=</span> <span class="p">[]</span>    <span class="c1"># time measure of hydrological modules</span>
 
+<span class="c1"># -------------------------</span>
+
+
+
+<span class="n">platform</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">uname</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">python_bit</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">sizeof</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_voidp</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span>
+
+<span class="nb">print</span> <span class="s2">&quot;Running under platform: &quot;</span><span class="p">,</span> <span class="n">platform</span>
+<span class="k">if</span> <span class="n">python_bit</span>  <span class="o">&lt;</span> <span class="mi">64</span><span class="p">:</span>
+   <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The Python version used is not a 64 bit version! Python &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">python_bit</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;bit&quot;</span>
+   <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="n">path_global</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+    <span class="n">dll_routing</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">path_global</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot;hydrological_modules&quot;</span><span class="p">,</span><span class="s2">&quot;routing_reservoirs&quot;</span><span class="p">,</span><span class="s2">&quot;t5.dll&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;CYGWIN_NT-6.1&quot;</span><span class="p">:</span>
+    <span class="c1"># CYGWIN_NT-6.1 - compiled with cygwin</span>
+    <span class="n">dll_routing</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">path_global</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot;hydrological_modules&quot;</span><span class="p">,</span><span class="s2">&quot;routing_reservoirs&quot;</span><span class="p">,</span><span class="s2">&quot;t5cyg.so&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="s2">&quot;Linux or something else</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="c1"># Linux?</span>
+    <span class="n">dll_routing</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">path_global</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot;hydrological_modules&quot;</span><span class="p">,</span><span class="s2">&quot;routing_reservoirs&quot;</span><span class="p">,</span><span class="s2">&quot;t5_linux.so&quot;</span><span class="p">)</span>
+
+<span class="c1">#dll_routing = &quot;C:/work2/test1/t4.dll&quot;</span>
+<span class="n">lib2</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cdll</span><span class="o">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="n">dll_routing</span><span class="p">)</span>
+
+<span class="c1"># setup the return typs and argument types</span>
+<span class="c1"># input type for the cos_doubles function</span>
+<span class="c1"># must be a double array, with single dimension that is contiguous</span>
+<span class="n">array_1d_double</span> <span class="o">=</span> <span class="n">npct</span><span class="o">.</span><span class="n">ndpointer</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="s1">&#39;CONTIGUOUS&#39;</span><span class="p">)</span>
+<span class="n">array_2d_int</span> <span class="o">=</span> <span class="n">npct</span><span class="o">.</span><span class="n">ndpointer</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">array_1d_int</span> <span class="o">=</span> <span class="n">npct</span><span class="o">.</span><span class="n">ndpointer</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">#array_1d_int16 = npct.ndpointer(dtype=np.int16, ndim=1, flags=&#39;CONTIGUOUS&#39;)</span>
+<span class="c1">#array_2d_int32 = npct.ndpointer(dtype=np.int32, ndim=2, flags=&#39;CONTIGUOUS&#39;)</span>
+<span class="n">array_2d_double</span> <span class="o">=</span> <span class="n">npct</span><span class="o">.</span><span class="n">ndpointer</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="s1">&#39;CONTIGUOUS&#39;</span><span class="p">)</span>
+
+
+<span class="n">lib2</span><span class="o">.</span><span class="n">ups</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">lib2</span><span class="o">.</span><span class="n">ups</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">array_1d_int</span><span class="p">,</span> <span class="n">array_1d_int</span><span class="p">,</span> <span class="n">array_1d_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+<span class="n">lib2</span><span class="o">.</span><span class="n">dirID</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">lib2</span><span class="o">.</span><span class="n">dirID</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">array_2d_int</span><span class="p">,</span> <span class="n">array_2d_int</span><span class="p">,</span> <span class="n">array_2d_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+<span class="c1">#lib2.repairLdd1.argtypes = [ array_2d_int, ctypes.c_int,ctypes.c_int]</span>
+<span class="n">lib2</span><span class="o">.</span><span class="n">repairLdd1</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span> <span class="n">array_2d_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+<span class="n">lib2</span><span class="o">.</span><span class="n">repairLdd2</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">lib2</span><span class="o">.</span><span class="n">repairLdd2</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span> <span class="n">array_1d_int</span><span class="p">,</span> <span class="n">array_1d_int</span><span class="p">,</span> <span class="n">array_1d_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+<span class="n">lib2</span><span class="o">.</span><span class="n">kinematic</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1">#lib2.kinematic.argtypes = [array_1d_double,array_1d_double, array_1d_int, array_1d_int, array_1d_int,  array_1d_double,  ctypes.c_double, ctypes.c_double,ctypes.c_double, ctypes.c_double, ctypes.c_int]</span>
+<span class="c1">#                             qold            q               dirdown        diruplen     dirupid         Qnew              alpha             beta            deltaT          deltaX           size</span>
+<span class="n">lib2</span><span class="o">.</span><span class="n">kinematic</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">array_1d_double</span><span class="p">,</span><span class="n">array_1d_double</span><span class="p">,</span> <span class="n">array_1d_int</span><span class="p">,</span> <span class="n">array_1d_int</span><span class="p">,</span> <span class="n">array_1d_int</span><span class="p">,</span>  <span class="n">array_1d_double</span><span class="p">,</span>  <span class="n">array_1d_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">array_1d_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+
+<span class="n">lib2</span><span class="o">.</span><span class="n">runoffConc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">lib2</span><span class="o">.</span><span class="n">runoffConc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">array_2d_double</span><span class="p">,</span><span class="n">array_1d_double</span><span class="p">,</span><span class="n">array_1d_double</span><span class="p">,</span><span class="n">array_1d_double</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
 <span class="c1"># ----------------------------------</span>
 <span class="n">FlagName</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span> <span class="s1">&#39;veryquiet&#39;</span><span class="p">,</span> <span class="s1">&#39;loud&#39;</span><span class="p">,</span>
             <span class="s1">&#39;checkfiles&#39;</span><span class="p">,</span> <span class="s1">&#39;noheader&#39;</span><span class="p">,</span> <span class="s1">&#39;printtime&#39;</span><span class="p">]</span>
@@ -122,9 +194,11 @@
 
 
 <div class="viewcode-block" id="globalFlags"><a class="viewcode-back" href="../../management_modules.html#management_modules.globals.globalFlags">[docs]</a><span class="k">def</span> <span class="nf">globalFlags</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; read flags - according to the flags the output is adjusted</span>
-<span class="sd">        quiet,veryquiet, loud, checkfiles, noheader,printtime</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read flags - according to the flags the output is adjusted</span>
+<span class="sd">    quiet,veryquiet, loud, checkfiles, noheader,printtime</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">try</span><span class="p">:</span>
         <span class="n">opts</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">getopt</span><span class="o">.</span><span class="n">getopt</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s1">&#39;qvlcht&#39;</span><span class="p">,</span> <span class="n">FlagName</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">getopt</span><span class="o">.</span><span class="n">GetoptError</span><span class="p">:</span>
@@ -158,11 +232,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../nexus.html">2. Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../community.html">3. Features of the Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../settings.html">4. Running the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../data.html">5. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../todo.html">7. TODO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../source.html">8. <strong>Source code</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modeldesign.html">4. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">5. Setup the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../runmodel.html">6. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settingsfile.html">7. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata.html">8. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../postpro.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">11. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">12. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source.html">13. <strong>Source code</strong></a></li>
 </ul>
 
         </div>
@@ -175,6 +254,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>

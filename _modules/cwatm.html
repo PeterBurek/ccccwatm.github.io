@@ -33,6 +33,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -76,11 +79,11 @@
 <span class="kn">import</span> <span class="nn">xml.dom.minidom</span>
 
 <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span>
-<span class="kn">from</span> <span class="nn">pcraster</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">pcraster.framework</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="kn">from</span> <span class="nn">management_modules.configuration</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">management_modules.messages</span> <span class="k">import</span> <span class="o">*</span>
+
+
 
 <span class="c1"># ---------------------------</span>
 
@@ -89,21 +92,35 @@
 
 
 <div class="viewcode-block" id="CWATModel"><a class="viewcode-back" href="../cwatm.html#cwatm.CWATModel">[docs]</a><span class="k">class</span> <span class="nc">CWATModel</span><span class="p">(</span><span class="n">CWATModel_ini</span><span class="p">,</span> <span class="n">CWATModel_dyn</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Initial and dynamic part of the CWat model</span>
-<span class="sd">	    initial part takes care of all the non temporal initialiation procedures</span>
-<span class="sd">		dynamic part loops over time</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initial and dynamic part of the CWATM model</span>
+
+<span class="sd">    * initial part takes care of all the non temporal initialiation procedures</span>
+
+<span class="sd">    * dynamic part loops over time</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 <span class="c1"># ==================================================</span>
 
 <div class="viewcode-block" id="CWATMexe"><a class="viewcode-back" href="../cwatm.html#cwatm.CWATMexe">[docs]</a><span class="k">def</span> <span class="nf">CWATMexe</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base subroutine of the CWATM model</span>
+
+<span class="sd">    * parses the settings file</span>
+<span class="sd">    * read the information for the netcdf files</span>
+<span class="sd">    * check if dates are alright</span>
+<span class="sd">    * check flags for screen output</span>
+<span class="sd">    * runs the model</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
 
     <span class="n">parse_configuration</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
     <span class="c1">#print option</span>
     <span class="c1">#print binding</span>
     <span class="c1"># read all the possible option for modelling and for generating output</span>
     <span class="c1"># read the settings file with all information about the catchments(s)</span>
-
     <span class="c1"># read the meta data information for netcdf outputfiles</span>
     <span class="n">read_metanetcdf</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;metaNetcdfFile&#39;</span><span class="p">])</span>
 
@@ -159,8 +176,16 @@
 
 
 <div class="viewcode-block" id="usage"><a class="viewcode-back" href="../cwatm.html#cwatm.usage">[docs]</a><span class="k">def</span> <span class="nf">usage</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot; prints some lines describing how to use this program</span>
-<span class="sd">        which arguments and parameters it accepts, etc</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints some lines describing how to use this program which arguments and parameters it accepts, etc</span>
+
+<span class="sd">    * -q --quiet       output progression given as .</span>
+<span class="sd">    * -v --veryquiet   no output progression is given</span>
+<span class="sd">    * -l --loud        output progression given as time step, date and discharge</span>
+<span class="sd">    * -c --check       input maps and stack maps are checked, output for each input map BUT no model run</span>
+<span class="sd">    * -h --noheader    .tss file have no header and start immediately with the time series</span>
+<span class="sd">    * -t --printtime   the computation time for hydrological modules are printed</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span> <span class="s1">&#39;CWatM - Community Water model&#39;</span>
     <span class="nb">print</span> <span class="s1">&#39;Authors: &#39;</span><span class="p">,</span> <span class="n">__authors__</span>
@@ -181,9 +206,12 @@
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="headerinfo"><a class="viewcode-back" href="../cwatm.html#cwatm.headerinfo">[docs]</a><span class="k">def</span> <span class="nf">headerinfo</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print the information on top of each run</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-   <span class="nb">print</span> <span class="s2">&quot;CWATM - Community Water Model &quot;</span><span class="p">,</span><span class="n">__version__</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="n">__date__</span><span class="p">,</span>
-   <span class="nb">print</span> <span class="s2">&quot;&quot;&quot;</span>
+    <span class="nb">print</span> <span class="s2">&quot;CWATM - Community Water Model &quot;</span><span class="p">,</span><span class="n">__version__</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="n">__date__</span><span class="p">,</span>
+    <span class="nb">print</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">Community Water Model</span>
 <span class="s2">International Institute of Applied Systems Analysis (IIASA)</span>
 <span class="s2">----------------------------------------------------------&quot;&quot;&quot;</span></div>
@@ -226,11 +254,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nexus.html">2. Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">3. Features of the Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../settings.html">4. Running the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data.html">5. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../todo.html">7. TODO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../source.html">8. <strong>Source code</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeldesign.html">4. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">5. Setup the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../runmodel.html">6. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settingsfile.html">7. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metadata.html">8. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../postpro.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results.html">11. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../todo.html">12. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source.html">13. <strong>Source code</strong></a></li>
 </ul>
 
         </div>
@@ -243,6 +276,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
       </ul>

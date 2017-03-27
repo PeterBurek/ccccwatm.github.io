@@ -33,6 +33,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -61,6 +64,11 @@
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Miscellaneous repeatedly used expressions</span>
+<span class="sd">    Definition if cell area comes from regular grid e.g. 5x5km or from irregular lat/lon</span>
+<span class="sd">    Conversion factors between m3 and mm etc.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Only used in the initial phase.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">misc_variable</span><span class="p">):</span>
@@ -70,7 +78,10 @@
 <span class="c1"># --------------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="miscInitial.initial"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.miscInitial.miscInitial.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; initial part of the misc module</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        - grid area, length definition</span>
+<span class="sd">        - conversion factors</span>
+<span class="sd">        - conversion factors for precipitation and pot evaporation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;gridSizeUserDefined&#39;</span><span class="p">]:</span>
@@ -89,8 +100,9 @@
             <span class="c1"># NOT needed only in routing</span>
 
             <span class="c1"># Area of pixel [m2]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellAreaPcr</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;CellArea&#39;</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellAreaPcr</span><span class="p">)</span>
+            <span class="c1">#self.var.cellAreaPcr = loadmap(&#39;CellArea&#39;,pcr=True)</span>
+            <span class="c1">#self.var.cellArea = compressArray(self.var.cellAreaPcr)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;CellArea&#39;</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Default behaviour: grid size is derived from location attributes of</span>
@@ -138,11 +150,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">MtoMM</span> <span class="o">=</span> <span class="mi">1000</span>
         <span class="c1"># Multiplier to convert water depths in meters to mm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">MtoM3</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
+
         <span class="c1"># Multiplier to convert water depths in m to cubic metres</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">M3toM</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">MtoM3</span>
         <span class="c1"># Multiplier to convert from cubic metres to m water slice</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">con_precipitation</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;precipitation_coversion&#39;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">con_e</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;evaporation_coversion&#39;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">twothird</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="mf">3.0</span></div></div>
@@ -167,11 +181,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../nexus.html">2. Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../community.html">3. Features of the Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../settings.html">4. Running the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../data.html">5. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../todo.html">7. TODO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../source.html">8. <strong>Source code</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modeldesign.html">4. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">5. Setup the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../runmodel.html">6. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settingsfile.html">7. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata.html">8. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../postpro.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">11. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">12. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source.html">13. <strong>Source code</strong></a></li>
 </ul>
 
         </div>
@@ -184,6 +203,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">CWATM</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
