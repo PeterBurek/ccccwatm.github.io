@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>10. Initialisation &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="next" title="11. Post processing" href="postpro.html" />
+    <link rel="prev" title="9. NetCDF meta data" href="metadata.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="postpro.html" title="11. Post processing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="metadata.html" title="9. NetCDF meta data"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="initialisation">
+<h1>10. Initialisation<a class="headerlink" href="#initialisation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>CWATM needs to have estimates of the initial state of the internal storage variables, e.g. the amount of water stored in snow, soil, groundwater etc.</p>
+<p>There are two possibilities:</p>
+<ol class="arabic simple">
+<li>The initial state of the internal storage variables are unknown and a <strong>first</strong> guess has to be used e.g. all storage variables are half filled.</li>
+<li>The initial state is known from a previous run, where the variables are stored at a certain time step. This is called <strong>warm start</strong></li>
+</ol>
+<p>The the <strong>warm start</strong> is usful for:</p>
+<ul class="simple">
+<li>using a long pre-run to find the steady-state storage of the groundwater storage and use it as initial value</li>
+<li>using the stored variables to shorten the warm-up period</li>
+<li>using the stored variables to restart every day with the values from the pre3vious day (forecasting mode)</li>
+</ul>
+</div>
+<div class="section" id="cold-start">
+<h2>Cold start<a class="headerlink" href="#cold-start" title="Permalink to this headline">¶</a></h2>
+<p>For a <strong>cold start</strong> the values of the storage variables are unknown and set to a &#8220;first&#8221; guess.
+A list of variables and their default value for a <strong>cold start</strong> is given below in: <a class="reference internal" href="#rst-initialcondition"><span class="std std-ref">Initial conditions</span></a></p>
+<div class="section" id="set-up-a-cold-start-in-the-settingsfile">
+<h3>Set up a cold start in the settingsfile<a class="headerlink" href="#set-up-a-cold-start-in-the-settingsfile" title="Permalink to this headline">¶</a></h3>
+<p>In the settings file the option: <strong>load_initial</strong> has to be set on <strong>False</strong></p>
+<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>143
+144
+145
+146
+147
+148
+149
+150</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#-------------------------------------------------------</span>
+<span class="k">[INITITIAL CONDITIONS]</span>
+<span class="c1">#-------------------------------------------------------</span>
+
+<span class="c1"># for a warm start initial variables a loaded</span>
+<span class="c1"># e.g for a start on 01/01/2010 load variable from 31/12/2009</span>
+<span class="na">load_initial</span> <span class="o">=</span> <span class="s">False</span>
+<span class="na">initLoad</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine_20030131.nc</span>
+</pre></div>
+</td></tr></table></div>
+<p>And all the initial conditions is the different sections have to be set to NONE
+The values here (if not set to NONE) will overwrite the initial conditions of the general initial condition netCDF file</p>
+<p>For example:</p>
+<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>330
+331
+332</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#--------------------------------------------------------------</span>
+<span class="c1"># INITIAL CONDITIONS (None either 0 or use init file)</span>
+<span class="na">FrostIndexIni</span> <span class="o">=</span> <span class="s">NONE</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="storing-initial-variables">
+<h2>Storing initial variables<a class="headerlink" href="#storing-initial-variables" title="Permalink to this headline">¶</a></h2>
+<p>In the settings file the option <strong>save_intitisal</strong> has to be set to <strong>True</strong></p>
+<p>The name of the initial netCDF4 file has to be put in <strong>initsave</strong></p>
+<p>and one or more dates have to be specified in StepInit</p>
+<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>152
+153
+154
+155
+156</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># saving variables from this run, to initiate a warm start next run</span>
+<span class="c1"># StepInit = saving date, can be more than one: 10/01/1973 20/01/1973</span>
+<span class="na">save_initial</span> <span class="o">=</span> <span class="s">True</span>
+<span class="na">initSave</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine</span>
+<span class="na">StepInit</span> <span class="o">=</span> <span class="s">31/12/1995 31/12/2010</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="warm-start">
+<h2>Warm start<a class="headerlink" href="#warm-start" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If the parameters are changes after a run(especially the groundwater parameters) the stored initial values do not represent the conditions of the storage variables. Stored initial conditions should <strong>not</strong> be used as initial values for a model run with another set of parameters. If you do this during calibration, you will not be able to reproduce the calibration results!</p>
+</div>
+<div class="section" id="id1">
+<h3>Set up a cold start in the settingsfile<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>In the settings file the option: <strong>load_initial</strong> has to be set on <strong>True</strong>
+And define the name of the netcdf4 file in <strong>initLoad</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Use the initial values of the previous day here. E.g. if you run the model from 01/01/2006 use the inital condition from 31/12/2005</p>
+</div>
+<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>143
+144
+145
+146
+147
+148
+149
+150</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#-------------------------------------------------------</span>
+<span class="k">[INITITIAL CONDITIONS]</span>
+<span class="c1">#-------------------------------------------------------</span>
+
+<span class="c1"># for a warm start initial variables a loaded</span>
+<span class="c1"># e.g for a start on 01/01/2010 load variable from 31/12/2009</span>
+<span class="na">load_initial</span> <span class="o">=</span> <span class="s">False</span>
+<span class="na">initLoad</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine_20030131.nc</span>
+</pre></div>
+</td></tr></table></div>
+<p>There is also the possibility to set single variables to a certain value (or map)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># INITIAL CONDITIONS (None either 0 or use init file)</span>
+<span class="n">FrostIndexIni</span> <span class="o">=</span> <span class="mf">56.0</span>
+</pre></div>
+</div>
+<p>Or</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># INITIAL CONDITIONS (None either 0 or use init file)</span>
+<span class="n">FrostIndexIni</span> <span class="o">=</span> <span class="o">../</span><span class="n">frostIndex31122005</span><span class="o">.</span><span class="n">map</span>
+</pre></div>
+</div>
+<p>This will <em>override</em> the value of an initial netcdf4 file.</p>
+</div>
+</div>
+<div class="section" id="initial-conditions">
+<span id="rst-initialcondition"></span><h2>Initial conditions<a class="headerlink" href="#initial-conditions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="20%" />
+<col width="40%" />
+<col width="20%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">No.</th>
+<th class="head">Variable</th>
+<th class="head">Description</th>
+<th class="head">Default value</th>
+<th class="head">Number of maps</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>SnowCover</td>
+<td>Snow cover for up to 7 zones</td>
+<td>0</td>
+<td>7</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>FrostIndex</td>
+<td>Degree days frost threshold</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">2. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">3. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">4. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">5. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">6. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="runmodel.html">7. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settingsfile.html">8. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">9. NetCDF meta data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Initialisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cold-start">Cold start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#storing-initial-variables">Storing initial variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#warm-start">Warm start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initial-conditions">Initial conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="postpro.html">11. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">12. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">13. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">14. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="updates.html">15. Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">16. Bug and bugfix report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">17. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">18. <strong>Source code</strong></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="metadata.html"
+                        title="previous chapter">9. NetCDF meta data</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="postpro.html"
+                        title="next chapter">11. Post processing</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="postpro.html" title="11. Post processing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="metadata.html" title="9. NetCDF meta data"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

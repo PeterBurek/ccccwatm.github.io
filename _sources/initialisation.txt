@@ -1,0 +1,129 @@
+
+#######################
+Initialisation
+#######################
+
+Introduction
+============
+
+CWATM needs to have estimates of the initial state of the internal storage variables, e.g. the amount of water stored in snow, soil, groundwater etc.
+
+There are two possibilities:
+
+1. The initial state of the internal storage variables are unknown and a **first** guess has to be used e.g. all storage variables are half filled.
+
+2. The initial state is known from a previous run, where the variables are stored at a certain time step. This is called **warm start**
+
+The the **warm start** is usful for:
+
+* using a long pre-run to find the steady-state storage of the groundwater storage and use it as initial value
+
+* using the stored variables to shorten the warm-up period
+
+* using the stored variables to restart every day with the values from the pre3vious day (forecasting mode)
+
+
+Cold start
+==========
+
+For a **cold start** the values of the storage variables are unknown and set to a "first" guess.
+A list of variables and their default value for a **cold start** is given below in: :ref:`rst_initialcondition`
+
+Set up a cold start in the settingsfile
+***************************************
+
+In the settings file the option: **load_initial** has to be set on **False**
+
+.. literalinclude:: _static/settings1.ini
+    :linenos:
+    :lineno-match:
+    :language: ini
+    :lines: 143-150
+
+And all the initial conditions is the different sections have to be set to NONE
+The values here (if not set to NONE) will overwrite the initial conditions of the general initial condition netCDF file
+	
+For example:
+	
+.. literalinclude:: _static/settings1.ini
+    :linenos:
+    :lineno-match:
+    :language: ini
+    :lines: 330-332
+
+
+Storing initial variables 
+=========================
+
+In the settings file the option **save_intitisal** has to be set to **True**
+
+The name of the initial netCDF4 file has to be put in **initsave**
+
+and one or more dates have to be specified in StepInit
+
+.. literalinclude:: _static/settings1.ini
+    :linenos:
+    :lineno-match:
+    :language: ini
+    :lines: 152-156
+
+
+	
+Warm start
+==========
+
+
+
+
+
+.. warning:: If the parameters are changes after a run(especially the groundwater parameters) the stored initial values do not represent the conditions of the storage variables. Stored initial conditions should **not** be used as initial values for a model run with another set of parameters. If you do this during calibration, you will not be able to reproduce the calibration results!
+
+
+
+
+Set up a cold start in the settingsfile
+***************************************
+
+In the settings file the option: **load_initial** has to be set on **True**
+And define the name of the netcdf4 file in **initLoad**
+
+.. note:: Use the initial values of the previous day here. E.g. if you run the model from 01/01/2006 use the inital condition from 31/12/2005
+
+.. literalinclude:: _static/settings1.ini
+    :linenos:
+    :lineno-match:
+    :language: ini
+    :lines: 143-150
+
+There is also the possibility to set single variables to a certain value (or map)
+
+::
+
+    # INITIAL CONDITIONS (None either 0 or use init file)
+    FrostIndexIni = 56.0
+
+Or
+	
+::
+
+    # INITIAL CONDITIONS (None either 0 or use init file)
+    FrostIndexIni = ../frostIndex31122005.map
+
+This will *override* the value of an initial netcdf4 file.	
+
+
+
+.. _rst_initialcondition:
+
+Initial conditions
+==================
+
+
+
+.. csv-table:: 
+   :header: "No.","Variable","Description", "Default value","Number of maps"
+   :widths: 20,50, 100, 50,30
+   
+   "1","SnowCover","Snow cover for up to 7 zones","0","7"
+   "2","FrostIndex","Degree days frost threshold","0","1"
+

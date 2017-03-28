@@ -1,6 +1,6 @@
 
 #######################
-Setup the model
+Setup of the model
 #######################
 
 .. contents:: 

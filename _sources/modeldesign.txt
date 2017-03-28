@@ -36,7 +36,7 @@ using fraction of 6 different land cover types
 * Irrigated land
 * Paddy irrigated land
 * Sealed areas (urban)
-* water
+* Water
 
 Water demand
 ************
