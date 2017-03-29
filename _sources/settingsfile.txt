@@ -212,26 +212,25 @@ Variables can also be defined by spatial maps or map stacks
 Sections of information
 =======================
 
-#. Snow
-#. Frost
-#. General information on land cover types
-#. Soil
-#. Information for each of the six land cover types
+* Snow
+* Frost
+* General information on land cover types
+* Soil
+* Information for each of the six land cover types
 	* Forest
 	* Grassland
 	* Paddy irrigated area
 	* Irrigated area
 	* Sealed area
 	* Water covered area
-#. Interflow
-#. Groundwater
-#. Water demand
-#. Runoff concentration
-#. Routing
-#. Lakes and reservoirs
-#. Inflow
+* Interflow
+* Groundwater
+* Water demand
+* Runoff concentration
+* Routing
+* Lakes and reservoirs
+* Inflow
 
-	
 	
 .. _rst_setting:	
 

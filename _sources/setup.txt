@@ -61,8 +61,9 @@ But nevertheless it is quite usefull to install a full PCRaster version:
 
 
 .. note:: If it is not possible to install a full version of PCRaster! 
+    Copy following files
 
-Copy following files::
+::
 
     From: PCRasterFolder\python\pcraster\framework
     
@@ -92,7 +93,7 @@ a compiled version is provided and CWATM is detecting automatically with system 
 
 for Linux versions the compiled version is loaded as *t5_linux.so*. The file has to be in *../source/hydrological_modules/routing_reservoirs/*
 
-A compiled version is provided for Ubuntu which 
+A compiled version is provided for Ubuntu 
 
 Compiling a version
 *******************

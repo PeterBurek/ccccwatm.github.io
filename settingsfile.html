@@ -219,7 +219,7 @@ For example: If Temperature data are in unit ° Celsius ot Kelvin</p>
 <span class="na">includeRunoffConcentration</span> <span class="o">=</span> <span class="s">True</span>
 <span class="c1"># Waterbodies like lakes and reservoirs</span>
 <span class="na">includeWaterBodies</span> <span class="o">=</span> <span class="s">True</span>
-<span class="c1"># kinemtatic wave routing, if False no routing is calculated</span>
+<span class="c1"># kinematic wave routing, if False no routing is calculated</span>
 <span class="na">includeRouting</span> <span class="o">=</span> <span class="s">True</span>
 
 <span class="c1"># Inflow from outside of the modelled area</span>
@@ -290,7 +290,7 @@ in the metaNetcdf.xml. See: <a class="reference internal" href="metadata.html#rs
 <span class="c1">#-------------------------------------------------------</span>
 
 <span class="na">PathOut</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/output2</span>
-<span class="na">PathMaps</span> <span class="o">=</span> <span class="s">M:/pcrglob_inputNetcdf</span>
+<span class="na">PathMaps</span> <span class="o">=</span> <span class="s">M:/cwatm_inputNetcdf</span>
 <span class="na">PathMeteo</span> <span class="o">=</span> <span class="s">M:/climate/Isi-Mip2/wfdei</span>
 </pre></div>
 </td></tr></table></div>
@@ -393,8 +393,8 @@ Spin-up time is the time for warming up (results will be stored after the spin-u
 <span class="na">CalendarDayStart</span> <span class="o">=</span> <span class="s">01/01/1990</span>
 
 <span class="na">StepStart</span> <span class="o">=</span> <span class="s">01/01/1990</span>
-<span class="na">SpinUp</span> <span class="o">=</span>  <span class="s">01/01/1995 </span>
-<span class="na">StepEnd</span> <span class="o">=</span>  <span class="s">31/12/2010</span>
+<span class="c1">#SpinUp =  01/01/1995 </span>
+<span class="na">SpinUp</span> <span class="o">=</span> <span class="s">NONE</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -418,7 +418,9 @@ Spin-up time is the time for warming up (results will be stored after the spin-u
 153
 154
 155
-156</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#-------------------------------------------------------</span>
+156</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">StepEnd</span> <span class="o">=</span>  <span class="s">5</span>
+
+<span class="c1">#-------------------------------------------------------</span>
 <span class="k">[INITITIAL CONDITIONS]</span>
 <span class="c1">#-------------------------------------------------------</span>
 
@@ -430,8 +432,6 @@ Spin-up time is the time for warming up (results will be stored after the spin-u
 <span class="c1"># saving variables from this run, to initiate a warm start next run</span>
 <span class="c1"># StepInit = saving date, can be more than one: 10/01/1973 20/01/1973</span>
 <span class="na">save_initial</span> <span class="o">=</span> <span class="s">True</span>
-<span class="na">initSave</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine</span>
-<span class="na">StepInit</span> <span class="o">=</span> <span class="s">31/12/1995 31/12/2010</span>
 </pre></div>
 </td></tr></table></div>
 <p>Initial conditions can be put directly into the settings file.
@@ -442,9 +442,9 @@ Either as numbers or references to maps (.tif, PCraster or netCDF)</p>
 </div>
 <div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>330
 331
-332</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#--------------------------------------------------------------</span>
-<span class="c1"># INITIAL CONDITIONS (None either 0 or use init file)</span>
-<span class="na">FrostIndexIni</span> <span class="o">=</span> <span class="s">NONE</span>
+332</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">FrostIndexThreshold</span> <span class="o">=</span> <span class="s">56</span>
+
+<span class="c1">#--------------------------------------------------------------</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -537,9 +537,7 @@ Here the value definitions for [SNOW] is shown:</p>
 312
 313
 314
-315
-316
-317</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#-------------------------------------------------------</span>
+315</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#-------------------------------------------------------</span>
 <span class="k">[SNOW]</span>
 <span class="c1">#-------------------------------------------------------</span>
 
@@ -572,8 +570,6 @@ Here the value definitions for [SNOW] is shown:</p>
 <span class="na">SnowCoverIni</span> <span class="o">=</span> <span class="s">NONE</span>
 
 <span class="na">OUT_Dir</span> <span class="o">=</span> <span class="s">$(FILE_PATHS:PathOut)</span>
-<span class="c1">#OUT_MAP_Daily = SnowCover</span>
-<span class="c1">#OUT_TSS_Daily  = SnowCover</span>
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
@@ -602,7 +598,7 @@ forest_coverFractionNC   = $(PathForest)\coverFractionInputForest366days.nc
 </div>
 <div class="section" id="sections-of-information">
 <h2><a class="toc-backref" href="#id14">Sections of information</a><a class="headerlink" href="#sections-of-information" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
+<ul>
 <li><p class="first">Snow</p>
 </li>
 <li><p class="first">Frost</p>
@@ -638,7 +634,7 @@ forest_coverFractionNC   = $(PathForest)\coverFractionInputForest366days.nc
 </li>
 <li><p class="first">Inflow</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="section" id="complete-settings-file">
 <span id="rst-setting"></span><h2><a class="toc-backref" href="#id15">Complete settings file</a><a class="headerlink" href="#complete-settings-file" title="Permalink to this headline">¶</a></h2>
@@ -705,7 +701,7 @@ CapillarRise = True
 includeRunoffConcentration = True
 # Waterbodies like lakes and reservoirs
 includeWaterBodies = True
-# kinemtatic wave routing, if False no routing is calculated
+# kinematic wave routing, if False no routing is calculated
 includeRouting = True
 
 # Inflow from outside of the modelled area
@@ -741,7 +737,7 @@ PathRoot = C:/work
 #-------------------------------------------------------
 
 PathOut = $(BASICS:PathRoot)/output2
-PathMaps = M:/pcrglob_inputNetcdf
+PathMaps = M:/cwatm_inputNetcdf
 PathMeteo = M:/climate/Isi-Mip2/wfdei
 #-------------------------------------------------------
 [NETCDF_ATTRIBUTES]
@@ -782,8 +778,10 @@ GaugesLocal = True
 CalendarDayStart = 01/01/1990
 
 StepStart = 01/01/1990
-SpinUp =  01/01/1995 
+#SpinUp =  01/01/1995 
+SpinUp = NONE
 StepEnd =  31/12/2010
+StepEnd =  5
 
 #-------------------------------------------------------
 [INITITIAL CONDITIONS]
@@ -834,7 +832,7 @@ lakeAFactor = 1.0
 #-------------------------------------------------------
 [TOPOP]
 # local drain direction map (1-9)
-Ldd = $(FILE_PATHS:PathMaps)/routing/lddsound_30min.map
+Ldd = $(FILE_PATHS:PathMaps)/routing/ldd.map
 
 # For water demand vs. availability: areas have to be aggregated
 # Allocation map
@@ -844,11 +842,11 @@ CatchmentNo = 650
 
 # Elevation standard deviation [m], i.e. altitude difference elevation within pixel.
 # Used for sub-pixel modelling of snow accumulation and melt
-ElevationStD = $(FILE_PATHS:PathMaps)/others/elvstd.map
+ElevationStD = $(FILE_PATHS:PathMaps)/landsurface/topo/elvstd.map
 # Length of pixel [m]
 # CellLength = $(FILE_PATHS:PathMaps)/others/pixleng.map
 # Area of pixel [m2]
-CellArea = $(FILE_PATHS:PathMaps)/routing/cellarea30min.map
+CellArea = $(FILE_PATHS:PathMaps)/routing/cellarea.map
 
 #-------------------------------------------------------
 # INPUT METEOROLOGICAL TIMESERIES AS MAPS
@@ -1005,8 +1003,8 @@ orographyBeta = $(PathTopo)/orographyBeta.map
 relativeElevation = $(PathTopo)/dzRel_hydro1k.nc
 
 # Soil hydraulic properties
-airEntryValue1 = $(PathSoil)/airEntryValue1.map
-airEntryValue2 = $(PathSoil)/airEntryValue2.map
+airEntryValue1 = $(PathSoil)/airEntry1.map
+airEntryValue2 = $(PathSoil)/airEntry2.map
 poreSizeBeta1 = $(PathSoil)/poreSizeBeta1.map
 poreSizeBeta2 = $(PathSoil)/poreSizeBeta2.map
 resVolWC1 = $(PathSoil)/resVolWC1.map
@@ -1024,8 +1022,8 @@ matricSuctionWP = 156.0
 maxGWCapRise    = 5.0
 
 # Soil depth
-firstStorDepth = $(PathSoil)/firstStorDepth.map
-secondStorDepth = $(PathSoil)/secondStorDepth.map
+StorDepth1 = $(PathSoil)/StorageDepth1.map
+StorDepth2 = $(PathSoil)/storageDepth2.map
 soilWaterStorageCap1 = $(PathSoil)/soilWaterStorageCap1.map
 soilWaterStorageCap2 = $(PathSoil)/soilWaterStorageCap2.map
 
@@ -1054,15 +1052,15 @@ forest_maxRootDepth  = $(PathForest)/maxRootDepth.map
 forest_minSoilDepthFrac = $(PathForest)/minSoilDepthFrac.map
 forest_maxSoilDepthFrac = $(PathForest)/maxSoilDepthFrac.map
 
-forest_cropCoefficientNC = $(PathForest)/Global_CropCoefficientKc-Forest_30min.nc
+forest_cropCoefficientNC = $(PathForest)/CropCoefficientForest_10days.nc
 forest_interceptCapNC    = $(PathForest)/interceptCapForest10days.nc
 
 # initial conditions:
 forest_interceptStorIni = NONE
 forest_topWaterLayerIni = NONE
-forest_soilStor[0]Ini = NONE
-forest_soilStor[1]Ini = NONE
-forest_soilStor[2]Ini = NONE
+forest_soilStor[0]Ini   = NONE
+forest_soilStor[1]Ini   = NONE
+forest_soilStor[2]Ini   = NONE
 forest_interflowIni     = NONE
 
 
@@ -1087,15 +1085,15 @@ grassland_maxRootDepth  = $(PathGrassland)/maxRootDepth.map
 grassland_minSoilDepthFrac = $(PathGrassland)/minSoilDepthFrac.map
 grassland_maxSoilDepthFrac = $(PathGrassland)/maxSoilDepthFrac.map
 
-grassland_cropCoefficientNC = $(PathGrassland)/Global_CropCoefficientKc-grassland_30min.nc
+grassland_cropCoefficientNC = $(PathGrassland)/CropCoefficientGrassland_10days.nc
 grassland_interceptCapNC    = $(PathGrassland)/interceptCapGrassland10days.nc
 
 # initial conditions:
 grassland_interceptStorIni = NONE
 grassland_topWaterLayerIni = NONE
-grassland_soilStor[0]Ini = NONE
-grassland_soilStor[1]Ini = NONE
-grassland_soilStor[2]Ini= NONE
+grassland_soilStor[0]Ini   = NONE
+grassland_soilStor[1]Ini   = NONE
+grassland_soilStor[2]Ini   = NONE
 grassland_interflowIni     = NONE
 
 
@@ -1120,16 +1118,16 @@ irrPaddy_maxRootDepth  = $(PathIrrPaddy)/maxRootDepth.map
 irrPaddy_minSoilDepthFrac = $(PathIrrPaddy)/minSoilDepthFrac.map
 irrPaddy_maxSoilDepthFrac = $(PathIrrPaddy)/maxSoilDepthFrac.map
 
-irrPaddy_cropCoefficientNC = $(PathIrrPaddy)/Global_CropCoefficientKc-irrPaddy_30min.nc
-irrPaddy_interceptCapNC    = $(PathIrrPaddy)/interceptCapInputirrPaddy366days.nc
-irrPaddy_coverFractionNC   = $(PathIrrPaddy)/coverFractionInputirrPaddy366days.nc
+irrPaddy_cropCoefficientNC = $(PathIrrPaddy)/CropCoefficientirrPaddy_10days.nc
+
+
 
 # initial conditions:
 irrPaddy_interceptStorIni = NONE
 irrPaddy_topWaterLayerIni = NONE
-irrPaddy_soilStor[0]Ini = NONE
-irrPaddy_soilStor[1]Ini = NONE
-irrPaddy_soilStor[2]Ini = NONE
+irrPaddy_soilStor[0]Ini   = NONE
+irrPaddy_soilStor[1]Ini   = NONE
+irrPaddy_soilStor[2]Ini   = NONE
 irrPaddy_interflowIni     = NONE
 
 
@@ -1154,16 +1152,16 @@ irrNonPaddy_maxRootDepth  = $(PathIrrNonPaddy)/maxRootDepth.map
 irrNonPaddy_minSoilDepthFrac = $(PathIrrNonPaddy)/minSoilDepthFrac.map
 irrNonPaddy_maxSoilDepthFrac = $(PathIrrNonPaddy)/maxSoilDepthFrac.map
 
-irrNonPaddy_cropCoefficientNC = $(PathIrrNonPaddy)/Global_CropCoefficientKc-irrNonPaddy_30min.nc
-irrNonPaddy_interceptCapNC    = $(PathIrrNonPaddy)/interceptCapInputirrNonPaddy366days.nc
-irrNonPaddy_coverFractionNC   = $(PathIrrNonPaddy)/coverFractionInputirrNonPaddy366days.nc
+irrNonPaddy_cropCoefficientNC = $(PathIrrNonPaddy)/CropCoefficientirrNonPaddy_10days.nc
+
+
 
 # initial conditions:
 irrNonPaddy_interceptStorIni = NONE
 irrNonPaddy_topWaterLayerIni = NONE
-irrNonPaddy_soilStor[0]Ini = NONE
-irrNonPaddy_soilStor[1]Ini = NONE
-irrNonPaddy_soilStor[2]Ini = NONE
+irrNonPaddy_soilStor[0]Ini   = NONE
+irrNonPaddy_soilStor[1]Ini   = NONE
+irrNonPaddy_soilStor[2]Ini   = NONE
 irrNonPaddy_interflowIni     = NONE
 
 
@@ -1209,9 +1207,9 @@ PathWaterdemand = $(FILE_PATHS:PathMaps)/landsurface/waterDemand
 
 allocSegments = $(PathWaterdemand)/catchx.nc
 
-domesticWaterDemandFile = $(PathWaterdemand)/domesticWaterDemand30ArcMin.nc
-industryWaterDemandFile = $(PathWaterdemand)/industryWaterDemand30ArcMin.nc
-historicalIrrigationArea = $(PathWaterdemand)/irrigationArea30ArcMin.nc
+domesticWaterDemandFile = $(PathWaterdemand)/domesticWaterDemand.nc
+industryWaterDemandFile = $(PathWaterdemand)/industryWaterDemand.nc
+historicalIrrigationArea = $(PathWaterdemand)/irrigationArea.nc
 
 
 #-------------------------------------------------------
@@ -1241,11 +1239,10 @@ runoff_concIni = NONE
 #-------------------------------------------------------
 [ROUTING]
 
-PathRouting = $(FILE_PATHS:PathMaps)/routing2
+PathRouting = $(FILE_PATHS:PathMaps)/routing
 
-# composite crop factors for WaterBodies 1 per month: 
-# not used here but still in
-cropCoefficientWaterNC   = $(PathRouting)/cropCoefficientForOpenWater.nc
+
+
 
 
 # Number of substep per day
@@ -1256,18 +1253,18 @@ NoRoutingSteps = 10
 chanBeta = 0.6
 
 # Channel gradient (fraction, dy/dx)
-chanGrad = $(PathRouting)/changrad.nc
+chanGrad = $(PathRouting)/kinematic/changrad.nc
 # Minimum channel gradient (for kin. wave: slope cannot be 0)
 chanGradMin = 0.0001
 
 #Channel Manning&#39;s n
-chanMan = $(PathRouting)/chanman.nc
+chanMan = $(PathRouting)/kinematic/chanman.nc
 #Channel length [meters]
-chanLength = $(PathRouting)/chanleng.nc
+chanLength = $(PathRouting)/kinematic/chanleng.nc
 #Channel bottom width [meters]
-chanWidth = $(PathRouting)/chanbw.nc
+chanWidth = $(PathRouting)/kinematic/chanbw.nc
 #Bankfull channel depth [meters]
-chanDepth = $(PathRouting)/chanbnkf.nc
+chanDepth = $(PathRouting)/kinematic/chanbnkf.nc
 
 # initial conditions:
 channelStorageIni        = NONE
@@ -1294,7 +1291,7 @@ OUT_TSS_Daily = discharge
 #-------------------------------------------------------
 [LAKES_RESERVOIRS]
 
-PathLakesRes = $(FILE_PATHS:PathMaps)/routing2/lakesreservoirs
+PathLakesRes = $(FILE_PATHS:PathMaps)/routing/lakesreservoirs
 
 # ID of every lake, reservoir from HydroLakes database
 waterBodyID = $(PathLakesRes)/lakesResID.nc
@@ -1381,14 +1378,15 @@ QInTS = nile_assiut.tss
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="metadata.html">9. NetCDF meta data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="postpro.html">10. Post processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">11. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">12. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">13. TODO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="updates.html">14. Updates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bugs.html">15. Bug and bugfix report</a></li>
-<li class="toctree-l1"><a class="reference internal" href="publication.html">16. Publication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source.html">17. <strong>Source code</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialisation.html">10. Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postpro.html">11. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">12. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">13. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">14. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="updates.html">15. Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">16. Bug and bugfix report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">17. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">18. <strong>Source code</strong></a></li>
 </ul>
 
   <h4>Previous topic</h4>

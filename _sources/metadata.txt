@@ -9,8 +9,6 @@ NetCDF meta data
 
 .. _rst_metadata:
 	
-
-
 Output Meta NetCDF information
 ===============================
 

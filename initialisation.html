@@ -69,6 +69,22 @@
 <li>using the stored variables to restart every day with the values from the pre3vious day (forecasting mode)</li>
 </ul>
 </div>
+<div class="section" id="example-of-soil-moisture">
+<h2>Example of soil moisture<a class="headerlink" href="#example-of-soil-moisture" title="Permalink to this headline">¶</a></h2>
+<p>The next figure shows the impact of different initial condition on the soil moisture of the lower soil.
+In one of the simulations the soil is initially almost ompletely saturated. In another simulation the soil is completely dry and the third simulation starts with initial conditions in between the two extremes.</p>
+<p>In the beginning the effect of different initial condition can be seen clearly. But after one year the three curves converge. The <strong>memory</strong> of the lower soil goes back for about one year.</p>
+<p>For all the initial condition apart from groundwater the memory is about 12 month. That means practically a spin-up of one year is sufficient to habve enough warm-up time.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/init_soilmoisture.jpg"><img alt="_images/init_soilmoisture.jpg" src="_images/init_soilmoisture.jpg" style="width: 600px;" /></a>
+</div>
+<p>Figure: Simulation of soil moisture in the lower soil with different initial conditions</p>
+<p>For the groundwater zone a longer warm-up period is needed, because of the slow response of groundwater. Here a rather fast reacting groundwater storage is shown with the three curves coverge after two years.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/init_groundwater.jpg"><img alt="_images/init_groundwater.jpg" src="_images/init_groundwater.jpg" style="width: 600px;" /></a>
+</div>
+<p>Figure: Simulation of groundwater storage with different initial conditions</p>
+</div>
 <div class="section" id="cold-start">
 <h2>Cold start<a class="headerlink" href="#cold-start" title="Permalink to this headline">¶</a></h2>
 <p>For a <strong>cold start</strong> the values of the storage variables are unknown and set to a &#8220;first&#8221; guess.
@@ -83,14 +99,14 @@ A list of variables and their default value for a <strong>cold start</strong> is
 147
 148
 149
-150</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#-------------------------------------------------------</span>
+150</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">StepEnd</span> <span class="o">=</span>  <span class="s">5</span>
+
+<span class="c1">#-------------------------------------------------------</span>
 <span class="k">[INITITIAL CONDITIONS]</span>
 <span class="c1">#-------------------------------------------------------</span>
 
 <span class="c1"># for a warm start initial variables a loaded</span>
 <span class="c1"># e.g for a start on 01/01/2010 load variable from 31/12/2009</span>
-<span class="na">load_initial</span> <span class="o">=</span> <span class="s">False</span>
-<span class="na">initLoad</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine_20030131.nc</span>
 </pre></div>
 </td></tr></table></div>
 <p>And all the initial conditions is the different sections have to be set to NONE
@@ -98,11 +114,19 @@ The values here (if not set to NONE) will overwrite the initial conditions of th
 <p>For example:</p>
 <div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>330
 331
-332</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#--------------------------------------------------------------</span>
-<span class="c1"># INITIAL CONDITIONS (None either 0 or use init file)</span>
-<span class="na">FrostIndexIni</span> <span class="o">=</span> <span class="s">NONE</span>
+332</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">FrostIndexThreshold</span> <span class="o">=</span> <span class="s">56</span>
+
+<span class="c1">#--------------------------------------------------------------</span>
 </pre></div>
 </td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is possible to exclude the warming up period of your model run for further analysis of results by setting the <strong>SpinUp</strong> option</p>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">TIME</span><span class="o">-</span><span class="n">RELATED_CONSTANTS</span><span class="p">]</span>
+<span class="n">SpinUp</span> <span class="o">=</span>  <span class="mi">01</span><span class="o">/</span><span class="mi">01</span><span class="o">/</span><span class="mi">1995</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="storing-initial-variables">
@@ -114,16 +138,18 @@ The values here (if not set to NONE) will overwrite the initial conditions of th
 153
 154
 155
-156</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># saving variables from this run, to initiate a warm start next run</span>
+156</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">initLoad</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine_20030131.nc</span>
+
+<span class="c1"># saving variables from this run, to initiate a warm start next run</span>
 <span class="c1"># StepInit = saving date, can be more than one: 10/01/1973 20/01/1973</span>
 <span class="na">save_initial</span> <span class="o">=</span> <span class="s">True</span>
-<span class="na">initSave</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine</span>
-<span class="na">StepInit</span> <span class="o">=</span> <span class="s">31/12/1995 31/12/2010</span>
 </pre></div>
 </td></tr></table></div>
 </div>
 <div class="section" id="warm-start">
 <h2>Warm start<a class="headerlink" href="#warm-start" title="Permalink to this headline">¶</a></h2>
+<p>CWATM can write internal variables to a netCDF file for choosen timesteps. These netCDF files can be used as the initial conditions for a suceeding simulation.</p>
+<p>This is useful for establishing a steady-state with a long-term run and then using this steady-state for succeding simulations or for an every day run (forecasting mode)</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">If the parameters are changes after a run(especially the groundwater parameters) the stored initial values do not represent the conditions of the storage variables. Stored initial conditions should <strong>not</strong> be used as initial values for a model run with another set of parameters. If you do this during calibration, you will not be able to reproduce the calibration results!</p>
@@ -143,14 +169,14 @@ And define the name of the netcdf4 file in <strong>initLoad</strong></p>
 147
 148
 149
-150</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#-------------------------------------------------------</span>
+150</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">StepEnd</span> <span class="o">=</span>  <span class="s">5</span>
+
+<span class="c1">#-------------------------------------------------------</span>
 <span class="k">[INITITIAL CONDITIONS]</span>
 <span class="c1">#-------------------------------------------------------</span>
 
 <span class="c1"># for a warm start initial variables a loaded</span>
 <span class="c1"># e.g for a start on 01/01/2010 load variable from 31/12/2009</span>
-<span class="na">load_initial</span> <span class="o">=</span> <span class="s">False</span>
-<span class="na">initLoad</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine_20030131.nc</span>
 </pre></div>
 </td></tr></table></div>
 <p>There is also the possibility to set single variables to a certain value (or map)</p>
@@ -197,6 +223,144 @@ And define the name of the netcdf4 file in <strong>initLoad</strong></p>
 <td>0</td>
 <td>1</td>
 </tr>
+<tr class="row-even"><td>3</td>
+<td>Forest state</td>
+<td>Interception storage</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Top water layer</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Soil storage for 3 soil layers</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>Grassland state</td>
+<td>Interception storage</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Top water layer</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Soil storage for 3 soil layers</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Paddy irrigation state</td>
+<td>Interception storage</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Top water layer</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Soil storage for 3 soil layers</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>Irrigation state</td>
+<td>Interception storage</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Top water layer</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Soil storage for 3 soil layers</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td>Sealed area state</td>
+<td>Interception storage</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>Groundwater</td>
+<td>Groundwater storage</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>9</td>
+<td>Runoff concentration</td>
+<td>10 layers of runoff concentration</td>
+<td>0</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>10</td>
+<td>Routing</td>
+<td>Channel storage</td>
+<td>0.2 * total cross section</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>Routing</td>
+<td>Riverbed exchange</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>Routing</td>
+<td>Discharge</td>
+<td>depending on ini channel stor.</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>11</td>
+<td>Lakes and Reservoirs</td>
+<td>Lake inflow</td>
+<td>from HydroLakes database</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Lake outflow</td>
+<td>same as lake inflow</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Lake&amp;Res outflow to other lakes&amp;res</td>
+<td>same as lake inflow</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Lake Storage</td>
+<td>based on inflow and lake area</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Reservoir Storage</td>
+<td>0.5 * max. reservoir storage</td>
+<td>1</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -224,6 +388,7 @@ And define the name of the netcdf4 file in <strong>initLoad</strong></p>
 <li class="toctree-l1"><a class="reference internal" href="metadata.html">9. NetCDF meta data</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">10. Initialisation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-of-soil-moisture">Example of soil moisture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cold-start">Cold start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#storing-initial-variables">Storing initial variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#warm-start">Warm start</a></li>
