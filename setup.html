@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="modeldesign.html" title="5. Model design and processes"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -98,20 +98,27 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </div>
 <div class="section" id="pcraster">
 <h3><a class="toc-backref" href="#id5">PCRaster</a><a class="headerlink" href="#pcraster" title="Permalink to this headline">¶</a></h3>
-<p>And the PCRASTER library from Faculty of Geosciences, Utrecht University, The Netherlands</p>
-<p><a class="reference external" href="http://pcraster.geo.uu.nl">Webpage of PCRaster</a></p>
-<p>Reference:</p>
-<p>Karssenberg, D., Schmitz, O., Salamon, P., de Jong, K., and Bierkens, M. F. P.: A software framework for construction of process-based stochastic spatio-temporal models and data assimilation, Environmental Modelling &amp; Software 25(4), 489-502, 2010. doi: 10.1016/j.envsoft.2009.10.004</p>
+<p>And the PCRASTER library from Faculty of Geosciences, Utrecht University, The Netherlands - <a class="reference external" href="http://pcraster.geo.uu.nl">Webpage of PCRaster</a></p>
+<div class="line-block">
+<div class="line">Reference:</div>
+<div class="line">Karssenberg, D., Schmitz, O., Salamon, P., de Jong, K., and Bierkens, M. F. P.: A software framework for construction of process-based stochastic spatio-temporal models and data assimilation, Environmental Modelling &amp; Software 25(4), 489-502, 2010. doi: 10.1016/j.envsoft.2009.10.004</div>
+</div>
 </div>
 </div>
 <div class="section" id="pcraster-installation">
 <h2><a class="toc-backref" href="#id6">PCRaster installation</a><a class="headerlink" href="#pcraster-installation" title="Permalink to this headline">¶</a></h2>
-<p>CWATM is using the PCRaster Python framwork of PCRaster but not the GIS commands.</p>
-<p>But nevertheless it is quite usefull to install a full PCRaster version:</p>
-<p><strong>Windows</strong></p>
-<p><a class="reference external" href="http://pcraster.geo.uu.nl/quick-start-guide/">Windows installation guide of PCRaster</a></p>
-<p><strong>Linux</strong></p>
-<p><a class="reference external" href="http://pcraster.geo.uu.nl/getting-started/pcraster-on-linux/">Linux installation guide of PCRaster</a></p>
+<div class="line-block">
+<div class="line">CWATM is using the PCRaster Python framwork of PCRaster but not the GIS commands.</div>
+<div class="line">But nevertheless it is quite usefull to install a full PCRaster version:</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Windows</strong></div>
+<div class="line"><a class="reference external" href="http://pcraster.geo.uu.nl/quick-start-guide/">Windows installation guide of PCRaster</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Linux</strong></div>
+<div class="line"><a class="reference external" href="http://pcraster.geo.uu.nl/getting-started/pcraster-on-linux/">Linux installation guide of PCRaster</a></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If it is not possible to install a full version of PCRaster!
@@ -135,11 +142,20 @@ Copy following files</p>
 CWATM comes with a C++ library</p>
 <div class="section" id="compiled-versions">
 <h3><a class="toc-backref" href="#id8">Compiled versions</a><a class="headerlink" href="#compiled-versions" title="Permalink to this headline">¶</a></h3>
-<p><strong>Windows and CYGWIN_NT-6.1</strong></p>
-<p>a compiled version is provided and CWATM is detecting automatically with system is running and with compiled version is needed</p>
-<p><strong>Linux</strong></p>
-<p>for Linux versions the compiled version is loaded as <em>t5_linux.so</em>. The file has to be in <em>../source/hydrological_modules/routing_reservoirs/</em></p>
-<p>A compiled version is provided for Ubuntu</p>
+<div class="line-block">
+<div class="line"><strong>Windows and CYGWIN_NT-6.1</strong></div>
+<div class="line">a compiled version is provided and CWATM is detecting automatically which system is running and which compiled version is needed</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Linux</strong></div>
+<div class="line">For Cygwin linux a compiled version <em>t5cyg.so</em> is provided in <em>../source/hydrological_modules/routing_reservoirs/</em> for version CYGWIN_NT-6.1.</div>
+<div class="line">If you use another cygwin version please compile it by yourself and name it <em>t5_linux.so</em></div>
+</div>
+<p>For Linux Ubuntu a compiled version is provided as <em>t5_linux.so</em>. The file is in <em>../source/hydrological_modules/routing_reservoirs/</em></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you use another Linux version or the compiled version is not working or you have a compiler which produce faster executables please compile a version on your own.</p>
+</div>
 </div>
 <div class="section" id="compiling-a-version">
 <h3><a class="toc-backref" href="#id9">Compiling a version</a><a class="headerlink" href="#compiling-a-version" title="Permalink to this headline">¶</a></h3>
@@ -264,11 +280,11 @@ CWATM comes with a C++ library</p>
         <li class="right" >
           <a href="modeldesign.html" title="5. Model design and processes"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, PB.
+        &#169; Copyright 2017, PB.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
     </div>
   </body>

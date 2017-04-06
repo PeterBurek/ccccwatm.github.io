@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="14. Source code" href="source.html" />
+    <link rel="up" title="18. Source code" href="source.html" />
     <link rel="prev" title="hydrological_modules package" href="hydrological_modules.html" /> 
   </head>
   <body role="document">
@@ -40,8 +40,8 @@
         <li class="right" >
           <a href="hydrological_modules.html" title="hydrological_modules package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">14. <strong>Source code</strong></a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">18. <strong>Source code</strong></a> &#187;</li> 
       </ul>
     </div>  
 
@@ -59,12 +59,12 @@
 <span id="management-modules-checks-module"></span><h2>management_modules.checks module<a class="headerlink" href="#module-management_modules.checks" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.checks.checkmap">
-<code class="descclassname">management_modules.checks.</code><code class="descname">checkmap</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#checkmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.checkmap" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.checks.</code><code class="descname">checkmap</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.checks.checkmap" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="management_modules.checks.counted">
-<code class="descclassname">management_modules.checks.</code><code class="descname">counted</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#counted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.counted" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.checks.</code><code class="descname">counted</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.checks.counted" title="Permalink to this definition">¶</a></dt>
 <dd><p>count number of times a subroutine is called</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -83,7 +83,7 @@
 <span id="management-modules-configuration-module"></span><h2>management_modules.configuration module<a class="headerlink" href="#module-management_modules.configuration" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="management_modules.configuration.ExtParser">
-<em class="property">class </em><code class="descclassname">management_modules.configuration.</code><code class="descname">ExtParser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">management_modules.configuration.</code><code class="descname">ExtParser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.configuration.ExtParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ConfigParser.SafeConfigParser</span></code></p>
 <p>addition to the parser to replace placeholders</p>
 <p class="rubric">Example</p>
@@ -91,7 +91,7 @@
 MaskMap = $(BASICS:PathRoot)/data/areamaps/area.tif</p>
 <dl class="method">
 <dt id="management_modules.configuration.ExtParser.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>raw=False</em>, <em>vars=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>raw=False</em>, <em>vars=None</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.configuration.ExtParser.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>placeholder replacement</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -116,7 +116,7 @@ MaskMap = $(BASICS:PathRoot)/data/areamaps/area.tif</p>
 
 <dl class="function">
 <dt id="management_modules.configuration.parse_configuration">
-<code class="descclassname">management_modules.configuration.</code><code class="descname">parse_configuration</code><span class="sig-paren">(</span><em>settingsFileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#parse_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.parse_configuration" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.configuration.</code><code class="descname">parse_configuration</code><span class="sig-paren">(</span><em>settingsFileName</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.configuration.parse_configuration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse settings file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -132,7 +132,7 @@ MaskMap = $(BASICS:PathRoot)/data/areamaps/area.tif</p>
 
 <dl class="function">
 <dt id="management_modules.configuration.read_metanetcdf">
-<code class="descclassname">management_modules.configuration.</code><code class="descname">read_metanetcdf</code><span class="sig-paren">(</span><em>metaxml</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#read_metanetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.read_metanetcdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.configuration.</code><code class="descname">read_metanetcdf</code><span class="sig-paren">(</span><em>metaxml</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.configuration.read_metanetcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the metadata for netcdf output files
 unit, long name, standard name and additional information</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -152,7 +152,7 @@ unit, long name, standard name and additional information</p>
 <span id="management-modules-data-handling-module"></span><h2>management_modules.data_handling module<a class="headerlink" href="#module-management_modules.data_handling" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.data_handling.compressArray">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">compressArray</code><span class="sig-paren">(</span><em>map</em>, <em>pcr=True</em>, <em>name='None'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#compressArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.compressArray" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">compressArray</code><span class="sig-paren">(</span><em>map</em>, <em>pcr=True</em>, <em>name='None'</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.compressArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compress 2D array with missing values to 1D array without missing values</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -174,7 +174,7 @@ unit, long name, standard name and additional information</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.decompress">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">decompress</code><span class="sig-paren">(</span><em>map</em>, <em>pcr1=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.decompress" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">decompress</code><span class="sig-paren">(</span><em>map</em>, <em>pcr1=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.decompress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decompress 1D array without missing values to 2D array with missing values</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -195,7 +195,7 @@ unit, long name, standard name and additional information</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.getValDivZero">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">getValDivZero</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>y_lim</em>, <em>z_def=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#getValDivZero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.getValDivZero" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">getValDivZero</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>y_lim</em>, <em>z_def=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.getValDivZero" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns the result of a division that possibly involves a zero</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -218,14 +218,14 @@ unit, long name, standard name and additional information</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.getmeta">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">getmeta</code><span class="sig-paren">(</span><em>key</em>, <em>varname</em>, <em>alternative</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#getmeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.getmeta" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">getmeta</code><span class="sig-paren">(</span><em>key</em>, <em>varname</em>, <em>alternative</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.getmeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the meta data information for the netcdf output from the global
 variable metaNetcdfVar</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.loadmap">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadmap</code><span class="sig-paren">(</span><em>name</em>, <em>pcr=False</em>, <em>lddflag=False</em>, <em>compress=True</em>, <em>local=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#loadmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.loadmap" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadmap</code><span class="sig-paren">(</span><em>name</em>, <em>pcr=False</em>, <em>lddflag=False</em>, <em>compress=True</em>, <em>local=False</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.loadmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>load a static map either value or pc raster map or netcdf</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -249,7 +249,7 @@ variable metaNetcdfVar</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.loadsetclone">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadsetclone</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#loadsetclone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.loadsetclone" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadsetclone</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.loadsetclone" title="Permalink to this definition">¶</a></dt>
 <dd><p>load the maskmap and set as clone</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -263,14 +263,14 @@ variable metaNetcdfVar</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.mapattrNetCDF">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrNetCDF</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#mapattrNetCDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.mapattrNetCDF" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrNetCDF</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.mapattrNetCDF" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the map attributes like col, row etc from a ntcdf map
 and define the rectangular of the mask map inside the netcdf map</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.mapattrTiff">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrTiff</code><span class="sig-paren">(</span><em>nf2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#mapattrTiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.mapattrTiff" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrTiff</code><span class="sig-paren">(</span><em>nf2</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.mapattrTiff" title="Permalink to this definition">¶</a></dt>
 <dd><p>map attributes of a geotiff file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -286,13 +286,13 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.metaNetCDF">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">metaNetCDF</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#metaNetCDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.metaNetCDF" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">metaNetCDF</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.metaNetCDF" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the map metadata from netcdf</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readnetcdf">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf</code><span class="sig-paren">(</span><em>name</em>, <em>time</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf</code><span class="sig-paren">(</span><em>name</em>, <em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -313,7 +313,7 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readnetcdf2">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf2</code><span class="sig-paren">(</span><em>name</em>, <em>date</em>, <em>useDaily='daily'</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>cut=True</em>, <em>zeros=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdf2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdf2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf2</code><span class="sig-paren">(</span><em>name</em>, <em>date</em>, <em>useDaily='daily'</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>cut=True</em>, <em>zeros=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdf2" title="Permalink to this definition">¶</a></dt>
 <dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -339,19 +339,19 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readnetcdfInitial">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfInitial</code><span class="sig-paren">(</span><em>name</em>, <em>value</em>, <em>default=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdfInitial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdfInitial" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfInitial</code><span class="sig-paren">(</span><em>name</em>, <em>value</em>, <em>default=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdfInitial" title="Permalink to this definition">¶</a></dt>
 <dd><p>load initial condition from netcdf format</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readnetcdfWithoutTime">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfWithoutTime</code><span class="sig-paren">(</span><em>name</em>, <em>value='None'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdfWithoutTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdfWithoutTime" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfWithoutTime</code><span class="sig-paren">(</span><em>name</em>, <em>value='None'</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdfWithoutTime" title="Permalink to this definition">¶</a></dt>
 <dd><p>load stack of maps in netcdf format</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.setmaskmapAttr">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">setmaskmapAttr</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>col</em>, <em>row</em>, <em>cell</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#setmaskmapAttr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.setmaskmapAttr" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">setmaskmapAttr</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>col</em>, <em>row</em>, <em>cell</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.setmaskmapAttr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Definition of cell size, coordinates of the meteo maps and maskmap</p>
 <dl class="docutils">
 <dt>Todo</dt>
@@ -379,7 +379,7 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.valuecell">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">valuecell</code><span class="sig-paren">(</span><em>mask</em>, <em>coordx</em>, <em>coordstr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#valuecell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.valuecell" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">valuecell</code><span class="sig-paren">(</span><em>mask</em>, <em>coordx</em>, <em>coordstr</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.valuecell" title="Permalink to this definition">¶</a></dt>
 <dd><p>to put a value into a pc raster map -&gt; invert of cellvalue, map is converted into a numpy array first</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -401,13 +401,13 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.writeIniNetcdf">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">writeIniNetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>varlist</em>, <em>inputlist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#writeIniNetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.writeIniNetcdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">writeIniNetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>varlist</em>, <em>inputlist</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.writeIniNetcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>write variables to netcdf init file</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.writenetcdf">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">writenetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>varname</em>, <em>varunits</em>, <em>inputmap</em>, <em>timeStamp</em>, <em>posCnt</em>, <em>flag</em>, <em>flagTime</em>, <em>nrdays=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#writenetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.writenetcdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">writenetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>varname</em>, <em>varunits</em>, <em>inputmap</em>, <em>timeStamp</em>, <em>posCnt</em>, <em>flag</em>, <em>flagTime</em>, <em>nrdays=None</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.writenetcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>write a netcdf stack</p>
 </dd></dl>
 
@@ -416,7 +416,7 @@ and define the rectangular of the mask map inside the netcdf map</p>
 <span id="management-modules-globals-module"></span><h2>management_modules.globals module<a class="headerlink" href="#module-management_modules.globals" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.globals.globalFlags">
-<code class="descclassname">management_modules.globals.</code><code class="descname">globalFlags</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/globals.html#globalFlags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.globals.globalFlags" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.globals.</code><code class="descname">globalFlags</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.globals.globalFlags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read flags - according to the flags the output is adjusted
 quiet,veryquiet, loud, checkfiles, noheader,printtime, warranty</p>
 </dd></dl>
@@ -426,7 +426,7 @@ quiet,veryquiet, loud, checkfiles, noheader,printtime, warranty</p>
 <span id="management-modules-improvepcraster-module"></span><h2>management_modules.improvepcraster module<a class="headerlink" href="#module-management_modules.improvepcraster" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="management_modules.improvepcraster.DynamicFramework2">
-<em class="property">class </em><code class="descclassname">management_modules.improvepcraster.</code><code class="descname">DynamicFramework2</code><span class="sig-paren">(</span><em>userModel</em>, <em>lastTimeStep=0</em>, <em>firstTimestep=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/improvepcraster.html#DynamicFramework2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">management_modules.improvepcraster.</code><code class="descname">DynamicFramework2</code><span class="sig-paren">(</span><em>userModel</em>, <em>lastTimeStep=0</em>, <em>firstTimestep=1</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pcraster2.dynamicFramework.DynamicFramework</span></code></p>
 <p>Framework class for dynamic models.
 <cite>userModel</cite>
@@ -446,7 +446,7 @@ Updated by improvepcraster.py</p>
 
 <dl class="method">
 <dt id="management_modules.improvepcraster.DynamicFramework2.run">
-<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/improvepcraster.html#DynamicFramework2.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2.run" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the dynamic user model.</p>
 </dd></dl>
 
@@ -457,7 +457,7 @@ Updated by improvepcraster.py</p>
 <span id="management-modules-messages-module"></span><h2>management_modules.messages module<a class="headerlink" href="#module-management_modules.messages" title="Permalink to this headline">¶</a></h2>
 <dl class="exception">
 <dt id="management_modules.messages.CWATMError">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.messages.CWATMError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
 <p>The error handling class
 prints out an error</p>
@@ -465,7 +465,7 @@ prints out an error</p>
 
 <dl class="exception">
 <dt id="management_modules.messages.CWATMFileError">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMFileError</code><span class="sig-paren">(</span><em>filename</em>, <em>msg=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMFileError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMFileError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMFileError</code><span class="sig-paren">(</span><em>filename</em>, <em>msg=''</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.messages.CWATMFileError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-class docutils literal"><span class="pre">management_modules.messages.CWATMError</span></code></a></p>
 <p>The error handling class
 prints out an error</p>
@@ -473,7 +473,7 @@ prints out an error</p>
 
 <dl class="exception">
 <dt id="management_modules.messages.CWATMRunInfo">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMRunInfo</code><span class="sig-paren">(</span><em>outputDir</em>, <em>Steps=1</em>, <em>ensMembers=1</em>, <em>Cores=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMRunInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMRunInfo" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMRunInfo</code><span class="sig-paren">(</span><em>outputDir</em>, <em>Steps=1</em>, <em>ensMembers=1</em>, <em>Cores=1</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.messages.CWATMRunInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Warning</span></code></p>
 <p>prints out an error</p>
 <dl class="docutils">
@@ -484,7 +484,7 @@ prints out an error</p>
 
 <dl class="exception">
 <dt id="management_modules.messages.CWATMWarning">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMWarning</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMWarning" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMWarning</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.messages.CWATMWarning" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Warning</span></code></p>
 <p>the error handling class
 prints out an error</p>
@@ -495,18 +495,18 @@ prints out an error</p>
 <span id="management-modules-output-module"></span><h2>management_modules.output module<a class="headerlink" href="#module-management_modules.output" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="management_modules.output.outputTssMap">
-<em class="property">class </em><code class="descclassname">management_modules.output.</code><code class="descname">outputTssMap</code><span class="sig-paren">(</span><em>out_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">management_modules.output.</code><code class="descname">outputTssMap</code><span class="sig-paren">(</span><em>out_variable</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.output.outputTssMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Output of time series and map</p>
 <dl class="method">
 <dt id="management_modules.output.outputTssMap.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.dynamic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.output.outputTssMap.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the output module</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="management_modules.output.outputTssMap.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.initial" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.output.outputTssMap.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the output module</p>
 </dd></dl>
 
@@ -517,7 +517,7 @@ prints out an error</p>
 <span id="management-modules-replace-pcr-module"></span><h2>management_modules.replace_pcr module<a class="headerlink" href="#module-management_modules.replace_pcr" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.replace_pcr.npareaaverage">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareaaverage</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareaaverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareaaverage" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareaaverage</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.replace_pcr.npareaaverage" title="Permalink to this definition">¶</a></dt>
 <dd><p>numpy area average procedure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -538,7 +538,7 @@ prints out an error</p>
 
 <dl class="function">
 <dt id="management_modules.replace_pcr.npareamajority">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamajority</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamajority"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamajority" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamajority</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.replace_pcr.npareamajority" title="Permalink to this definition">¶</a></dt>
 <dd><p>numpy area majority procedure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -559,7 +559,7 @@ prints out an error</p>
 
 <dl class="function">
 <dt id="management_modules.replace_pcr.npareamaximum">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamaximum</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamaximum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamaximum" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamaximum</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.replace_pcr.npareamaximum" title="Permalink to this definition">¶</a></dt>
 <dd><p>numpy area maximum procedure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -580,7 +580,7 @@ prints out an error</p>
 
 <dl class="function">
 <dt id="management_modules.replace_pcr.npareatotal">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareatotal</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareatotal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareatotal" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareatotal</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.replace_pcr.npareatotal" title="Permalink to this definition">¶</a></dt>
 <dd><p>numpy area total procedure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -604,7 +604,7 @@ prints out an error</p>
 <span id="management-modules-timestep-module"></span><h2>management_modules.timestep module<a class="headerlink" href="#module-management_modules.timestep" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.timestep.Calendar">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">Calendar</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#Calendar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.Calendar" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">Calendar</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.Calendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the date from CalendarDayStart in the settings xml
 Reformatting the date till it fits to datetime</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -621,7 +621,7 @@ Reformatting the date till it fits to datetime</p>
 
 <dl class="function">
 <dt id="management_modules.timestep.checkifDate">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">checkifDate</code><span class="sig-paren">(</span><em>start</em>, <em>end</em>, <em>spinup</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#checkifDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.checkifDate" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">checkifDate</code><span class="sig-paren">(</span><em>start</em>, <em>end</em>, <em>spinup</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.checkifDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if start date is earlier than end date etc
 And set some date variables</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -644,7 +644,7 @@ And set some date variables</p>
 
 <dl class="function">
 <dt id="management_modules.timestep.datetoInt">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">datetoInt</code><span class="sig-paren">(</span><em>dateIn</em>, <em>begin</em>, <em>both=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#datetoInt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.datetoInt" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">datetoInt</code><span class="sig-paren">(</span><em>dateIn</em>, <em>begin</em>, <em>both=False</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.datetoInt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the integer of a date from a reference date</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -666,7 +666,7 @@ And set some date variables</p>
 
 <dl class="function">
 <dt id="management_modules.timestep.timemeasure">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">timemeasure</code><span class="sig-paren">(</span><em>name</em>, <em>loops=0</em>, <em>update=False</em>, <em>sample=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#timemeasure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.timemeasure" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">timemeasure</code><span class="sig-paren">(</span><em>name</em>, <em>loops=0</em>, <em>update=False</em>, <em>sample=1</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.timemeasure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Measuring of the time for each subroutine</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -689,7 +689,7 @@ And set some date variables</p>
 
 <dl class="function">
 <dt id="management_modules.timestep.timestep_dynamic">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">timestep_dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#timestep_dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.timestep_dynamic" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">timestep_dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.timestep_dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of setting the date
 Current date is increasing, checking if beginning of month, year</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -720,7 +720,7 @@ Current date is increasing, checking if beginning of month, year</p>
 <h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">2. GNU GENERAL PUBLIC LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">2. License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nexus.html">3. Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="community.html">4. Features of the Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modeldesign.html">5. Model design and processes</a></li>
@@ -728,11 +728,15 @@ Current date is increasing, checking if beginning of month, year</p>
 <li class="toctree-l1"><a class="reference internal" href="runmodel.html">7. Running the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settingsfile.html">8. Settings file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metadata.html">9. NetCDF meta data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="postpro.html">10. Post processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">11. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">12. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">13. TODO</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="source.html">14. <strong>Source code</strong></a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="initialisation.html">10. Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postpro.html">11. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">12. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">13. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">14. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="updates.html">15. Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">16. Bug and bugfix report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">17. Publication</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="source.html">18. <strong>Source code</strong></a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cwatm.html">cwatm module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cwatm_dynamic.html">cwatm_dynamic module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cwatm_initial.html">cwatm_initial module</a></li>
@@ -761,12 +765,12 @@ Current date is increasing, checking if beginning of month, year</p>
         <li class="right" >
           <a href="hydrological_modules.html" title="hydrological_modules package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CWATM</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" >14. <strong>Source code</strong></a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="source.html" >18. <strong>Source code</strong></a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, PB.
+        &#169; Copyright 2017, PB.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
     </div>
   </body>

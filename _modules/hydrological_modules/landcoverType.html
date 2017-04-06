@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hydrological_modules.landcoverType &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for hydrological_modules.landcoverType</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -------------------------------------------------------------------------</span>
+<span class="c1"># Name:        Land Cover Type module</span>
+<span class="c1"># Purpose:</span>
+<span class="c1">#</span>
+<span class="c1"># Author:      PB</span>
+<span class="c1">#</span>
+<span class="c1"># Created:     15/07/2016</span>
+<span class="c1"># Copyright:   (c) PB 2016</span>
+<span class="c1"># -------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="landcoverType"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.landcoverType.landcoverType">[docs]</a><span class="k">class</span> <span class="nc">landcoverType</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    LAND COVER TYPE</span>
+
+<span class="sd">    runs the 6 land cover types through soil procedures</span>
+<span class="sd">    This routine calls the soil routine for each land cover type</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">landcoverType_variable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">landcoverType_variable</span>
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="landcoverType.initial"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.landcoverType.landcoverType.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initial part of the land cover type module</span>
+<span class="sd">        Initialise the six land cover types</span>
+
+<span class="sd">        * Forest</span>
+<span class="sd">        * Grasland/non irrigated land</span>
+<span class="sd">        * Irrigation</span>
+<span class="sd">        * Paddy iirigation</span>
+<span class="sd">        * Sealed area</span>
+<span class="sd">        * Water covered area</span>
+
+<span class="sd">        And initialize the soil variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">coverTypes</span><span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="n">binding</span><span class="p">[</span><span class="s2">&quot;coverTypes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+        <span class="n">landcoverAll</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fracVegCover&#39;</span><span class="p">,</span><span class="s1">&#39;interceptStor&#39;</span><span class="p">,</span><span class="s1">&#39;interceptCap&#39;</span><span class="p">,</span><span class="s1">&#39;availWaterInfiltration&#39;</span><span class="p">,</span><span class="s1">&#39;interceptEvap&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;directRunoff&#39;</span><span class="p">,</span> <span class="s1">&#39;openWaterEvap&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">landcoverAll</span><span class="p">:</span>  <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">landcoverPara</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;minTopWaterLayer&#39;</span><span class="p">,</span><span class="s1">&#39;minCropKC&#39;</span><span class="p">,</span><span class="s1">&#39;minInterceptCap&#39;</span><span class="p">,</span><span class="s1">&#39;cropDeplFactor&#39;</span><span class="p">,</span><span class="s1">&#39;rootFraction1&#39;</span><span class="p">,</span><span class="s1">&#39;rootFraction2&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;maxRootDepth&#39;</span><span class="p">,</span> <span class="s1">&#39;minSoilDepthFrac&#39;</span><span class="p">,</span><span class="s1">&#39;maxSoilDepthFrac&#39;</span><span class="p">,</span><span class="s1">&#39;topWaterLayer&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;interflow&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;cropCoefficientNC_filename&#39;</span><span class="p">,</span> <span class="s1">&#39;interceptCapNC_filename&#39;</span><span class="p">,</span><span class="s1">&#39;coverFractionNC_filename&#39;</span><span class="p">,]</span>
+        <span class="c1"># arrays stored as list not as numpy, because it can contain strings, single parameters or arrays</span>
+        <span class="c1"># list is filled with append afterwards</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">landcoverPara</span><span class="p">:</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># fraction (m2) of a certain irrigation type over (only) total irrigation area ; will be assigned by the landSurface module</span>
+        <span class="c1"># output variable per land cover class</span>
+        <span class="n">landcoverVars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;irrTypeFracOverIrr&#39;</span><span class="p">,</span><span class="s1">&#39;fractionArea&#39;</span><span class="p">,</span><span class="s1">&#39;totAvlWater&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;effSatAt50&#39;</span><span class="p">,</span>  <span class="s1">&#39;effPoreSizeBetaAt50&#39;</span><span class="p">,</span> <span class="s1">&#39;rootZoneWaterStorageMin&#39;</span><span class="p">,</span><span class="s1">&#39;rootZoneWaterStorageRange&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;totalPotET&#39;</span><span class="p">,</span><span class="s1">&#39;potBareSoilEvap&#39;</span><span class="p">,</span><span class="s1">&#39;potTranspiration&#39;</span><span class="p">,</span><span class="s1">&#39;soilWaterStorage&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;infiltration&#39;</span><span class="p">,</span><span class="s1">&#39;actBareSoilEvap&#39;</span><span class="p">,</span><span class="s1">&#39;landSurfaceRunoff&#39;</span><span class="p">,</span><span class="s1">&#39;actTransTotal&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;gwRecharge&#39;</span><span class="p">,</span><span class="s1">&#39;interflow&#39;</span><span class="p">,</span><span class="s1">&#39;actualET&#39;</span><span class="p">,</span><span class="s1">&#39;irrGrossDemand&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;topWaterLayer&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;totalPotentialGrossDemand&#39;</span><span class="p">,</span><span class="s1">&#39;actSurfaceWaterAbstract&#39;</span><span class="p">,</span><span class="s1">&#39;allocSurfaceWaterAbstract&#39;</span><span class="p">,</span><span class="s1">&#39;potGroundwaterAbstract&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;percToGW&#39;</span><span class="p">,</span><span class="s1">&#39;capRiseFromGW&#39;</span><span class="p">,</span><span class="s1">&#39;netPercUpper&#39;</span><span class="p">,</span><span class="s1">&#39;netPerc&#39;</span><span class="p">,</span><span class="s1">&#39;PrefFlow&#39;</span><span class="p">]</span>
+        <span class="c1"># for 6 landcover types</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">landcoverVars</span><span class="p">:</span>  <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">soilVars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;adjRoot&#39;</span><span class="p">,</span><span class="s1">&#39;perc&#39;</span><span class="p">,</span><span class="s1">&#39;capRise&#39;</span><span class="p">,</span> <span class="s1">&#39;soilStor&#39;</span><span class="p">,</span><span class="s1">&#39;rootDepth&#39;</span><span class="p">]</span>
+        <span class="c1"># For 3 soil layers and 4 landcover types</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">soilVars</span><span class="p">:</span>  <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">variable</span><span class="p">]</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># set aggregated storages to zero</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">landcoverSum</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;interceptStor&#39;</span><span class="p">,</span> <span class="s1">&#39;topWaterLayer&#39;</span><span class="p">,</span><span class="s1">&#39;interflow&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;directRunoff&#39;</span><span class="p">,</span> <span class="s1">&#39;totalPotET&#39;</span><span class="p">,</span> <span class="s1">&#39;potBareSoilEvap&#39;</span><span class="p">,</span> <span class="s1">&#39;potTranspiration&#39;</span><span class="p">,</span> <span class="s1">&#39;availWaterInfiltration&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;interceptEvap&#39;</span><span class="p">,</span> <span class="s1">&#39;infiltration&#39;</span><span class="p">,</span> <span class="s1">&#39;actBareSoilEvap&#39;</span><span class="p">,</span> <span class="s1">&#39;landSurfaceRunoff&#39;</span><span class="p">,</span> <span class="s1">&#39;actTransTotal&#39;</span><span class="p">,</span> <span class="s1">&#39;gwRecharge&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;actualET&#39;</span><span class="p">,</span> <span class="s1">&#39;topWaterLayer&#39;</span><span class="p">,</span> <span class="s1">&#39;openWaterEvap&#39;</span><span class="p">,</span><span class="s1">&#39;capRiseFromGW&#39;</span><span class="p">,</span><span class="s1">&#39;percToGW&#39;</span><span class="p">,</span><span class="s2">&quot;PrefFlow&quot;</span><span class="p">,</span>
+                         <span class="s1">&#39;irrGrossDemand&#39;</span><span class="p">,</span><span class="s1">&#39;totalPotentialGrossDemand&#39;</span><span class="p">,</span><span class="s1">&#39;actSurfaceWaterAbstract&#39;</span><span class="p">,</span><span class="s1">&#39;allocSurfaceWaterAbstract&#39;</span><span class="p">,</span><span class="s1">&#39;potGroundwaterAbstract&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">landcoverSum</span><span class="p">:</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="s2">&quot;sum_&quot;</span><span class="o">+</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># for three soil layers</span>
+        <span class="n">soilVars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;soilStor&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">soilVars</span><span class="p">:</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="s2">&quot;sum_&quot;</span> <span class="o">+</span> <span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSoil</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalET</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+        <span class="c1"># ----------------------------------------------------------</span>
+        <span class="c1"># Load initial values and calculate basic soil parameters which are not changed in time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_fracIrrigation</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">coverType</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">coverTypes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minInterceptCap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_minInterceptCap&quot;</span><span class="p">))</span>
+            <span class="c1"># init values</span>
+            <span class="k">if</span> <span class="n">coverType</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;forest&#39;</span><span class="p">,</span> <span class="s1">&#39;grassland&#39;</span><span class="p">,</span> <span class="s1">&#39;irrPaddy&#39;</span><span class="p">,</span> <span class="s1">&#39;irrNonPaddy&#39;</span><span class="p">,</span><span class="s1">&#39;sealed&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interceptStor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_interceptStor&quot;</span><span class="p">)</span>
+
+            <span class="c1"># summarize the following initial storages:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptStor</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interceptStor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">coverType</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">coverTypes</span><span class="p">[:</span><span class="mi">4</span><span class="p">]:</span>
+            <span class="c1"># other paramater values</span>
+            <span class="c1"># b coefficient of soil water storage capacity distribution</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minTopWaterLayer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_minTopWaterLayer&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minCropKC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_minCropKC&quot;</span><span class="p">))</span>
+
+            <span class="c1">#self.var.minInterceptCap.append(loadmap(coverType + &quot;_minInterceptCap&quot;))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropDeplFactor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_cropDeplFactor&quot;</span><span class="p">))</span>
+            <span class="c1"># parameter values</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootFraction1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_rootFraction1&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootFraction2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_rootFraction2&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxRootDepth</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_maxRootDepth&quot;</span><span class="p">))</span>
+
+            <span class="c1"># store filenames</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropCoefficientNC_filename</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_cropCoefficientNC&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interceptCapNC_filename</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_interceptCapNC&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">coverFractionNC_filename</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_coverFractionNC&quot;</span><span class="p">)</span>
+
+            <span class="c1"># init values</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">topWaterLayer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_topWaterLayer&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interflow</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_interflow&quot;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">soilLayer</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilStor</span><span class="p">[</span><span class="n">soilLayer</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="n">coverType</span> <span class="o">+</span> <span class="s2">&quot;_soilStor[&quot;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">soilLayer</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;]&quot;</span><span class="p">)</span>
+                <span class="c1"># summarize the following initial storages:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="n">soilLayer</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilStor</span><span class="p">[</span><span class="n">soilLayer</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="c1"># summarize the following initial storages:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_topWaterLayer</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">topWaterLayer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">soilLayer</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="n">soilLayer</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="n">soilLayer</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilStor</span><span class="p">[</span><span class="n">soilLayer</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+
+            <span class="c1"># Improved Arno&#39;s scheme parameters: Hageman and Gates 2003</span>
+            <span class="c1"># arnoBeta defines the shape of soil water capacity distribution curve as a function of  topographic variability</span>
+            <span class="c1"># b = max( (oh - o0)/(oh + omax), 0.01)</span>
+            <span class="c1"># oh: the standard deviation of orography, o0: minimum std dev, omax: max std dev</span>
+
+<span class="c1">#            if self.var.arnoBeta[i] == 0:</span>
+<span class="c1">#               self.var.arnoBeta[i] = (self.var.maxSoilDepthFrac[i] - 1.) / (1. - self.var.minSoilDepthFrac[i]) + self.var.orographyBeta - 0.01</span>
+
+<span class="c1">#            # for CALIBRATION</span>
+<span class="c1">#            self.var.arnoBeta[i] = self.var.arnoBeta[i] * loadmap(&#39;arnoBeta_factor&#39;)</span>
+<span class="c1">#            self.var.arnoBeta[i] = np.minimum(10.0,np.maximum(0.001, self.var.arnoBeta[i]))</span>
+
+  <span class="c1">#          self.var.rootZoneWaterStorageMin[i] = self.var.minSoilDepthFrac[i] * self.var.rootZoneWaterStorageCap</span>
+  <span class="c1">#          self.var.rootZoneWaterStorageRange[i] = self.var.rootZoneWaterStorageCap - self.var.rootZoneWaterStorageMin[i]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootZoneWaterStorageRange</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootZoneWaterStorageCap</span>
+
+            <span class="c1"># calculate rootdepth for each soillayer and each land cover class</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootDepth</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soildepth</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxRootDepth</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootDepth</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soildepth</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxRootDepth</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soildepth</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootDepth</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soildepth</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxRootDepth</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soildepth</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+            <span class="c1"># scaleRootFractions</span>
+            <span class="n">rootFrac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">rootFrac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.05</span><span class="o">/</span><span class="mf">0.30</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootFraction1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">rootFrac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.25</span><span class="o">/</span><span class="mf">0.30</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootFraction1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">rootFrac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootFraction2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">rootFracSum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rootFrac</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">soilLayer</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">adjRoot</span><span class="p">[</span><span class="n">soilLayer</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rootFrac</span><span class="p">[</span><span class="n">soilLayer</span><span class="p">]</span> <span class="o">/</span> <span class="n">rootFracSum</span>
+
+
+
+            <span class="c1"># ------------------------------------------</span>
+            <span class="c1"># calculateTotAvlWaterCapacityInRootZone</span>
+            <span class="c1"># total water capacity in the root zone (upper soil layers)</span>
+            <span class="c1"># Note: This is dependent on the land cover type.</span>
+
+            <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">):</span>
+                <span class="n">h</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">effSatAtFieldCap</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">effSatAtWiltPoint</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">*</span> \
+                     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">satVol</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resVol</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootDepth</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totAvlWater</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totAvlWater</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totAvlWater</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootZoneWaterStorageCap</span><span class="p">)</span>
+
+            <span class="n">h0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">h3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="c1"># calculateParametersAtHalfTranspiration(self, parameters):</span>
+            <span class="c1"># average soil parameters at which actual transpiration is halved</span>
+            <span class="c1"># calculateParametersAtHalfTranspiration(self, parameters):</span>
+            <span class="c1"># average soil parameters at which actual transpiration is halved</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">):</span>
+                <span class="n">h0</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storCap</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">adjRoot</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">h1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">effSatAtFieldCap</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">effSatAtWiltPoint</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">*</span> \
+                     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">satVol</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resVol</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootDepth</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">h2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">h0</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">matricSuction50</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">airEntry</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">poreSizeBeta</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">h3</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">h0</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">poreSizeBeta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+            <span class="n">adjrootZoneWaterStorageCap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">h0</span> <span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totAvlWater</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">h1</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totAvlWater</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totAvlWater</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootZoneWaterStorageCap</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">effSatAt50</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">h2</span> <span class="o">/</span> <span class="n">adjrootZoneWaterStorageCap</span> <span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">effPoreSizeBetaAt50</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">h3</span> <span class="o">/</span> <span class="n">adjrootZoneWaterStorageCap</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">landcoverSumSum</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;directRunoff&#39;</span><span class="p">,</span> <span class="s1">&#39;totalPotET&#39;</span><span class="p">,</span> <span class="s1">&#39;potTranspiration&#39;</span><span class="p">,</span> <span class="s2">&quot;Precipitation&quot;</span><span class="p">,</span> <span class="s1">&#39;ETRef&#39;</span><span class="p">,</span><span class="s1">&#39;gwRecharge&#39;</span><span class="p">,</span><span class="s1">&#39;Runoff&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">landcoverSumSum</span><span class="p">:</span>
+            <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="s2">&quot;sumsum_&quot;</span> <span class="o">+</span> <span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="landcoverType.dynamic_fracIrrigation"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic_fracIrrigation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dynamic part of the land cover type module</span>
+<span class="sd">        Calculating fraction of land cover</span>
+
+<span class="sd">        * loads the fraction of landcover for each year from netcdf maps</span>
+<span class="sd">        * calculate the fraction of 6 land cover types based on the maps</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">#if option[&#39;includeIrrigation&#39;] and option[&#39;dynamicIrrigationArea&#39;]:</span>
+
+        <span class="c1"># updating fracVegCover of landCover (for historical irrigation areas, done at yearly basis)</span>
+        <span class="c1"># if first day of the year or first day of run</span>
+
+        <span class="k">if</span> <span class="n">init</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">coverType</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">coverTypes</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;fractionLandcover&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">useDaily</span><span class="o">=</span><span class="s2">&quot;yearly&quot;</span><span class="p">,</span>  <span class="n">value</span><span class="o">=</span> <span class="s1">&#39;frac&#39;</span><span class="o">+</span><span class="n">coverType</span><span class="p">)</span>
+                <span class="c1">#report(decompress(self.var.fracVegCover[i]), &quot;C:\work\output2/lc&quot;+str(i)+&quot;.map&quot;)</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># correction of grassland if sum is not 1.0</span>
+            <span class="nb">sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="nb">sum</span>
+            <span class="c1"># sum of landcover without water and sealed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_fracVegCover</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+
+            <span class="c1">#self.var.fracVegCover[0] = self.var.fracVegCover[0] + self.var.fracVegCover[4]</span>
+            <span class="c1">#self.var.fracVegCover[1] = self.var.fracVegCover[1] + self.var.fracVegCover[5]</span>
+            <span class="c1">#self.var.fracVegCover[0] = 1.0</span>
+            <span class="c1">#self.var.fracVegCover[1] = 0.0</span>
+            <span class="c1">#self.var.fracVegCover[2] = 0.0</span>
+            <span class="c1">#self.var.fracVegCover[3] = 0.0</span>
+            <span class="c1">#self.var.fracVegCover[4] = 0.0</span>
+            <span class="c1">#self.var.fracVegCover[5] = 0.0</span>
+            <span class="c1">#i = 111</span>
+
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="landcoverType.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.landcoverType.landcoverType.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dynamic part of the land cover type module</span>
+<span class="sd">        Calculating soil for each of the 6  land cover class</span>
+
+<span class="sd">        * calls evaporation_module.dynamic</span>
+<span class="sd">        * calls interception_module.dynamic</span>
+<span class="sd">        * calls soil_module.dynamic</span>
+<span class="sd">        * calls sealed_water_module.dynamic</span>
+
+<span class="sd">        And sums every thing up depending on the land cover type fraction</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">]:</span>
+            <span class="n">preTopWaterLayer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_topWaterLayer</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">preIntStor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptStor</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">preStor1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">preStor2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">preStor3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSoil</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSoil</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+        <span class="n">coverNo</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># update soil (loop per each land cover type):</span>
+        <span class="k">for</span> <span class="n">coverType</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">coverTypes</span><span class="p">:</span>
+            <span class="c1">#print coverNo,coverType</span>
+
+
+            <span class="c1"># calculate evaporation and transpiration for soil land cover types (not for sealed and water covered areas)</span>
+            <span class="k">if</span> <span class="n">coverNo</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">evaporation_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="n">coverType</span><span class="p">,</span> <span class="n">coverNo</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interception_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="n">coverType</span><span class="p">,</span> <span class="n">coverNo</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">coverNo</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soil_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="n">coverType</span><span class="p">,</span> <span class="n">coverNo</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sealed_water_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">(</span><span class="n">coverType</span><span class="p">,</span> <span class="n">coverNo</span><span class="p">)</span>
+                <span class="c1"># calculate for openwater and sealed area</span>
+            <span class="n">coverNo</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+
+
+
+
+        <span class="c1"># aggregated variables by fraction of land cover</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">landcoverSum</span><span class="p">:</span>
+            <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="s2">&quot;sum_&quot;</span> <span class="o">+</span> <span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">No</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+                <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="s2">&quot;sum_&quot;</span> <span class="o">+</span> <span class="n">variable</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">*</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">variable</span><span class="p">][</span><span class="n">No</span><span class="p">]</span>
+
+        <span class="c1">#print &quot;--&quot;, self.var.sum_directRunoff</span>
+
+
+
+        <span class="n">soilVars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;soilStor&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">soilVars</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span><span class="p">):</span>
+                <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="s2">&quot;sum_&quot;</span> <span class="o">+</span> <span class="n">variable</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">No</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+                    <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="s2">&quot;sum_&quot;</span> <span class="o">+</span> <span class="n">variable</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">*</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)[</span><span class="n">variable</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">No</span><span class="p">]</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSoil</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptStor</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_topWaterLayer</span> <span class="o">+</span> \
+                             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCover</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptStor</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_topWaterLayer</span> <span class="o">+</span> \
+                            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalET</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span>
+
+        <span class="c1">#print self.var.totalSoil,self.var.soilStor[0][1],self.var.soilStor[1][1], self.var.soilStor[2][1],</span>
+        <span class="n">i</span><span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># --------------------------------------------------------------------</span>
+
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rain</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowMelt</span><span class="p">],</span>  <span class="c1"># In</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_availWaterInfiltration</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="n">preIntStor</span><span class="p">],</span>   <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptStor</span><span class="p">],</span>
+                <span class="s2">&quot;InterAll&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_availWaterInfiltration</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_capRiseFromGW</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_irrGrossDemand</span><span class="p">],</span>                             <span class="c1"># In  self.var.irrGrossDemand</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_percToGW</span><span class="p">,</span> \
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_PrefFlow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> \
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">],</span>                                                                <span class="c1"># Out</span>
+                <span class="p">[</span><span class="n">preTopWaterLayer</span><span class="p">,</span><span class="n">preStor1</span><span class="p">,</span><span class="n">preStor2</span><span class="p">,</span><span class="n">preStor3</span><span class="p">],</span>                                       <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_topWaterLayer</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+                <span class="s2">&quot;Soil_sum1&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1">#True</span>
+
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rain</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowMelt</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_capRiseFromGW</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_irrGrossDemand</span><span class="p">],</span>                             <span class="c1"># In  self.var.irrGrossDemand</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_percToGW</span><span class="p">,</span> \
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_PrefFlow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> \
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">],</span>                                                                <span class="c1"># Out</span>
+                <span class="p">[</span><span class="n">preTopWaterLayer</span><span class="p">,</span><span class="n">preStor1</span><span class="p">,</span><span class="n">preStor2</span><span class="p">,</span><span class="n">preStor3</span><span class="p">,</span><span class="n">preIntStor</span><span class="p">],</span>                                       <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_topWaterLayer</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptStor</span><span class="p">],</span>
+                <span class="s2">&quot;Soil_sum2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_capRiseFromGW</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_irrGrossDemand</span><span class="p">],</span>                             <span class="c1"># In</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_percToGW</span><span class="p">,</span> \
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_PrefFlow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> \
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">],</span>                                                                <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prevSnowCover</span><span class="p">,</span> <span class="n">preTopWaterLayer</span><span class="p">,</span><span class="n">preStor1</span><span class="p">,</span><span class="n">preStor2</span><span class="p">,</span><span class="n">preStor3</span><span class="p">,</span><span class="n">preIntStor</span><span class="p">],</span>                                       <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCover</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_topWaterLayer</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_soilStor</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptStor</span><span class="p">],</span>
+                <span class="s2">&quot;Soil_All&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1">#True</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span></div></div>
+
+
+
+
+        <span class="c1">#a = decompress(self.var.sumsum_Precipitation)</span>
+        <span class="c1">#b = cellvalue(a,81,379)</span>
+        <span class="c1">#print self.var.sum_directRunoff</span>
+        <span class="c1">#report(decompress(self.var.sumsum_Precipitation), &quot;c:\work\output\Prsum.map&quot;)</span>
+        <span class="c1">#report(decompress(self.var.sumsum_gwRecharge), &quot;c:\work\output\gwrsum.map&quot;)</span>
+
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">2. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexus.html">3. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">4. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modeldesign.html">5. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">6. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../runmodel.html">7. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settingsfile.html">8. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata.html">9. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialisation.html">10. Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../postpro.html">11. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">12. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">13. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">14. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../updates.html">15. Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">16. Bug and bugfix report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">17. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source.html">18. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hydrological_modules.readmeteo &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for hydrological_modules.readmeteo</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -------------------------------------------------------------------------</span>
+<span class="c1"># Name:        READ METEO input maps</span>
+<span class="c1"># Purpose:</span>
+<span class="c1">#</span>
+<span class="c1"># Author:      PB</span>
+<span class="c1">#</span>
+<span class="c1"># Created:     13/07/2016</span>
+<span class="c1"># Copyright:   (c) PB 2016</span>
+<span class="c1"># -------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="readmeteo"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.readmeteo.readmeteo">[docs]</a><span class="k">class</span> <span class="nc">readmeteo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    READ METEOROLOGICAL DATA</span>
+
+<span class="sd">    reads all meteorological data from netcdf4 files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">readmeteo_variable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">readmeteo_variable</span>
+
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="readmeteo.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.readmeteo.readmeteo.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dynamic part of the readmeteo module</span>
+<span class="sd">        Read meteo input maps from netcdf files</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            If option *calc_evaporation* is False only precipitation, avg. temp., and 2 evaporation vlaues are read</span>
+<span class="sd">            Otherwise all the variable needed for Penman-Monteith</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            If option *TemperatureInKelvin* = True temperature is assumed to be Kelvin instead of Celsius!</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="n">ZeroKelvin</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;TemperatureInKelvin&#39;</span><span class="p">]:</span>
+            <span class="c1"># if temperature is in Kelvin -&gt; conversion to deg C</span>
+            <span class="c1"># TODO in initial there could be a check if temperature &gt; 200 -&gt; automatic change to Kelvin</span>
+            <span class="n">ZeroKelvin</span> <span class="o">=</span> <span class="mf">273.15</span>
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">],</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span><span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtDay</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">con_precipitation</span>
+
+        <span class="c1">#TODO PB</span>
+        <span class="c1">##self.var.Precipitation = self.var.Precipitation * 0 + 0.2</span>
+
+
+        <span class="c1"># precipitation (conversion to [mm] per time step)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Tavg</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;TavgMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">=</span> <span class="n">ZeroKelvin</span><span class="p">)</span>
+        <span class="c1"># average DAILY temperature (even if you are running the model</span>
+        <span class="c1"># on say an hourly time step) [degrees C]</span>
+
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;TemperatureInKelvin&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Tavg</span> <span class="o">-=</span> <span class="n">ZeroKelvin</span>
+
+        <span class="c1"># -----------------------------------------------------------------------</span>
+        <span class="c1"># if evaporation has to be calculated load all the meteo map sets</span>
+        <span class="c1"># Temparture min, max;  Windspeed,  specific humidity or relative humidity</span>
+        <span class="c1"># psurf, radiation</span>
+        <span class="c1"># -----------------------------------------------------------------------</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calc_evaporation&#39;</span><span class="p">]:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMin</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;TminMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">=</span> <span class="n">ZeroKelvin</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMax</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;TmaxMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">=</span> <span class="n">ZeroKelvin</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Psurf</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;PSurfMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="c1"># Instantaneous surface pressure[Pa]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Wind</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;WindMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="c1"># wind speed maps at 10m [m/s]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rsds</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;RSDSMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="c1"># radiation surface downwelling shortwave maps [W/m2]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rsdl</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;RSDLMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="c1"># radiation surface downwelling longwave maps [W/m2]</span>
+            <span class="k">if</span> <span class="nb">eval</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;useHuss&#39;</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Qair</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;QAirMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="c1"># 2 m istantaneous specific humidity[kg / kg]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Qair</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;RhsMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="c1">#</span>
+
+
+            <span class="c1">#--------------------------------------------------------</span>
+            <span class="c1"># conversions</span>
+
+            <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;TemperatureInKelvin&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMin</span> <span class="o">-=</span> <span class="n">ZeroKelvin</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMax</span> <span class="o">-=</span> <span class="n">ZeroKelvin</span>
+
+            <span class="c1"># [Pa] to [KPa]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Psurf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Psurf</span> <span class="o">*</span> <span class="mf">0.001</span>
+
+            <span class="c1"># Adjust wind speed for measurement height: wind speed measured at</span>
+            <span class="c1"># 10 m, but needed at 2 m height</span>
+            <span class="c1"># Shuttleworth, W.J. (1993) in Maidment, D.R. (1993), p. 4.36</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Wind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Wind</span> <span class="o">*</span> <span class="mf">0.749</span>
+
+            <span class="c1"># Conversion factor from [W] to [MJ]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">WtoMJ</span> <span class="o">=</span> <span class="mi">86400</span> <span class="o">*</span> <span class="mi">1</span><span class="n">E</span><span class="o">-</span><span class="mi">6</span>
+
+            <span class="c1"># conversion from W/m2 to MJ/m2/day</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rsds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rsds</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">WtoMJ</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rsdl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rsdl</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">WtoMJ</span>
+
+
+        <span class="c1"># if pot evaporation is already precalulated</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ETRef</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;ETMaps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">cut</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtDay</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">con_e</span>
+            <span class="c1"># daily reference evaporation (conversion to [m] per time step)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EWRef</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;E0Maps&#39;</span><span class="p">],</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">cut</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtDay</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">con_e</span></div></div>
+            <span class="c1"># potential evaporation rate from water surface (conversion to [m] per time step)</span>
+            <span class="c1"># self.var.ESRef = (self.var.EWRef + self.var.ETRef)/2</span>
+            <span class="c1"># potential evaporation rate from a bare soil surface (conversion # to [m] per time step)</span>
+
+
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">2. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexus.html">3. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">4. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modeldesign.html">5. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">6. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../runmodel.html">7. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settingsfile.html">8. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata.html">9. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialisation.html">10. Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../postpro.html">11. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">12. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">13. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">14. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../updates.html">15. Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">16. Bug and bugfix report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">17. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source.html">18. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

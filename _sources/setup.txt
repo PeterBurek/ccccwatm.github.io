@@ -30,35 +30,26 @@ Both libraries can be installed with pip or
 downloaded at `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs>`_
 
 
-
-
 PCRaster
 ******** 
 
-And the PCRASTER library from Faculty of Geosciences, Utrecht University, The Netherlands
+And the PCRASTER library from Faculty of Geosciences, Utrecht University, The Netherlands - `Webpage of PCRaster <http://pcraster.geo.uu.nl>`_
 
-`Webpage of PCRaster <http://pcraster.geo.uu.nl>`_
-
-Reference:
-
-Karssenberg, D., Schmitz, O., Salamon, P., de Jong, K., and Bierkens, M. F. P.: A software framework for construction of process-based stochastic spatio-temporal models and data assimilation, Environmental Modelling & Software 25(4), 489-502, 2010. doi: 10.1016/j.envsoft.2009.10.004
+| Reference:
+| Karssenberg, D., Schmitz, O., Salamon, P., de Jong, K., and Bierkens, M. F. P.: A software framework for construction of process-based stochastic spatio-temporal models and data assimilation, Environmental Modelling & Software 25(4), 489-502, 2010. doi: 10.1016/j.envsoft.2009.10.004
 
 
 PCRaster installation
 =====================
 
-CWATM is using the PCRaster Python framwork of PCRaster but not the GIS commands.
+| CWATM is using the PCRaster Python framwork of PCRaster but not the GIS commands.
+| But nevertheless it is quite usefull to install a full PCRaster version:
 
-But nevertheless it is quite usefull to install a full PCRaster version:
+| **Windows**
+| `Windows installation guide of PCRaster <http://pcraster.geo.uu.nl/quick-start-guide/>`_
 
-**Windows**
-
-`Windows installation guide of PCRaster <http://pcraster.geo.uu.nl/quick-start-guide/>`_
-
-**Linux**
-
-`Linux installation guide of PCRaster <http://pcraster.geo.uu.nl/getting-started/pcraster-on-linux/>`_
-
+| **Linux**
+| `Linux installation guide of PCRaster <http://pcraster.geo.uu.nl/getting-started/pcraster-on-linux/>`_
 
 .. note:: If it is not possible to install a full version of PCRaster! 
     Copy following files
@@ -85,15 +76,18 @@ CWATM comes with a C++ library
 Compiled versions
 *****************
 
-**Windows and CYGWIN_NT-6.1**
+| **Windows and CYGWIN_NT-6.1**
+| a compiled version is provided and CWATM is detecting automatically which system is running and which compiled version is needed
 
-a compiled version is provided and CWATM is detecting automatically with system is running and with compiled version is needed
+| **Linux**
+| For Cygwin linux a compiled version *t5cyg.so* is provided in *../source/hydrological_modules/routing_reservoirs/* for version CYGWIN_NT-6.1.
+| If you use another cygwin version please compile it by yourself and name it *t5_linux.so*
 
-**Linux**
+For Linux Ubuntu a compiled version is provided as *t5_linux.so*. The file is in *../source/hydrological_modules/routing_reservoirs/* 
 
-for Linux versions the compiled version is loaded as *t5_linux.so*. The file has to be in *../source/hydrological_modules/routing_reservoirs/*
+.. note::
+    If you use another Linux version or the compiled version is not working or you have a compiler which produce faster executables please compile a version on your own.
 
-A compiled version is provided for Ubuntu 
 
 Compiling a version
 *******************

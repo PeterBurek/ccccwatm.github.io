@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pcraster.framework.dynamicBase &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for pcraster.framework.dynamicBase</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+
+
+<span class="k">class</span> <span class="nc">DynamicBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Base class for DynamicModel framework class.</span>
+
+<span class="sd">  .. todo::</span>
+
+<span class="sd">    KDJ: What is the reason this class exists? Can it be merged with</span>
+<span class="sd">    DynamicModel?</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span> <span class="ow">is</span> <span class="n">DynamicBase</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_d_nrTimeSteps</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">currentStep</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_d_firstTimeStep</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">inTimeStep</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">inInitial</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">inDynamic</span> <span class="o">=</span> <span class="kc">False</span>
+
+  <span class="k">def</span> <span class="nf">setDebug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Class needs to implement &#39;setDebug&#39; method&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;  &quot;&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Class needs to implement &#39;initial&#39; method&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;  &quot;&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Class needs to implement &#39;dynamic&#39; method&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">timeSteps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;  &quot;&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Class needs to implement &#39;timeSteps&#39; method&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">nrTimeSteps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;  &quot;&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Class needs to implement &#39;nrTimeSteps&#39; method&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">firstTimeStep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the first timestep that is executed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Class needs to implement &#39;firstTimeStep&#39; method&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">setQuiet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Disables the progress display of timesteps.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">silentModelOutput</span> <span class="o">=</span> <span class="n">quiet</span>
+
+  <span class="k">def</span> <span class="nf">currentTimeStep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;  &quot;&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Class needs to implement &#39;currentTimeStep&#39; method&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">_inDynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inDynamic</span>
+
+  <span class="k">def</span> <span class="nf">_inInitial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inInitial</span>
+
+
+  <span class="k">def</span> <span class="nf">_setInInitial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">inInitial</span> <span class="o">=</span> <span class="n">value</span>
+
+  <span class="k">def</span> <span class="nf">_setInDynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">inDynamic</span> <span class="o">=</span> <span class="n">value</span>
+
+
+
+
+
+  <span class="k">def</span> <span class="nf">_inTimeStep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns whether a time step is currently executing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#if hasattr(self._userModel(), &quot;_d_inTimeStep&quot;):</span>
+    <span class="c1">#  return self._userModel()._d_inTimeStep</span>
+    <span class="c1">#else:</span>
+    <span class="c1">#  return False</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inTimeStep</span>
+
+  <span class="k">def</span> <span class="nf">_setInTimeStep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">inTimeStep</span> <span class="o">=</span> <span class="n">value</span>
+
+
+  <span class="k">def</span> <span class="nf">_setFirstTimeStep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firstTimeStep</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">firstTimeStep</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;first timestep argument (</span><span class="si">%s</span><span class="s2">) of DynamicFramework must be of type int&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">firstTimeStep</span><span class="p">))</span>
+      <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">firstTimeStep</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;first timestep argument (</span><span class="si">%s</span><span class="s2">) of DynamicFramework must be &gt; 0&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">firstTimeStep</span><span class="p">)</span>
+      <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">firstTimeStep</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrTimeSteps</span><span class="p">():</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;first timestep argument (</span><span class="si">%s</span><span class="s2">) of DynamicFramework must be smaller than given last timestep (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">firstTimeStep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrTimeSteps</span><span class="p">())</span>
+      <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_d_firstTimeStep</span> <span class="o">=</span> <span class="n">firstTimeStep</span>
+
+  <span class="k">def</span> <span class="nf">_setCurrentTimeStep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Current timestep must be &gt; 0&quot;</span>
+      <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">step</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrTimeSteps</span><span class="p">():</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Current timestep must be &lt;= </span><span class="si">%d</span><span class="s2"> (nrTimeSteps)&quot;</span>
+      <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">currentStep</span> <span class="o">=</span> <span class="n">step</span>
+
+  <span class="k">def</span> <span class="nf">_setNrTimeSteps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lastTimeStep</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the number of time steps to run.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lastTimeStep</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;last timestep argument (</span><span class="si">%s</span><span class="s2">) of DynamicFramework must be of type int&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">lastTimeStep</span><span class="p">))</span>
+      <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">lastTimeStep</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;last timestep argument (</span><span class="si">%s</span><span class="s2">) of DynamicFramework must be &gt; 0&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">lastTimeStep</span><span class="p">)</span>
+      <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_d_nrTimeSteps</span> <span class="o">=</span> <span class="n">lastTimeStep</span>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">2. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nexus.html">3. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../community.html">4. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modeldesign.html">5. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">6. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../runmodel.html">7. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../settingsfile.html">8. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metadata.html">9. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../initialisation.html">10. Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../postpro.html">11. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">12. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">13. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">14. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../updates.html">15. Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">16. Bug and bugfix report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publication.html">17. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source.html">18. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hydrological_modules.inflow &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for hydrological_modules.inflow</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -------------------------------------------------------------------------</span>
+<span class="c1"># Name:        INFLOW HYDROGRAPHS module (OPTIONAL)</span>
+<span class="c1"># Purpose:</span>
+<span class="c1">#</span>
+<span class="c1"># Author:      PB</span>
+<span class="c1">#</span>
+<span class="c1"># Created:     13/07/2016</span>
+<span class="c1"># Copyright:   (c) PB 2016</span>
+<span class="c1"># -------------------------------------------------------------------------</span>
+
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="inflow"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.inflow.inflow">[docs]</a><span class="k">class</span> <span class="nc">inflow</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    READ INFLOW HYDROGRAPHS (OPTIONAL)</span>
+<span class="sd">    If option &quot;inflow&quot; is set to 1 the inflow hydrograph code is used otherwise dummy code is used</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        Not included at moment</span>
+
+<span class="sd">    Todo:</span>
+<span class="sd">        has to be revamped</span>
+<span class="sd">        The  pcraster routine timeinputscalar has to be replaced by reading txt -&gt; numpy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inflow_variable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">inflow_variable</span>
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="inflow.initial"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.inflow.inflow.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initial part of the inflow module</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;inflow&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">InflowPoints</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;InflowPoints&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QInM3Old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">InflowPoints</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ChanQ</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span></div>
+            <span class="c1"># Initialising cumulative output variables</span>
+            <span class="c1"># These are all needed to compute the cumulative mass balance error</span>
+
+<span class="c1">#        self.var.QInDt = globals.inZero.copy()</span>
+        <span class="c1"># inflow substep amount</span>
+
+<div class="viewcode-block" id="inflow.dynamic_init"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.inflow.inflow.dynamic_init">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dynamic part of the inflow module</span>
+<span class="sd">        Init inflow before sub step routing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># ************************************************************</span>
+        <span class="c1"># ***** INLETS INIT</span>
+        <span class="c1"># ************************************************************</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;inflow&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QDelta</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QInM3</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QInM3Old</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">InvNoRoutSteps</span></div>
+            <span class="c1"># difference between old and new inlet flow  per sub step</span>
+            <span class="c1"># in order to calculate the amount of inlet flow in the routing loop</span>
+
+<div class="viewcode-block" id="inflow.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.inflow.inflow.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dynamic part of the inflow module</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;inflow&#39;</span><span class="p">]:</span>
+            <span class="n">QIn</span> <span class="o">=</span> <span class="n">timeinputscalar</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;QInTS&#39;</span><span class="p">],</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;InflowPoints&#39;</span><span class="p">,</span><span class="n">pcr</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+            <span class="c1"># Get inflow hydrograph at each inflow point [m3/s]</span>
+            <span class="n">QIn</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">QIn</span><span class="p">)</span>
+            <span class="n">QIn</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">QIn</span><span class="p">)]</span><span class="o">=</span><span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QInM3</span> <span class="o">=</span> <span class="n">QIn</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>
+            <span class="c1"># Convert to [m3] per time step</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TotalQInM3</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QInM3</span></div>
+            <span class="c1"># Map of total inflow from inflow hydrographs [m3]</span>
+
+
+<div class="viewcode-block" id="inflow.dynamic_inloop"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.inflow.inflow.dynamic_inloop">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic_inloop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">NoRoutingExecuted</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param NoRoutingExecuted: actual number of routing substep</span>
+<span class="sd">        :return: self.var.QInDt - inflow in m3 per sub timestep</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># ************************************************************</span>
+        <span class="c1"># ***** INLFLOW **********************************************</span>
+        <span class="c1"># ************************************************************</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;inflow&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QInDt</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QInM3Old</span> <span class="o">+</span> <span class="p">(</span><span class="n">NoRoutingExecuted</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QDelta</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">InvNoRoutSteps</span></div></div>
+            <span class="c1"># flow from inlets per sub step</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/CWATM.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">2. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexus.html">3. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">4. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modeldesign.html">5. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">6. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../runmodel.html">7. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settingsfile.html">8. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata.html">9. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialisation.html">10. Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../postpro.html">11. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">12. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">13. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">14. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../updates.html">15. Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">16. Bug and bugfix report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">17. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source.html">18. <strong>Source code</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>
