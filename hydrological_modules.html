@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="18. Source code" href="source.html" />
+    <link rel="up" title="19. Source code" href="source.html" />
     <link rel="next" title="management_modules package" href="management_modules.html" />
     <link rel="prev" title="cwatm_initial module" href="cwatm_initial.html" /> 
   </head>
@@ -45,7 +45,7 @@
           <a href="cwatm_initial.html" title="cwatm_initial module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">18. <strong>Source code</strong></a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">19. <strong>Source code</strong></a> &#187;</li> 
       </ul>
     </div>  
 
@@ -264,7 +264,10 @@ The equation is a modification of:</p>
 <li>loads all the parameters for the day-degree approach for rain, snow and snowmelt</li>
 <li>loads the parameter for frost</li>
 </ul>
-</dd></dl>
+<p>test of math1</p>
+<div class="math">
+<p><img src="_images/math/1388948b609ce9a1d9ae0380d361628d6b385812.png" alt="n_{\mathrm{offset}} = \sum_{k=0}^{N-1} s_k n_k"/></p>
+</div></dd></dl>
 
 </dd></dl>
 
@@ -1013,12 +1016,8 @@ routing using the kinematic wave</p>
 <em class="property">class </em><code class="descclassname">hydrological_modules.waterbalance.</code><code class="descname">waterbalance</code><span class="sig-paren">(</span><em>waterbalance_variable</em><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.waterbalance.waterbalance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>WATER BALANCE</p>
-<blockquote>
-<div><ul class="simple">
-<li>check if water balnace per time step is ok ( = 0)</li>
-</ul>
-</div></blockquote>
 <ul class="simple">
+<li>check if water balnace per time step is ok ( = 0)</li>
 <li>produce an annual overview - income, outcome storage</li>
 </ul>
 <dl class="method">
@@ -1107,28 +1106,29 @@ and sums it up for a catchment</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/CWATM.jpg" alt="Logo"/>
+              <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
             </a></p>
 <h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">2. License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nexus.html">3. Background</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community.html">4. Features of the Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">5. Model design and processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup.html">6. Setup of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="runmodel.html">7. Running the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="settingsfile.html">8. Settings file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metadata.html">9. NetCDF meta data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="initialisation.html">10. Initialisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="postpro.html">11. Post processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">12. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">13. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">14. TODO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="updates.html">15. Updates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bugs.html">16. Bug and bugfix report</a></li>
-<li class="toctree-l1"><a class="reference internal" href="publication.html">17. Publication</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="source.html">18. <strong>Source code</strong></a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">4. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">5. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="runmodel.html">6. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settingsfile.html">7. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">8. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialisation.html">9. Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postpro.html">10. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">11. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">12. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">13. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="updates.html">14. Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">15. Bug and bugfix report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">16. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">17. Developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">18. License and Conditions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="source.html">19. <strong>Source code</strong></a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cwatm.html">cwatm module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cwatm_dynamic.html">cwatm_dynamic module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cwatm_initial.html">cwatm_initial module</a></li>
@@ -1164,7 +1164,7 @@ and sums it up for a catchment</p>
           <a href="cwatm_initial.html" title="cwatm_initial module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" >18. <strong>Source code</strong></a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="source.html" >19. <strong>Source code</strong></a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
