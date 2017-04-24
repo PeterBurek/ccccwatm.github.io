@@ -24,9 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="19. Source code" href="source.html" />
+    <link rel="up" title="20. Source code" href="source.html" />
     <link rel="next" title="cwatm_dynamic module" href="cwatm_dynamic.html" />
-    <link rel="prev" title="19. Source code" href="source.html" /> 
+    <link rel="prev" title="20. Source code" href="source.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -42,10 +42,10 @@
           <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="source.html" title="19. Source code"
+          <a href="source.html" title="20. Source code"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">19. <strong>Source code</strong></a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">20. <strong>Source code</strong></a> &#187;</li> 
       </ul>
     </div>  
 
@@ -60,17 +60,15 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Inheritance</p>
 </div>
-<img src="_images/inheritance-6a49114b24ccf441a7c2ce1ff13c69934dc10959.png" alt="Inheritance diagram of cwatm" usemap="#inheritance71a609caa7" class="inheritance"/>
+<img src="_images/inheritance-d0e3e5bb8d21d33a873ae807ae47d9851d630e17.png" alt="Inheritance diagram of cwatm" usemap="#inheritance71a609caa7" class="inheritance"/>
 <map id="inheritance71a609caa7" name="inheritance71a609caa7">
-<area shape="rect" id="node1" href="#cwatm.CWATModel" target="_top" title="Initial and dynamic part of the CWATM model" alt="" coords="483,31,577,56"/>
-<area shape="rect" id="node2" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="316,5,431,31"/>
-<area shape="rect" id="node3" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" target="_top" title="CWATModel_dyn" alt="" coords="312,55,435,80"/>
-<area shape="rect" id="node5" title="Base class for DynamicModel framework class." alt="" coords="5,31,108,56"/>
+<area shape="rect" id="node1" href="#cwatm.CWATModel" target="_top" title="Initial and dynamic part of the CWATM model" alt="" coords="332,31,427,56"/>
+<area shape="rect" id="node2" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="165,5,280,31"/>
+<area shape="rect" id="node3" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" target="_top" title="CWATModel_dyn" alt="" coords="161,55,284,80"/>
 </map>
-<img src="_images/inheritance-288f76990e69b9a0b9809f95fa12720c35fb9e3a.png" alt="Inheritance diagram of cwatm_initial.CWATModel_ini" usemap="#inheritancea6f9efa807" class="inheritance"/>
+<img src="_images/inheritance-bfe4432c2a741fa14fd00a9d6c50f37ae70d8fb4.png" alt="Inheritance diagram of cwatm_initial.CWATModel_ini" usemap="#inheritancea6f9efa807" class="inheritance"/>
 <map id="inheritancea6f9efa807" name="inheritancea6f9efa807">
-<area shape="rect" id="node1" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="587,5,763,28"/>
-<area shape="rect" id="node3" title="Base class for DynamicModel framework class." alt="" coords="5,5,225,28"/>
+<area shape="rect" id="node1" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="359,5,553,31"/>
 </map>
 <img src="_images/inheritance-1c24f45187165f494130d2002c9b812c0a9ac5c7.png" alt="Inheritance diagram of hydrological_modules.groundwater.groundwater, hydrological_modules.inflow.inflow" usemap="#inheritance14745111ce" class="inheritance"/>
 <map id="inheritance14745111ce" name="inheritance14745111ce">
@@ -166,43 +164,6 @@ Looping through time and space</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cwatm.CWATModel.readmap">
-<code class="descname">readmap</code><span class="sig-paren">(</span><em>name</em>, <em>style=1</em><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.readmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read map data from disk.</p>
-<dl class="docutils">
-<dt><cite>name</cite></dt>
-<dd>Name used as filename. Use filename with less than eight characters
-and without extension. File extension for dynamic models is &#8221;.map&#8221;
-in initial section and the 8.3 style format name in the dynamic
-section. File extensions will be appended automatically.</dd>
-</dl>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last"><cite>style</cite> argument is not used.</p>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.report">
-<code class="descname">report</code><span class="sig-paren">(</span><em>variable</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.report" title="Permalink to this definition">¶</a></dt>
-<dd><p>Storing map data to disk</p>
-<dl class="docutils">
-<dt><cite>variable</cite></dt>
-<dd>Variable containing the PCRaster map data</dd>
-<dt><cite>name</cite></dt>
-<dd>Name used as filename. Use a filename with less than eight
-characters and without extension. File extension for dynamic models
-is &#8221;.map&#8221; in the initial section and the 8.3 style format name in
-the dynamic section. File extensions will be appended automatically.</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.CWATModel.setDebug">
-<code class="descname">setDebug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.setDebug" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="cwatm.CWATModel.setQuiet">
 <code class="descname">setQuiet</code><span class="sig-paren">(</span><em>quiet=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cwatm.CWATModel.setQuiet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disables the progress display of timesteps.</p>
@@ -273,7 +234,8 @@ the dynamic section. File extensions will be appended automatically.</dd>
 <li class="toctree-l1"><a class="reference internal" href="publication.html">16. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">17. Developer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">18. License and Conditions</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="source.html">19. <strong>Source code</strong></a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="download.html">19. Download</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="source.html">20. <strong>Source code</strong></a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">cwatm module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cwatm_dynamic.html">cwatm_dynamic module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cwatm_initial.html">cwatm_initial module</a></li>
@@ -285,7 +247,7 @@ the dynamic section. File extensions will be appended automatically.</dd>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="source.html"
-                        title="previous chapter">19. <strong>Source code</strong></a></p>
+                        title="previous chapter">20. <strong>Source code</strong></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="cwatm_dynamic.html"
                         title="next chapter">cwatm_dynamic module</a></p>
@@ -306,10 +268,10 @@ the dynamic section. File extensions will be appended automatically.</dd>
           <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
              >next</a> |</li>
         <li class="right" >
-          <a href="source.html" title="19. Source code"
+          <a href="source.html" title="20. Source code"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" >19. <strong>Source code</strong></a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="source.html" >20. <strong>Source code</strong></a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
