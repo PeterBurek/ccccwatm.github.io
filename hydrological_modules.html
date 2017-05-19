@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="20. Source code" href="source.html" />
+    <link rel="up" title="21. Source code" href="source.html" />
     <link rel="next" title="management_modules package" href="management_modules.html" />
     <link rel="prev" title="cwatm_initial module" href="cwatm_initial.html" /> 
   </head>
@@ -45,7 +45,7 @@
           <a href="cwatm_initial.html" title="cwatm_initial module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">20. <strong>Source code</strong></a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">21. <strong>Source code</strong></a> &#187;</li> 
       </ul>
     </div>  
 
@@ -483,36 +483,6 @@ Caclulation vertical transfer of water based on improved Arno scheme</p>
 For each of the land cover classes the vertical water transport is simulated
 Distribution of water holding capiacity in 3 soil layers based on saturation excess overland flow, preferential flow
 Dependend on soil depth, soil hydraulic parameters</p>
-<p><em>Improved Arno Scheme</em></p>
-<p class="rubric">References</p>
-<p>Hagemann, S. and L.D. Gates (2003), Improving a subgrid runoff parameterization scheme for climate models by the use of high resolution data derived from satellite observations. Climate Dynamics 21. 349-359</p>
-<blockquote>
-<div><ul class="simple">
-<li>arnoBeta: b coefficient of soil water storage capacity distribution</li>
-<li>WMIN: root zone water storage capacity, minimum values  (first 2 zones)</li>
-<li>WMAX: root zone water storage capacity</li>
-<li>W: actual water storage in root zone</li>
-<li>rootZoneWaterStorageRange: WMAX - WMIN</li>
-<li>DW: WMAX - soilWaterStorage</li>
-<li>WFRACB: DW/WRANGE raised to the power (1/(b+1))</li>
-<li>SATFRAC: fractional saturated area</li>
-</ul>
-</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coverType</strong> &#8211; Land cover type: forest, grassland  ...</li>
-<li><strong>No</strong> &#8211; number of land cover type: forest = 0, grassland = 1 ...</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">All soil variables for 4 land cover types e.g. soil storage for 3 layers</p>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
@@ -1130,9 +1100,10 @@ and sums it up for a catchment</p>
 <li class="toctree-l1"><a class="reference internal" href="bugs.html">15. Bug and bugfix report</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication.html">16. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">17. Developer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">18. License and Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="download.html">19. Download</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="source.html">20. <strong>Source code</strong></a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">18. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">19. License and Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">20. Download</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="source.html">21. <strong>Source code</strong></a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cwatm.html">cwatm module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cwatm_dynamic.html">cwatm_dynamic module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cwatm_initial.html">cwatm_initial module</a></li>
@@ -1168,7 +1139,7 @@ and sums it up for a catchment</p>
           <a href="cwatm_initial.html" title="cwatm_initial module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" >20. <strong>Source code</strong></a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="source.html" >21. <strong>Source code</strong></a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
