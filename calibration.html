@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>18. Calibration tool &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="next" title="19. License and Conditions" href="license.html" />
+    <link rel="prev" title="17. Developer" href="developer.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="license.html" title="19. License and Conditions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="developer.html" title="17. Developer"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="calibration-tool">
+<h1>18. Calibration tool<a class="headerlink" href="#calibration-tool" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Calibration tool for hydrological models</div>
+<div class="line">in ../CWATM/calibration</div>
+</div>
+<div class="line-block">
+<div class="line">using a distributed evolutionary algorithms in python: DEAP library</div>
+<div class="line"><a class="reference external" href="http://deap.readthedocs.io/en/master/">http://deap.readthedocs.io/en/master/</a></div>
+<div class="line"><a class="reference external" href="https://github.com/DEAP/deap/blob/master/README.md">https://github.com/DEAP/deap/blob/master/README.md</a></div>
+</div>
+<p>Félix-Antoine Fortin, François-Michel De Rainville, Marc-André Gardner, Marc Parizeau and Christian Gagné, &#8220;DEAP: Evolutionary Algorithms Made Easy&#8221;, Journal of Machine Learning Research, vol. 13, pp. 2171-2175, jul 2012</p>
+<div class="line-block">
+<div class="line">The calibration tool was created by Hylke Beck 2014 (JRC, Princeton) <a class="reference external" href="mailto:hylkeb&#37;&#52;&#48;princeton&#46;edu">hylkeb<span>&#64;</span>princeton<span>&#46;</span>edu</a></div>
+<div class="line">Thanks Hylke for making it available for use and modification</div>
+<div class="line">Modified by Peter Burek</div>
+</div>
+<div class="line-block">
+<div class="line">The submodule Hydrostats was created 2011 by:</div>
+<div class="line">Sat Kumar Tomer (modified by Hylke Beck)</div>
+<div class="line">Please see his book <a class="reference external" href="http://greenteapress.com/pythonhydro/pythonhydro.pdf">Python in Hydrology</a></div>
+</div>
+<div class="section" id="calibration-tool-structure">
+<h2>Calibration tool structure<a class="headerlink" href="#calibration-tool-structure" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-rest"><div class="highlight"><pre><span></span>calibration
+│-  readme.txt
+│-  readme.txt
+│
+└--observed_data
+│   └- lobith2006.cvs, ...
+│
+└--templates
+│   └-- runpy.bat
+│   └-- settings.ini
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>The calibration tool builds up a single-objective obtimization framework using the Python libray DEAP
+For each run it triggers the run of the hydrological model:</p>
+<ul class="simple">
+<li>using a template of the settings file</li>
+<li>replacing the output folder in this template file</li>
+<li>replace placeholders with the values of calibration parameters, the limit of the parameter range is given in the file: ParamRanges.csv</li>
+</ul>
+<p>After each run the model run is compared to observed values (e.g. observed_data/lobith2006.csv)</p>
+<p>After the calibration, statistics and the best run is printed output</p>
+</div>
+<div class="section" id="what-is-needed">
+<h2>What is needed<a class="headerlink" href="#what-is-needed" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>The template files in ../templates have to be adjusted</li>
+</ol>
+<ul class="simple">
+<li>runpy.bat: the path to cwatm.py have to be set correctly (for linux a .sh file has to be created)</li>
+<li>The actual version of a cwatm settings file has to modified:</li>
+<li>replacing the output folder with the placeholder: %run_rand_id</li>
+</ul>
+<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>640</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">OUT_Dir</span> <span class="o">=</span> <span class="s">%run_rand_id</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li>replacing calibration parameter values with a placeholder: e.g. %SnowMelt</li>
+</ul>
+<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">[CALIBRATION]</span>
+
+<span class="c1"># These are parameter which are used for calibration</span>
+<span class="c1"># could be any parameter, but for an easier overview, tehey are collected here</span>
+<span class="c1"># in the calibration template a placeholder (e.g. %arnoBeta) instead of value</span>
+
+<span class="c1"># Snow  SnowMeltCoef = 0.004</span>
+<span class="na">SnowMeltCoef</span> <span class="o">=</span> <span class="s">%SnowMelt</span>
+<span class="c1"># Cropf factor correction</span>
+<span class="na">crop_correct</span> <span class="o">=</span>  <span class="s">%crop</span>
+<span class="c1">#Soil</span>
+<span class="na">soildepth_factor</span> <span class="o">=</span> <span class="s">%soildepthF</span>
+<span class="c1">#Soil preferentialFlowConstant = 4.0, arnoBeta_factor = 1.0</span>
+<span class="na">preferentialFlowConstant</span> <span class="o">=</span> <span class="s">%pref</span>
+<span class="na">arnoBeta_add</span> <span class="o">=</span> <span class="s">%arnoB</span>
+<span class="c1"># groundwater recessionCoeff_factor = 1.0</span>
+<span class="na">recessionCoeff_factor</span> <span class="o">=</span> <span class="s">%reces</span>
+<span class="c1"># runoff concentration factor runoffConc_factor = 1.0</span>
+<span class="na">runoffConc_factor</span> <span class="o">=</span> <span class="s">%runoff</span>
+<span class="c1">#Routing manningsN = 0.04</span>
+<span class="na">manningsN</span> <span class="o">=</span> <span class="s">%CCM</span>
+<span class="c1"># reservoir  normal storage limit (fraction of total storage, [-]) [0.15 - 0.85] default 0.5</span>
+<span class="na">normalStorageLimit</span> <span class="o">=</span> <span class="s">%normalStorageLimit</span>
+<span class="c1"># lake parameter - factor to alpha: parameter of of channel width and weir coefficient  [0.33 - 3.] dafault 1.</span>
+<span class="na">lakeAFactor</span> <span class="o">=</span> <span class="s">%lakeAFactor</span>
+</pre></div>
+</td></tr></table></div>
+<ol class="arabic simple" start="2">
+<li>the range of parameter space has to be defined in ParamRanges.csv</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ParameterName</span><span class="p">,</span><span class="n">MinValue</span><span class="p">,</span><span class="n">MaxValue</span>
+<span class="n">SnowMelt</span><span class="p">,</span><span class="mf">0.001</span><span class="p">,</span><span class="mf">0.007</span>
+<span class="n">crop</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mi">2</span>
+<span class="n">soildepthF</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span><span class="mi">2</span>
+<span class="n">pref</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span>
+<span class="n">arnoB</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">10</span>
+<span class="n">reces</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">10</span>
+<span class="n">runoff</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">5</span>
+<span class="n">CCM</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">10.0</span>
+<span class="n">normalStorageLimit</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.85</span>
+<span class="n">lakeAFactor</span><span class="p">,</span><span class="mf">0.333</span><span class="p">,</span><span class="mf">5.0</span>
+<span class="n">No</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>The observed discharge has to be provided in an .cvs file e.g. observed_data/lobith2006.csv</li>
+</ol>
+<ul class="simple">
+<li>In the template settings the date has to be set, so that the period of observed discharge is between SpinUp and StepEnd</li>
+</ul>
+<ol class="arabic simple" start="4">
+<li>And empty ../catchments directory needs to be created</li>
+<li>A few option in the settings.txt have to be adjusted (how many runs?, a first run with standard parameters? etc)</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<span class="n">Root</span> <span class="o">=</span> <span class="n">C</span><span class="p">:</span>\<span class="n">work</span>\<span class="n">CWATM</span>\<span class="n">calibration</span>
+<span class="n">ForcingStart</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">2003</span>
+<span class="n">ForcingEnd</span> <span class="o">=</span> <span class="mi">12</span><span class="o">/</span><span class="mi">31</span><span class="o">/</span><span class="mi">2010</span>
+
+<span class="p">[</span><span class="n">ObservedData</span><span class="p">]</span>
+<span class="n">Qtss</span> <span class="o">=</span> <span class="o">%</span><span class="p">(</span><span class="n">Root</span><span class="p">)</span><span class="n">s</span>\<span class="n">observed_data</span>\<span class="n">lobith2006</span><span class="o">.</span><span class="n">csv</span>
+<span class="n">Column</span> <span class="o">=</span> <span class="n">lobith</span>
+
+<span class="p">[</span><span class="n">Path</span><span class="p">]</span>
+<span class="n">Templates</span> <span class="o">=</span> <span class="o">%</span><span class="p">(</span><span class="n">Root</span><span class="p">)</span><span class="n">s</span>\<span class="n">templates</span>
+<span class="n">SubCatchmentPath</span> <span class="o">=</span> <span class="o">%</span><span class="p">(</span><span class="n">Root</span><span class="p">)</span><span class="n">s</span>\<span class="n">catchments</span>
+<span class="n">ParamRanges</span> <span class="o">=</span> <span class="o">%</span><span class="p">(</span><span class="n">Root</span><span class="p">)</span><span class="n">s</span>\<span class="n">ParamRanges</span><span class="o">.</span><span class="n">csv</span>
+
+<span class="p">[</span><span class="n">Templates</span><span class="p">]</span>
+<span class="n">ModelSettings</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">ini</span>
+<span class="n">RunModel</span> <span class="o">=</span> <span class="n">runpy</span><span class="o">.</span><span class="n">bat</span>
+
+<span class="p">[</span><span class="n">Option</span><span class="p">]</span>
+<span class="n">firstrun</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">para_first</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0035</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span>
+<span class="c1"># Snowmelt, crop KC, soil depth,pref. flow, arno beta, groundwater recession, runoff conc., routing, manning factor, normalStorageLimit, lakeAFactor,No of run</span>
+<span class="n">bestrun</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="p">[</span><span class="n">DEAP</span><span class="p">]</span>
+<span class="n">maximize</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">use_multiprocessing</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ngen</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">lambda_</span> <span class="o">=</span> <span class="mi">16</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>run python calibration_single.py settings.txt</li>
+</ol>
+</div>
+<div class="section" id="recommondations">
+<h2>Recommondations<a class="headerlink" href="#recommondations" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Run the model first to store the pot. evaporation results</li>
+</ol>
+<div class="line-block">
+<div class="line">Afterwards use the stored evaporation to run the calibration</div>
+<div class="line">calc_evaporation = False</div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Run the model and store the last day to be used as initial condition for the calibration runs</li>
+</ol>
+<div class="line-block">
+<div class="line">Best is to use a long term run for this.</div>
+</div>
+<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">[INITITIAL CONDITIONS]</span>
+<span class="c1">#-------------------------------------------------------</span>
+
+<span class="c1"># for a warm start initial variables a loaded</span>
+<span class="c1"># e.g for a start on 01/01/2010 load variable from 31/12/2009</span>
+<span class="na">load_initial</span> <span class="o">=</span> <span class="s">False</span>
+<span class="na">initLoad</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine_20030131.nc</span>
+
+<span class="c1"># saving variables from this run, to initiate a warm start next run</span>
+<span class="c1"># StepInit = saving date, can be more than one: 10/01/1973 20/01/1973</span>
+<span class="na">save_initial</span> <span class="o">=</span> <span class="s">True</span>
+<span class="na">initSave</span> <span class="o">=</span> <span class="s">$(BASICS:PathRoot)/init/Rhine</span>
+<span class="na">StepInit</span> <span class="o">=</span> <span class="s">31/12/1995 31/12/2010</span>
+</pre></div>
+</td></tr></table></div>
+<div class="line-block">
+<div class="line">load_initial = False</div>
+<div class="line">save_initial = True</div>
+</div>
+<div class="line-block">
+<div class="line">During calibration use:</div>
+<div class="line">load_initial = True</div>
+<div class="line">save_initial = False</div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Use a long SpinUp time (&gt; 10 years to give groundwater enough time)</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">4. Model design and processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">5. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="runmodel.html">6. Running the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settingsfile.html">7. Settings file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">8. NetCDF meta data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialisation.html">9. Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postpro.html">10. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">11. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">12. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">13. TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="updates.html">14. Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">15. Bug and bugfix report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">16. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">17. Developer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">18. Calibration tool</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#calibration-tool-structure">Calibration tool structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-needed">What is needed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recommondations">Recommondations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">19. License and Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">20. Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">21. <strong>Source code</strong></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="developer.html"
+                        title="previous chapter">17. Developer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="license.html"
+                        title="next chapter">19. License and Conditions</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="license.html" title="19. License and Conditions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="developer.html" title="17. Developer"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>
