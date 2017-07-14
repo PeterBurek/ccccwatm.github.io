@@ -1,9 +1,63 @@
 #####################
-TODO
+The Model Itself
 #####################
 
+
+.. contents:: 
+    :depth: 3
+
+
+Updates
+=======
+
+**Most recent updates on top**
+
+25/05/2017
+**********
+
+* added new soil scheme based on Arno scheme 
+
+27/03/2017
+**********
+
+* included license term GNU V3 in cwatm.py and globals.py
+
+26/03/2017
+**********
+
+* added documentation for autodocu for a lot of subroutines
+
+
+
+
+
+
+
+
+
+
+
+
+Bug and bugfix report
+=====================
+
+This is the only and first source code without bugs
+Really!
+
+Hey really!!
+
+Ok some exceptions:
+-------------------
+
+
+
+
+
+TODO
+====
+
 Structural improvements
-=======================
+-----------------------
 
 .. todo:: This has to be done. Importance: 1 to be changed first .. 3 to be changed later 
 
@@ -20,15 +74,9 @@ Structural improvements
    "Handling","Checks maps","include a pre-run, where input data are checked for plausibility","2","."
    "Handling","Load multiple netcd files","read meteo input netcdf from split files","2","."
 
-
-   
-   
-   
-   
-   
    
 Model improvements
-==================
+------------------
 
 
 .. csv-table:: 

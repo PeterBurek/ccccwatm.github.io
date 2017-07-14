@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="21. Source code" href="source.html" />
+    <link rel="up" title="9. Model download" href="license.html" />
     <link rel="prev" title="hydrological_modules package" href="hydrological_modules.html" /> 
   </head>
   <body role="document">
@@ -41,7 +41,7 @@
           <a href="hydrological_modules.html" title="hydrological_modules package"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" accesskey="U">21. <strong>Source code</strong></a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="license.html" accesskey="U">9. Model download</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -301,16 +301,35 @@ and define the rectangular of the mask map inside the netcdf map</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="management_modules.data_handling.readnetcdf">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf</code><span class="sig-paren">(</span><em>name</em>, <em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdf" title="Permalink to this definition">¶</a></dt>
+<dt id="management_modules.data_handling.multinetdf">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">multinetdf</code><span class="sig-paren">(</span><em>meteomaps</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.multinetdf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>meteomaps</strong> &#8211; list of meteomaps to define start and end time</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.readmeteodata">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readmeteodata</code><span class="sig-paren">(</span><em>name</em>, <em>date</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>zeros=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readmeteodata" title="Permalink to this definition">¶</a></dt>
 <dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> &#8211; name of the file</li>
-<li><strong>time</strong> &#8211; time stamp</li>
+<li><strong>name</strong> &#8211; file name</li>
+<li><strong>date</strong> &#8211; </li>
+<li><strong>value</strong> &#8211; if set the name of the parameter is defined</li>
+<li><strong>addZeros</strong> &#8211; </li>
+<li><strong>cut</strong> &#8211; if True the map is clipped to mask map</li>
+<li><strong>zeros</strong> &#8211; default value</li>
 </ul>
 </td>
 </tr>
@@ -741,35 +760,16 @@ Current date is increasing, checking if beginning of month, year</p>
               <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
             </a></p>
 <h3><a href="index.html">Table Of Contents</a></h3>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nexus.html">2. Background</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community.html">3. Features of the Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">4. Model design and processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup.html">5. Setup of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="runmodel.html">6. Running the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="settingsfile.html">7. Settings file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metadata.html">8. NetCDF meta data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="initialisation.html">9. Initialisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="postpro.html">10. Post processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">11. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">12. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">13. TODO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="updates.html">14. Updates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bugs.html">15. Bug and bugfix report</a></li>
-<li class="toctree-l1"><a class="reference internal" href="publication.html">16. Publication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developer.html">17. Developer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calibration.html">18. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">19. License and Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="download.html">20. Download</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="source.html">21. <strong>Source code</strong></a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="cwatm.html">cwatm module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cwatm_dynamic.html">cwatm_dynamic module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cwatm_initial.html">cwatm_initial module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html">hydrological_modules package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">management_modules package</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">4. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">5. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">6. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">7. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">8. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">9. Model download</a></li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -792,7 +792,7 @@ Current date is increasing, checking if beginning of month, year</p>
           <a href="hydrological_modules.html" title="hydrological_modules package"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="source.html" >21. <strong>Source code</strong></a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="license.html" >9. Model download</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

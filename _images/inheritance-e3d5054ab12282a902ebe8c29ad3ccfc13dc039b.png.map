@@ -1,6 +1,0 @@
-<map id="inheritance71a609caa7" name="inheritance71a609caa7">
-<area shape="rect" id="node1" href="#cwatm.CWATModel" target="_top" title="| Initial and dynamic part of the CWat model" alt="" coords="483,31,577,56"/>
-<area shape="rect" id="node2" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="316,5,431,31"/>
-<area shape="rect" id="node3" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" target="_top" title="CWATModel_dyn" alt="" coords="312,55,435,80"/>
-<area shape="rect" id="node5" title="Base class for DynamicModel framework class." alt="" coords="5,31,108,56"/>
-</map>
