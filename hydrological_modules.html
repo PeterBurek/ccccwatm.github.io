@@ -225,6 +225,22 @@ read multiple file of input
 <p>Domain: snow calculations evaluated for center points of up to 7 sub-pixel
 snow zones 1 -7 which each occupy a part of the pixel surface</p>
 <p>Variables <em>snow</em> and <em>rain</em> at end of this module are the pixel-average snowfall and rain</p>
+<p>Inheritace: <code class="docutils literal"><span class="pre">inheritance-diagram</span></code></p>
+<img src="_images/inheritance-4955e7c8f9bc2d2fea6f564b7580f75772ea7bb7.png" alt="Inheritance diagram of cwatm_initial.CWATModel_ini" usemap="#inheritance4a5d7dd76a" class="inheritance"/>
+<map id="inheritance4a5d7dd76a" name="inheritance4a5d7dd76a">
+<area shape="rect" id="node1" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="161,5,276,31"/>
+</map>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">inheritance</span><span class="o">-</span><span class="n">diagram</span><span class="p">::</span> <span class="n">cwatm</span>
+</pre></div>
+</div>
+<p>produces 1:</p>
+<blockquote>
+<div><img src="_images/inheritance-509ac048d0b3c6bb73e709fc30069806fc58a50d.png" alt="Inheritance diagram of hydrological_modules.snow_frost.snow" usemap="#inheritance3aedbacfc4" class="inheritance"/>
+<map id="inheritance3aedbacfc4" name="inheritance3aedbacfc4">
+<area shape="rect" id="node1" href="#hydrological_modules.snow_frost.snow" target="_top" title="RAIN AND SNOW" alt="" coords="5,5,252,31"/>
+</map>
+<span class="target" id="extensions-literal"></span></div></blockquote>
 <dl class="method">
 <dt id="hydrological_modules.snow_frost.snow.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.snow_frost.snow.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -240,7 +256,10 @@ The equation is a modification of:</p>
 <p class="first admonition-title">Todo</p>
 <p class="last">calculate sinus shape function for the southern hemisspere</p>
 </div>
-</dd></dl>
+<p>test of math1</p>
+<div class="math">
+<p><img src="_images/math/8722107bc4b0b206f195810147815643d1762429.png" alt="a = \sqrt{2}"/></p>
+</div></dd></dl>
 
 <dl class="method">
 <dt id="hydrological_modules.snow_frost.snow.initial">
@@ -250,10 +269,14 @@ The equation is a modification of:</p>
 <li>loads all the parameters for the day-degree approach for rain, snow and snowmelt</li>
 <li>loads the parameter for frost</li>
 </ul>
-<p>test of math1</p>
-<div class="math">
-<p><img src="_images/math/1388948b609ce9a1d9ae0380d361628d6b385812.png" alt="n_{\mathrm{offset}} = \sum_{k=0}^{N-1} s_k n_k"/></p>
-</div><img src="_images/graphviz-e349a7e39ef5a3bab336d3330e4a298eeb3bd500.png" alt="digraph foo {
+<p>Since Pythagoras, we know that <img class="math" src="_images/math/d4d3268036aaf8e626b870edc6fc001d22f3f96e.png" alt="a^2 + b^2 = c^2"/>.</p>
+<p>test of math2</p>
+<div class="math" id="equation-test2">
+<p><span class="eqno">(1)</span><img src="_images/math/799a497f12f84cef7e52eb68f1db2995cb1c6822.png" alt="(a + b)^2 = a^2 + 2ab + b^2 \clubsuit"/></p>
+</div><div class="math" id="equation-euler">
+<p><span class="eqno">(2)</span><img src="_images/math/a5bdd41fa273e15e748fe95f87c2017faaf08fa7.png" alt="e^{i\pi} + 1 = 0"/></p>
+</div><p>Euler&#8217;s identity, equation <a href="#equation-euler">(2)</a>, was elected one of the most beautiful mathematical formulas.</p>
+<img src="_images/graphviz-e349a7e39ef5a3bab336d3330e4a298eeb3bd500.png" alt="digraph foo {
     &quot;snow&quot; -&gt; &quot;initial&quot;;
 }" />
 </dd></dl>
@@ -333,7 +356,7 @@ Calculating soil for each of the 6  land cover class</p>
 
 <dl class="method">
 <dt id="hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation">
-<code class="descname">dynamic_fracIrrigation</code><span class="sig-paren">(</span><em>init=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dynamic_fracIrrigation</code><span class="sig-paren">(</span><em>init=False</em>, <em>dynamic=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the land cover type module
 Calculating fraction of land cover</p>
 <ul class="simple">
@@ -539,24 +562,6 @@ Agricultural water demand based on water need by plants</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.waterdemand.waterdemand.dynamic_waterdemand">
-<code class="descname">dynamic_waterdemand</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand.dynamic_waterdemand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of water demand</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>coverType</strong> &#8211; Land cover type: forest, grassland  ...</li>
-<li><strong>No</strong> &#8211; number of land cover type: forest = 0, grassland = 1 ...</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="hydrological_modules.waterdemand.waterdemand.initial">
 <code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the water demand module
@@ -646,6 +651,12 @@ Setting the peaq time for:</p>
 <p>LAKES AND RESERVOIRS
 calculate water retention in lakes and reservoirs</p>
 <dl class="method">
+<dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part set lakes and reservoirs for each year</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic_inloop">
 <code class="descname">dynamic_inloop</code><span class="sig-paren">(</span><em>NoRoutingExecuted</em><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic_inloop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part to calculate outflow from lakes and reservoirs</p>
@@ -699,6 +710,43 @@ Using the appraoch of LISFLOOD</p>
 <p class="first admonition-title">See also</p>
 <p class="last">LISFLOOD manual Annex 1: (Burek et al. 2013)</p>
 </div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-hydrological_modules.lakes_res_small">
+<span id="hydrological-modules-lakes-res-small-module"></span><h2>hydrological_modules.lakes_res_small module<a class="headerlink" href="#module-hydrological_modules.lakes_res_small" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="hydrological_modules.lakes_res_small.lakes_res_small">
+<em class="property">class </em><code class="descclassname">hydrological_modules.lakes_res_small.</code><code class="descname">lakes_res_small</code><span class="sig-paren">(</span><em>lakes_res_small_variable</em><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.lakes_res_small.lakes_res_small" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>LAKES AND RESERVOIRS
+calculate water retention in lakes and reservoirs</p>
+<dl class="method">
+<dt id="hydrological_modules.lakes_res_small.lakes_res_small.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.lakes_res_small.lakes_res_small.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part to calculate outflow from small lakes and reservoirs</p>
+<ul class="simple">
+<li>lakes with modified Puls approach</li>
+<li>reservoirs with special filling levels</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">outflow in m3 to the network</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="hydrological_modules.lakes_res_small.lakes_res_small.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.lakes_res_small.lakes_res_small.initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize small lakes and reservoirs
+Read parameters from maps e.g
+area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1068,7 +1116,7 @@ and sums it up for a catchment</p>
               <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
             </a></p>
 <h3><a href="index.html">Table Of Contents</a></h3>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
@@ -1077,7 +1125,12 @@ and sums it up for a catchment</p>
 <li class="toctree-l1"><a class="reference internal" href="todo.html">6. The Model Itself</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data.html">7. Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calibration.html">8. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">9. Model download</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="license.html">9. Model download</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="license.html#gnu-general-public-license">GNU General public license</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#download">Download</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="license.html#id1">Source code</a></li>
+</ul>
+</li>
 </ul>
 
   <h4>Previous topic</h4>
