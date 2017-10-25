@@ -710,9 +710,10 @@ Either as numbers or references to maps (.tif, PCraster or netCDF)</p>
 </div>
 <p>Output can be as maps and time series:</p>
 <ul class="simple">
-<li>per day</li>
-<li>total month, average month, end of month</li>
-<li>total year, average year, end of year</li>
+<li>per day [Daily]</li>
+<li>total month [MonthTot],  average month [MonthAvg], end of month [MonthEnd]</li>
+<li>total year  [AnnualTot], average year [AnnualAvg], end of year [AnnualEnd]</li>
+<li>total sum [TotalTot], total average [TotalAvg]</li>
 </ul>
 <p>For each of the following sections output can be defined for different variables:</p>
 <ul class="simple">
@@ -724,9 +725,17 @@ Either as numbers or references to maps (.tif, PCraster or netCDF)</p>
 <li>River routing</li>
 <li>Lakes and reservoirs</li>
 </ul>
-<p><strong>Or</strong> output can be dined in the section <em>[output]</em></p>
-<p>An output directory can be defined and for each sort of output the variable(s) can be set
-As example output for precipitation, temperature and discharge is shown here:</p>
+<p><strong>Or</strong> output can be defined in the section <em>[output]</em></p>
+<p>An output directory can be defined and for each sort of output the variable(s) can be set:</p>
+<div class="line-block">
+<div class="line"><em>OUT_</em> defines that this variable(s) are output</div>
+<div class="line"><em>MAP_</em> or <em>TSS_</em> defines if it is a spatial map or a time series of point(s)</div>
+<div class="line"><em>Daily</em> or <em>MonthAvg</em> or .. is specifying the time</div>
+<div class="line">The variable is given after the equal sign e.g. * = discharge*</div>
+<div class="line">If more than one variable should be used for output, split with <strong>,</strong></div>
+<div class="line">E.g. OUT_MAP_Daily = discharge -&gt; daily spatial map of discharge</div>
+</div>
+<p>As example output for precipitation, temperature and discharge is shown here:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span># OUTPUT maps and timeseries
 OUT_Dir = $(FILE_PATHS:PathOut)
 OUT_MAP_Daily =
@@ -735,14 +744,6 @@ OUT_MAP_MonthTot = Precipitation, Tavg
 OUT_MAP_MonthAvg =
 
 OUT_TSS_MonthTot = Precipitation, Tavg
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span># OUTPUT maps and timeseries
-OUT_Dir = $(FILE_PATHS:PathOut)
-OUT_MAP_Daily = discharge
-OUT_MAP_MonthEnd =
-OUT_MAP_MonthTot =
-
 OUT_TSS_Daily = discharge
 OUT_TSS_MonthEnd = discharge
 OUT_TSS_AnnualEnd = discharge
