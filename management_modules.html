@@ -23,8 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="9. Model download" href="license.html" />
+    <link rel="up" title="10. Model download" href="license.html" />
     <link rel="prev" title="hydrological_modules package" href="hydrological_modules.html" /> 
   </head>
   <body role="document">
@@ -41,7 +42,7 @@
           <a href="hydrological_modules.html" title="hydrological_modules package"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="license.html" accesskey="U">9. Model download</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="license.html" accesskey="U">10. Model download</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -162,7 +163,7 @@ unit, long name, standard name and additional information</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.compressArray">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">compressArray</code><span class="sig-paren">(</span><em>map</em>, <em>pcr=True</em>, <em>name='None'</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.compressArray" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">compressArray</code><span class="sig-paren">(</span><em>map</em>, <em>pcr=True</em>, <em>name='None'</em>, <em>zeros=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.compressArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compress 2D array with missing values to 1D array without missing values</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -234,7 +235,7 @@ variable metaNetcdfVar</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.loadmap">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadmap</code><span class="sig-paren">(</span><em>name</em>, <em>pcr=False</em>, <em>lddflag=False</em>, <em>compress=True</em>, <em>local=False</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.loadmap" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadmap</code><span class="sig-paren">(</span><em>name</em>, <em>pcr=False</em>, <em>lddflag=False</em>, <em>compress=True</em>, <em>local=False</em>, <em>cut=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.loadmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>load a static map either value or pc raster map or netcdf</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -273,7 +274,14 @@ variable metaNetcdfVar</p>
 <dl class="function">
 <dt id="management_modules.data_handling.mapattrNetCDF">
 <code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrNetCDF</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.mapattrNetCDF" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the map attributes like col, row etc from a ntcdf map
+<dd><p>get the map attributes like col, row etc from a netcdf map
+and define the rectangular of the mask map inside the netcdf map</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.mapattrNetCDFMeteo">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrNetCDFMeteo</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.mapattrNetCDFMeteo" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the map attributes like col, row etc from a netcdf map
 and define the rectangular of the mask map inside the netcdf map</p>
 </dd></dl>
 
@@ -315,8 +323,17 @@ and define the rectangular of the mask map inside the netcdf map</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="management_modules.data_handling.readCoordNetCDF">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readCoordNetCDF</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readCoordNetCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads the map attributes col, row etc from a netcdf map
+:param name: name of the netcdf file
+:param check:  checking if netcdffile exists
+:return:</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="management_modules.data_handling.readmeteodata">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readmeteodata</code><span class="sig-paren">(</span><em>name</em>, <em>date</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>zeros=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readmeteodata" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readmeteodata</code><span class="sig-paren">(</span><em>name</em>, <em>date</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>zeros=0.0</em>, <em>mapsscale=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readmeteodata" title="Permalink to this definition">¶</a></dt>
 <dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -341,7 +358,7 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readnetcdf2">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf2</code><span class="sig-paren">(</span><em>namebinding</em>, <em>date</em>, <em>useDaily='daily'</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>cut=True</em>, <em>zeros=0.0</em>, <em>meteo=False</em>, <em>usefilename=False</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdf2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf2</code><span class="sig-paren">(</span><em>namebinding</em>, <em>date</em>, <em>useDaily='daily'</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>cut=True</em>, <em>zeros=0.0</em>, <em>meteo=False</em>, <em>usefilename=False</em>, <em>compress=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdf2" title="Permalink to this definition">¶</a></dt>
 <dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -443,7 +460,7 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.writenetcdf">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">writenetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>varname</em>, <em>varunits</em>, <em>inputmap</em>, <em>timeStamp</em>, <em>posCnt</em>, <em>flag</em>, <em>flagTime</em>, <em>nrdays=None</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.writenetcdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">writenetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>prename</em>, <em>addname</em>, <em>varunits</em>, <em>inputmap</em>, <em>timeStamp</em>, <em>posCnt</em>, <em>flag</em>, <em>flagTime</em>, <em>nrdays=None</em>, <em>dateunit='days'</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.writenetcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>write a netcdf stack</p>
 </dd></dl>
 
@@ -769,11 +786,12 @@ Current date is increasing, checking if beginning of month, year</p>
 <li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">4. Setup of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">5. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">6. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">7. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calibration.html">8. Calibration tool</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="license.html">9. Model download</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">5. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">7. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="license.html">10. Model download</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="license.html#gnu-general-public-license">GNU General public license</a></li>
 <li class="toctree-l2"><a class="reference internal" href="license.html#download">Download</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="license.html#id1">Source code</a></li>
@@ -801,7 +819,7 @@ Current date is increasing, checking if beginning of month, year</p>
           <a href="hydrological_modules.html" title="hydrological_modules package"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="license.html" >9. Model download</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="license.html" >10. Model download</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
