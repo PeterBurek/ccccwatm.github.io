@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="10. Model download" href="license.html" />
+    <link rel="up" title="11. Model download" href="license.html" />
     <link rel="next" title="management_modules package" href="management_modules.html" />
     <link rel="prev" title="cwatm_initial module" href="cwatm_initial.html" /> 
   </head>
@@ -46,7 +46,7 @@
           <a href="cwatm_initial.html" title="cwatm_initial module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="license.html" accesskey="U">10. Model download</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="license.html" accesskey="U">11. Model download</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -338,48 +338,42 @@ Load inictial parameters</p>
 <dt id="hydrological_modules.landcoverType.landcoverType">
 <em class="property">class </em><code class="descclassname">hydrological_modules.landcoverType.</code><code class="descname">landcoverType</code><span class="sig-paren">(</span><em>landcoverType_variable</em><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>LAND COVER TYPE</p>
-<p>runs the 6 land cover types through soil procedures
+<p>LAND COVER TYPE
+runs the 6 land cover types through soil procedures
 This routine calls the soil routine for each land cover type</p>
 <dl class="method">
 <dt id="hydrological_modules.landcoverType.landcoverType.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the land cover type module
-Calculating soil for each of the 6  land cover class</p>
-<ul class="simple">
-<li>calls evaporation_module.dynamic</li>
-<li>calls interception_module.dynamic</li>
-<li>calls soil_module.dynamic</li>
-<li>calls sealed_water_module.dynamic</li>
-</ul>
-<p>And sums every thing up depending on the land cover type fraction</p>
+Calculating soil for each of the 6  land cover class
+* calls evaporation_module.dynamic
+* calls interception_module.dynamic
+* calls soil_module.dynamic
+* calls sealed_water_module.dynamic
+And sums every thing up depending on the land cover type fraction</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation">
 <code class="descname">dynamic_fracIrrigation</code><span class="sig-paren">(</span><em>init=False</em>, <em>dynamic=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the land cover type module
-Calculating fraction of land cover</p>
-<ul class="simple">
-<li>loads the fraction of landcover for each year from netcdf maps</li>
-<li>calculate the fraction of 6 land cover types based on the maps</li>
-</ul>
+Calculating fraction of land cover
+* loads the fraction of landcover for each year from netcdf maps
+* calculate the fraction of 6 land cover types based on the maps</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hydrological_modules.landcoverType.landcoverType.initial">
 <code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the land cover type module
-Initialise the six land cover types</p>
-<ul class="simple">
-<li>Forest</li>
-<li>Grasland/non irrigated land</li>
-<li>Irrigation</li>
-<li>Paddy iirigation</li>
-<li>Sealed area</li>
-<li>Water covered area</li>
-</ul>
-<p>And initialize the soil variables</p>
+Initialise the six land cover types
+* Forest
+* Grasland/non irrigated land
+* Irrigation
+* Paddy iirigation
+* Sealed area
+* Water covered area
+And initialize the soil variables</p>
 </dd></dl>
 
 </dd></dl>
@@ -544,6 +538,16 @@ runoff calculation for open water and sealed areas</p>
 </div>
 <div class="section" id="module-hydrological_modules.waterdemand">
 <span id="hydrological-modules-waterdemand-module"></span><h2>hydrological_modules.waterdemand module<a class="headerlink" href="#module-hydrological_modules.waterdemand" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Naming convention:</dt>
+<dd><ul class="first last simple">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</dd>
+</dl>
 <dl class="class">
 <dt id="hydrological_modules.waterdemand.waterdemand">
 <em class="property">class </em><code class="descclassname">hydrological_modules.waterdemand.</code><code class="descname">waterdemand</code><span class="sig-paren">(</span><em>waterdemand_variable</em><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand" title="Permalink to this definition">¶</a></dt>
@@ -555,11 +559,9 @@ Agricultural water demand based on water need by plants</p>
 <dl class="method">
 <dt id="hydrological_modules.waterdemand.waterdemand.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the water demand module</p>
-<ul class="simple">
-<li>calculate the fraction of water from surface water vs. groundwater</li>
-<li>get non-Irrigation water demand and its return flow fraction</li>
-</ul>
+<dd><p>Dynamic part of the water demand module
+* calculate the fraction of water from surface water vs. groundwater
+* get non-Irrigation water demand and its return flow fraction</p>
 </dd></dl>
 
 <dl class="method">
@@ -1127,7 +1129,8 @@ and sums it up for a catchment</p>
 <li class="toctree-l1"><a class="reference internal" href="todo.html">7. The Model Itself</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="license.html">10. Model download</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">10. Calibration tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="license.html">11. Model download</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="license.html#gnu-general-public-license">GNU General public license</a></li>
 <li class="toctree-l2"><a class="reference internal" href="license.html#download">Download</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="license.html#id1">Source code</a></li>
@@ -1161,7 +1164,7 @@ and sums it up for a catchment</p>
           <a href="cwatm_initial.html" title="cwatm_initial module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="license.html" >10. Model download</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="license.html" >11. Model download</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -54,28 +54,34 @@
           <div class="body" role="main">
             
   <div class="section" id="tutorial">
-<h1><a class="toc-backref" href="#id1">5. Tutorial</a><a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id4">5. Tutorial</a><a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#tutorial" id="id1">Tutorial</a><ul>
-<li><a class="reference internal" href="#requirements" id="id2">Requirements</a><ul>
-<li><a class="reference internal" href="#python-version" id="id3">Python version</a></li>
-<li><a class="reference internal" href="#libraries" id="id4">Libraries</a></li>
+<li><a class="reference internal" href="#tutorial" id="id4">Tutorial</a><ul>
+<li><a class="reference internal" href="#requirements" id="id5">Requirements</a><ul>
+<li><a class="reference internal" href="#id1" id="id6">Requirements</a><ul>
+<li><a class="reference internal" href="#python-version" id="id7">Python version</a></li>
+<li><a class="reference internal" href="#libraries" id="id8">Libraries</a></li>
+<li><a class="reference internal" href="#windows-executeable-python-version" id="id9">Windows executeable Python version</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#test-the-model" id="id5">Test the model</a><ul>
-<li><a class="reference internal" href="#error-because-the-python-libraries-are-installed-incorrectly" id="id6">Error because the python libraries are installed incorrectly</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#running-the-model-1" id="id7">Running the model 1</a></li>
-<li><a class="reference internal" href="#downloading-and-installing-the-spatial-dataset" id="id8">Downloading and installing the spatial dataset</a></li>
-<li><a class="reference internal" href="#changing-the-settings-file" id="id9">Changing the Settings file</a></li>
-<li><a class="reference internal" href="#running-the-model-2" id="id10">Running the model 2</a></li>
-<li><a class="reference internal" href="#changing-parameters-of-the-model" id="id11">Changing parameters of the model</a></li>
-<li><a class="reference internal" href="#changing-the-output" id="id12">Changing the Output</a><ul>
-<li><a class="reference internal" href="#output-variables" id="id13">Output variables</a></li>
-<li><a class="reference internal" href="#daily-monthly-at-the-end-or-average" id="id14">Daily, monthly - at the end or average</a></li>
+<li><a class="reference internal" href="#test-the-model" id="id10">Test the model</a><ul>
+<li><a class="reference internal" href="#error-because-the-python-libraries-are-installed-incorrectly" id="id11">Error because the python libraries are installed incorrectly</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-the-model-1" id="id12">Running the model 1</a></li>
+<li><a class="reference internal" href="#downloading-and-installing-the-spatial-dataset" id="id13">Downloading and installing the spatial dataset</a></li>
+<li><a class="reference internal" href="#changing-the-settings-file" id="id14">Changing the Settings file</a></li>
+<li><a class="reference internal" href="#running-the-model-2" id="id15">Running the model 2</a></li>
+<li><a class="reference internal" href="#changing-parameters-of-the-model" id="id16">Changing parameters of the model</a></li>
+<li><a class="reference internal" href="#changing-the-output" id="id17">Changing the Output</a><ul>
+<li><a class="reference internal" href="#output-variables" id="id18">Output variables</a></li>
+<li><a class="reference internal" href="#daily-monthly-at-the-end-or-average" id="id19">Daily, monthly - at the end or average</a></li>
+<li><a class="reference internal" href="#most-important-output-variables-a-selection" id="id20">Most important output variables - a selection</a></li>
+<li><a class="reference internal" href="#output-variables-starting-a-list" id="id21">Output variables - starting a list</a></li>
 </ul>
 </li>
 </ul>
@@ -83,30 +89,45 @@
 </ul>
 </div>
 <div class="section" id="requirements">
-<h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="python-version">
-<h3><a class="toc-backref" href="#id3">Python version</a><a class="headerlink" href="#python-version" title="Permalink to this headline">¶</a></h3>
-<p>Requirements are a 64 bit <a class="reference external" href="https://www.python.org/downloads/release/python-2712/">Python 2.7.x version</a></p>
+<h4><a class="toc-backref" href="#id7">Python version</a><a class="headerlink" href="#python-version" title="Permalink to this headline">¶</a></h4>
+<p>NEW from 2019 on:
+Requirements are a 64 bit <a class="reference external" href="https://www.python.org/downloads/release/python-372/">Python 3.7.x version</a></p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">a 32 bit version is not able to handle the data requirements!</p>
 </div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">From 2019 on we are changing to Python37. We do not provide further support for Python 2.7</p>
+</div>
 </div>
 <div class="section" id="libraries">
-<h3><a class="toc-backref" href="#id4">Libraries</a><a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id8">Libraries</a><a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h4>
 <p>These external libraries are needed:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.numpy.org">Numpy</a></li>
+<li><a class="reference external" href="https://www.scipy.org">Scipy</a></li>
 <li><a class="reference external" href="https://pypi.python.org/pypi/netCDF4">netCDF4</a></li>
 <li><a class="reference external" href="http://www.gdal.org">GDAL</a></li>
 </ul>
 <p><strong>Windows</strong></p>
-<p>Three libraries can be installed with pip or
+<p>The four libraries can be installed with pip or
 downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs">Unofficial Windows Binaries for Python Extension Packages</a></p>
+</div>
+<div class="section" id="windows-executeable-python-version">
+<h4><a class="toc-backref" href="#id9">Windows executeable Python version</a><a class="headerlink" href="#windows-executeable-python-version" title="Permalink to this headline">¶</a></h4>
+<div class="line-block">
+<div class="line">A CWATM executable cwatm.exe can be used instead of the Python version</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="test-the-model">
-<h2><a class="toc-backref" href="#id5">Test the model</a><a class="headerlink" href="#test-the-model" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">Test the model</a><a class="headerlink" href="#test-the-model" title="Permalink to this headline">¶</a></h2>
 <p><strong>Windows and Linux</strong></p>
 <p>python &lt;modelpath&gt;/cwatm.py</p>
 <p>The output should be:</p>
@@ -131,7 +152,7 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 <p class="last">If python is not set in the environment path, the full path of python has to be used</p>
 </div>
 <div class="section" id="error-because-the-python-libraries-are-installed-incorrectly">
-<h3><a class="toc-backref" href="#id6">Error because the python libraries are installed incorrectly</a><a class="headerlink" href="#error-because-the-python-libraries-are-installed-incorrectly" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id11">Error because the python libraries are installed incorrectly</a><a class="headerlink" href="#error-because-the-python-libraries-are-installed-incorrectly" title="Permalink to this headline">¶</a></h3>
 <p>If the model is causing an error at this stage, please check the python libraries:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
@@ -143,7 +164,7 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </div>
 </div>
 <div class="section" id="running-the-model-1">
-<h2><a class="toc-backref" href="#id7">Running the model 1</a><a class="headerlink" href="#running-the-model-1" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">Running the model 1</a><a class="headerlink" href="#running-the-model-1" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The model needs a settings file as an argument. See: <a class="reference internal" href="setup.html#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
@@ -163,7 +184,7 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </div>
 </div>
 <div class="section" id="downloading-and-installing-the-spatial-dataset">
-<h2><a class="toc-backref" href="#id8">Downloading and installing the spatial dataset</a><a class="headerlink" href="#downloading-and-installing-the-spatial-dataset" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Downloading and installing the spatial dataset</a><a class="headerlink" href="#downloading-and-installing-the-spatial-dataset" title="Permalink to this headline">¶</a></h2>
 <p>The spatial dataset contains:</p>
 <ul class="simple">
 <li>static data ie. data that does not change over time (a model assumption) e.g. soil data</li>
@@ -204,7 +225,7 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </div>
 </div>
 <div class="section" id="changing-the-settings-file">
-<h2><a class="toc-backref" href="#id9">Changing the Settings file</a><a class="headerlink" href="#changing-the-settings-file" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Changing the Settings file</a><a class="headerlink" href="#changing-the-settings-file" title="Permalink to this headline">¶</a></h2>
 <p>to run the model the pathes to data have to be set correctly:
 The information of pathes are stored in the settings file around line 80-100</p>
 <p>[FILE_PATHS]:</p>
@@ -225,7 +246,7 @@ metaNetcdfFile = $(FILE_PATHS:PathRoot)/CWATM/source/metaNetcdf.xml
 </div>
 </div>
 <div class="section" id="running-the-model-2">
-<h2><a class="toc-backref" href="#id10">Running the model 2</a><a class="headerlink" href="#running-the-model-2" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">Running the model 2</a><a class="headerlink" href="#running-the-model-2" title="Permalink to this headline">¶</a></h2>
 <p>If you type now:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">cwatm</span><span class="o">.</span><span class="n">py</span> <span class="n">settings_rhine</span><span class="o">.</span><span class="n">ini</span> <span class="o">-</span><span class="n">l</span>
 </pre></div>
@@ -280,16 +301,16 @@ Ldd = $(FILE_PATHS:PathMaps)/routing/ldd.map
 <p>But many other error can occure too! Have fun.</p>
 </div>
 <div class="section" id="changing-parameters-of-the-model">
-<h2><a class="toc-backref" href="#id11">Changing parameters of the model</a><a class="headerlink" href="#changing-parameters-of-the-model" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16">Changing parameters of the model</a><a class="headerlink" href="#changing-parameters-of-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">An overview of possibilities is given in  see <a class="reference internal" href="setup.html#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
 </div>
 </div>
 <div class="section" id="changing-the-output">
-<h2><a class="toc-backref" href="#id12">Changing the Output</a><a class="headerlink" href="#changing-the-output" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id17">Changing the Output</a><a class="headerlink" href="#changing-the-output" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="output-variables">
-<h3><a class="toc-backref" href="#id13">Output variables</a><a class="headerlink" href="#output-variables" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id18">Output variables</a><a class="headerlink" href="#output-variables" title="Permalink to this headline">¶</a></h3>
 <p>Output can be every global defined variable in the model
 Variable are e.g. Precipitation, runoff, baseflow</p>
 <p>but also not so common variables as:</p>
@@ -301,7 +322,7 @@ Variable are e.g. Precipitation, runoff, baseflow</p>
 </ul>
 </div>
 <div class="section" id="daily-monthly-at-the-end-or-average">
-<h3><a class="toc-backref" href="#id14">Daily, monthly - at the end or average</a><a class="headerlink" href="#daily-monthly-at-the-end-or-average" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id19">Daily, monthly - at the end or average</a><a class="headerlink" href="#daily-monthly-at-the-end-or-average" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>per day</li>
 <li>total month, average month, end of month</li>
@@ -328,6 +349,88 @@ OUT_TSS_AnnualAvg = Precipitation
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For information how to adjust the output in the settings file see <a class="reference internal" href="setup.html#rst-outputone"><span class="std std-ref">Output</span></a></p>
+</div>
+</div>
+<div class="section" id="most-important-output-variables-a-selection">
+<h3><a class="toc-backref" href="#id20">Most important output variables - a selection</a><a class="headerlink" href="#most-important-output-variables-a-selection" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Variable name    : Description</span>
+<span class="n">discharge</span>         <span class="p">:</span> <span class="n">river</span> <span class="n">discharge</span>
+<span class="n">runoff</span>            <span class="p">:</span> <span class="n">runoff</span>
+<span class="n">Precipitation</span>     <span class="p">:</span> <span class="n">rainfall</span> <span class="o">+</span> <span class="n">snow</span>
+<span class="n">Tavg</span>              <span class="p">:</span> <span class="n">average</span> <span class="n">temperature</span>
+<span class="n">ETRef</span><span class="p">:</span> <span class="n">potential</span>  <span class="p">:</span> <span class="n">evaporation</span> <span class="kn">from</span> <span class="nn">reference</span> <span class="n">soil</span>
+<span class="n">sum_gwRecharge</span>    <span class="p">:</span> <span class="n">total</span> <span class="n">groundwater</span> <span class="n">recharge</span>
+<span class="n">totalET</span>           <span class="p">:</span> <span class="n">total</span> <span class="n">actual</span> <span class="n">evapotranspiration</span>
+<span class="n">baseflow</span>          <span class="p">:</span> <span class="n">baseflow</span> <span class="kn">from</span> <span class="nn">groundwater</span>
+<span class="o">...</span> <span class="p">(</span><span class="n">to</span> <span class="n">be</span> <span class="n">continued</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-variables-starting-a-list">
+<h3><a class="toc-backref" href="#id21">Output variables - starting a list</a><a class="headerlink" href="#output-variables-starting-a-list" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">A list of variables can be produced by using:</div>
+<div class="line">grep -d recurse &#8216;self.var.&#8217; <a href="#id2"><span class="problematic" id="id3">*</span></a>.py</div>
+<div class="line">Every self.var.variable can be used as output variable</div>
+<div class="line">For a description of the variable please take a look at the python module itself.</div>
+<div class="line"><br /></div>
+<div class="line">As output variable please use without self.var.</div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Python_modul            Variable_name</span>
+<span class="n">capillarRise</span><span class="o">.</span><span class="n">py</span>          <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">capRiseFrac</span>
+<span class="n">evaporationPot</span><span class="o">.</span><span class="n">py</span>        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">AlbedoCanopy</span>
+<span class="n">evaporationPot</span><span class="o">.</span><span class="n">py</span>        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">AlbedoSoil</span>
+<span class="n">evaporationPot</span><span class="o">.</span><span class="n">py</span>        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">AlbedoWater</span>
+<span class="n">evaporationPot</span><span class="o">.</span><span class="n">py</span>        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ETRef</span>
+<span class="n">evaporationPot</span><span class="o">.</span><span class="n">py</span>        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EWRef</span>
+<span class="n">evaporation</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potBareSoilEvap</span>
+<span class="n">evaporation</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span>
+<span class="n">evaporation</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowMelt</span>
+<span class="n">evaporation</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potBareSoilEvap</span>
+<span class="n">evaporation</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+<span class="n">evaporation</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+<span class="n">evaporation</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potTranspiration</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+<span class="n">groundwater</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span>
+<span class="n">groundwater</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span>
+<span class="n">groundwater</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">kSatAquifer</span>
+<span class="n">groundwater</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span>
+<span class="n">groundwater</span><span class="o">.</span><span class="n">py</span>           <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span>
+<span class="n">interception</span><span class="o">.</span><span class="n">py</span>          <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interceptCap</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+<span class="n">interception</span><span class="o">.</span><span class="n">py</span>          <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interceptStor</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+<span class="n">interception</span><span class="o">.</span><span class="n">py</span>          <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">availWaterInfiltration</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+<span class="n">interception</span><span class="o">.</span><span class="n">py</span>          <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">potTranspiration</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+<span class="n">interception</span><span class="o">.</span><span class="n">py</span>          <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actualET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyID</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyOut</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeArea</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeDis0</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeAC</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeEvaFactor</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">reslakeoutflow</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeVolume</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeStorage</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeInflow</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeOutflow</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">reservoirStorage</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeResStorage</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumlakeResInflow</span>
+<span class="n">lakes_reservoirs</span><span class="o">.</span><span class="n">py</span>      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumlakeResOutflow</span>
+<span class="n">lakes_res_small</span><span class="o">.</span><span class="n">py</span>       <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span>
+<span class="n">lakes_res_small</span><span class="o">.</span><span class="n">py</span>       <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeDis0</span>
+<span class="n">lakes_res_small</span><span class="o">.</span><span class="n">py</span>       <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeA</span>
+<span class="n">lakes_res_small</span><span class="o">.</span><span class="n">py</span>       <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactor</span>
+<span class="n">lakes_res_small</span><span class="o">.</span><span class="n">py</span>       <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span>
+<span class="n">lakes_res_small</span><span class="o">.</span><span class="n">py</span>       <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBodyStorage</span>
+<span class="n">landcoverType</span><span class="o">.</span><span class="n">py</span>         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">coverTypes</span>
+<span class="n">landcoverType</span><span class="o">.</span><span class="n">py</span>         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalET</span>
+<span class="n">landcoverType</span><span class="o">.</span><span class="n">py</span>         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actSurfaceWaterAbstract</span>
+<span class="n">landcoverType</span><span class="o">.</span><span class="n">py</span>         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minInterceptCap</span>
+<span class="n">landcoverType</span><span class="o">.</span><span class="n">py</span>         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interceptStor</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
+<span class="n">landcoverType</span><span class="o">.</span><span class="n">py</span>         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptStor</span>
+<span class="n">landcoverType</span><span class="o">.</span><span class="n">py</span>         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minCropKC</span>
+<span class="n">landcoverType</span><span class="o">.</span><span class="n">py</span>         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">maxGWCapRise</span>
+<span class="o">...</span> <span class="p">(</span><span class="n">to</span> <span class="n">be</span> <span class="n">continued</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -363,7 +466,8 @@ OUT_TSS_AnnualAvg = Precipitation
 <li class="toctree-l1"><a class="reference internal" href="todo.html">7. The Model Itself</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">10. Model download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">10. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">11. Model download</a></li>
 </ul>
 
   <h4>Previous topic</h4>

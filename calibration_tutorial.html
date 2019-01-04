@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>10. Calibration tutorial &#8212; Community Water Model</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="next" title="11. Model download" href="license.html" />
+    <link rel="prev" title="9. Calibration tool" href="calibration.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="license.html" title="11. Model download"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="calibration.html" title="9. Calibration tool"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="calibration-tutorial">
+<h1>10. Calibration tutorial<a class="headerlink" href="#calibration-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Calibration tool for hydrological models</div>
+<div class="line">in ../CWATM/calibration</div>
+</div>
+<div class="section" id="calibration-method">
+<h2>Calibration method<a class="headerlink" href="#calibration-method" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="calibration-parameters">
+<h2>Calibration parameters<a class="headerlink" href="#calibration-parameters" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><strong>Snow</strong></div>
+<div class="line">1.    Snowmelt coefficient in [m/C deg/day]  as a degree-day factor</div>
+<div class="line"><strong>Evapotranspiration</strong></div>
+<div class="line">2.    Crop factor as an adjustment to crop evapotranspiration</div>
+<div class="line"><strong>Soil</strong></div>
+<div class="line">3.    Soil depth factor: a factor for the overall soil depth of soil layer 1 and 2</div>
+<div class="line">4.    Preferential bypass flow: empirical shape parameter of the preferential flow relation</div>
+<div class="line">5.    Infiltration capacity parameter: empirical shape parameter b of the ARNO model</div>
+<div class="line"><strong>Groundwater</strong></div>
+<div class="line">6.    Interflow factor: factor to  adjust the amount which percolates from interflow to groundwater</div>
+<div class="line">7.    Recession coefficient factor: factor to adjust the base flow recession constant (the contribution from groundwater to baseflow)</div>
+<div class="line"><strong>Routing</strong></div>
+<div class="line">8.    Runoff concentration factor: a factor for the concentration time of run-off in each grid-cell</div>
+<div class="line">9.    Channel Manning&#8217;s n factor: a factor roughness in channel routing</div>
+<div class="line">10.   Channel, lake and river evaporation factor: factor to adjust open water evaporation</div>
+<div class="line"><strong>Reservoir &amp; lakes</strong></div>
+<div class="line">11.   Normal storage limit: the fraction of storage capacity used as normal storage limit</div>
+<div class="line">12.   Lake A factor : factor to channel width and weir coefficient as a part of the Poleni weir equation</div>
+</div>
+</div>
+<div class="section" id="calibration-tool-structure">
+<h2>Calibration tool structure<a class="headerlink" href="#calibration-tool-structure" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Beck, H. E., A. I. J. M. van Dijk, A. de Roo, D. G. Miralles, T. R. McVicar, J. Schellekens and L. A. Bruijnzeel (2016). &#8220;Global-scale regionalization of hydrologic model parameters.&#8221; Water Resources Research 52(5): 3599-3622.</li>
+<li>Deb, K., A. Pratap, S. Agarwal and T. Meyarivan (2002). &#8220;A fast and elitist multiobjective genetic algorithm: NSGA-II.&#8221; IEEE Transactions on Evolutionary Computation 6(2): 182-197.</li>
+<li>Fortin, F. A., F. M. De Rainville, M. A. Gardner, M. Parizeau and C. Gagńe (2012). &#8220;DEAP: Evolutionary algorithms made easy.&#8221; Journal of Machine Learning Research 13: 2171-2175.</li>
+<li>Greve, P., L. Gudmundsson, B. Orlowsky and S. I. Seneviratne (2016). &#8220;A two-parameter Budyko function to represent conditions under which evapotranspiration exceeds precipitation.&#8221; Hydrology and Earth System Sciences 20(6): 2195-2205.</li>
+<li>Gupta, H. V., H. Kling, K. K. Yilmaz and G. F. Martinez (2009). &#8220;Decomposition of the mean squared error and NSE performance criteria: Implications for improving hydrological modelling.&#8221; Journal of Hydrology 377(1-2): 80-91.</li>
+<li>Kling, H., M. Fuchs and M. Paulin (2012). &#8220;Runoff conditions in the upper Danube basin under an ensemble of climate change scenarios.&#8221; Journal of Hydrology 424-425: 264-277.</li>
+<li>Samaniego, L., R. Kumar, S. Thober, O. Rakovec, M. Zink, N. Wanders, S. Eisner, H. Müller Schmied, E. Sutanudjaja, K. Warrach-Sagi and S. Attinger (2017). &#8220;Toward seamless hydrologic predictions across spatial scales.&#8221; Hydrology and Earth System Sciences 21(9): 4323-4346.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">4. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">5. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">7. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Calibration tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#calibration-method">Calibration method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calibration-parameters">Calibration parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calibration-tool-structure">Calibration tool structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">11. Model download</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="calibration.html"
+                        title="previous chapter">9. Calibration tool</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="license.html"
+                        title="next chapter">11. Model download</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="license.html" title="11. Model download"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="calibration.html" title="9. Calibration tool"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>
