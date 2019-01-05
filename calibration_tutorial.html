@@ -55,17 +55,12 @@
             
   <div class="section" id="calibration-tutorial">
 <h1>10. Calibration tutorial<a class="headerlink" href="#calibration-tutorial" title="Permalink to this headline">¶</a></h1>
-<div class="line-block">
-<div class="line">Calibration tool for hydrological models</div>
-<div class="line">in ../CWATM/calibration</div>
-</div>
-<div class="section" id="calibration-method">
-<h2>Calibration method<a class="headerlink" href="#calibration-method" title="Permalink to this headline">¶</a></h2>
-</div>
 <div class="section" id="what-you-need">
 <h2>What you need<a class="headerlink" href="#what-you-need" title="Permalink to this headline">¶</a></h2>
 <p>Python 2.7.x 64 bit and a running CWATM (libraries netCDF4, numpy, scipy, GDAL)
-In addition: library deap</p>
+In addition: <strong>library deap</strong></p>
+<p>Calibration is using a distributed evolutionary algorithms in python: DEAP library</p>
+<p>Félix-Antoine Fortin, François-Michel De Rainville, Marc-André Gardner, Marc Parizeau and Christian Gagné, &#8220;DEAP: Evolutionary Algorithms Made Easy&#8221;, Journal of Machine Learning Research, vol. 13, pp. 2171-2175</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Deap can also be used in Python 3.7 but at the moment we did not translate the scripts to Python3.7. it is on the TODO list</p>
@@ -535,7 +530,6 @@ Use initial file for calibration</p>
 <li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">10. Calibration tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#calibration-method">Calibration method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-you-need">What you need</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#running-calibration">Running calibration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-runcalibration-bat">Run runCalibration.bat</a></li>
