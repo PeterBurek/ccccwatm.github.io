@@ -61,7 +61,8 @@
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    WATERDEMAND</span>
-<span class="sd">    calculating water demand</span>
+
+<span class="sd">    calculating water demand -</span>
 <span class="sd">    Industrial, domenstic based on precalculated maps</span>
 <span class="sd">    Agricultural water demand based on water need by plants</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -74,8 +75,10 @@
 <div class="viewcode-block" id="waterdemand.initial"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.waterdemand.waterdemand.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial part of the water demand module</span>
+
 <span class="sd">        Set the water allocation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterDemand&#39;</span><span class="p">):</span>
 
             <span class="c1"># Add  zones at which water allocation (surface and groundwater allocation) is determined</span>
@@ -205,6 +208,7 @@
 <div class="viewcode-block" id="waterdemand.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.waterdemand.waterdemand.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the water demand module</span>
+
 <span class="sd">        * calculate the fraction of water from surface water vs. groundwater</span>
 <span class="sd">        * get non-Irrigation water demand and its return flow fraction</span>
 <span class="sd">        &quot;&quot;&quot;</span>

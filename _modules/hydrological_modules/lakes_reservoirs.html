@@ -59,7 +59,56 @@
 <div class="viewcode-block" id="lakes_reservoirs"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs">[docs]</a><span class="k">class</span> <span class="nc">lakes_reservoirs</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    LAKES AND RESERVOIRS</span>
-<span class="sd">    calculate water retention in lakes and reservoirs</span>
+
+<span class="sd">    Note:</span>
+
+<span class="sd">        Calculate water retention in lakes and reservoirs</span>
+
+<span class="sd">        Using the **Modified Puls approach** to calculate retention of a lake</span>
+<span class="sd">        See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</span>
+
+<span class="sd">        for Modified Puls Method the Q(inflow)1 has to be used. It is assumed that this is the same as Q(inflow)2 for the first timestep</span>
+<span class="sd">        has to be checked if this works in forecasting mode!</span>
+
+<span class="sd">        Lake Routine using Modified Puls Method (see Maniak, p.331ff)</span>
+<span class="sd">        :math:`(Qin1 + Qin2)/2 - (Qout1 + Qout2)/2 = (S2 - S1)/dtime`</span>
+
+<span class="sd">        changed into:</span>
+
+<span class="sd">        :math:`(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2`</span>
+
+<span class="sd">        outgoing discharge (Qout) are linked to storage (S) by elevation.</span>
+
+<span class="sd">        Now some assumption to make life easier:</span>
+
+<span class="sd">        1.) storage volume is increase proportional to elevation: S = A * H where: H: elevation, A: area of lake</span>
+
+<span class="sd">        2.) :math:`outgoing discharge = c * b * H^2.0` (c: weir constant, b: width)</span>
+
+<span class="sd">             2.0 because it fits to a parabolic cross section see (Aigner 2008) (and it is much easier to calculate (that&#39;s the main reason)</span>
+
+<span class="sd">        c: for a perfect weir with mu=0.577 and Poleni: :math:`2/3 \mu * \sqrt{2*g} = 1.7`</span>
+
+<span class="sd">        c: for a parabolic weir: around 1.8</span>
+
+<span class="sd">        because it is a imperfect weir::math:`C = c * 0.85 = 1.5`</span>
+
+<span class="sd">        results in a formular: :math:`Q = 1.5 * b * H ** 2 = a*H**2 -&gt; H = \sqrt{Q/a}`</span>
+
+<span class="sd">        Solving the equation:</span>
+
+<span class="sd">        :math:`(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2`</span>
+
+<span class="sd">        :math:`SI = (S2/dtime + Qout2/2) =  (A*H)/DtRouting + Q/2 = A/(DtRouting*\sqrt(a)  * \sqrt(Q) + Q/2`</span>
+
+<span class="sd">        -&gt; replacement: :math:`A/(DtRouting*sqrt(a)) = Lakefactor, Y = \sqrt(Q)`</span>
+
+<span class="sd">        :math:`Y^2 + 2 *L akefactor *Y - 2 * SI=0`</span>
+
+<span class="sd">        solution of this quadratic equation:</span>
+
+<span class="sd">        :math:`Q = (-LakeFactor + sqrt{LakeFactor^2+2*SI})^2`</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lakes_reservoirs_variable</span><span class="p">):</span>
@@ -78,7 +127,6 @@
 
 <span class="sd">        Compress numpy array from mask map to the size of lakes+reservoirs</span>
 <span class="sd">        (marked as capital C at the end of the variable name)</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">):</span>
@@ -205,10 +253,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial part of the lakes module</span>
 <span class="sd">        Using the **Modified Puls approach** to calculate retention of a lake</span>
-
-<span class="sd">        See also:</span>
-<span class="sd">            LISFLOOD maunal Annex 3 (Burek et al. 2013)</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># self.var.lakeInflowOldC = np.bincount(self.var.downstruct, weights=self.var.ChanQ)[self.var.LakeIndex]</span>
@@ -217,31 +261,7 @@
         <span class="c1"># for Modified Puls Method the Q(inflow)1 has to be used. It is assumed that this is the same as Q(inflow)2 for the first timestep</span>
         <span class="c1"># has to be checked if this works in forecasting mode!</span>
 
-
-        <span class="c1"># NEW Lake Routine using Modified Puls Method (see Maniak, p.331ff)</span>
-        <span class="c1"># (Qin1 + Qin2)/2 - (Qout1 + Qout2)/2 = (S2 - S1)/dtime</span>
-        <span class="c1"># changed into:</span>
-        <span class="c1"># (S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2</span>
-        <span class="c1"># outgoing discharge (Qout) are linked to storage (S) by elevation.</span>
-        <span class="c1"># Now some assumption to make life easier:</span>
-        <span class="c1"># 1.) storage volume is increase proportional to elevation: S = A * H</span>
-        <span class="c1">#      H: elevation, A: area of lake</span>
-        <span class="c1"># 2.) outgoing discharge = c * b * H **2.0 (c: weir constant, b: width)</span>
-        <span class="c1">#      2.0 because it fits to a parabolic cross section see Aigner 2008</span>
-        <span class="c1">#      (and it is much easier to calculate (that&#39;s the main reason)</span>
-        <span class="c1"># c for a perfect weir with mu=0.577 and Poleni: 2/3 mu * sqrt(2*g) = 1.7</span>
-        <span class="c1"># c for a parabolic weir: around 1.8</span>
-        <span class="c1"># because it is a imperfect weir: C = c* 0.85 = 1.5</span>
-        <span class="c1"># results in a formular : Q = 1.5 * b * H ** 2 = a*H**2 -&gt; H =</span>
-        <span class="c1"># sqrt(Q/a)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeFactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeAreaC</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dtRouting</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeAC</span><span class="p">))</span>
-
-        <span class="c1">#  solving the equation  (S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2</span>
-        <span class="c1">#  SI = (S2/dtime + Qout2/2) =  (A*H)/DtRouting + Q/2 = A/(DtRouting*sqrt(a)  * sqrt(Q) + Q/2</span>
-        <span class="c1">#  -&gt; replacement: A/(DtRouting*sqrt(a)) = Lakefactor, Y = sqrt(Q)</span>
-        <span class="c1">#  Y**2 + 2*Lakefactor*Y-2*SI=0</span>
-        <span class="c1"># solution of this quadratic equation:</span>
-        <span class="c1"># Q=sqr(-LakeFactor+sqrt(sqr(LakeFactor)+2*SI))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeFactorSqr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeFactor</span><span class="p">)</span>
         <span class="c1"># for faster calculation inside dynamic section</span>
@@ -283,7 +303,6 @@
 
 <span class="sd">        See Also:</span>
 <span class="sd">            LISFLOOD manual Annex 1: (Burek et al. 2013)</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#  Conservative, normal and flood storage limit (fraction of total storage, [-])</span>
@@ -328,6 +347,23 @@
 <div class="viewcode-block" id="lakes_reservoirs.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part set lakes and reservoirs for each year</span>
+
+<span class="sd">        Note:</span>
+
+<span class="sd">            **Flow out of lake:** solving the equation:</span>
+
+<span class="sd">            :math:`(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2`</span>
+
+<span class="sd">            :math:`SI = (S2 / dtime + Qout2 / 2) =  (A*H) / DtSec + Q/2 = A/(DtSec * \sqrt{a} * \sqrt{Q} + Q/2`</span>
+
+<span class="sd">            -&gt; replacement: :math:`A / (DtSec * sqrt(a)) = Lakefactor, Y = sqrt(Q)`</span>
+
+<span class="sd">            :math:`Y^2 + 2 * Lakefactor * Y - 2 * SI = 0`</span>
+
+<span class="sd">            solution of this quadratic equation:</span>
+
+<span class="sd">            :math:`Q = (-LakeFactor + \sqrt{LakeFactor^2 + 2 * SI})^2`</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">):</span>
             <span class="c1"># check years</span>
@@ -407,13 +443,6 @@
             <span class="c1"># here S1/dtime - Qout1/2 + LakeIn , so that is the right part of the equation above</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeOutflowC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeFactor</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeFactorSqr</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lakeStorageIndicator</span><span class="p">))</span>
-            <span class="c1"># Flow out of lake:</span>
-            <span class="c1">#  solving the equation  (S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2</span>
-            <span class="c1">#  SI = (S2/dtime + Qout2/2) =  (A*H)/DtRouting + Q/2 = A/(DtRouting*sqrt(a)  * sqrt(Q) + Q/2</span>
-            <span class="c1">#  -&gt; replacement: A/(DtRouting*sqrt(a)) = Lakefactor, Y = sqrt(Q)</span>
-            <span class="c1">#  Y**2 + 2*Lakefactor*Y-2*SI=0</span>
-            <span class="c1"># solution of this quadratic equation:</span>
-            <span class="c1"># Q=sqr(-LakeFactor+sqrt(sqr(LakeFactor)+2*SI));</span>
 
             <span class="n">QLakeOutM3DtC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeOutflowC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dtRouting</span>
             <span class="c1"># Outflow in [m3] per timestep</span>

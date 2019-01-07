@@ -43,119 +43,38 @@
             
   <div class="section" id="management-modules-package">
 <h1>management_modules package<a class="headerlink" href="#management-modules-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-management_modules.checks">
-<span id="management-modules-checks-module"></span><h2>management_modules.checks module<a class="headerlink" href="#module-management_modules.checks" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="management_modules.checks.checkmap">
-<code class="descclassname">management_modules.checks.</code><code class="descname">checkmap</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#checkmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.checkmap" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="management_modules.checks.counted">
-<code class="descclassname">management_modules.checks.</code><code class="descname">counted</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#counted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.counted" title="Permalink to this definition">¶</a></dt>
-<dd><p>count number of times a subroutine is called</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-<div class="section" id="module-management_modules.configuration">
-<span id="management-modules-configuration-module"></span><h2>management_modules.configuration module<a class="headerlink" href="#module-management_modules.configuration" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="management_modules.configuration.ExtParser">
-<em class="property">class </em><code class="descclassname">management_modules.configuration.</code><code class="descname">ExtParser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">configparser.ConfigParser</span></code></p>
-<p>addition to the parser to replace placeholders</p>
-<p class="rubric">Example</p>
-<p>PathRoot = C:/work
-MaskMap = $(FILE_PATHS:PathRoot)/data/areamaps/area.tif</p>
-<dl class="method">
-<dt id="management_modules.configuration.ExtParser.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>raw=False</em>, <em>vars=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>def get(self, section, option, raw=False, vars=None
-placeholder replacement</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>section</strong> – </li>
-<li><strong>option</strong> – </li>
-<li><strong>raw</strong> – </li>
-<li><strong>vars</strong> – </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="management_modules.configuration.parse_configuration">
-<code class="descclassname">management_modules.configuration.</code><code class="descname">parse_configuration</code><span class="sig-paren">(</span><em>settingsFileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#parse_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.parse_configuration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse settings file</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>settingsFileName</strong> – name of the settings file</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">parameters in list: binding, options in list: option</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="management_modules.configuration.read_metanetcdf">
-<code class="descclassname">management_modules.configuration.</code><code class="descname">read_metanetcdf</code><span class="sig-paren">(</span><em>metaxml</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#read_metanetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.read_metanetcdf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read the metadata for netcdf output files
-unit, long name, standard name and additional information</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>metaxml</strong> – file mit information for netcdf files (metadata)</li>
-<li><strong>name</strong> – file name information</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">List with metadata information: metaNetcdfVar</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-<div class="section" id="module-management_modules.data_handling">
-<span id="management-modules-data-handling-module"></span><h2>management_modules.data_handling module<a class="headerlink" href="#module-management_modules.data_handling" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<div class="section" id="data-management">
+<h2>Data management<a class="headerlink" href="#data-management" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data-handling-module">
+<h3>data_handling module<a class="headerlink" href="#data-handling-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Managing data and data handling</strong></p>
+<span class="target" id="module-management_modules.data_handling"></span><dl class="function">
 <dt id="management_modules.data_handling.cbinding">
 <code class="descclassname">management_modules.data_handling.</code><code class="descname">cbinding</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#cbinding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.cbinding" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check if variable in settings file has a counterpart in the source code</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inBinding</strong> – parameter in settings file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.checkOption">
 <code class="descclassname">management_modules.data_handling.</code><code class="descname">checkOption</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#checkOption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.checkOption" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check if option in settings file has a counterpart in the source code</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inBinding</strong> – parameter in settings file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.compressArray">
@@ -353,14 +272,6 @@ calls function <a class="reference internal" href="#management_modules.data_hand
 <dt id="management_modules.data_handling.metaNetCDF">
 <code class="descclassname">management_modules.data_handling.</code><code class="descname">metaNetCDF</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#metaNetCDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.metaNetCDF" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the map metadata from precipitation netcdf maps</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">if no precipitation maps can be found: <a class="reference internal" href="#management_modules.messages.CWATMFileError" title="management_modules.messages.CWATMFileError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMFileError()</span></code></a></td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="function">
@@ -691,195 +602,10 @@ variable metaNetcdfVar</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-management_modules.globals">
-<span id="management-modules-globals-module"></span><h2>management_modules.globals module<a class="headerlink" href="#module-management_modules.globals" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="management_modules.globals.globalFlags">
-<code class="descclassname">management_modules.globals.</code><code class="descname">globalFlags</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/globals.html#globalFlags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.globals.globalFlags" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read flags - according to the flags the output is adjusted
-quiet,veryquiet, loud, checkfiles, noheader,printtime, warranty</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-management_modules.dynamicModel">
-<span id="management-modules-dynamicmodel-module"></span><h2>management_modules.dynamicModel module<a class="headerlink" href="#module-management_modules.dynamicModel" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="management_modules.dynamicModel.DynamicModel">
-<em class="property">class </em><code class="descclassname">management_modules.dynamicModel.</code><code class="descname">DynamicModel</code><a class="reference internal" href="_modules/management_modules/dynamicModel.html#DynamicModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.dynamicModel.DynamicModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="attribute">
-<dt id="management_modules.dynamicModel.DynamicModel.i">
-<code class="descname">i</code><em class="property"> = 1</em><a class="headerlink" href="#management_modules.dynamicModel.DynamicModel.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="management_modules.dynamicModel.ModelFrame">
-<em class="property">class </em><code class="descclassname">management_modules.dynamicModel.</code><code class="descname">ModelFrame</code><span class="sig-paren">(</span><em>model</em>, <em>lastTimeStep=1</em>, <em>firstTimestep=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/dynamicModel.html#ModelFrame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.dynamicModel.ModelFrame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Frame of the dynamic hydrological model</p>
-<p>lastTimeStep:  Last time step to run
-firstTimestep: Starting time step of the model</p>
-<dl class="method">
-<dt id="management_modules.dynamicModel.ModelFrame.run">
-<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/dynamicModel.html#ModelFrame.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.dynamicModel.ModelFrame.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run the dynamic part of the model</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-management_modules.messages">
-<span id="management-modules-messages-module"></span><h2>management_modules.messages module<a class="headerlink" href="#module-management_modules.messages" title="Permalink to this headline">¶</a></h2>
-<dl class="exception">
-<dt id="management_modules.messages.CWATMError">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>The error handling class
-prints out an error</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="management_modules.messages.CWATMFileError">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMFileError</code><span class="sig-paren">(</span><em>filename</em>, <em>msg=''</em>, <em>sname=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMFileError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMFileError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-class docutils literal notranslate"><span class="pre">management_modules.messages.CWATMError</span></code></a></p>
-<p>The error handling class
-prints out an error</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="management_modules.messages.CWATMRunInfo">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMRunInfo</code><span class="sig-paren">(</span><em>outputDir</em>, <em>Steps=1</em>, <em>ensMembers=1</em>, <em>Cores=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMRunInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMRunInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></p>
-<p>prints out an error</p>
-<dl class="docutils">
-<dt>Warning</dt>
-<dd>warning given with a header and a message from the subroutine</dd>
-</dl>
-</dd></dl>
-
-<dl class="exception">
-<dt id="management_modules.messages.CWATMWarning">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMWarning</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMWarning" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></p>
-<p>the error handling class
-prints out an error</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-management_modules.output">
-<span id="management-modules-output-module"></span><h2>management_modules.output module<a class="headerlink" href="#module-management_modules.output" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="management_modules.output.outputTssMap">
-<em class="property">class </em><code class="descclassname">management_modules.output.</code><code class="descname">outputTssMap</code><span class="sig-paren">(</span><em>out_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Output of time series and map</p>
-<dl class="method">
-<dt id="management_modules.output.outputTssMap.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><em>ef=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the output module</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="management_modules.output.outputTssMap.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of the output module</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-management_modules.replace_pcr">
-<span id="management-modules-replace-pcr-module"></span><h2>management_modules.replace_pcr module<a class="headerlink" href="#module-management_modules.replace_pcr" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="management_modules.replace_pcr.npareaaverage">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareaaverage</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareaaverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareaaverage" title="Permalink to this definition">¶</a></dt>
-<dd><p>numpy area average procedure</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>values</strong> – </li>
-<li><strong>areaclass</strong> – </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="management_modules.replace_pcr.npareamajority">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamajority</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamajority"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamajority" title="Permalink to this definition">¶</a></dt>
-<dd><p>numpy area majority procedure</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>values</strong> – </li>
-<li><strong>areaclass</strong> – </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="management_modules.replace_pcr.npareamaximum">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamaximum</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamaximum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamaximum" title="Permalink to this definition">¶</a></dt>
-<dd><p>numpy area maximum procedure</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>values</strong> – </li>
-<li><strong>areaclass</strong> – </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="management_modules.replace_pcr.npareatotal">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareatotal</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareatotal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareatotal" title="Permalink to this definition">¶</a></dt>
-<dd><p>numpy area total procedure</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>values</strong> – </li>
-<li><strong>areaclass</strong> – </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-<div class="section" id="module-management_modules.timestep">
-<span id="management-modules-timestep-module"></span><h2>management_modules.timestep module<a class="headerlink" href="#module-management_modules.timestep" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<div class="section" id="timestep-module">
+<h3>timestep module<a class="headerlink" href="#timestep-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Managing time</strong></p>
+<span class="target" id="module-management_modules.timestep"></span><dl class="function">
 <dt id="management_modules.timestep.Calendar">
 <code class="descclassname">management_modules.timestep.</code><code class="descname">Calendar</code><span class="sig-paren">(</span><em>input</em>, <em>errorNo=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#Calendar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.Calendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the date from CalendarDayStart in the settings xml
@@ -927,17 +653,65 @@ And set some date variables</p>
 <dl class="function">
 <dt id="management_modules.timestep.ctbinding">
 <code class="descclassname">management_modules.timestep.</code><code class="descname">ctbinding</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#ctbinding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.ctbinding" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check if variable in settings file has a counterpart in source code</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> – variable in settings file to be tested</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">if variable is not found send an error: <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMError()</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="management_modules.timestep.date2indexNew">
 <code class="descclassname">management_modules.timestep.</code><code class="descname">date2indexNew</code><span class="sig-paren">(</span><em>date</em>, <em>nctime</em>, <em>calendar</em>, <em>select='nearest'</em>, <em>name=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#date2indexNew"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.date2indexNew" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The original netCDF4 library cannot handle month and years
+Replace: date2index
+This one checks for days, month and years
+And set some date variables</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>date</strong> – date</li>
+<li><strong>nctime</strong> – time unit of the netcdf file</li>
+<li><strong>select</strong> – (optional) which date is selected, default: nearest</li>
+<li><strong>name</strong> – (optional) name of th dataset</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">index</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="management_modules.timestep.date2str">
 <code class="descclassname">management_modules.timestep.</code><code class="descname">date2str</code><span class="sig-paren">(</span><em>date</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#date2str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.date2str" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Convert date to string of date e.g. 27/12/2018</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> – date as (datetime)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">date string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="management_modules.timestep.datetoInt">
@@ -954,7 +728,7 @@ And set some date variables</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">interger value of a date, satarting from begin date</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">integer value of a date, starting from begin date</p>
 </td>
 </tr>
 </tbody>
@@ -976,7 +750,7 @@ And set some date variables</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">interger value of a dates, satarting from begin date</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">integer value of a dates, starting from begin date</p>
 </td>
 </tr>
 </tbody>
@@ -1022,8 +796,370 @@ Current date is increasing, checking if beginning of month, year</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-management_modules">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-management_modules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configuration-module">
+<h3>configuration module<a class="headerlink" href="#configuration-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Loading and parsing of the settings file</strong></p>
+<span class="target" id="module-management_modules.configuration"></span><dl class="class">
+<dt id="management_modules.configuration.ExtParser">
+<em class="property">class </em><code class="descclassname">management_modules.configuration.</code><code class="descname">ExtParser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">configparser.ConfigParser</span></code></p>
+<p>addition to the parser to replace placeholders</p>
+<p class="rubric">Example</p>
+<p>PathRoot = C:/work
+MaskMap = $(FILE_PATHS:PathRoot)/data/areamaps/area.tif</p>
+<dl class="method">
+<dt id="management_modules.configuration.ExtParser.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>raw=False</em>, <em>vars=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>def get(self, section, option, raw=False, vars=None
+placeholder replacement</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>section</strong> – section part of the settings file</li>
+<li><strong>option</strong> – option part of the settings file</li>
+<li><strong>raw</strong> – </li>
+<li><strong>vars</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.configuration.parse_configuration">
+<code class="descclassname">management_modules.configuration.</code><code class="descname">parse_configuration</code><span class="sig-paren">(</span><em>settingsFileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#parse_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.parse_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse settings file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>settingsFileName</strong> – name of the settings file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">parameters in list: binding, options in list: option</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.configuration.read_metanetcdf">
+<code class="descclassname">management_modules.configuration.</code><code class="descname">read_metanetcdf</code><span class="sig-paren">(</span><em>metaxml</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#read_metanetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.read_metanetcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the metadata for netcdf output files
+unit, long name, standard name and additional information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>metaxml</strong> – file mit information for netcdf files (metadata)</li>
+<li><strong>name</strong> – file name information</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">List with metadata information: metaNetcdfVar</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="management-modules-messages-module">
+<h3>management_modules.messages module<a class="headerlink" href="#management-modules-messages-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Error handling - giving out messages</strong></p>
+<span class="target" id="module-management_modules.messages"></span><dl class="exception">
+<dt id="management_modules.messages.CWATMError">
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>The error handling class
+prints out an error</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Warning</strong> – class CWATMError</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">prints out a message about an error</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="exception">
+<dt id="management_modules.messages.CWATMFileError">
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMFileError</code><span class="sig-paren">(</span><em>filename</em>, <em>msg=''</em>, <em>sname=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMFileError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMFileError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-class docutils literal notranslate"><span class="pre">management_modules.messages.CWATMError</span></code></a></p>
+<p>The error handling class
+prints out an error</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Warning</strong> – class CWATMError</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">prints out a message about file error</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="exception">
+<dt id="management_modules.messages.CWATMRunInfo">
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMRunInfo</code><span class="sig-paren">(</span><em>outputDir</em>, <em>Steps=1</em>, <em>ensMembers=1</em>, <em>Cores=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMRunInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMRunInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></p>
+<p>prints out an error</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Warning</strong> – class warning</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">prints out a message</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Warning</dt>
+<dd>warning given with a header and a message from the subroutine</dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="management_modules.messages.CWATMWarning">
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMWarning</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></p>
+<p>the error handling class
+prints out an error</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Warning</strong> – class warning</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">prints out a message</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p><strong>Handling output of CWATM</strong></p>
+</div>
+<div class="section" id="module-management_modules.output">
+<span id="management-modules-output-module"></span><h3>management_modules.output module<a class="headerlink" href="#module-management_modules.output" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="management_modules.output.outputTssMap">
+<em class="property">class </em><code class="descclassname">management_modules.output.</code><code class="descname">outputTssMap</code><span class="sig-paren">(</span><em>out_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class: Output of time series and map</p>
+<dl class="method">
+<dt id="management_modules.output.outputTssMap.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><em>ef=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of the output module
+Output of maps and timeseries</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ef</strong> – done with environmental flow</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="management_modules.output.outputTssMap.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial part of the output module</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="management-modules-checks-module">
+<h3>management_modules.checks module<a class="headerlink" href="#management-modules-checks-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Checking maps if they fit in</strong></p>
+<span class="target" id="module-management_modules.checks"></span><dl class="function">
+<dt id="management_modules.checks.checkmap">
+<code class="descclassname">management_modules.checks.</code><code class="descname">checkmap</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#checkmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.checkmap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="management_modules.checks.counted">
+<code class="descclassname">management_modules.checks.</code><code class="descname">counted</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#counted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.counted" title="Permalink to this definition">¶</a></dt>
+<dd><p>count number of times a subroutine is called</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">number of times the subroutine is called</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="program-management">
+<h2>Program management<a class="headerlink" href="#program-management" title="Permalink to this headline">¶</a></h2>
+<p><strong>Global definition of variables</strong></p>
+<div class="section" id="globals-module">
+<h3>globals module<a class="headerlink" href="#globals-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Global definition of variables</strong></p>
+<span class="target" id="module-management_modules.globals"></span><dl class="function">
+<dt id="management_modules.globals.globalFlags">
+<code class="descclassname">management_modules.globals.</code><code class="descname">globalFlags</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/globals.html#globalFlags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.globals.globalFlags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read flags - according to the flags the output is adjusted
+quiet,veryquiet, loud, checkfiles, noheader,printtime, warranty</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arg</strong> – argument from calling cwatm</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="dynamicmodel-module">
+<h3>dynamicModel module<a class="headerlink" href="#dynamicmodel-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Framework of initial and dynamic modules</strong></p>
+<span class="target" id="module-management_modules.dynamicModel"></span><dl class="class">
+<dt id="management_modules.dynamicModel.DynamicModel">
+<em class="property">class </em><code class="descclassname">management_modules.dynamicModel.</code><code class="descname">DynamicModel</code><a class="reference internal" href="_modules/management_modules/dynamicModel.html#DynamicModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.dynamicModel.DynamicModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="management_modules.dynamicModel.DynamicModel.i">
+<code class="descname">i</code><em class="property"> = 1</em><a class="headerlink" href="#management_modules.dynamicModel.DynamicModel.i" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="management_modules.dynamicModel.ModelFrame">
+<em class="property">class </em><code class="descclassname">management_modules.dynamicModel.</code><code class="descname">ModelFrame</code><span class="sig-paren">(</span><em>model</em>, <em>lastTimeStep=1</em>, <em>firstTimestep=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/dynamicModel.html#ModelFrame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.dynamicModel.ModelFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Frame of the dynamic hydrological model</p>
+<p>lastTimeStep:  Last time step to run
+firstTimestep: Starting time step of the model</p>
+<dl class="method">
+<dt id="management_modules.dynamicModel.ModelFrame.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/dynamicModel.html#ModelFrame.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.dynamicModel.ModelFrame.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the dynamic part of the model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="replace-pcr-module">
+<h3>replace_pcr module<a class="headerlink" href="#replace-pcr-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Some pcr operation are done in numpy</strong></p>
+<span class="target" id="module-management_modules.replace_pcr"></span><dl class="function">
+<dt id="management_modules.replace_pcr.npareaaverage">
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareaaverage</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareaaverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareaaverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>numpy area average procedure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>values</strong> – </li>
+<li><strong>areaclass</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">calculates the average area of a class</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.replace_pcr.npareamajority">
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamajority</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamajority"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamajority" title="Permalink to this definition">¶</a></dt>
+<dd><p>numpy area majority procedure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>values</strong> – </li>
+<li><strong>areaclass</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">calculates the majority of an area of a class</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.replace_pcr.npareamaximum">
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamaximum</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamaximum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamaximum" title="Permalink to this definition">¶</a></dt>
+<dd><p>numpy area maximum procedure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>values</strong> – </li>
+<li><strong>areaclass</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">calculates the maximum of an area of a class</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.replace_pcr.npareatotal">
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareatotal</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareatotal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareatotal" title="Permalink to this definition">¶</a></dt>
+<dd><p>numpy area total procedure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>values</strong> – </li>
+<li><strong>areaclass</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">calculates the total area of a class</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-management_modules"></span></div>
 </div>
 </div>
 

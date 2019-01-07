@@ -67,10 +67,17 @@
 <div class="viewcode-block" id="inflow.initial"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.inflow.inflow.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial part of the inflow module</span>
+<span class="sd">        Get the inflow points</span>
+
+<span class="sd">        calls function :meth:`hydrological_modules.getlocOutpoints`</span>
+<span class="sd">        calls function :meth:`hydrological_modules.join_struct_arrays2`</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">getlocOutpoints</span><span class="p">(</span><span class="n">out</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get location from Inflow (same as outflow) points</span>
+
 <span class="sd">            :param out: get out</span>
 <span class="sd">            :return: sampleAdresses - number and locs of the output</span>
 <span class="sd">            &quot;&quot;&quot;</span>
@@ -82,6 +89,17 @@
             <span class="k">return</span> <span class="n">sampleAdresses</span>
 
         <span class="k">def</span> <span class="nf">join_struct_arrays2</span><span class="p">(</span><span class="n">arrays</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Join arrays to a combined one</span>
+
+<span class="sd">            :param arrays:</span>
+<span class="sd">            :return: combined arry</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            :param arrays: </span>
+<span class="sd">            :return: </span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
             <span class="n">newdtype</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">descr</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">),</span> <span class="p">[])</span>
             <span class="n">newrecarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arrays</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">newdtype</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">:</span>
@@ -168,6 +186,7 @@
 <div class="viewcode-block" id="inflow.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.inflow.inflow.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the inflow module</span>
+<span class="sd">        Use the inflow points to add inflow from time series file(s)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;inflow&#39;</span><span class="p">):</span>

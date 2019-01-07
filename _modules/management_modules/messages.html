@@ -62,6 +62,11 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The error handling class</span>
 <span class="sd">    prints out an error</span>
+
+<span class="sd">    :param Warning: class CWATMError</span>
+<span class="sd">    :return: prints out a message about an error</span>
+
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
 
@@ -81,6 +86,9 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The error handling class</span>
 <span class="sd">    prints out an error</span>
+
+<span class="sd">    :param Warning: class CWATMError</span>
+<span class="sd">    :return: prints out a message about file error</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">sname</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
@@ -103,7 +111,11 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    the error handling class</span>
 <span class="sd">    prints out an error</span>
+
+<span class="sd">    :param Warning: class warning</span>
+<span class="sd">    :return: prints out a message</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">tracebacklimit</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2"> ========================== CWATM Warning =============================</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -115,6 +127,9 @@
 <div class="viewcode-block" id="CWATMRunInfo"><a class="viewcode-back" href="../../management_modules.html#management_modules.messages.CWATMRunInfo">[docs]</a><span class="k">class</span> <span class="nc">CWATMRunInfo</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    prints out an error</span>
+
+<span class="sd">    :param Warning: class warning</span>
+<span class="sd">    :return: prints out a message</span>
 
 <span class="sd">    Warning</span>
 <span class="sd">        warning given with a header and a message from the subroutine</span>

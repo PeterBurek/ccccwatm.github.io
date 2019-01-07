@@ -451,7 +451,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    get the map metadata from precipitation netcdf maps</span>
 
-<span class="sd">    :raises: if no precipitation maps can be found: :meth:`management_modules.messages.CWATMFileError`</span>
+
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1358,7 +1358,11 @@
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="checkOption"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.checkOption">[docs]</a><span class="k">def</span> <span class="nf">checkOption</span><span class="p">(</span><span class="n">inBinding</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if option in settings file has a counterpart in the source code</span>
 
+<span class="sd">    :param inBinding: parameter in settings file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lineclosest</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">test</span> <span class="o">=</span> <span class="n">inBinding</span> <span class="ow">in</span> <span class="n">option</span>
     <span class="k">if</span> <span class="n">test</span><span class="p">:</span>
@@ -1379,6 +1383,11 @@
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="cbinding"><a class="viewcode-back" href="../../management_modules.html#management_modules.data_handling.cbinding">[docs]</a><span class="k">def</span> <span class="nf">cbinding</span><span class="p">(</span><span class="n">inBinding</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if variable in settings file has a counterpart in the source code</span>
+
+<span class="sd">    :param inBinding: parameter in settings file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">lineclosest</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">test</span> <span class="o">=</span> <span class="n">inBinding</span> <span class="ow">in</span> <span class="n">binding</span>

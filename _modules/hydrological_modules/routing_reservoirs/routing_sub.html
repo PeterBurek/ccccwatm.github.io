@@ -64,50 +64,35 @@
 <div class="viewcode-block" id="Compress"><a class="viewcode-back" href="../../../hydrological_modules.html#hydrological_modules.routing_reservoirs.routing_sub.Compress">[docs]</a><span class="k">def</span> <span class="nf">Compress</span> <span class="p">(</span><span class="nb">map</span><span class="p">,</span><span class="n">mask</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    compressing map from 2D to 1D without missing values</span>
+
 <span class="sd">    :param map:  input map</span>
 <span class="sd">    :param mask: mask map</span>
 <span class="sd">    :return: compressed map</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">maskmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span><span class="n">mask</span><span class="p">)</span>
     <span class="n">compmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">compressed</span><span class="p">(</span><span class="n">maskmap</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">compmap</span></div>
 
 
-<div class="viewcode-block" id="Decompress"><a class="viewcode-back" href="../../../hydrological_modules.html#hydrological_modules.routing_reservoirs.routing_sub.Decompress">[docs]</a><span class="k">def</span> <span class="nf">Decompress</span><span class="p">(</span><span class="n">compmap</span><span class="p">,</span><span class="n">mask</span><span class="p">,</span><span class="n">emptymap</span><span class="p">):</span>
+<div class="viewcode-block" id="decompress"><a class="viewcode-back" href="../../../hydrological_modules.html#hydrological_modules.routing_reservoirs.routing_sub.decompress">[docs]</a><span class="k">def</span> <span class="nf">decompress</span><span class="p">(</span><span class="nb">map</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decompressing map from 1D to 2D with missing values</span>
-<span class="sd">    :param compmap: compressed map</span>
-<span class="sd">    :param mask:  mask map</span>
-<span class="sd">    :param emptymap: map with only 0 in</span>
+
+<span class="sd">    :param map: compressed map</span>
 <span class="sd">    :return: decompressed 2D map</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dmap</span><span class="o">=</span><span class="n">emptymap</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">dmap</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span> <span class="o">=</span> <span class="n">compmap</span><span class="p">[:]</span>
-    <span class="n">dmap</span> <span class="o">=</span> <span class="n">dmap</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dmap</span></div>
 
-
-<div class="viewcode-block" id="decompress1"><a class="viewcode-back" href="../../../hydrological_modules.html#hydrological_modules.routing_reservoirs.routing_sub.decompress1">[docs]</a><span class="k">def</span> <span class="nf">decompress1</span><span class="p">(</span><span class="nb">map</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    redundant have to look if it is still used</span>
-
-<span class="sd">    Todo:</span>
-<span class="sd">        remove it?</span>
-
-<span class="sd">    :param map:</span>
-<span class="sd">    :return:</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dmap</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">dmap</span><span class="p">[</span><span class="o">~</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskflat&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">map</span><span class="p">[:]</span>
     <span class="n">dmap</span> <span class="o">=</span> <span class="n">dmap</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">dmap</span></div>
 
 
-
-
 <div class="viewcode-block" id="postorder"><a class="viewcode-back" href="../../../hydrological_modules.html#hydrological_modules.routing_reservoirs.routing_sub.postorder">[docs]</a><span class="k">def</span> <span class="nf">postorder</span><span class="p">(</span><span class="n">dirUp</span><span class="p">,</span><span class="n">catchment</span><span class="p">,</span><span class="n">node</span><span class="p">,</span><span class="n">catch</span><span class="p">,</span><span class="n">dirDown</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    routine to run a postoder tree traversal</span>
+<span class="sd">    Routine to run a postoder tree traversal</span>
+
 <span class="sd">    :param dirUp:</span>
 <span class="sd">    :param catchment:</span>
 <span class="sd">    :param node:</span>
@@ -155,7 +140,7 @@
 <span class="sd">    runs the network tree upstream from outlet to source</span>
 
 <span class="sd">    :param dirshort:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: direction upstream</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># -- up direction</span>
@@ -184,7 +169,7 @@
 <span class="sd">    :param dirUp:</span>
 <span class="sd">    :param lddcomp:</span>
 <span class="sd">    :param dirDown:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: direction downstream</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">catchment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
@@ -202,10 +187,11 @@
 <div class="viewcode-block" id="upstreamArea"><a class="viewcode-back" href="../../../hydrological_modules.html#hydrological_modules.routing_reservoirs.routing_sub.upstreamArea">[docs]</a><span class="k">def</span> <span class="nf">upstreamArea</span><span class="p">(</span><span class="n">dirDown</span><span class="p">,</span><span class="n">dirshort</span><span class="p">,</span><span class="n">area</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    calculates upstream area</span>
+
 <span class="sd">    :param dirDown: array which point from each cell to the next downstream cell</span>
 <span class="sd">    :param dirshort:</span>
 <span class="sd">    :param area: area in m2 for a single gridcell</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: upstream area</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">ups</span> <span class="o">=</span> <span class="n">area</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -218,7 +204,7 @@
 
 <span class="sd">    :param downstruct:</span>
 <span class="sd">    :param weight:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: upstream 1cell</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">downstruct</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weight</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
@@ -229,7 +215,7 @@
 
 <span class="sd">    :param dirUp:</span>
 <span class="sd">    :param weight:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: dowmnstream 1 cell</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">downstream</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -247,7 +233,7 @@
 
 <span class="sd">    :param dirUp:</span>
 <span class="sd">    :param points:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: subcatchment</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">subcatch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
@@ -272,7 +258,7 @@
 <span class="sd">    :param dirUp:</span>
 <span class="sd">    :param points:</span>
 <span class="sd">    :param ups:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: subcatchment</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">subcatch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
@@ -306,8 +292,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    defines river network</span>
 
-<span class="sd">    :param ldd:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :param ldd: river network</span>
+<span class="sd">    :return: ldd variables</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">#ldd2D = decompress(ldd, pcr1=False).astype(np.int64)</span>
@@ -317,7 +303,7 @@
     <span class="c1"># every cell gets an order starting from 0 ...</span>
     <span class="n">lddshortOrder</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
     <span class="c1"># decompress this map to 2D</span>
-    <span class="n">lddOrder</span> <span class="o">=</span> <span class="n">decompress1</span><span class="p">(</span><span class="n">lddshortOrder</span><span class="p">)</span>
+    <span class="n">lddOrder</span> <span class="o">=</span> <span class="n">decompress</span><span class="p">(</span><span class="n">lddshortOrder</span><span class="p">)</span>
     <span class="n">lddOrder</span><span class="p">[</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]]</span><span class="o">=-</span><span class="mi">1</span>
     <span class="n">lddOrder</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lddOrder</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 
@@ -349,9 +335,9 @@
 <span class="sd">    * eliminate unsound parts</span>
 <span class="sd">    * add pits at points with no connections</span>
 
-<span class="sd">    :param lddnp:</span>
+<span class="sd">    :param lddnp: rivernetwork as 1D array</span>
 <span class="sd">    :param lddOrder:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: repaired ldd</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">yi</span><span class="o">=</span><span class="n">lddnp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>

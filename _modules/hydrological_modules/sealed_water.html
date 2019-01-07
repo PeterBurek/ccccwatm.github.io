@@ -69,12 +69,13 @@
 <div class="viewcode-block" id="sealed_water.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.sealed_water.sealed_water.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">coverType</span><span class="p">,</span> <span class="n">No</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the sealed_water module</span>
+
 <span class="sd">        runoff calculation for open water and sealed areas</span>
 
 <span class="sd">        :param coverType: Land cover type: forest, grassland  ...</span>
 <span class="sd">        :param No: number of land cover type: forest = 0, grassland = 1 ...</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="n">No</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">coverType</span> <span class="o">==</span> <span class="s2">&quot;water&quot;</span><span class="p">:</span>
                 <span class="c1"># bigger than 1.0 because of wind evaporation</span>

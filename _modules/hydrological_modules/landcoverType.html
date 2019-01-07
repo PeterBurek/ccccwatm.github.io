@@ -55,7 +55,9 @@
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    LAND COVER TYPE</span>
+
 <span class="sd">    runs the 6 land cover types through soil procedures</span>
+
 <span class="sd">    This routine calls the soil routine for each land cover type</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -70,12 +72,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial part of the land cover type module</span>
 <span class="sd">        Initialise the six land cover types</span>
+
 <span class="sd">        * Forest</span>
 <span class="sd">        * Grasland/non irrigated land</span>
 <span class="sd">        * Irrigation</span>
 <span class="sd">        * Paddy iirigation</span>
 <span class="sd">        * Sealed area</span>
 <span class="sd">        * Water covered area</span>
+
 <span class="sd">        And initialize the soil variables</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -381,9 +385,16 @@
 <div class="viewcode-block" id="landcoverType.dynamic_fracIrrigation"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic_fracIrrigation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dynamic</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the land cover type module</span>
+
 <span class="sd">        Calculating fraction of land cover</span>
+
 <span class="sd">        * loads the fraction of landcover for each year from netcdf maps</span>
 <span class="sd">        * calculate the fraction of 6 land cover types based on the maps</span>
+
+<span class="sd">        :param init: (optional) True: set for the first time of a run</span>
+<span class="sd">        :param dynamic: used in the dynmic run not in the initial phase</span>
+<span class="sd">        :return: -</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#if checkOption(&#39;includeIrrigation&#39;) and checkOption(&#39;dynamicIrrigationArea&#39;):</span>
@@ -448,13 +459,17 @@
 <div class="viewcode-block" id="landcoverType.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.landcoverType.landcoverType.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the land cover type module</span>
+
 <span class="sd">        Calculating soil for each of the 6  land cover class</span>
+
 <span class="sd">        * calls evaporation_module.dynamic</span>
 <span class="sd">        * calls interception_module.dynamic</span>
 <span class="sd">        * calls soil_module.dynamic</span>
 <span class="sd">        * calls sealed_water_module.dynamic</span>
+
 <span class="sd">        And sums every thing up depending on the land cover type fraction</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="c1">#if (dateVar[&#39;curr&#39;] == 15):</span>
         <span class="c1">#    ii=1</span>
 

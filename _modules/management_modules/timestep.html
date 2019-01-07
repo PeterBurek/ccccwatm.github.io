@@ -63,10 +63,25 @@
 <span class="kn">from</span> <span class="nn">dateutil.relativedelta</span> <span class="k">import</span> <span class="o">*</span>
 
 <div class="viewcode-block" id="date2str"><a class="viewcode-back" href="../../management_modules.html#management_modules.timestep.date2str">[docs]</a><span class="k">def</span> <span class="nf">date2str</span><span class="p">(</span><span class="n">date</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert date to string of date e.g. 27/12/2018</span>
+
+<span class="sd">    :param x: date as (datetime)</span>
+<span class="sd">    :return: date string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%02d</span><span class="s2">/</span><span class="si">%02d</span><span class="s2">/</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ctbinding"><a class="viewcode-back" href="../../management_modules.html#management_modules.timestep.ctbinding">[docs]</a><span class="k">def</span> <span class="nf">ctbinding</span><span class="p">(</span><span class="n">inBinding</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if variable in settings file has a counterpart in source code</span>
+
+<span class="sd">    :param x: variable in settings file to be tested</span>
+<span class="sd">    :return: -</span>
+<span class="sd">    :raises: if variable is not found send an error: :meth:`management_modules.messages.CWATMError`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">test</span> <span class="o">=</span> <span class="n">inBinding</span> <span class="ow">in</span> <span class="n">binding</span>
     <span class="k">if</span> <span class="n">test</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">binding</span><span class="p">[</span><span class="n">inBinding</span><span class="p">]</span>
@@ -152,7 +167,7 @@
 <span class="sd">    :param dateIn: date</span>
 <span class="sd">    :param begin: reference date</span>
 <span class="sd">    :param both: if set to True both the int and the string of the date are returned</span>
-<span class="sd">    :return: interger value of a date, satarting from begin date</span>
+<span class="sd">    :return: integer value of a date, starting from begin date</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">date1</span> <span class="o">=</span> <span class="n">Calendar</span><span class="p">(</span><span class="n">dateIn</span><span class="p">)</span>
@@ -178,7 +193,7 @@
 <span class="sd">    :param initdates: one or several dates</span>
 <span class="sd">    :param begin: reference date</span>
 <span class="sd">    :param end: end date</span>
-<span class="sd">    :return: interger value of a dates, satarting from begin date</span>
+<span class="sd">    :return: integer value of a dates, starting from begin date</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># datetosaveInit(initdates, dateVar[&#39;dateBegin&#39;], dateVar[&#39;dateEnd&#39;])</span>
@@ -308,7 +323,19 @@
 
 
 <div class="viewcode-block" id="date2indexNew"><a class="viewcode-back" href="../../management_modules.html#management_modules.timestep.date2indexNew">[docs]</a><span class="k">def</span> <span class="nf">date2indexNew</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">nctime</span><span class="p">,</span> <span class="n">calendar</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-    <span class="c1"># because date2index cannot handle month and years only</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The original netCDF4 library cannot handle month and years</span>
+<span class="sd">    Replace: date2index</span>
+<span class="sd">    This one checks for days, month and years</span>
+<span class="sd">    And set some date variables</span>
+
+<span class="sd">    :param date: date</span>
+<span class="sd">    :param nctime: time unit of the netcdf file</span>
+<span class="sd">    :param select: (optional) which date is selected, default: nearest</span>
+<span class="sd">    :param name: (optional) name of th dataset</span>
+<span class="sd">    :return: index</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">unit</span> <span class="o">=</span> <span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">unit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span><span class="s2">&quot;DAYS&quot;</span><span class="p">:</span>
         <span class="n">index</span> <span class="o">=</span> <span class="n">date2index</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">nctime</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
@@ -348,8 +375,6 @@
 
 <span class="sd">    :return: a list of date variable in: dateVar</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-
 
     <span class="c1">#print &quot;leap:&quot;, globals.leap_flag[0]</span>
     <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;dateBegin&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;curr&#39;</span><span class="p">])</span>

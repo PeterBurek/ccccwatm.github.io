@@ -58,7 +58,7 @@
 <span class="sd">    count number of times a subroutine is called</span>
 
 <span class="sd">    :param fn:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: number of times the subroutine is called</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">wrapper</span><span class="o">.</span><span class="n">called</span><span class="o">+=</span> <span class="mi">1</span>
@@ -71,12 +71,13 @@
 <span class="k">def</span> <span class="nf">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="n">flagmap</span><span class="p">,</span> <span class="n">find</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    check maps if the fit to the mask map</span>
-<span class="sd">    :param name:</span>
-<span class="sd">    :param value:</span>
-<span class="sd">    :param map:</span>
-<span class="sd">    :param flagmap:</span>
-<span class="sd">    :param find:</span>
-<span class="sd">    :return:</span>
+
+<span class="sd">    :param name: name of the variable in settingsfile</span>
+<span class="sd">    :param value: filename of the variable</span>
+<span class="sd">    :param map: data (either a number or a 1D array)</span>
+<span class="sd">    :param flagmap: indicates a 1D array or a number</span>
+<span class="sd">    :param find: at the moment a dummy</span>
+<span class="sd">    :return: -</span>
 
 <span class="sd">    Todo:</span>
 <span class="sd">        still to improve, this is work in progress!</span>

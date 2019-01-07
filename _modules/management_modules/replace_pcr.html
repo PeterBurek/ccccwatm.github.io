@@ -67,7 +67,7 @@
 
 <span class="sd">    :param values:</span>
 <span class="sd">    :param areaclass:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: calculates the total area of a class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">areaclass</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="n">values</span><span class="p">),</span><span class="n">areaclass</span><span class="p">)</span></div>
 
@@ -78,7 +78,7 @@
 
 <span class="sd">    :param values:</span>
 <span class="sd">    :param areaclass:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: calculates the average area of a class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">areaclass</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="n">values</span><span class="p">)</span><span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">areaclass</span><span class="p">)</span> <span class="p">,</span><span class="n">areaclass</span><span class="p">)</span></div>
@@ -90,7 +90,7 @@
 
 <span class="sd">    :param values:</span>
 <span class="sd">    :param areaclass:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: calculates the maximum of an area of a class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">valueMax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">areaclass</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">valueMax</span><span class="p">,</span> <span class="n">areaclass</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
@@ -103,7 +103,7 @@
 
 <span class="sd">    :param values:</span>
 <span class="sd">    :param areaclass:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    :return: calculates the majority of an area of a class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">uni</span><span class="p">,</span><span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">areaclass</span><span class="p">,</span><span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

@@ -71,7 +71,7 @@
 <div class="viewcode-block" id="outputTssMap"><a class="viewcode-back" href="../../management_modules.html#management_modules.output.outputTssMap">[docs]</a><span class="k">class</span> <span class="nc">outputTssMap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Output of time series and map</span>
+<span class="sd">    Class: Output of time series and map</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_variable</span><span class="p">):</span>
@@ -86,6 +86,8 @@
 
         <span class="k">def</span> <span class="nf">getlocOutpoints</span><span class="p">(</span><span class="n">out</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the location of output points</span>
+
 <span class="sd">            :param out: get out</span>
 <span class="sd">            :return: sampleAdresses - number and locs of the output</span>
 <span class="sd">            &quot;&quot;&quot;</span>
@@ -99,6 +101,7 @@
 
         <span class="k">def</span> <span class="nf">appendinfo</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">sec</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">ismap</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Append all information on outputpoints and maps - what output, where, when</span>
 
 <span class="sd">            :param out:  map or tss, info of variable, output location</span>
 <span class="sd">            :param sec:  Section of settingsfile</span>
@@ -204,19 +207,27 @@
 <div class="viewcode-block" id="outputTssMap.dynamic"><a class="viewcode-back" href="../../management_modules.html#management_modules.output.outputTssMap.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ef</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the output module</span>
+<span class="sd">        Output of maps and timeseries</span>
+
+<span class="sd">        :param ef: done with environmental flow</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">firstout</span><span class="p">(</span><span class="nb">map</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            returns the first cell as output value</span>
+
+<span class="sd">            :param map: 1D array of data</span>
+<span class="sd">            :return: value of the first output point</span>
 <span class="sd">            &quot;&quot;&quot;</span>
+
             <span class="n">first</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sampleAdresses</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">value</span> <span class="o">=</span> <span class="nb">map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sampleAdresses</span><span class="p">[</span><span class="n">first</span><span class="p">]]</span>
             <span class="k">return</span> <span class="n">value</span>
 
         <span class="k">def</span> <span class="nf">checkifvariableexists</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">vari</span><span class="p">,</span> <span class="n">space</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Test if variable dxists</span>
+<span class="sd">            Test if variable exists</span>
+
 <span class="sd">            :param name: variable name</span>
 <span class="sd">            :param vari: variable to check if it exists in the variable space</span>
 <span class="sd">            :param space: variable space of self.var</span>
@@ -232,10 +243,13 @@
 
         <span class="k">def</span> <span class="nf">sample3</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="n">daymonthyear</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            :param expression:</span>
-<span class="sd">            :param map:</span>
-<span class="sd">            :param daymonthyear:</span>
-<span class="sd">            :return:</span>
+<span class="sd">            Collects outputpoint value to write it into a time series file</span>
+<span class="sd">            calls function :meth:`management_modules.writeTssFile`</span>
+
+<span class="sd">            :param expression: array of outputpoint information</span>
+<span class="sd">            :param map: 1D array of data</span>
+<span class="sd">            :param daymonthyear: day =0 , month =1 , year =2</span>
+<span class="sd">            :return: expression</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="c1">#if dateVar[&#39;checked&#39;][dateVar[&#39;currwrite&#39;] - 1] &gt;= daymonthyear:</span>
@@ -258,39 +272,17 @@
 
             <span class="k">return</span> <span class="n">expression</span>
 
-        <span class="k">def</span> <span class="nf">sample4</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">daymonthyear</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            for mareatotal, for each gauge a separate value</span>
-<span class="sd">            :param expression:</span>
-<span class="sd">            :param input:</span>
-<span class="sd">            :param daymonthyear:</span>
-<span class="sd">            :return:</span>
-<span class="sd">            TODO: change this to store in arrays not in maps</span>
-<span class="sd">            &quot;&quot;&quot;</span>
-
-            <span class="c1">#if dateVar[&#39;checked&#39;][dateVar[&#39;currwrite&#39;] - 1] &gt;= daymonthyear:</span>
-            <span class="c1"># using a list with is 1 for monthend and 2 for year end to check for execution</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">ii</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sampleAdresses</span><span class="p">):</span>
-                <span class="nb">map</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="nb">input</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span>
-                <span class="n">v</span> <span class="o">=</span> <span class="nb">map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sampleAdresses</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span>
-                <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-                <span class="n">ii</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">expression</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;laststep&#39;</span><span class="p">]:</span>
-                <span class="n">writeTssFile</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">daymonthyear</span><span class="p">)</span>
-
-            <span class="k">return</span> <span class="n">expression</span>
-
-
 
         <span class="k">def</span> <span class="nf">writeTssFile</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">daymonthyear</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            writing timeseries to disk</span>
+<span class="sd">            writing timeseries</span>
+<span class="sd">            calls function :meth:`management_modules.writeFileHeader`</span>
+
+<span class="sd">            :param expression:  array of outputpoint information</span>
+<span class="sd">            :param daymonthyear: day =0 , month =1 , year =2</span>
+<span class="sd">            :return: -</span>
 <span class="sd">            &quot;&quot;&quot;</span>
-            <span class="c1">#</span>
+
             <span class="n">outputFilename</span> <span class="o">=</span> <span class="n">expression</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
             <span class="k">if</span> <span class="n">expression</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
@@ -322,6 +314,10 @@
         <span class="k">def</span> <span class="nf">writeFileHeader</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">,</span><span class="n">expression</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            writes header part of tss file</span>
+
+<span class="sd">            :param outputfilename: name of the outputfile</span>
+<span class="sd">            :param expression:  array of outputpoint information</span>
+<span class="sd">            :return: -</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="n">outputFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
@@ -349,6 +345,8 @@
 
         <span class="k">def</span> <span class="nf">sample_maptotxt</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="nb">map</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Write map information to textfile</span>
+
 <span class="sd">            :param expression:</span>
 <span class="sd">            :param map:</span>
 <span class="sd">            :return:</span>

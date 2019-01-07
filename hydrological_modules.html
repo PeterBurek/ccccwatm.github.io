@@ -47,12 +47,12 @@
             
   <div class="section" id="hydrological-modules-package">
 <h1>hydrological_modules package<a class="headerlink" href="#hydrological-modules-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-hydrological_modules.miscInitial">
-<span id="hydrological-modules-miscinitial-module"></span><h2>hydrological_modules.miscInitial module<a class="headerlink" href="#module-hydrological_modules.miscInitial" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="initialize">
+<h2>Initialize<a class="headerlink" href="#initialize" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="miscinitial-module">
+<h3>miscInitial module<a class="headerlink" href="#miscinitial-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Initializing some variables</strong></p>
+<span class="target" id="module-hydrological_modules.miscInitial"></span><dl class="class">
 <dt id="hydrological_modules.miscInitial.miscInitial">
 <em class="property">class </em><code class="descclassname">hydrological_modules.miscInitial.</code><code class="descname">miscInitial</code><span class="sig-paren">(</span><em>misc_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/miscInitial.html#miscInitial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.miscInitial.miscInitial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -66,7 +66,8 @@ Conversion factors between m3 and mm etc.</p>
 <dl class="method">
 <dt id="hydrological_modules.miscInitial.miscInitial.initial">
 <code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/miscInitial.html#miscInitial.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.miscInitial.miscInitial.initial" title="Permalink to this definition">¶</a></dt>
-<dd><ul class="simple">
+<dd><p>Initialization of some basic parameters e.g. cellArea</p>
+<ul class="simple">
 <li>grid area, length definition</li>
 <li>conversion factors</li>
 <li>conversion factors for precipitation and pot evaporation</li>
@@ -76,9 +77,10 @@ Conversion factors between m3 and mm etc.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.initcondition">
-<span id="hydrological-modules-initcondition-module"></span><h2>hydrological_modules.initcondition module<a class="headerlink" href="#module-hydrological_modules.initcondition" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="initcondition-module">
+<h3>initcondition module<a class="headerlink" href="#initcondition-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Load initial storage parameter maps</strong></p>
+<span class="target" id="module-hydrological_modules.initcondition"></span><dl class="class">
 <dt id="hydrological_modules.initcondition.initcondition">
 <em class="property">class </em><code class="descclassname">hydrological_modules.initcondition.</code><code class="descname">initcondition</code><span class="sig-paren">(</span><em>initcondition_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/initcondition.html#initcondition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.initcondition.initcondition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -139,42 +141,156 @@ write initital conditions into a single netcdf file</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.inflow">
-<span id="hydrological-modules-inflow-module"></span><h2>hydrological_modules.inflow module<a class="headerlink" href="#module-hydrological_modules.inflow" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="hydrological_modules.inflow.inflow">
-<em class="property">class </em><code class="descclassname">hydrological_modules.inflow.</code><code class="descname">inflow</code><span class="sig-paren">(</span><em>inflow_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/inflow.html#inflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.inflow.inflow" title="Permalink to this definition">¶</a></dt>
+<div class="section" id="landcovertype-module">
+<h3>landcoverType module<a class="headerlink" href="#landcovertype-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Generate landcover types</strong></p>
+<span class="target" id="module-hydrological_modules.landcoverType"></span><dl class="class">
+<dt id="hydrological_modules.landcoverType.landcoverType">
+<em class="property">class </em><code class="descclassname">hydrological_modules.landcoverType.</code><code class="descname">landcoverType</code><span class="sig-paren">(</span><em>landcoverType_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>READ INFLOW HYDROGRAPHS (OPTIONAL)
-If option “inflow” is set to 1 the inflow hydrograph code is used otherwise dummy code is used</p>
+<p>LAND COVER TYPE</p>
+<p>runs the 6 land cover types through soil procedures</p>
+<p>This routine calls the soil routine for each land cover type</p>
 <dl class="method">
-<dt id="hydrological_modules.inflow.inflow.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/inflow.html#inflow.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.inflow.inflow.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the inflow module</p>
+<dt id="hydrological_modules.landcoverType.landcoverType.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of the land cover type module</p>
+<p>Calculating soil for each of the 6  land cover class</p>
+<ul class="simple">
+<li>calls evaporation_module.dynamic</li>
+<li>calls interception_module.dynamic</li>
+<li>calls soil_module.dynamic</li>
+<li>calls sealed_water_module.dynamic</li>
+</ul>
+<p>And sums every thing up depending on the land cover type fraction</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.inflow.inflow.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/inflow.html#inflow.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.inflow.inflow.initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of the inflow module</p>
+<dt id="hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation">
+<code class="descname">dynamic_fracIrrigation</code><span class="sig-paren">(</span><em>init=False</em>, <em>dynamic=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType.dynamic_fracIrrigation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of the land cover type module</p>
+<p>Calculating fraction of land cover</p>
+<ul class="simple">
+<li>loads the fraction of landcover for each year from netcdf maps</li>
+<li>calculate the fraction of 6 land cover types based on the maps</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>init</strong> – (optional) True: set for the first time of a run</li>
+<li><strong>dynamic</strong> – used in the dynmic run not in the initial phase</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li></li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="hydrological_modules.landcoverType.landcoverType.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial part of the land cover type module
+Initialise the six land cover types</p>
+<ul class="simple">
+<li>Forest</li>
+<li>Grasland/non irrigated land</li>
+<li>Irrigation</li>
+<li>Paddy iirigation</li>
+<li>Sealed area</li>
+<li>Water covered area</li>
+</ul>
+<p>And initialize the soil variables</p>
 </dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.readmeteo">
-<span id="hydrological-modules-readmeteo-module"></span><h2>hydrological_modules.readmeteo module<a class="headerlink" href="#module-hydrological_modules.readmeteo" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+</div>
+<div class="section" id="hydrology-i-from-rain-to-soil">
+<h2>Hydrology I - from rain to soil<a class="headerlink" href="#hydrology-i-from-rain-to-soil" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="readmeteo-module">
+<h3>readmeteo module<a class="headerlink" href="#readmeteo-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Read meteorological input data</strong></p>
+<span class="target" id="module-hydrological_modules.readmeteo"></span><dl class="class">
 <dt id="hydrological_modules.readmeteo.readmeteo">
 <em class="property">class </em><code class="descclassname">hydrological_modules.readmeteo.</code><code class="descname">readmeteo</code><span class="sig-paren">(</span><em>readmeteo_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>READ METEOROLOGICAL DATA
-reads all meteorological data from netcdf4 files</p>
+<p>READ METEOROLOGICAL DATA</p>
+<p>reads all meteorological data from netcdf4 files</p>
+<dl class="method">
+<dt id="hydrological_modules.readmeteo.readmeteo.downscaling1">
+<code class="descname">downscaling1</code><span class="sig-paren">(</span><em>input</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo.downscaling1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo.downscaling1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downscaling based on elevation correction for temperature and pressure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input</strong> – </li>
+<li><strong>downscale</strong> – 0 for no change, 1: for temperature change 6 deg per 1km , 2 for psurf</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">input - downscaled input data</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="hydrological_modules.readmeteo.readmeteo.downscaling2">
+<code class="descname">downscaling2</code><span class="sig-paren">(</span><em>input</em>, <em>downscaleName=''</em>, <em>wc2=0</em>, <em>wc4=0</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo.downscaling2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo.downscaling2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downscaling based on Delta method:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<div class="last line-block">
+<div class="line"><strong>References</strong></div>
+<div class="line">Moreno and Hasenauer  2015:</div>
+<div class="line"><a class="reference external" href="ftp://palantir.boku.ac.at/Public/ClimateData/Moreno_et_al-2015-International_Journal_of_Climatology.pdf">ftp://palantir.boku.ac.at/Public/ClimateData/Moreno_et_al-2015-International_Journal_of_Climatology.pdf</a></div>
+<div class="line">Mosier et al. 2018:</div>
+<div class="line"><a class="reference external" href="http://onlinelibrary.wiley.com/doi/10.1002/joc.5213/epdf">http://onlinelibrary.wiley.com/doi/10.1002/joc.5213/epdf</a></div>
+</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input</strong> – low input map</li>
+<li><strong>downscaleName</strong> – High resolution monthly map from WorldClim</li>
+<li><strong>wc2</strong> – High resolution WorldClim map</li>
+<li><strong>wc4</strong> – upscaled to low resolution</li>
+<li><strong>downscale</strong> – 0 for no change, 1: for temperature , 2 for pprecipitation, 3 for psurf</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">input - downscaled input data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">wc2</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">wc4</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="hydrological_modules.readmeteo.readmeteo.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the readmeteo module
-Read meteo input maps from netcdf files</p>
+<dd><p>Dynamic part of the readmeteo module</p>
+<p>Read meteo input maps from netcdf files</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If option <em>calc_evaporation</em> is False only precipitation, avg. temp., and 2 evaporation vlaues are read
@@ -189,17 +305,45 @@ Otherwise all the variable needed for Penman-Monteith</p>
 <dl class="method">
 <dt id="hydrological_modules.readmeteo.readmeteo.initial">
 <code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo.initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of meteo
-read multiple file of input
-:return:</p>
+<dd><p>Initial part of meteo</p>
+<p>read multiple file of input</p>
 </dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.snow_frost">
-<span id="hydrological-modules-snow-frost-module"></span><h2>hydrological_modules.snow_frost module<a class="headerlink" href="#module-hydrological_modules.snow_frost" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="inflow-module">
+<h3>inflow module<a class="headerlink" href="#inflow-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Read river discharge time series as inflow data</strong></p>
+<span class="target" id="module-hydrological_modules.inflow"></span><dl class="class">
+<dt id="hydrological_modules.inflow.inflow">
+<em class="property">class </em><code class="descclassname">hydrological_modules.inflow.</code><code class="descname">inflow</code><span class="sig-paren">(</span><em>inflow_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/inflow.html#inflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.inflow.inflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>READ INFLOW HYDROGRAPHS (OPTIONAL)
+If option “inflow” is set to 1 the inflow hydrograph code is used otherwise dummy code is used</p>
+<dl class="method">
+<dt id="hydrological_modules.inflow.inflow.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/inflow.html#inflow.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.inflow.inflow.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of the inflow module
+Use the inflow points to add inflow from time series file(s)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hydrological_modules.inflow.inflow.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/inflow.html#inflow.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.inflow.inflow.initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial part of the inflow module
+Get the inflow points</p>
+<p>calls function <code class="xref py py-meth docutils literal notranslate"><span class="pre">hydrological_modules.getlocOutpoints()</span></code>
+calls function <code class="xref py py-meth docutils literal notranslate"><span class="pre">hydrological_modules.join_struct_arrays2()</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="snow-frost-module">
+<h3>snow_frost module<a class="headerlink" href="#snow-frost-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate snow and frost</strong></p>
+<span class="target" id="module-hydrological_modules.snow_frost"></span><dl class="class">
 <dt id="hydrological_modules.snow_frost.snow">
 <em class="property">class </em><code class="descclassname">hydrological_modules.snow_frost.</code><code class="descname">snow</code><span class="sig-paren">(</span><em>snow_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/snow_frost.html#snow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.snow_frost.snow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -212,21 +356,14 @@ snow zones 1 -7 which each occupy a part of the pixel surface</p>
 <map id="inheritance4a5d7dd76a" name="inheritance4a5d7dd76a">
 <area shape="rect" id="node1" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="161,5,276,31"/>
 <area shape="rect" id="node2" href="management_modules.html#management_modules.dynamicModel.DynamicModel" target="_top" title="DynamicModel" alt="" coords="5,5,113,31"/>
-</map><p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">inheritance</span><span class="o">-</span><span class="n">diagram</span><span class="p">::</span> <span class="n">cwatm</span>
-</pre></div>
-</div>
-<p>produces 1:</p>
-<blockquote>
-<div><div class="graphviz"><img src="_images/inheritance-509ac048d0b3c6bb73e709fc30069806fc58a50d.png" alt="Inheritance diagram of hydrological_modules.snow_frost.snow" usemap="#inheritance3aedbacfc4" class="inheritance graphviz" /></div>
+</map><div class="graphviz"><img src="_images/inheritance-509ac048d0b3c6bb73e709fc30069806fc58a50d.png" alt="Inheritance diagram of hydrological_modules.snow_frost.snow" usemap="#inheritance3aedbacfc4" class="inheritance graphviz" /></div>
 <map id="inheritance3aedbacfc4" name="inheritance3aedbacfc4">
 <area shape="rect" id="node1" href="#hydrological_modules.snow_frost.snow" target="_top" title="RAIN AND SNOW" alt="" coords="5,5,252,31"/>
-</map><span class="target" id="extensions-literal"></span></div></blockquote>
-<dl class="method">
+</map><span class="target" id="extensions-literal"></span><dl class="method">
 <dt id="hydrological_modules.snow_frost.snow.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/snow_frost.html#snow.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.snow_frost.snow.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the snow module
-Distinguish between rain/snow and calculates snow melt and glacier melt
+<dd><p>Dynamic part of the snow module</p>
+<p>Distinguish between rain/snow and calculates snow melt and glacier melt
 The equation is a modification of:</p>
 <p class="rubric">References</p>
 <p>Speers, D.D., Versteeg, J.D. (1979) Runoff forecasting for reservoir operations - the pastand the future. In: Proceedings 52nd Western Snow Conference, 149-156</p>
@@ -250,13 +387,6 @@ The equation is a modification of:</p>
 <li>loads all the parameters for the day-degree approach for rain, snow and snowmelt</li>
 <li>loads the parameter for frost</li>
 </ul>
-<p>Since Pythagoras, we know that <img class="math" src="_images/math/d4d3268036aaf8e626b870edc6fc001d22f3f96e.png" alt="a^2 + b^2 = c^2"/>.</p>
-<p>test of math2</p>
-<div class="math" id="equation-test2">
-<p><span class="eqno">(1)<a class="headerlink" href="#equation-test2" title="Permalink to this equation">¶</a></span><img src="_images/math/799a497f12f84cef7e52eb68f1db2995cb1c6822.png" alt="(a + b)^2 = a^2 + 2ab + b^2 \clubsuit"/></p>
-</div><div class="math" id="equation-euler">
-<p><span class="eqno">(2)<a class="headerlink" href="#equation-euler" title="Permalink to this equation">¶</a></span><img src="_images/math/a5bdd41fa273e15e748fe95f87c2017faaf08fa7.png" alt="e^{i\pi} + 1 = 0"/></p>
-</div><p>Euler’s identity, equation <a class="reference internal" href="#equation-euler">(2)</a>, was elected one of the most beautiful mathematical formulas.</p>
 <div class="graphviz"><img src="_images/graphviz-1295f4ca2b5527e3ef214bb186c827fe30afbf44.png" alt="digraph foo {
     &quot;snow&quot; -&gt; &quot;initial&quot;;
 }" class="graphviz" /></div>
@@ -265,9 +395,10 @@ The equation is a modification of:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.evaporationPot">
-<span id="hydrological-modules-evaporationpot-module"></span><h2>hydrological_modules.evaporationPot module<a class="headerlink" href="#module-hydrological_modules.evaporationPot" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="evaporationpot-module">
+<h3>evaporationPot module<a class="headerlink" href="#evaporationpot-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate potential Evaporation</strong></p>
+<span class="target" id="module-hydrological_modules.evaporationPot"></span><dl class="class">
 <dt id="hydrological_modules.evaporationPot.evaporationPot">
 <em class="property">class </em><code class="descclassname">hydrological_modules.evaporationPot.</code><code class="descname">evaporationPot</code><span class="sig-paren">(</span><em>evaporationPot_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporationPot.html#evaporationPot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporationPot.evaporationPot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -283,10 +414,6 @@ Based on Penman Monteith</p>
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporationPot.html#evaporationPot.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporationPot.evaporationPot.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the potential evaporation module
 Based on Penman Monteith - FAO 56</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Only run if <em>calc_evaporation</em> is True</p>
-</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -312,56 +439,10 @@ Load inictial parameters</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.landcoverType">
-<span id="hydrological-modules-landcovertype-module"></span><h2>hydrological_modules.landcoverType module<a class="headerlink" href="#module-hydrological_modules.landcoverType" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="hydrological_modules.landcoverType.landcoverType">
-<em class="property">class </em><code class="descclassname">hydrological_modules.landcoverType.</code><code class="descname">landcoverType</code><span class="sig-paren">(</span><em>landcoverType_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>LAND COVER TYPE
-runs the 6 land cover types through soil procedures
-This routine calls the soil routine for each land cover type</p>
-<dl class="method">
-<dt id="hydrological_modules.landcoverType.landcoverType.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the land cover type module
-Calculating soil for each of the 6  land cover class
-* calls evaporation_module.dynamic
-* calls interception_module.dynamic
-* calls soil_module.dynamic
-* calls sealed_water_module.dynamic
-And sums every thing up depending on the land cover type fraction</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation">
-<code class="descname">dynamic_fracIrrigation</code><span class="sig-paren">(</span><em>init=False</em>, <em>dynamic=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType.dynamic_fracIrrigation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the land cover type module
-Calculating fraction of land cover
-* loads the fraction of landcover for each year from netcdf maps
-* calculate the fraction of 6 land cover types based on the maps</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hydrological_modules.landcoverType.landcoverType.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of the land cover type module
-Initialise the six land cover types
-* Forest
-* Grasland/non irrigated land
-* Irrigation
-* Paddy iirigation
-* Sealed area
-* Water covered area
-And initialize the soil variables</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-hydrological_modules.evaporation">
-<span id="hydrological-modules-evaporation-module"></span><h2>hydrological_modules.evaporation module<a class="headerlink" href="#module-hydrological_modules.evaporation" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="evaporation-module">
+<h3>evaporation module<a class="headerlink" href="#evaporation-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate actual evapotranspiration</strong></p>
+<span class="target" id="module-hydrological_modules.evaporation"></span><dl class="class">
 <dt id="hydrological_modules.evaporation.evaporation">
 <em class="property">class </em><code class="descclassname">hydrological_modules.evaporation.</code><code class="descname">evaporation</code><span class="sig-paren">(</span><em>evaporation_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporation.html#evaporation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporation.evaporation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -393,36 +474,10 @@ get crop coefficient, use potential ET, calculate potential bare soil evaporatio
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.capillarRise">
-<span id="hydrological-modules-capillarrise-module"></span><h2>hydrological_modules.capillarRise module<a class="headerlink" href="#module-hydrological_modules.capillarRise" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="hydrological_modules.capillarRise.capillarRise">
-<em class="property">class </em><code class="descclassname">hydrological_modules.capillarRise.</code><code class="descname">capillarRise</code><span class="sig-paren">(</span><em>capillarRise_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/capillarRise.html#capillarRise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.capillarRise.capillarRise" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>CAPPILAR RISE
-calculate cell fraction influenced by capillary rise</p>
-<dl class="method">
-<dt id="hydrological_modules.capillarRise.capillarRise.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/capillarRise.html#capillarRise.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.capillarRise.capillarRise.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the capillar Rise module
-calculate cell fraction influenced by capillary rise
-depending on appr. height of groundwater and relative elevation of grid cell</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">capRiseFrac = cell fraction influenced by capillary rise</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-hydrological_modules.interception">
-<span id="hydrological-modules-interception-module"></span><h2>hydrological_modules.interception module<a class="headerlink" href="#module-hydrological_modules.interception" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="interception-module">
+<h3>interception module<a class="headerlink" href="#interception-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate interception</strong></p>
+<span class="target" id="module-hydrological_modules.interception"></span><dl class="class">
 <dt id="hydrological_modules.interception.interception">
 <em class="property">class </em><code class="descclassname">hydrological_modules.interception.</code><code class="descname">interception</code><span class="sig-paren">(</span><em>interception_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/interception.html#interception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.interception.interception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -452,43 +507,10 @@ calculating interception for each land cover class</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.soil">
-<span id="hydrological-modules-soil-module"></span><h2>hydrological_modules.soil module<a class="headerlink" href="#module-hydrological_modules.soil" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="hydrological_modules.soil.soil">
-<em class="property">class </em><code class="descclassname">hydrological_modules.soil.</code><code class="descname">soil</code><span class="sig-paren">(</span><em>soil_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/soil.html#soil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.soil.soil" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>SOIL
-Caclulation vertical transfer of water based on improved Arno scheme</p>
-<dl class="method">
-<dt id="hydrological_modules.soil.soil.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/soil.html#soil.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.soil.soil.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the soil module
-For each of the land cover classes the vertical water transport is simulated
-Distribution of water holding capiacity in 3 soil layers based on saturation excess overland flow, preferential flow
-Dependend on soil depth, soil hydraulic parameters</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hydrological_modules.soil.soil.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/soil.html#soil.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.soil.soil.initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of the soil module</p>
-<ul class="simple">
-<li>Initialize all the hydraulic properties of soil</li>
-<li>Set soil depth</li>
-</ul>
-<div class="admonition-todo admonition" id="index-1">
-<p class="first admonition-title">Todo</p>
-<p class="last">individual soil properties for each land cover type</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-hydrological_modules.sealed_water">
-<span id="hydrological-modules-sealed-water-module"></span><h2>hydrological_modules.sealed_water module<a class="headerlink" href="#module-hydrological_modules.sealed_water" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="sealed-water-module">
+<h3>sealed_water module<a class="headerlink" href="#sealed-water-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate water runoff from impermeable surface</strong></p>
+<span class="target" id="module-hydrological_modules.sealed_water"></span><dl class="class">
 <dt id="hydrological_modules.sealed_water.sealed_water">
 <em class="property">class </em><code class="descclassname">hydrological_modules.sealed_water.</code><code class="descname">sealed_water</code><span class="sig-paren">(</span><em>sealed_water_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/sealed_water.html#sealed_water"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.sealed_water.sealed_water" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -497,8 +519,8 @@ Dependend on soil depth, soil hydraulic parameters</p>
 <dl class="method">
 <dt id="hydrological_modules.sealed_water.sealed_water.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/sealed_water.html#sealed_water.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.sealed_water.sealed_water.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the sealed_water module
-runoff calculation for open water and sealed areas</p>
+<dd><p>Dynamic part of the sealed_water module</p>
+<p>runoff calculation for open water and sealed areas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -516,47 +538,72 @@ runoff calculation for open water and sealed areas</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.waterdemand">
-<span id="hydrological-modules-waterdemand-module"></span><h2>hydrological_modules.waterdemand module<a class="headerlink" href="#module-hydrological_modules.waterdemand" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Naming convention:</dt>
-<dd><ul class="first last simple">
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
-</dd>
-</dl>
-<dl class="class">
-<dt id="hydrological_modules.waterdemand.waterdemand">
-<em class="property">class </em><code class="descclassname">hydrological_modules.waterdemand.</code><code class="descname">waterdemand</code><span class="sig-paren">(</span><em>waterdemand_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterdemand.html#waterdemand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand" title="Permalink to this definition">¶</a></dt>
+</div>
+<div class="section" id="hydrology-ii-from-soil-to-river">
+<h2>Hydrology II - from soil to river<a class="headerlink" href="#hydrology-ii-from-soil-to-river" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="soil-module">
+<h3>soil module<a class="headerlink" href="#soil-module" title="Permalink to this headline">¶</a></h3>
+<p>** Calculate fluxes in 3 layer soil**</p>
+<span class="target" id="module-hydrological_modules.soil"></span><dl class="class">
+<dt id="hydrological_modules.soil.soil">
+<em class="property">class </em><code class="descclassname">hydrological_modules.soil.</code><code class="descname">soil</code><span class="sig-paren">(</span><em>soil_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/soil.html#soil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.soil.soil" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>WATERDEMAND
-calculating water demand
-Industrial, domenstic based on precalculated maps
-Agricultural water demand based on water need by plants</p>
+<p>SOIL</p>
+<p>Caclulation vertical transfer of water based on Arno scheme</p>
 <dl class="method">
-<dt id="hydrological_modules.waterdemand.waterdemand.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterdemand.html#waterdemand.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the water demand module
-* calculate the fraction of water from surface water vs. groundwater
-* get non-Irrigation water demand and its return flow fraction</p>
+<dt id="hydrological_modules.soil.soil.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/soil.html#soil.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.soil.soil.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of the soil module</p>
+<p>For each of the land cover classes the vertical water transport is simulated
+Distribution of water holding capiacity in 3 soil layers based on saturation excess overland flow, preferential flow
+Dependend on soil depth, soil hydraulic parameters</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.waterdemand.waterdemand.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterdemand.html#waterdemand.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand.initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of the water demand module
-Set the water allocation</p>
+<dt id="hydrological_modules.soil.soil.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/soil.html#soil.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.soil.soil.initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial part of the soil module</p>
+<ul class="simple">
+<li>Initialize all the hydraulic properties of soil</li>
+<li>Set soil depth</li>
+</ul>
 </dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.groundwater">
-<span id="hydrological-modules-groundwater-module"></span><h2>hydrological_modules.groundwater module<a class="headerlink" href="#module-hydrological_modules.groundwater" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="capillarrise-module">
+<h3>capillarRise module<a class="headerlink" href="#capillarrise-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate capillar rise from groundwater</strong></p>
+<span class="target" id="module-hydrological_modules.capillarRise"></span><dl class="class">
+<dt id="hydrological_modules.capillarRise.capillarRise">
+<em class="property">class </em><code class="descclassname">hydrological_modules.capillarRise.</code><code class="descname">capillarRise</code><span class="sig-paren">(</span><em>capillarRise_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/capillarRise.html#capillarRise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.capillarRise.capillarRise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>CAPPILAR RISE
+calculate cell fraction influenced by capillary rise</p>
+<dl class="method">
+<dt id="hydrological_modules.capillarRise.capillarRise.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/capillarRise.html#capillarRise.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.capillarRise.capillarRise.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of the capillar Rise module
+calculate cell fraction influenced by capillary rise
+depending on appr. height of groundwater and relative elevation of grid cell</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">capRiseFrac = cell fraction influenced by capillary rise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="groundwater-module">
+<h3>groundwater module<a class="headerlink" href="#groundwater-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate groundwater</strong></p>
+<span class="target" id="module-hydrological_modules.groundwater"></span><dl class="class">
 <dt id="hydrological_modules.groundwater.groundwater">
 <em class="property">class </em><code class="descclassname">hydrological_modules.groundwater.</code><code class="descname">groundwater</code><span class="sig-paren">(</span><em>groundwater_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/groundwater.html#groundwater"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.groundwater.groundwater" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -581,14 +628,15 @@ Calculate groundweater storage and baseflow</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.runoff_concentration">
-<span id="hydrological-modules-runoff-concentration-module"></span><h2>hydrological_modules.runoff_concentration module<a class="headerlink" href="#module-hydrological_modules.runoff_concentration" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="runoff-concentration-module">
+<h3>runoff_concentration module<a class="headerlink" href="#runoff-concentration-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate runoff concentration - from grid cell to grid cell corner</strong></p>
+<span class="target" id="module-hydrological_modules.runoff_concentration"></span><dl class="class">
 <dt id="hydrological_modules.runoff_concentration.runoff_concentration">
 <em class="property">class </em><code class="descclassname">hydrological_modules.runoff_concentration.</code><code class="descname">runoff_concentration</code><span class="sig-paren">(</span><em>runoff_concentration_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/runoff_concentration.html#runoff_concentration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.runoff_concentration.runoff_concentration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p><em>Runoff concentration</em>
-this is the part between runoff generation and routing
+<p>Runoff concentration</p>
+<p>this is the part between runoff generation and routing
 for each gridcell and for each land cover class the generated runoff is concentrated at a corner of a gridcell
 this concentration needs some lag-time (and peak time) and leads to diffusion
 lag-time/ peak time is calculated using slope, length and land cover class
@@ -596,8 +644,8 @@ diffusion is calculated using a triangular-weighting-function</p>
 <dl class="method">
 <dt id="hydrological_modules.runoff_concentration.runoff_concentration.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/runoff_concentration.html#runoff_concentration.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.runoff_concentration.runoff_concentration.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the runoff concentration module
-For surface runoff for each land cover class  and for interflow and for baseflow the
+<dd><p>Dynamic part of the runoff concentration module</p>
+<p>For surface runoff for each land cover class  and for interflow and for baseflow the
 runoff concentration time is calculated</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -608,8 +656,8 @@ runoff concentration time is calculated</p>
 <dl class="method">
 <dt id="hydrological_modules.runoff_concentration.runoff_concentration.initial">
 <code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/runoff_concentration.html#runoff_concentration.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.runoff_concentration.runoff_concentration.initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of the  runoff concentration module
-Setting the peaq time for:</p>
+<dd><p>Initial part of the  runoff concentration module</p>
+<p>Setting the peak time for:</p>
 <ul class="simple">
 <li>surface runoff = 3</li>
 <li>interflow = 4</li>
@@ -625,18 +673,104 @@ Setting the peaq time for:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.lakes_reservoirs">
-<span id="hydrological-modules-lakes-reservoirs-module"></span><h2>hydrological_modules.lakes_reservoirs module<a class="headerlink" href="#module-hydrological_modules.lakes_reservoirs" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="hydrology-iii-socio-economic-water-demand">
+<h2>Hydrology III - Socio-economic - Water demand<a class="headerlink" href="#hydrology-iii-socio-economic-water-demand" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="waterdemand-module">
+<h3>waterdemand module<a class="headerlink" href="#waterdemand-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate water demand from different sectors</strong></p>
+<span class="target" id="module-hydrological_modules.waterdemand"></span><dl class="docutils">
+<dt>Naming convention:</dt>
+<dd><ul class="first last simple">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</dd>
+</dl>
 <dl class="class">
+<dt id="hydrological_modules.waterdemand.waterdemand">
+<em class="property">class </em><code class="descclassname">hydrological_modules.waterdemand.</code><code class="descname">waterdemand</code><span class="sig-paren">(</span><em>waterdemand_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterdemand.html#waterdemand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>WATERDEMAND</p>
+<p>calculating water demand -
+Industrial, domenstic based on precalculated maps
+Agricultural water demand based on water need by plants</p>
+<dl class="method">
+<dt id="hydrological_modules.waterdemand.waterdemand.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterdemand.html#waterdemand.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of the water demand module</p>
+<ul class="simple">
+<li>calculate the fraction of water from surface water vs. groundwater</li>
+<li>get non-Irrigation water demand and its return flow fraction</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="hydrological_modules.waterdemand.waterdemand.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterdemand.html#waterdemand.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand.initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial part of the water demand module</p>
+<p>Set the water allocation</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="hydrology-iv-lakes-reservoirs-and-river">
+<h2>Hydrology IV - Lakes, reservoirs and river<a class="headerlink" href="#hydrology-iv-lakes-reservoirs-and-river" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lakes-reservoirs-module">
+<h3>lakes_reservoirs module<a class="headerlink" href="#lakes-reservoirs-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate water retention in lakes</strong></p>
+<span class="target" id="module-hydrological_modules.lakes_reservoirs"></span><dl class="class">
 <dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs">
 <em class="property">class </em><code class="descclassname">hydrological_modules.lakes_reservoirs.</code><code class="descname">lakes_reservoirs</code><span class="sig-paren">(</span><em>lakes_reservoirs_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>LAKES AND RESERVOIRS
-calculate water retention in lakes and reservoirs</p>
+<p>LAKES AND RESERVOIRS</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Calculate water retention in lakes and reservoirs</p>
+<p>Using the <strong>Modified Puls approach</strong> to calculate retention of a lake
+See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
+<p>for Modified Puls Method the Q(inflow)1 has to be used. It is assumed that this is the same as Q(inflow)2 for the first timestep
+has to be checked if this works in forecasting mode!</p>
+<p>Lake Routine using Modified Puls Method (see Maniak, p.331ff)
+<img class="math" src="_images/math/81dae2adcc5bbda79b1e66ac779da29900b5e584.png" alt="(Qin1 + Qin2)/2 - (Qout1 + Qout2)/2 = (S2 - S1)/dtime"/></p>
+<p>changed into:</p>
+<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
+<p>outgoing discharge (Qout) are linked to storage (S) by elevation.</p>
+<p>Now some assumption to make life easier:</p>
+<p>1.) storage volume is increase proportional to elevation: S = A * H where: H: elevation, A: area of lake</p>
+<p>2.) <img class="math" src="_images/math/63e0cd8680ca67984305e039181f162bfa51c398.png" alt="outgoing discharge = c * b * H^2.0"/> (c: weir constant, b: width)</p>
+<blockquote>
+<div>2.0 because it fits to a parabolic cross section see (Aigner 2008) (and it is much easier to calculate (that’s the main reason)</div></blockquote>
+<p>c: for a perfect weir with mu=0.577 and Poleni: <img class="math" src="_images/math/e70a4d8fb2dba6c1d321fb6fccba8f0b6732e0a3.png" alt="2/3 \mu * \sqrt{2*g} = 1.7"/></p>
+<p>c: for a parabolic weir: around 1.8</p>
+<p>because it is a imperfect weir:<img class="math" src="_images/math/dcc4fd5f328db8e74d8916b7d64b2df0a5c4d3ee.png" alt="C = c * 0.85 = 1.5"/></p>
+<p>results in a formular: <img class="math" src="_images/math/adae7c7da299210b22fcf9264993e15c5bcadad5.png" alt="Q = 1.5 * b * H ** 2 = a*H**2 -&gt; H = \sqrt{Q/a}"/></p>
+<p>Solving the equation:</p>
+<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
+<p><img class="math" src="_images/math/de28b749c6762d70cb5fd7be4847aad90941cd8e.png" alt="SI = (S2/dtime + Qout2/2) =  (A*H)/DtRouting + Q/2 = A/(DtRouting*\sqrt(a)  * \sqrt(Q) + Q/2"/></p>
+<p>-&gt; replacement: <img class="math" src="_images/math/cfa5516c000fc1fc311f939378a9baf8373f7d5d.png" alt="A/(DtRouting*sqrt(a)) = Lakefactor, Y = \sqrt(Q)"/></p>
+<p><img class="math" src="_images/math/6c62e5c4124113e1da4f81f4231ab5b224db5bdd.png" alt="Y^2 + 2 *L akefactor *Y - 2 * SI=0"/></p>
+<p>solution of this quadratic equation:</p>
+<p class="last"><img class="math" src="_images/math/fe09166e1a73dda8e15d861c3f7aad816f39834d.png" alt="Q = (-LakeFactor + sqrt{LakeFactor^2+2*SI})^2"/></p>
+</div>
 <dl class="method">
 <dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part set lakes and reservoirs for each year</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Flow out of lake:</strong> solving the equation:</p>
+<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
+<p><img class="math" src="_images/math/a23d6423b54056da28e040926700e6511f14f51e.png" alt="SI = (S2 / dtime + Qout2 / 2) =  (A*H) / DtSec + Q/2 = A/(DtSec * \sqrt{a} * \sqrt{Q} + Q/2"/></p>
+<p>-&gt; replacement: <img class="math" src="_images/math/838e7862728652e50453042ca2b061f482358a6d.png" alt="A / (DtSec * sqrt(a)) = Lakefactor, Y = sqrt(Q)"/></p>
+<p><img class="math" src="_images/math/a1d3396cfd7810b0abff6736d710c0b8b65137c2.png" alt="Y^2 + 2 * Lakefactor * Y - 2 * SI = 0"/></p>
+<p>solution of this quadratic equation:</p>
+<p class="last"><img class="math" src="_images/math/dd6d947fbfce14cd3e223a2e21f0f2d38e3c768f.png" alt="Q = (-LakeFactor + \sqrt{LakeFactor^2 + 2 * SI})^2"/></p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -678,10 +812,6 @@ area, location, initial average discharge, type 9reservoir or lake) etc.</p>
 <code class="descname">initial_lakes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.initial_lakes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_lakes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the lakes module
 Using the <strong>Modified Puls approach</strong> to calculate retention of a lake</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">LISFLOOD maunal Annex 3 (Burek et al. 2013)</p>
-</div>
 </dd></dl>
 
 <dl class="method">
@@ -698,14 +828,43 @@ Using the appraoch of LISFLOOD</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.lakes_res_small">
-<span id="hydrological-modules-lakes-res-small-module"></span><h2>hydrological_modules.lakes_res_small module<a class="headerlink" href="#module-hydrological_modules.lakes_res_small" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="lakes-res-small-module">
+<h3>lakes_res_small module<a class="headerlink" href="#lakes-res-small-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Calculate water retention in small lakes</strong></p>
+<span class="target" id="module-hydrological_modules.lakes_res_small"></span><dl class="class">
 <dt id="hydrological_modules.lakes_res_small.lakes_res_small">
 <em class="property">class </em><code class="descclassname">hydrological_modules.lakes_res_small.</code><code class="descname">lakes_res_small</code><span class="sig-paren">(</span><em>lakes_res_small_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_res_small.html#lakes_res_small"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_res_small.lakes_res_small" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>LAKES AND RESERVOIRS
-calculate water retention in lakes and reservoirs</p>
+<p>Small LAKES AND RESERVOIRS</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Calculate water retention in lakes and reservoirs</p>
+<p>Using the <strong>Modified Puls approach</strong> to calculate retention of a lake
+See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
+<p>for Modified Puls Method the Q(inflow)1 has to be used. It is assumed that this is the same as Q(inflow)2 for the first timestep
+has to be checked if this works in forecasting mode!</p>
+<p>Lake Routine using Modified Puls Method (see Maniak, p.331ff)
+<img class="math" src="_images/math/81dae2adcc5bbda79b1e66ac779da29900b5e584.png" alt="(Qin1 + Qin2)/2 - (Qout1 + Qout2)/2 = (S2 - S1)/dtime"/></p>
+<p>changed into:</p>
+<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
+<p>outgoing discharge (Qout) are linked to storage (S) by elevation.</p>
+<p>Now some assumption to make life easier:</p>
+<p>1.) storage volume is increase proportional to elevation: S = A * H where: H: elevation, A: area of lake</p>
+<p>2.) <img class="math" src="_images/math/63e0cd8680ca67984305e039181f162bfa51c398.png" alt="outgoing discharge = c * b * H^2.0"/> (c: weir constant, b: width)</p>
+<blockquote>
+<div>2.0 because it fits to a parabolic cross section see (Aigner 2008) (and it is much easier to calculate (that’s the main reason)</div></blockquote>
+<p>c: for a perfect weir with mu=0.577 and Poleni: <img class="math" src="_images/math/e70a4d8fb2dba6c1d321fb6fccba8f0b6732e0a3.png" alt="2/3 \mu * \sqrt{2*g} = 1.7"/></p>
+<p>c: for a parabolic weir: around 1.8</p>
+<p>because it is a imperfect weir:<img class="math" src="_images/math/dcc4fd5f328db8e74d8916b7d64b2df0a5c4d3ee.png" alt="C = c * 0.85 = 1.5"/></p>
+<p>results in a formular: <img class="math" src="_images/math/adae7c7da299210b22fcf9264993e15c5bcadad5.png" alt="Q = 1.5 * b * H ** 2 = a*H**2 -&gt; H = \sqrt{Q/a}"/></p>
+<p>Solving the equation:</p>
+<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
+<p><img class="math" src="_images/math/de28b749c6762d70cb5fd7be4847aad90941cd8e.png" alt="SI = (S2/dtime + Qout2/2) =  (A*H)/DtRouting + Q/2 = A/(DtRouting*\sqrt(a)  * \sqrt(Q) + Q/2"/></p>
+<p>-&gt; replacement: <img class="math" src="_images/math/cfa5516c000fc1fc311f939378a9baf8373f7d5d.png" alt="A/(DtRouting*sqrt(a)) = Lakefactor, Y = \sqrt(Q)"/></p>
+<p><img class="math" src="_images/math/6c62e5c4124113e1da4f81f4231ab5b224db5bdd.png" alt="Y^2 + 2 *L akefactor *Y - 2 * SI=0"/></p>
+<p>solution of this quadratic equation:</p>
+<p class="last"><img class="math" src="_images/math/fe09166e1a73dda8e15d861c3f7aad816f39834d.png" alt="Q = (-LakeFactor + sqrt{LakeFactor^2+2*SI})^2"/></p>
+</div>
 <dl class="method">
 <dt id="hydrological_modules.lakes_res_small.lakes_res_small.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_res_small.html#lakes_res_small.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_res_small.lakes_res_small.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -714,6 +873,16 @@ calculate water retention in lakes and reservoirs</p>
 <li>lakes with modified Puls approach</li>
 <li>reservoirs with special filling levels</li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Flow out of lake:</strong> solving the equation:</p>
+<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
+<p><img class="math" src="_images/math/a23d6423b54056da28e040926700e6511f14f51e.png" alt="SI = (S2 / dtime + Qout2 / 2) =  (A*H) / DtSec + Q/2 = A/(DtSec * \sqrt{a} * \sqrt{Q} + Q/2"/></p>
+<p>-&gt; replacement: <img class="math" src="_images/math/838e7862728652e50453042ca2b061f482358a6d.png" alt="A / (DtSec * sqrt(a)) = Lakefactor, Y = sqrt(Q)"/></p>
+<p><img class="math" src="_images/math/a1d3396cfd7810b0abff6736d710c0b8b65137c2.png" alt="Y^2 + 2 * Lakefactor * Y - 2 * SI = 0"/></p>
+<p>solution of this quadratic equation:</p>
+<p class="last"><img class="math" src="_images/math/dd6d947fbfce14cd3e223a2e21f0f2d38e3c768f.png" alt="Q = (-LakeFactor + \sqrt{LakeFactor^2 + 2 * SI})^2"/></p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -735,14 +904,15 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.routing_reservoirs.routing_kinematic">
-<span id="hydrological-modules-routing-reservoirs-routing-kinematic-module"></span><h2>hydrological_modules.routing_reservoirs.routing_kinematic module<a class="headerlink" href="#module-hydrological_modules.routing_reservoirs.routing_kinematic" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="routing-reservoirs-routing-kinematic-module">
+<h3>routing_reservoirs.routing_kinematic module<a class="headerlink" href="#routing-reservoirs-routing-kinematic-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>River routing - kinematic wave</strong></p>
+<span class="target" id="module-hydrological_modules.routing_reservoirs.routing_kinematic"></span><dl class="class">
 <dt id="hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic">
 <em class="property">class </em><code class="descclassname">hydrological_modules.routing_reservoirs.routing_kinematic.</code><code class="descname">routing_kinematic</code><span class="sig-paren">(</span><em>routing_kinematic_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>ROUTING
-routing using the kinematic wave</p>
+<p>ROUTING</p>
+<p>routing using the kinematic wave</p>
 <dl class="method">
 <dt id="hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -771,25 +941,28 @@ routing using the kinematic wave</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-hydrological_modules.routing_reservoirs.routing_sub">
-<span id="hydrological-modules-routing-reservoirs-routing-sub-module"></span><h2>hydrological_modules.routing_reservoirs.routing_sub module<a class="headerlink" href="#module-hydrological_modules.routing_reservoirs.routing_sub" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<div class="section" id="routing-reservoirs-routing-sub-module">
+<h3>routing_reservoirs.routing_sub module<a class="headerlink" href="#routing-reservoirs-routing-sub-module" title="Permalink to this headline">¶</a></h3>
+<p><strong>Sub routines for river routing</strong></p>
+<span class="target" id="module-hydrological_modules.routing_reservoirs.routing_sub"></span><dl class="function">
 <dt id="hydrological_modules.routing_reservoirs.routing_sub.Compress">
 <code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">Compress</code><span class="sig-paren">(</span><em>map</em>, <em>mask</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#Compress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.Compress" title="Permalink to this definition">¶</a></dt>
-<dd><p>compressing map from 2D to 1D without missing values
-:param map:  input map
-:param mask: mask map
-:return: compressed map</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.Decompress">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">Decompress</code><span class="sig-paren">(</span><em>compmap</em>, <em>mask</em>, <em>emptymap</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#Decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.Decompress" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decompressing map from 1D to 2D with missing values
-:param compmap: compressed map
-:param mask:  mask map
-:param emptymap: map with only 0 in
-:return: decompressed 2D map</p>
+<dd><p>compressing map from 2D to 1D without missing values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map</strong> – input map</li>
+<li><strong>mask</strong> – mask map</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">compressed map</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -806,7 +979,7 @@ routing using the kinematic wave</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">subcatchment</p>
 </td>
 </tr>
 </tbody>
@@ -814,20 +987,16 @@ routing using the kinematic wave</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.decompress1">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">decompress1</code><span class="sig-paren">(</span><em>map</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#decompress1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.decompress1" title="Permalink to this definition">¶</a></dt>
-<dd><p>redundant have to look if it is still used</p>
-<div class="admonition-todo admonition" id="index-2">
-<p class="first admonition-title">Todo</p>
-<p class="last">remove it?</p>
-</div>
+<dt id="hydrological_modules.routing_reservoirs.routing_sub.decompress">
+<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">decompress</code><span class="sig-paren">(</span><em>map</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.decompress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decompressing map from 1D to 2D with missing values</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>map</strong> – </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>map</strong> – compressed map</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">decompressed 2D map</td>
 </tr>
 </tbody>
 </table>
@@ -841,9 +1010,9 @@ routing using the kinematic wave</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ldd</strong> – </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ldd</strong> – river network</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">ldd variables</td>
 </tr>
 </tbody>
 </table>
@@ -864,7 +1033,7 @@ routing using the kinematic wave</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">direction downstream</p>
 </td>
 </tr>
 </tbody>
@@ -881,7 +1050,7 @@ routing using the kinematic wave</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dirshort</strong> – </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">direction upstream</td>
 </tr>
 </tbody>
 </table>
@@ -901,7 +1070,7 @@ routing using the kinematic wave</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">dowmnstream 1 cell</p>
 </td>
 </tr>
 </tbody>
@@ -921,12 +1090,12 @@ routing using the kinematic wave</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>lddnp</strong> – </li>
+<li><strong>lddnp</strong> – rivernetwork as 1D array</li>
 <li><strong>lddOrder</strong> – </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">repaired ldd</p>
 </td>
 </tr>
 </tbody>
@@ -936,13 +1105,25 @@ routing using the kinematic wave</p>
 <dl class="function">
 <dt id="hydrological_modules.routing_reservoirs.routing_sub.postorder">
 <code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">postorder</code><span class="sig-paren">(</span><em>dirUp</em>, <em>catchment</em>, <em>node</em>, <em>catch</em>, <em>dirDown</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#postorder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.postorder" title="Permalink to this definition">¶</a></dt>
-<dd><p>routine to run a postoder tree traversal
-:param dirUp:
-:param catchment:
-:param node:
-:param catch:
-:param dirDown:
-:return: dirDown and catchment</p>
+<dd><p>Routine to run a postoder tree traversal</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dirUp</strong> – </li>
+<li><strong>catchment</strong> – </li>
+<li><strong>node</strong> – </li>
+<li><strong>catch</strong> – </li>
+<li><strong>dirDown</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">dirDown and catchment</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -960,7 +1141,7 @@ routing using the kinematic wave</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">subcatchment</p>
 </td>
 </tr>
 </tbody>
@@ -981,7 +1162,7 @@ routing using the kinematic wave</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">upstream 1cell</p>
 </td>
 </tr>
 </tbody>
@@ -991,16 +1172,31 @@ routing using the kinematic wave</p>
 <dl class="function">
 <dt id="hydrological_modules.routing_reservoirs.routing_sub.upstreamArea">
 <code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">upstreamArea</code><span class="sig-paren">(</span><em>dirDown</em>, <em>dirshort</em>, <em>area</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#upstreamArea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.upstreamArea" title="Permalink to this definition">¶</a></dt>
-<dd><p>calculates upstream area
-:param dirDown: array which point from each cell to the next downstream cell
-:param dirshort:
-:param area: area in m2 for a single gridcell
-:return:</p>
+<dd><p>calculates upstream area</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dirDown</strong> – array which point from each cell to the next downstream cell</li>
+<li><strong>dirshort</strong> – </li>
+<li><strong>area</strong> – area in m2 for a single gridcell</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">upstream area</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
+</div>
+<div class="section" id="hydrology-v-water-balance">
+<h2>Hydrology V - Water balance<a class="headerlink" href="#hydrology-v-water-balance" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-hydrological_modules.waterbalance">
-<span id="hydrological-modules-waterbalance-module"></span><h2>hydrological_modules.waterbalance module<a class="headerlink" href="#module-hydrological_modules.waterbalance" title="Permalink to this headline">¶</a></h2>
+<span id="waterbalance-module"></span><h3>waterbalance module<a class="headerlink" href="#module-hydrological_modules.waterbalance" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="hydrological_modules.waterbalance.waterbalance">
 <em class="property">class </em><code class="descclassname">hydrological_modules.waterbalance.</code><code class="descname">waterbalance</code><span class="sig-paren">(</span><em>waterbalance_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterbalance.html#waterbalance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterbalance.waterbalance" title="Permalink to this definition">¶</a></dt>
@@ -1032,8 +1228,8 @@ If option <strong>sumWaterBalance</strong> sum water balance for certain variabl
 <dl class="method">
 <dt id="hydrological_modules.waterbalance.waterbalance.waterBalanceCheck">
 <code class="descname">waterBalanceCheck</code><span class="sig-paren">(</span><em>fluxesIn</em>, <em>fluxesOut</em>, <em>preStorages</em>, <em>endStorages</em>, <em>processName</em>, <em>printTrue=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterbalance.html#waterbalance.waterBalanceCheck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterbalance.waterbalance.waterBalanceCheck" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the water balance module
-Returns the water balance for a list of input, output, and storage map files</p>
+<dd><p>Dynamic part of the water balance module</p>
+<p>Returns the water balance for a list of input, output, and storage map files</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1048,7 +1244,10 @@ Returns the water balance for a list of input, output, and storage map files</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li></li>
+</ul>
+</p>
 </td>
 </tr>
 </tbody>
@@ -1083,9 +1282,7 @@ and sums it up for a catchment</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-hydrological_modules">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-hydrological_modules" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-hydrological_modules"></span></div>
 </div>
 </div>
 

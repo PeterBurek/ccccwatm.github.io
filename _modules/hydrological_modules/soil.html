@@ -55,7 +55,8 @@
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SOIL</span>
-<span class="sd">    Caclulation vertical transfer of water based on improved Arno scheme</span>
+
+<span class="sd">    Caclulation vertical transfer of water based on Arno scheme</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_variable</span><span class="p">):</span>
@@ -70,10 +71,6 @@
 
 <span class="sd">        * Initialize all the hydraulic properties of soil</span>
 <span class="sd">        * Set soil depth</span>
-
-<span class="sd">        Todo:</span>
-<span class="sd">            individual soil properties for each land cover type</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span> <span class="o">=</span> <span class="mi">3</span>
@@ -150,10 +147,10 @@
 <div class="viewcode-block" id="soil.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.soil.soil.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coverType</span><span class="p">,</span> <span class="n">No</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the soil module</span>
+
 <span class="sd">        For each of the land cover classes the vertical water transport is simulated</span>
 <span class="sd">        Distribution of water holding capiacity in 3 soil layers based on saturation excess overland flow, preferential flow</span>
 <span class="sd">        Dependend on soil depth, soil hydraulic parameters</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
     <span class="c1"># ---------------------------------------------------------</span>

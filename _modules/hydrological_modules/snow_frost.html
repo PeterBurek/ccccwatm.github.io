@@ -69,19 +69,10 @@
 <span class="sd">    .. inheritance-diagram:: cwatm_initial.CWATModel_ini</span>
 <span class="sd">       :parts: 1</span>
 
+<span class="sd">    .. inheritance-diagram:: hydrological_modules.snow_frost.snow</span>
 
-<span class="sd">    </span>
-<span class="sd">    For example::</span>
+<span class="sd">    .. _extensions-literal:</span>
 
-<span class="sd">       .. inheritance-diagram:: cwatm</span>
-
-<span class="sd">    produces 1:</span>
-
-<span class="sd">       .. inheritance-diagram:: hydrological_modules.snow_frost.snow</span>
-
-
-<span class="sd">       .. _extensions-literal:</span>
-<span class="sd">	</span>
 <span class="sd">	</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -104,31 +95,13 @@
 <span class="sd">        .. inheritance-diagram: initial</span>
 
 
-
-<span class="sd">        Since Pythagoras, we know that :math:`a^2 + b^2 = c^2`.</span>
-
-<span class="sd">        test of math2</span>
-
-<span class="sd">        .. math:: (a + b)^2 = a^2 + 2ab + b^2 \clubsuit</span>
-<span class="sd">              :label: test2</span>
-
-<span class="sd">        .. math:: e^{i\pi} + 1 = 0</span>
-<span class="sd">             :label: euler</span>
-
-<span class="sd">        Euler&#39;s identity, equation :eq:`euler`, was elected one of the most beautiful mathematical formulas.</span>
-
-<span class="sd">			</span>
 <span class="sd">        .. graphviz::</span>
 
 <span class="sd">            digraph foo {</span>
 <span class="sd">                &quot;snow&quot; -&gt; &quot;initial&quot;;</span>
 <span class="sd">            }</span>
 
-
 <span class="sd">        &quot;&quot;&quot;</span>
-
-
-
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">numberSnowLayersFloat</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;NumberSnowLayers&#39;</span><span class="p">)</span>    <span class="c1"># default 3</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">numberSnowLayers</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">numberSnowLayersFloat</span><span class="p">)</span>
@@ -223,6 +196,7 @@
 <div class="viewcode-block" id="snow.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.snow_frost.snow.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the snow module</span>
+
 <span class="sd">        Distinguish between rain/snow and calculates snow melt and glacier melt</span>
 <span class="sd">        The equation is a modification of:</span>
 

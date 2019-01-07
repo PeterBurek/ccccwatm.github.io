@@ -54,12 +54,24 @@
 <span class="sd">  &quot;&quot;&quot;</span>
 
   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">lastTimeStep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">firstTimestep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    sets first and last time step into the model</span>
+
+<span class="sd">    :param lastTimeStep: last timestep</span>
+<span class="sd">    :param firstTimeStep: first timestep</span>
+<span class="sd">    :return: -</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">model</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">lastStep</span> <span class="o">=</span> <span class="n">lastTimeStep</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">firstStep</span> <span class="o">=</span> <span class="n">firstTimestep</span>
 
 <div class="viewcode-block" id="ModelFrame.run"><a class="viewcode-back" href="../../management_modules.html#management_modules.dynamicModel.ModelFrame.run">[docs]</a>  <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;  Run the dynamic part of the model &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;  Run the dynamic part of the model</span>
+
+<span class="sd">    :return: -</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">firstStep</span>
     <span class="k">while</span> <span class="n">step</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">lastStep</span><span class="p">:</span>
       <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">currentStep</span> <span class="o">=</span> <span class="n">step</span>

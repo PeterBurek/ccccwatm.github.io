@@ -98,6 +98,7 @@
 <div class="viewcode-block" id="waterbalance.waterBalanceCheck"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.waterbalance.waterbalance.waterBalanceCheck">[docs]</a>    <span class="k">def</span> <span class="nf">waterBalanceCheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fluxesIn</span><span class="p">,</span> <span class="n">fluxesOut</span><span class="p">,</span> <span class="n">preStorages</span><span class="p">,</span> <span class="n">endStorages</span><span class="p">,</span> <span class="n">processName</span><span class="p">,</span> <span class="n">printTrue</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the water balance module</span>
+
 <span class="sd">        Returns the water balance for a list of input, output, and storage map files</span>
 
 <span class="sd">        :param fluxesIn: income</span>
@@ -106,7 +107,7 @@
 <span class="sd">        :param endStorages:  this was in afterwards</span>
 <span class="sd">        :param processName:  name of the process</span>
 <span class="sd">        :param printTrue: calculate it?</span>
-<span class="sd">        :return:</span>
+<span class="sd">        :return: -</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">printTrue</span><span class="p">:</span>
@@ -446,7 +447,6 @@
 
 <span class="sd">            #report(decompress(self.var.sumRunoff), &quot;C:\work\output3/sumRun.map&quot;)</span>
 
-<span class="sd">            ii= 1</span>
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
 

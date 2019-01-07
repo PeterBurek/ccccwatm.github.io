@@ -56,7 +56,8 @@
 <div class="viewcode-block" id="runoff_concentration"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.runoff_concentration.runoff_concentration">[docs]</a><span class="k">class</span> <span class="nc">runoff_concentration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    *Runoff concentration*</span>
+<span class="sd">    Runoff concentration</span>
+
 <span class="sd">    this is the part between runoff generation and routing</span>
 <span class="sd">    for each gridcell and for each land cover class the generated runoff is concentrated at a corner of a gridcell</span>
 <span class="sd">    this concentration needs some lag-time (and peak time) and leads to diffusion</span>
@@ -73,7 +74,8 @@
 <div class="viewcode-block" id="runoff_concentration.initial"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.runoff_concentration.runoff_concentration.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial part of the  runoff concentration module</span>
-<span class="sd">        Setting the peaq time for:</span>
+
+<span class="sd">        Setting the peak time for:</span>
 
 <span class="sd">        * surface runoff = 3</span>
 <span class="sd">        * interflow = 4</span>
@@ -160,6 +162,7 @@
 <div class="viewcode-block" id="runoff_concentration.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.runoff_concentration.runoff_concentration.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the runoff concentration module</span>
+
 <span class="sd">        For surface runoff for each land cover class  and for interflow and for baseflow the</span>
 <span class="sd">        runoff concentration time is calculated</span>
 
@@ -210,7 +213,8 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_landSurfaceRunoff</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span>
 
-       <span class="c1"># -------------------------------------------------------</span>
+
+        <span class="c1"># -------------------------------------------------------</span>
         <span class="c1"># runoff concentration: triangular-weighting method</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># shifting array</span>
