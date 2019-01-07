@@ -1,0 +1,384 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hydrological_modules.lakes_res_small &#8212; Community Water Model</title>
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for hydrological_modules.lakes_res_small</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -------------------------------------------------------------------------</span>
+<span class="c1"># Name:        Small Lakes and reservoirs module</span>
+<span class="c1">#              (watershed provided &lt; 5000 km2 or lakearea &lt; 100km2)</span>
+<span class="c1"># Purpose:</span>
+<span class="c1">#</span>
+<span class="c1"># Author:      PB</span>
+<span class="c1">#</span>
+<span class="c1"># Created:     30/08/2017</span>
+<span class="c1"># Copyright:   (c) PB 2017</span>
+<span class="c1"># -------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">hydrological_modules.routing_reservoirs.routing_sub</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<span class="kn">from</span> <span class="nn">management_modules.globals</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="lakes_res_small"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_res_small.lakes_res_small">[docs]</a><span class="k">class</span> <span class="nc">lakes_res_small</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    LAKES AND RESERVOIRS</span>
+<span class="sd">    calculate water retention in lakes and reservoirs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lakes_res_small_variable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">lakes_res_small_variable</span>
+
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="lakes_res_small.initial"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_res_small.lakes_res_small.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize small lakes and reservoirs</span>
+<span class="sd">        Read parameters from maps e.g</span>
+<span class="sd">        area, location, initial average discharge, type: reservoir or lake) etc.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+
+        <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;useSmallLakes&#39;</span><span class="p">):</span>
+
+
+
+            <span class="k">if</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;useResAndLakes&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;dynamicLakesRes&#39;</span><span class="p">):</span>
+                <span class="n">year</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">year</span> <span class="o">=</span>  <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;fixLakesResYear&#39;</span><span class="p">]),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+
+            <span class="c1"># read which part of the cellarea is a lake/res catchment (sumed up for all lakes/res in a cell)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="s1">&#39;smallLakesRes&#39;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">useDaily</span><span class="o">=</span><span class="s2">&quot;yearly&quot;</span><span class="p">,</span>  <span class="n">value</span><span class="o">=</span> <span class="s1">&#39;watershedarea&#39;</span><span class="p">)</span> <span class="o">*</span><span class="mi">1000</span> <span class="o">*</span> <span class="mi">1000</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span>  <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="s1">&#39;smallLakesRes&#39;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">useDaily</span><span class="o">=</span><span class="s2">&quot;yearly&quot;</span><span class="p">,</span>  <span class="n">value</span><span class="o">=</span> <span class="s1">&#39;area&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">*</span> <span class="mi">1000</span>
+
+			
+
+            <span class="c1"># lake discharge at outlet to calculate alpha: parameter of channel width, gravity and weir coefficient</span>
+            <span class="c1"># Lake parameter A (suggested  value equal to outflow width in [m])</span>
+            <span class="c1"># multiplied with the calibration parameter LakeMultiplier</span>
+            <span class="n">testRunoff</span> <span class="o">=</span> <span class="s2">&quot;averageRunoff&quot;</span> <span class="ow">in</span> <span class="n">binding</span>
+            <span class="k">if</span> <span class="n">testRunoff</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeDis0</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;averageRunoff&#39;</span><span class="p">)</span> <span class="o">*</span>  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">InvDtSec</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeDis0</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;smallwaterBodyDis&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeDis0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeDis0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+            <span class="n">chanwidth</span> <span class="o">=</span> <span class="mf">7.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeDis0</span><span class="p">,</span> <span class="mf">0.539</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeA</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;lakeAFactor&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.612</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">chanwidth</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mf">9.81</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+
+
+            <span class="c1">#Initial part of the lakes module</span>
+            <span class="c1">#Using the **Modified Puls approach** to calculate retention of a lake</span>
+            <span class="c1"># See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</span>
+
+            <span class="c1"># for Modified Puls Method the Q(inflow)1 has to be used. It is assumed that this is the same as Q(inflow)2 for the first timestep</span>
+            <span class="c1"># has to be checked if this works in forecasting mode!</span>
+
+            <span class="c1"># NEW Lake Routine using Modified Puls Method (see Maniak, p.331ff)</span>
+            <span class="c1"># (Qin1 + Qin2)/2 - (Qout1 + Qout2)/2 = (S2 - S1)/dtime</span>
+            <span class="c1"># changed into:</span>
+            <span class="c1"># (S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2</span>
+            <span class="c1"># outgoing discharge (Qout) are linked to storage (S) by elevation.</span>
+            <span class="c1"># Now some assumption to make life easier:</span>
+            <span class="c1"># 1.) storage volume is increase proportional to elevation: S = A * H</span>
+            <span class="c1">#      H: elevation, A: area of lake</span>
+            <span class="c1"># 2.) outgoing discharge = c * b * H **2.0 (c: weir constant, b: width)</span>
+            <span class="c1">#      2.0 because it fits to a parabolic cross section see Aigner 2008</span>
+            <span class="c1">#      (and it is much easier to calculate (that&#39;s the main reason)</span>
+            <span class="c1"># c for a perfect weir with mu=0.577 and Poleni: 2/3 mu * sqrt(2*g) = 1.7</span>
+            <span class="c1"># c for a parabolic weir: around 1.8</span>
+            <span class="c1"># because it is a imperfect weir: C = c* 0.85 = 1.5</span>
+            <span class="c1"># results in a formular : Q = 1.5 * b * H ** 2 = a*H**2 -&gt; H = sqrt(Q/a)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeA</span><span class="p">))</span>
+
+            <span class="c1">#  solving the equation  (S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2</span>
+            <span class="c1">#  SI = (S2/dtime + Qout2/2) =  (A*H)/DtRouting + Q/2 = A/(DtRouting*sqrt(a)  * sqrt(Q) + Q/2</span>
+            <span class="c1">#  -&gt; replacement: A/(DtRouting*sqrt(a)) = Lakefactor, Y = sqrt(Q)</span>
+            <span class="c1">#  Y**2 + 2*Lakefactor*Y-2*SI=0</span>
+            <span class="c1"># solution of this quadratic equation:</span>
+            <span class="c1"># Q=sqr(-LakeFactor+sqrt(sqr(LakeFactor)+2*SI))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactorSqr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactor</span><span class="p">)</span>
+            <span class="c1"># for faster calculation inside dynamic section</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;smalllakeInflow&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeDis0</span><span class="p">)</span>  <span class="c1"># inflow in m3/s estimate</span>
+            
+            <span class="n">old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeA</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;smalllakeStorage&quot;</span><span class="p">,</span><span class="n">old</span><span class="p">)</span>
+
+
+            <span class="n">smalllakeStorageIndicator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactor</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactorSqr</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">smalllakeStorageIndicator</span><span class="p">))</span>
+            <span class="c1"># SI = S/dt + Q/2</span>
+            <span class="c1"># solution of quadratic equation</span>
+            <span class="c1"># 1. storage volume is increase proportional to elevation</span>
+            <span class="c1">#  2. Q= a *H **2.0  (if you choose Q= a *H **1.5 you have to solve the formula of Cardano)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeOutflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;smalllakeOutflow&quot;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+
+            <span class="c1"># lake storage ini</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeLevel</span> <span class="o">=</span> <span class="n">divideValues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+            <span class="n">testStorage</span> <span class="o">=</span> <span class="s2">&quot;minStorage&quot;</span> <span class="ow">in</span> <span class="n">binding</span>
+            <span class="k">if</span> <span class="n">testStorage</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minsmalllakeVolumeM3</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;minStorage&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minsmalllakeVolumeM3</span> <span class="o">=</span> <span class="mf">9.e99</span></div>
+
+
+
+
+
+
+
+   <span class="c1"># ------------------ End init ------------------------------------------------------------------------------------</span>
+   <span class="c1"># ----------------------------------------------------------------------------------------------------------------</span>
+
+
+
+
+<div class="viewcode-block" id="lakes_res_small.dynamic"><a class="viewcode-back" href="../../hydrological_modules.html#hydrological_modules.lakes_res_small.lakes_res_small.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dynamic part to calculate outflow from small lakes and reservoirs</span>
+
+<span class="sd">        * lakes with modified Puls approach</span>
+<span class="sd">        * reservoirs with special filling levels</span>
+
+<span class="sd">        :return: outflow in m3 to the network</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">dynamic_smalllakes</span><span class="p">(</span><span class="n">inflow</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Lake routine to calculate lake outflow</span>
+<span class="sd">            :param inflow: inflow to lakes and reservoirs</span>
+<span class="sd">            :return: QLakeOutM3DtC - lake outflow in [m3] per subtime step</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># ************************************************************</span>
+            <span class="c1"># ***** LAKE</span>
+            <span class="c1"># ************************************************************</span>
+
+
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="c1">#if (dateVar[&#39;curr&#39;] == 998):</span>
+            <span class="c1">#    ii = 1</span>
+
+            <span class="n">inflowM3S</span> <span class="o">=</span> <span class="n">inflow</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>
+            <span class="c1"># Lake inflow in [m3/s]</span>
+            <span class="n">lakeIn</span> <span class="o">=</span> <span class="p">(</span><span class="n">inflowM3S</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
+            <span class="c1"># for Modified Puls Method: (S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2</span>
+            <span class="c1"># here: (Qin1 + Qin2)/2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span> <span class="o">=</span> <span class="n">lakeIn</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>  <span class="c1"># in [m]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeEvaFactor</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EWRef</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span>
+            <span class="c1"># lakestorage - evaporation from lakes</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span> <span class="o">=</span> <span class="n">inflowM3S</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="c1"># Qin2 becomes Qin1 for the next time step</span>
+
+            <span class="n">lakeStorageIndicator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>  <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeOutflow</span> <span class="o">+</span> <span class="n">lakeIn</span><span class="p">)</span>
+
+            <span class="c1"># here S1/dtime - Qout1/2 + lakeIn , so that is the right part</span>
+            <span class="c1"># of the equation above</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactor</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactorSqr</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lakeStorageIndicator</span><span class="p">))</span>
+
+            <span class="c1"># Flow out of lake:</span>
+            <span class="c1">#  solving the equation  (S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2</span>
+            <span class="c1">#  SI = (S2/dtime + Qout2/2) =  (A*H)/DtSec + Q/2 = A/(DtSec*sqrt(a)  * sqrt(Q) + Q/2</span>
+            <span class="c1">#  -&gt; replacement: A/(DtSec*sqrt(a)) = Lakefactor, Y = sqrt(Q)</span>
+            <span class="c1">#  Y**2 + 2*Lakefactor*Y-2*SI=0</span>
+            <span class="c1"># solution of this quadratic equation:</span>
+            <span class="c1"># Q=sqr(-LakeFactor+sqrt(sqr(LakeFactor)+2*SI));</span>
+
+            <span class="n">QsmallLakeOut</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeOutflow</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">=</span> <span class="p">(</span><span class="n">lakeStorageIndicator</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeOutflow</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>
+            <span class="c1"># Lake storage</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">+</span> <span class="n">lakeIn</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>  <span class="o">-</span> <span class="n">QsmallLakeOut</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span>
+            <span class="c1"># for mass balance, the lake storage is calculated every time step</span>
+
+            <span class="c1">### if dateVar[&#39;curr&#39;] &gt;= dateVar[&#39;intSpin&#39;]:</span>
+            <span class="c1">###   self.var.minsmalllakeStorageM3 = np.where(self.var.smalllakeStorageM3 &lt; self.var.minsmalllakeStorageM3,self.var.smalllakeStorageM3,self.var.minsmalllakeStorageM3)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="c1"># back to [m]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeLevel</span> <span class="o">=</span> <span class="n">divideValues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span><span class="p">)</span>
+
+
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span><span class="p">],</span>  <span class="c1"># In</span>
+                    <span class="p">[</span><span class="n">QsmallLakeOut</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="p">]</span>  <span class="p">,</span>  <span class="c1"># Out</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                    <span class="s2">&quot;smalllake&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+
+
+            <span class="k">return</span> <span class="n">QsmallLakeOut</span>
+
+        <span class="c1"># ---------------------------------------------------------------------------------------------</span>
+        <span class="c1"># ---------------------------------------------------------------------------------------------</span>
+
+
+
+        <span class="c1"># ---------------------------------------------------------------------------------------------</span>
+        <span class="c1"># ---------------------------------------------------------------------------------------------</span>
+        <span class="c1"># Small lake and reservoirs</span>
+
+        <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;useSmallLakes&#39;</span><span class="p">):</span>
+
+
+
+            <span class="c1"># check years</span>
+            <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newStart&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newYear&#39;</span><span class="p">]:</span>
+               
+                <span class="k">if</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;useResAndLakes&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;dynamicLakesRes&#39;</span><span class="p">):</span>
+                    <span class="n">year</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">year</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">binding</span><span class="p">[</span><span class="s1">&#39;fixLakesResYear&#39;</span><span class="p">]),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="s1">&#39;smallLakesRes&#39;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">useDaily</span><span class="o">=</span><span class="s2">&quot;yearly&quot;</span><span class="p">,</span>  <span class="n">value</span><span class="o">=</span> <span class="s1">&#39;watershedarea&#39;</span><span class="p">)</span> <span class="o">*</span><span class="mi">1000</span> <span class="o">*</span> <span class="mi">1000</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span>  <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span> <span class="o">=</span> <span class="n">readnetcdf2</span><span class="p">(</span><span class="s1">&#39;smallLakesRes&#39;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">useDaily</span><span class="o">=</span><span class="s2">&quot;yearly&quot;</span><span class="p">,</span>  <span class="n">value</span><span class="o">=</span> <span class="s1">&#39;area&#39;</span><span class="p">)</span> <span class="o">*</span><span class="mi">1000</span> <span class="o">*</span> <span class="mi">1000</span>
+                <span class="c1"># mult with 1,000,000 to convert from km2 to m2</span>
+
+
+
+            <span class="c1"># ----------</span>
+            <span class="c1"># inflow lakes</span>
+            <span class="c1"># 1.  dis = upstream1(self.var.downstruct_LR, self.var.discharge)   # from river upstream</span>
+            <span class="c1"># 2.  runoff = npareatotal(self.var.waterBodyID, self.var.waterBodyID)  # from cell itself</span>
+            <span class="c1"># 3.                  # outflow from upstream lakes</span>
+
+            <span class="c1"># ----------</span>
+
+            <span class="c1"># runoff to the lake as a part of the cell basin</span>
+            <span class="n">inflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>  <span class="c1"># inflow in m3</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span> <span class="o">=</span> <span class="n">dynamic_smalllakes</span><span class="p">(</span><span class="n">inflow</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>     <span class="c1"># back to [m]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeDiff</span> <span class="o">=</span>   <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallrunoffDiff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span>    <span class="c1"># back to [m]  # with and without in m3</span>
+
+
+            <span class="c1"># ------------------------------------------------------------</span>
+            <span class="c1">#report(decompress(runoff_LR), &quot;C:\work\output3/run.map&quot;)</span>
+
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span><span class="p">],</span>  <span class="c1"># In</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span><span class="p">],</span>  <span class="c1"># Out</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                    <span class="s2">&quot;smalllake1&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+            <span class="k">return</span></div></div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------</span>
+<span class="c1"># --------------------------------------------------------------------------</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/CWATM1.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modeldesign.html">2. Model Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">3. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">4. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">5. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">7. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">8. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../calibration.html">9. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../calibration_tutorial.html">10. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">11. Model download</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+    </div>
+  </body>
+</html>

@@ -1,34 +1,25 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>5. Tutorial &#8212; Community Water Model</title>
-    
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. Demo of the model" href="results.html" />
     <link rel="prev" title="4. Setup of the model" href="setup.html" /> 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -54,34 +45,34 @@
           <div class="body" role="main">
             
   <div class="section" id="tutorial">
-<h1><a class="toc-backref" href="#id4">5. Tutorial</a><a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id2">5. Tutorial</a><a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#tutorial" id="id4">Tutorial</a><ul>
-<li><a class="reference internal" href="#requirements" id="id5">Requirements</a><ul>
-<li><a class="reference internal" href="#id1" id="id6">Requirements</a><ul>
-<li><a class="reference internal" href="#python-version" id="id7">Python version</a></li>
-<li><a class="reference internal" href="#libraries" id="id8">Libraries</a></li>
-<li><a class="reference internal" href="#windows-executeable-python-version" id="id9">Windows executeable Python version</a></li>
+<li><a class="reference internal" href="#tutorial" id="id2">Tutorial</a><ul>
+<li><a class="reference internal" href="#requirements" id="id3">Requirements</a><ul>
+<li><a class="reference internal" href="#id1" id="id4">Requirements</a><ul>
+<li><a class="reference internal" href="#python-version" id="id5">Python version</a></li>
+<li><a class="reference internal" href="#libraries" id="id6">Libraries</a></li>
+<li><a class="reference internal" href="#windows-executeable-python-version" id="id7">Windows executeable Python version</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#test-the-model" id="id10">Test the model</a><ul>
-<li><a class="reference internal" href="#error-because-the-python-libraries-are-installed-incorrectly" id="id11">Error because the python libraries are installed incorrectly</a></li>
+<li><a class="reference internal" href="#test-the-model" id="id8">Test the model</a><ul>
+<li><a class="reference internal" href="#error-because-the-python-libraries-are-installed-incorrectly" id="id9">Error because the python libraries are installed incorrectly</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#running-the-model-1" id="id12">Running the model 1</a></li>
-<li><a class="reference internal" href="#downloading-and-installing-the-spatial-dataset" id="id13">Downloading and installing the spatial dataset</a></li>
-<li><a class="reference internal" href="#changing-the-settings-file" id="id14">Changing the Settings file</a></li>
-<li><a class="reference internal" href="#running-the-model-2" id="id15">Running the model 2</a></li>
-<li><a class="reference internal" href="#changing-parameters-of-the-model" id="id16">Changing parameters of the model</a></li>
-<li><a class="reference internal" href="#changing-the-output" id="id17">Changing the Output</a><ul>
-<li><a class="reference internal" href="#output-variables" id="id18">Output variables</a></li>
-<li><a class="reference internal" href="#daily-monthly-at-the-end-or-average" id="id19">Daily, monthly - at the end or average</a></li>
-<li><a class="reference internal" href="#most-important-output-variables-a-selection" id="id20">Most important output variables - a selection</a></li>
-<li><a class="reference internal" href="#output-variables-starting-a-list" id="id21">Output variables - starting a list</a></li>
+<li><a class="reference internal" href="#running-the-model-1" id="id10">Running the model 1</a></li>
+<li><a class="reference internal" href="#downloading-and-installing-the-spatial-dataset" id="id11">Downloading and installing the spatial dataset</a></li>
+<li><a class="reference internal" href="#changing-the-settings-file" id="id12">Changing the Settings file</a></li>
+<li><a class="reference internal" href="#running-the-model-2" id="id13">Running the model 2</a></li>
+<li><a class="reference internal" href="#changing-parameters-of-the-model" id="id14">Changing parameters of the model</a></li>
+<li><a class="reference internal" href="#changing-the-output" id="id15">Changing the Output</a><ul>
+<li><a class="reference internal" href="#output-variables" id="id16">Output variables</a></li>
+<li><a class="reference internal" href="#daily-monthly-at-the-end-or-average" id="id17">Daily, monthly - at the end or average</a></li>
+<li><a class="reference internal" href="#most-important-output-variables-a-selection" id="id18">Most important output variables - a selection</a></li>
+<li><a class="reference internal" href="#output-variables-starting-a-list" id="id19">Output variables - starting a list</a></li>
 </ul>
 </li>
 </ul>
@@ -89,11 +80,11 @@
 </ul>
 </div>
 <div class="section" id="requirements">
-<h2><a class="toc-backref" href="#id5">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
-<h3><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4">Requirements</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="python-version">
-<h4><a class="toc-backref" href="#id7">Python version</a><a class="headerlink" href="#python-version" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id5">Python version</a><a class="headerlink" href="#python-version" title="Permalink to this headline">¶</a></h4>
 <p>NEW from 2019 on:
 Requirements are a 64 bit <a class="reference external" href="https://www.python.org/downloads/release/python-372/">Python 3.7.x version</a></p>
 <div class="admonition warning">
@@ -106,7 +97,7 @@ Requirements are a 64 bit <a class="reference external" href="https://www.python
 </div>
 </div>
 <div class="section" id="libraries">
-<h4><a class="toc-backref" href="#id8">Libraries</a><a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id6">Libraries</a><a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h4>
 <p>These external libraries are needed:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.numpy.org">Numpy</a></li>
@@ -119,7 +110,7 @@ Requirements are a 64 bit <a class="reference external" href="https://www.python
 downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs">Unofficial Windows Binaries for Python Extension Packages</a></p>
 </div>
 <div class="section" id="windows-executeable-python-version">
-<h4><a class="toc-backref" href="#id9">Windows executeable Python version</a><a class="headerlink" href="#windows-executeable-python-version" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id7">Windows executeable Python version</a><a class="headerlink" href="#windows-executeable-python-version" title="Permalink to this headline">¶</a></h4>
 <div class="line-block">
 <div class="line">A CWATM executable cwatm.exe can be used instead of the Python version</div>
 </div>
@@ -127,11 +118,11 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </div>
 </div>
 <div class="section" id="test-the-model">
-<h2><a class="toc-backref" href="#id10">Test the model</a><a class="headerlink" href="#test-the-model" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8">Test the model</a><a class="headerlink" href="#test-the-model" title="Permalink to this headline">¶</a></h2>
 <p><strong>Windows and Linux</strong></p>
 <p>python &lt;modelpath&gt;/cwatm.py</p>
 <p>The output should be:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Running</span> <span class="n">under</span> <span class="n">platform</span><span class="p">:</span>  <span class="n">Windows</span>  <span class="o">**</span><span class="p">(</span><span class="ow">or</span> <span class="n">Linux</span> <span class="n">etc</span><span class="p">)</span><span class="o">**</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span> <span class="n">under</span> <span class="n">platform</span><span class="p">:</span>  <span class="n">Windows</span>  <span class="o">**</span><span class="p">(</span><span class="ow">or</span> <span class="n">Linux</span> <span class="n">etc</span><span class="p">)</span><span class="o">**</span>
 <span class="n">CWatM</span> <span class="o">-</span> <span class="n">Community</span> <span class="n">Water</span> <span class="n">Model</span>
 <span class="n">Authors</span><span class="p">:</span> <span class="o">...</span>
 <span class="n">Version</span><span class="p">:</span> <span class="o">...</span>
@@ -152,9 +143,9 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 <p class="last">If python is not set in the environment path, the full path of python has to be used</p>
 </div>
 <div class="section" id="error-because-the-python-libraries-are-installed-incorrectly">
-<h3><a class="toc-backref" href="#id11">Error because the python libraries are installed incorrectly</a><a class="headerlink" href="#error-because-the-python-libraries-are-installed-incorrectly" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id9">Error because the python libraries are installed incorrectly</a><a class="headerlink" href="#error-because-the-python-libraries-are-installed-incorrectly" title="Permalink to this headline">¶</a></h3>
 <p>If the model is causing an error at this stage, please check the python libraries:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">scipy.ndimage</span>
 <span class="kn">import</span> <span class="nn">gdal</span>
@@ -164,19 +155,19 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </div>
 </div>
 <div class="section" id="running-the-model-1">
-<h2><a class="toc-backref" href="#id12">Running the model 1</a><a class="headerlink" href="#running-the-model-1" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">Running the model 1</a><a class="headerlink" href="#running-the-model-1" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The model needs a settings file as an argument. See: <a class="reference internal" href="setup.html#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
 </div>
 <p>python &lt;modelpath&gt;/cwatm.py settingsfile flags</p>
 <p>example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">cwatm</span><span class="o">.</span><span class="n">py</span> <span class="n">settings_rhine</span><span class="o">.</span><span class="n">ini</span> <span class="o">-</span><span class="n">l</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">cwatm</span><span class="o">.</span><span class="n">py</span> <span class="n">settings_rhine</span><span class="o">.</span><span class="n">ini</span> <span class="o">-</span><span class="n">l</span>
 </pre></div>
 </div>
 <p>The flag -l show the output on screen as date and discharge</p>
 <p>At this point you should receive this eror message:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">========================</span> <span class="n">CWATM</span> <span class="n">FILE</span> <span class="n">ERROR</span> <span class="o">===========================</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">========================</span> <span class="n">CWATM</span> <span class="n">FILE</span> <span class="n">ERROR</span> <span class="o">===========================</span>
 <span class="n">Cannot</span> <span class="n">find</span> <span class="n">option</span> <span class="n">file</span><span class="p">:</span> <span class="n">d</span><span class="p">:</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">CWATM</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">metaNetcdf</span><span class="o">.</span><span class="n">xml</span> <span class="n">In</span>  <span class="s2">&quot;metaNetcdfFile&quot;</span>
 <span class="n">searching</span><span class="p">:</span> <span class="s2">&quot;d:/work/CWATM/source/metaNetcdf.xml&quot;</span>
 <span class="n">path</span><span class="p">:</span> <span class="n">d</span><span class="p">:</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">CWATM</span><span class="o">/</span><span class="n">source</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">exists</span>
@@ -184,7 +175,7 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </div>
 </div>
 <div class="section" id="downloading-and-installing-the-spatial-dataset">
-<h2><a class="toc-backref" href="#id13">Downloading and installing the spatial dataset</a><a class="headerlink" href="#downloading-and-installing-the-spatial-dataset" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">Downloading and installing the spatial dataset</a><a class="headerlink" href="#downloading-and-installing-the-spatial-dataset" title="Permalink to this headline">¶</a></h2>
 <p>The spatial dataset contains:</p>
 <ul class="simple">
 <li>static data ie. data that does not change over time (a model assumption) e.g. soil data</li>
@@ -193,8 +184,8 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </ul>
 <p>These data are stored as global dataset:</p>
 <ul class="simple">
-<li>cwat_input.zip  for the 30&#8217; global version</li>
-<li>cwat_input5min.zip  for the 5&#8217; global version</li>
+<li>cwat_input.zip  for the 30’ global version</li>
+<li>cwat_input5min.zip  for the 5’ global version</li>
 </ul>
 <p>As climate data different forcings can be used e.g:</p>
 <ul class="simple">
@@ -208,7 +199,7 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </ul>
 <div class="line-block">
 <div class="line">For the tutorial we cut out Rhine basin and included the WATCH+WFDEI precipitation, average temperature and the calculated potential evaporation .</div>
-<div class="line">A 30&#8217; and a 5&#8217; version can be found on FTP in rhine/climate</div>
+<div class="line">A 30’ and a 5’ version can be found on FTP in rhine/climate</div>
 </div>
 <div class="line-block">
 <div class="line">Reference:</div>
@@ -218,18 +209,18 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <div class="last line-block">
-<div class="line">Please copy and unpack the spatial dataset (either 30&#8217; or 5&#8217;)in a folder</div>
+<div class="line">Please copy and unpack the spatial dataset (either 30’ or 5’)in a folder</div>
 <div class="line">Please copy the the climate dataset 30min_meteo_rhine.zip or 5min_meteo_rhine.zip in a seperate folder</div>
 <div class="line">Please create a folder called output</div>
 </div>
 </div>
 </div>
 <div class="section" id="changing-the-settings-file">
-<h2><a class="toc-backref" href="#id14">Changing the Settings file</a><a class="headerlink" href="#changing-the-settings-file" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">Changing the Settings file</a><a class="headerlink" href="#changing-the-settings-file" title="Permalink to this headline">¶</a></h2>
 <p>to run the model the pathes to data have to be set correctly:
 The information of pathes are stored in the settings file around line 80-100</p>
 <p>[FILE_PATHS]:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>PathRoot = E:/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PathRoot = E:/
 PathOut = $(PathRoot)/output
 PathMaps = E:/cwatm_input
 PathMeteo = E:/climate
@@ -246,13 +237,13 @@ metaNetcdfFile = $(FILE_PATHS:PathRoot)/CWATM/source/metaNetcdf.xml
 </div>
 </div>
 <div class="section" id="running-the-model-2">
-<h2><a class="toc-backref" href="#id15">Running the model 2</a><a class="headerlink" href="#running-the-model-2" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Running the model 2</a><a class="headerlink" href="#running-the-model-2" title="Permalink to this headline">¶</a></h2>
 <p>If you type now:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">cwatm</span><span class="o">.</span><span class="n">py</span> <span class="n">settings_rhine</span><span class="o">.</span><span class="n">ini</span> <span class="o">-</span><span class="n">l</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">cwatm</span><span class="o">.</span><span class="n">py</span> <span class="n">settings_rhine</span><span class="o">.</span><span class="n">ini</span> <span class="o">-</span><span class="n">l</span>
 </pre></div>
 </div>
 <p>You should see:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">E</span><span class="p">:</span>\<span class="n">CWATM_rhine</span>\<span class="n">source</span><span class="o">&gt;</span><span class="n">python</span> <span class="n">cwatm</span><span class="o">.</span><span class="n">py</span> <span class="n">settings_rhine30min</span><span class="o">.</span><span class="n">ini</span> <span class="o">-</span><span class="n">l</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="p">:</span>\<span class="n">CWATM_rhine</span>\<span class="n">source</span><span class="o">&gt;</span><span class="n">python</span> <span class="n">cwatm</span><span class="o">.</span><span class="n">py</span> <span class="n">settings_rhine30min</span><span class="o">.</span><span class="n">ini</span> <span class="o">-</span><span class="n">l</span>
 <span class="n">CWATM</span> <span class="o">-</span> <span class="n">Community</span> <span class="n">Water</span> <span class="n">Model</span>  <span class="n">Version</span><span class="p">:</span> <span class="mf">0.991</span>  <span class="n">Date</span><span class="p">:</span>  <span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">2017</span>
 <span class="n">International</span> <span class="n">Institute</span> <span class="n">of</span> <span class="n">Applied</span> <span class="n">Systems</span> <span class="n">Analysis</span> <span class="p">(</span><span class="n">IIASA</span><span class="p">)</span>
 <span class="n">Running</span> <span class="n">under</span> <span class="n">platform</span><span class="p">:</span>  <span class="n">Windows</span>
@@ -266,8 +257,8 @@ metaNetcdfFile = $(FILE_PATHS:PathRoot)/CWATM/source/metaNetcdf.xml
 <span class="o">...</span>
 </pre></div>
 </div>
-<p>If you do&#8217;t see this. Something went wrong and you mifght see this instead:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>E:\CWATM_rhine\source&gt;python cwatm.py settings_rhine30min.ini -l
+<p>If you do’t see this. Something went wrong and you mifght see this instead:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>E:\CWATM_rhine\source&gt;python cwatm.py settings_rhine30min.ini -l
 CWATM - Community Water Model  Version: 0.991  Date:  16/09/2017
 International Institute of Applied Systems Analysis (IIASA)
 Running under platform:  Windows
@@ -287,13 +278,13 @@ path: E:/CWATM_rhine/cwatm_input/routing does not exists
 <div class="line">but it cannot find the file and not even the path to the file.</div>
 </div>
 <p>Here you might change:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>[FILE_PATHS]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[FILE_PATHS]
 PathRoot = E:/CWATM_rhine
 PathMaps = $(PathRoot)/cwatm_input
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>[TOPOP]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[TOPOP]
 # local drain direction map (1-9)
 Ldd = $(FILE_PATHS:PathMaps)/routing/ldd.map
 </pre></div>
@@ -301,16 +292,16 @@ Ldd = $(FILE_PATHS:PathMaps)/routing/ldd.map
 <p>But many other error can occure too! Have fun.</p>
 </div>
 <div class="section" id="changing-parameters-of-the-model">
-<h2><a class="toc-backref" href="#id16">Changing parameters of the model</a><a class="headerlink" href="#changing-parameters-of-the-model" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Changing parameters of the model</a><a class="headerlink" href="#changing-parameters-of-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">An overview of possibilities is given in  see <a class="reference internal" href="setup.html#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
 </div>
 </div>
 <div class="section" id="changing-the-output">
-<h2><a class="toc-backref" href="#id17">Changing the Output</a><a class="headerlink" href="#changing-the-output" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">Changing the Output</a><a class="headerlink" href="#changing-the-output" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="output-variables">
-<h3><a class="toc-backref" href="#id18">Output variables</a><a class="headerlink" href="#output-variables" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id16">Output variables</a><a class="headerlink" href="#output-variables" title="Permalink to this headline">¶</a></h3>
 <p>Output can be every global defined variable in the model
 Variable are e.g. Precipitation, runoff, baseflow</p>
 <p>but also not so common variables as:</p>
@@ -318,11 +309,11 @@ Variable are e.g. Precipitation, runoff, baseflow</p>
 <li>reservoirStorage (amount of water in the reservoirs in [m3])</li>
 <li>nonIrrReturnFlowFraction (returnflow from domenstic and industrial water use [m3])</li>
 <li>actualET[1] (actual evapotranspiration from grassland [m/day])</li>
-<li>...</li>
+<li>…</li>
 </ul>
 </div>
 <div class="section" id="daily-monthly-at-the-end-or-average">
-<h3><a class="toc-backref" href="#id19">Daily, monthly - at the end or average</a><a class="headerlink" href="#daily-monthly-at-the-end-or-average" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id17">Daily, monthly - at the end or average</a><a class="headerlink" href="#daily-monthly-at-the-end-or-average" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>per day</li>
 <li>total month, average month, end of month</li>
@@ -330,7 +321,7 @@ Variable are e.g. Precipitation, runoff, baseflow</p>
 <li>total average, total at the end</li>
 </ul>
 <p>for example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>[OUTPUT]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[OUTPUT]
 # OUTPUT maps and timeseries
 OUT_Dir = $(FILE_PATHS:PathOut)
 OUT_MAP_Daily = discharge, runoff
@@ -352,8 +343,8 @@ OUT_TSS_AnnualAvg = Precipitation
 </div>
 </div>
 <div class="section" id="most-important-output-variables-a-selection">
-<h3><a class="toc-backref" href="#id20">Most important output variables - a selection</a><a class="headerlink" href="#most-important-output-variables-a-selection" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Variable name    : Description</span>
+<h3><a class="toc-backref" href="#id18">Most important output variables - a selection</a><a class="headerlink" href="#most-important-output-variables-a-selection" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Variable name    : Description</span>
 <span class="n">discharge</span>         <span class="p">:</span> <span class="n">river</span> <span class="n">discharge</span>
 <span class="n">runoff</span>            <span class="p">:</span> <span class="n">runoff</span>
 <span class="n">Precipitation</span>     <span class="p">:</span> <span class="n">rainfall</span> <span class="o">+</span> <span class="n">snow</span>
@@ -367,16 +358,16 @@ OUT_TSS_AnnualAvg = Precipitation
 </div>
 </div>
 <div class="section" id="output-variables-starting-a-list">
-<h3><a class="toc-backref" href="#id21">Output variables - starting a list</a><a class="headerlink" href="#output-variables-starting-a-list" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id19">Output variables - starting a list</a><a class="headerlink" href="#output-variables-starting-a-list" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">A list of variables can be produced by using:</div>
-<div class="line">grep -d recurse &#8216;self.var.&#8217; <a href="#id2"><span class="problematic" id="id3">*</span></a>.py</div>
+<div class="line">grep -d recurse ‘self.var.’ *.py</div>
 <div class="line">Every self.var.variable can be used as output variable</div>
 <div class="line">For a description of the variable please take a look at the python module itself.</div>
 <div class="line"><br /></div>
 <div class="line">As output variable please use without self.var.</div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Python_modul            Variable_name</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Python_modul            Variable_name</span>
 <span class="n">capillarRise</span><span class="o">.</span><span class="n">py</span>          <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">capRiseFrac</span>
 <span class="n">evaporationPot</span><span class="o">.</span><span class="n">py</span>        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">AlbedoCanopy</span>
 <span class="n">evaporationPot</span><span class="o">.</span><span class="n">py</span>        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">AlbedoSoil</span>
@@ -445,7 +436,7 @@ OUT_TSS_AnnualAvg = Precipitation
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
             </a></p>
-<h3><a href="index.html">Table Of Contents</a></h3>
+<h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
@@ -500,7 +491,7 @@ OUT_TSS_AnnualAvg = Precipitation
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
     </div>
   </body>
 </html>

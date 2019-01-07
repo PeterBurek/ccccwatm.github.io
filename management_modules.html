@@ -1,34 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>management_modules package &#8212; Community Water Model</title>
-    
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="11. Model download" href="license.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="hydrological_modules package" href="hydrological_modules.html" /> 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -60,18 +50,18 @@
 <span id="management-modules-checks-module"></span><h2>management_modules.checks module<a class="headerlink" href="#module-management_modules.checks" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.checks.checkmap">
-<code class="descclassname">management_modules.checks.</code><code class="descname">checkmap</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.checks.checkmap" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.checks.</code><code class="descname">checkmap</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#checkmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.checkmap" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="management_modules.checks.counted">
-<code class="descclassname">management_modules.checks.</code><code class="descname">counted</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.checks.counted" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.checks.</code><code class="descname">counted</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/checks.html#counted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.checks.counted" title="Permalink to this definition">¶</a></dt>
 <dd><p>count number of times a subroutine is called</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
 </tr>
@@ -84,25 +74,26 @@
 <span id="management-modules-configuration-module"></span><h2>management_modules.configuration module<a class="headerlink" href="#module-management_modules.configuration" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="management_modules.configuration.ExtParser">
-<em class="property">class </em><code class="descclassname">management_modules.configuration.</code><code class="descname">ExtParser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.configuration.ExtParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ConfigParser.SafeConfigParser</span></code></p>
+<em class="property">class </em><code class="descclassname">management_modules.configuration.</code><code class="descname">ExtParser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">configparser.ConfigParser</span></code></p>
 <p>addition to the parser to replace placeholders</p>
 <p class="rubric">Example</p>
 <p>PathRoot = C:/work
 MaskMap = $(FILE_PATHS:PathRoot)/data/areamaps/area.tif</p>
 <dl class="method">
 <dt id="management_modules.configuration.ExtParser.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>raw=False</em>, <em>vars=None</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.configuration.ExtParser.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>placeholder replacement</p>
+<code class="descname">get</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>raw=False</em>, <em>vars=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#ExtParser.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.ExtParser.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>def get(self, section, option, raw=False, vars=None
+placeholder replacement</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>section</strong> &#8211; </li>
-<li><strong>option</strong> &#8211; </li>
-<li><strong>raw</strong> &#8211; </li>
-<li><strong>vars</strong> &#8211; </li>
+<li><strong>section</strong> – </li>
+<li><strong>option</strong> – </li>
+<li><strong>raw</strong> – </li>
+<li><strong>vars</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -117,13 +108,13 @@ MaskMap = $(FILE_PATHS:PathRoot)/data/areamaps/area.tif</p>
 
 <dl class="function">
 <dt id="management_modules.configuration.parse_configuration">
-<code class="descclassname">management_modules.configuration.</code><code class="descname">parse_configuration</code><span class="sig-paren">(</span><em>settingsFileName</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.configuration.parse_configuration" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.configuration.</code><code class="descname">parse_configuration</code><span class="sig-paren">(</span><em>settingsFileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#parse_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.parse_configuration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse settings file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>settingsFileName</strong> &#8211; name of the settings file</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>settingsFileName</strong> – name of the settings file</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">parameters in list: binding, options in list: option</td>
 </tr>
@@ -133,16 +124,21 @@ MaskMap = $(FILE_PATHS:PathRoot)/data/areamaps/area.tif</p>
 
 <dl class="function">
 <dt id="management_modules.configuration.read_metanetcdf">
-<code class="descclassname">management_modules.configuration.</code><code class="descname">read_metanetcdf</code><span class="sig-paren">(</span><em>metaxml</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.configuration.read_metanetcdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.configuration.</code><code class="descname">read_metanetcdf</code><span class="sig-paren">(</span><em>metaxml</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/configuration.html#read_metanetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.configuration.read_metanetcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the metadata for netcdf output files
 unit, long name, standard name and additional information</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>metaxml</strong> &#8211; file mit information for netcdf files (metadata)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>metaxml</strong> – file mit information for netcdf files (metadata)</li>
+<li><strong>name</strong> – file name information</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List with metadata information: metaNetcdfVar</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">List with metadata information: metaNetcdfVar</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -153,30 +149,30 @@ unit, long name, standard name and additional information</p>
 <span id="management-modules-data-handling-module"></span><h2>management_modules.data_handling module<a class="headerlink" href="#module-management_modules.data_handling" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.data_handling.cbinding">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">cbinding</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.cbinding" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">cbinding</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#cbinding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.cbinding" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.checkOption">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">checkOption</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.checkOption" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">checkOption</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#checkOption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.checkOption" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.compressArray">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">compressArray</code><span class="sig-paren">(</span><em>map</em>, <em>pcr=True</em>, <em>name='None'</em>, <em>zeros=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.compressArray" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">compressArray</code><span class="sig-paren">(</span><em>map</em>, <em>name='None'</em>, <em>zeros=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#compressArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.compressArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compress 2D array with missing values to 1D array without missing values</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>map</strong> &#8211; in map</li>
-<li><strong>pcr</strong> &#8211; if True input map is used as pcraster map</li>
-<li><strong>name</strong> &#8211; </li>
+<li><strong>map</strong> – in map</li>
+<li><strong>name</strong> – filename of the map</li>
+<li><strong>zeros</strong> – add zeros (default= 0) if values of map are to big or too small</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Compressed 1D array</p>
 </td>
 </tr>
 </tbody>
@@ -185,19 +181,19 @@ unit, long name, standard name and additional information</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.decompress">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">decompress</code><span class="sig-paren">(</span><em>map</em>, <em>pcr1=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.decompress" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">decompress</code><span class="sig-paren">(</span><em>map</em>, <em>pcmap</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.decompress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decompress 1D array without missing values to 2D array with missing values</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>map</strong> &#8211; numpy 1D array as input</li>
-<li><strong>pcr1</strong> &#8211; if True map is used as pcraster map</li>
+<li><strong>map</strong> – numpy 1D array as input</li>
+<li><strong>pcmap</strong> – if True map is used as .map format</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D map</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D array for displaying</p>
 </td>
 </tr>
 </tbody>
@@ -206,20 +202,20 @@ unit, long name, standard name and additional information</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.divideValues">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">divideValues</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>default=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.divideValues" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">divideValues</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>default=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#divideValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.divideValues" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns the result of a division that possibly involves a zero</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>x</strong> &#8211; </li>
-<li><strong>y</strong> &#8211; divisor</li>
-<li><strong>default</strong> &#8211; return value if y =0</li>
+<li><strong>x</strong> – </li>
+<li><strong>y</strong> – divisor</li>
+<li><strong>default</strong> – return value if y =0</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">result of <img class="math" src="_images/math/750940e0680e4ad322889befa00d4dd93c9a9fe0.png" alt="x/y"/> or default if y = 0</p>
 </td>
 </tr>
 </tbody>
@@ -228,25 +224,40 @@ unit, long name, standard name and additional information</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.getmeta">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">getmeta</code><span class="sig-paren">(</span><em>key</em>, <em>varname</em>, <em>alternative</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.getmeta" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">getmeta</code><span class="sig-paren">(</span><em>key</em>, <em>varname</em>, <em>alternative</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#getmeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.getmeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the meta data information for the netcdf output from the global
 variable metaNetcdfVar</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> – key</li>
+<li><strong>varname</strong> – variable name eg self.var.Precipitation</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">metadata information</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.loadmap">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadmap</code><span class="sig-paren">(</span><em>name</em>, <em>pcr=False</em>, <em>lddflag=False</em>, <em>compress=True</em>, <em>local=False</em>, <em>cut=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.loadmap" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadmap</code><span class="sig-paren">(</span><em>name</em>, <em>lddflag=False</em>, <em>compress=True</em>, <em>local=False</em>, <em>cut=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#loadmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.loadmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>load a static map either value or pc raster map or netcdf</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> &#8211; name of map</li>
-<li><strong>pcr</strong> &#8211; if pcr=True - pcraster map is given back</li>
-<li><strong>lddflag</strong> &#8211; if True the map is used as a ldd map</li>
-<li><strong>compress</strong> &#8211; if True the return map will be compressed</li>
-<li><strong>local</strong> &#8211; if True the map will be not cut</li>
+<li><strong>name</strong> – name of map</li>
+<li><strong>lddflag</strong> – if True the map is used as a ldd map</li>
+<li><strong>compress</strong> – if True the return map will be compressed</li>
+<li><strong>local</strong> – if True the map is local and will be not cut</li>
+<li><strong>cut</strong> – if True the map will be not cut</li>
 </ul>
 </td>
 </tr>
@@ -259,13 +270,15 @@ variable metaNetcdfVar</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.loadsetclone">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadsetclone</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.loadsetclone" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">loadsetclone</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#loadsetclone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.loadsetclone" title="Permalink to this definition">¶</a></dt>
 <dd><p>load the maskmap and set as clone</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> &#8211; name of mask map, can be a file or - row col cellsize xupleft yupleft -</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> – name of mask map, can be a file or - row col cellsize xupleft yupleft -</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">new mask map</td>
 </tr>
 </tbody>
 </table>
@@ -273,29 +286,64 @@ variable metaNetcdfVar</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.mapattrNetCDF">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrNetCDF</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.mapattrNetCDF" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the map attributes like col, row etc from a netcdf map
-and define the rectangular of the mask map inside the netcdf map</p>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrNetCDF</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#mapattrNetCDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.mapattrNetCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the 4 corners of a netcdf map to cut the map
+defines the rectangular of the mask map inside the netcdf map
+calls function <a class="reference internal" href="#management_modules.data_handling.readCoord" title="management_modules.data_handling.readCoord"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.data_handling.readCoord()</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> – name of the netcdf file</li>
+<li><strong>check</strong> – checking if netcdffile exists</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">cut1,cut2,cut3,cut4</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>if cell size is different</strong> – <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMError()</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.mapattrNetCDFMeteo">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrNetCDFMeteo</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.mapattrNetCDFMeteo" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrNetCDFMeteo</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#mapattrNetCDFMeteo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.mapattrNetCDFMeteo" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the map attributes like col, row etc from a netcdf map
-and define the rectangular of the mask map inside the netcdf map</p>
+and define the rectangular of the mask map inside the netcdf map
+calls function <a class="reference internal" href="#management_modules.data_handling.readCoordNetCDF" title="management_modules.data_handling.readCoordNetCDF"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.data_handling.readCoordNetCDF()</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> – name of the netcdf file</li>
+<li><strong>check</strong> – checking if netcdffile exists</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">cut0,cut1,cut2,cut3,cut4,cut5,cut6,cut7</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.mapattrTiff">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrTiff</code><span class="sig-paren">(</span><em>nf2</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.mapattrTiff" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">mapattrTiff</code><span class="sig-paren">(</span><em>nf2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#mapattrTiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.mapattrTiff" title="Permalink to this definition">¶</a></dt>
 <dd><p>map attributes of a geotiff file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nf2</strong> &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nf2</strong> – </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">cut0,cut1,cut2,cut3</td>
 </tr>
 </tbody>
 </table>
@@ -303,20 +351,36 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.metaNetCDF">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">metaNetCDF</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.metaNetCDF" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the map metadata from netcdf</p>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">metaNetCDF</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#metaNetCDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.metaNetCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the map metadata from precipitation netcdf maps</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">if no precipitation maps can be found: <a class="reference internal" href="#management_modules.messages.CWATMFileError" title="management_modules.messages.CWATMFileError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMFileError()</span></code></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.multinetdf">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">multinetdf</code><span class="sig-paren">(</span><em>meteomaps</em>, <em>startcheck='dateBegin'</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.multinetdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">multinetdf</code><span class="sig-paren">(</span><em>meteomaps</em>, <em>startcheck='dateBegin'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#multinetdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.multinetdf" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>meteomaps</strong> &#8211; list of meteomaps to define start and end time</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>meteomaps</strong> – list of meteomaps to define start and end time</li>
+<li><strong>startcheck</strong> – date of beginning simulation</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>if no map stack in meteo map folder</strong> – <a class="reference internal" href="#management_modules.messages.CWATMFileError" title="management_modules.messages.CWATMFileError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMFileError()</span></code></a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -324,37 +388,70 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readCoord">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readCoord</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readCoord" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readCoord</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readCoord"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readCoord" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the meta data information for the netcdf output from the global
+variable metaNetcdfVar</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> – name of the netcdf file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">latitude, longitude, cell size, inverse cell size</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readCoordNetCDF">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readCoordNetCDF</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readCoordNetCDF" title="Permalink to this definition">¶</a></dt>
-<dd><p>reads the map attributes col, row etc from a netcdf map
-:param name: name of the netcdf file
-:param check:  checking if netcdffile exists
-:return:</p>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readCoordNetCDF</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readCoordNetCDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readCoordNetCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads the map attributes col, row etc from a netcdf map</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> – name of the netcdf file</li>
+<li><strong>check</strong> – checking if netcdffile exists</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">latitude, longitude, cell size, inverse cell size</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>if no netcdf map can be found</strong> – <a class="reference internal" href="#management_modules.messages.CWATMFileError" title="management_modules.messages.CWATMFileError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMFileError()</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readmeteodata">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readmeteodata</code><span class="sig-paren">(</span><em>name</em>, <em>date</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>zeros=0.0</em>, <em>mapsscale=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readmeteodata" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readmeteodata</code><span class="sig-paren">(</span><em>name</em>, <em>date</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>zeros=0.0</em>, <em>mapsscale=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readmeteodata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readmeteodata" title="Permalink to this definition">¶</a></dt>
 <dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> &#8211; file name</li>
-<li><strong>date</strong> &#8211; </li>
-<li><strong>value</strong> &#8211; if set the name of the parameter is defined</li>
-<li><strong>addZeros</strong> &#8211; </li>
-<li><strong>cut</strong> &#8211; if True the map is clipped to mask map</li>
-<li><strong>zeros</strong> &#8211; default value</li>
+<li><strong>name</strong> – file name</li>
+<li><strong>date</strong> – </li>
+<li><strong>value</strong> – if set the name of the parameter is defined</li>
+<li><strong>addZeros</strong> – </li>
+<li><strong>zeros</strong> – default value</li>
+<li><strong>mapsscale</strong> – if meteo maps have the same extend as the other spatial static m</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Compressed 1D array of meteo data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>if data is wrong</strong> – <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMError()</span></code></a></li>
+<li><strong>if meteo netcdf file cannot be opened</strong> – <a class="reference internal" href="#management_modules.messages.CWATMFileError" title="management_modules.messages.CWATMFileError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMFileError()</span></code></a></li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -363,24 +460,33 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readnetcdf2">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf2</code><span class="sig-paren">(</span><em>namebinding</em>, <em>date</em>, <em>useDaily='daily'</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>cut=True</em>, <em>zeros=0.0</em>, <em>meteo=False</em>, <em>usefilename=False</em>, <em>compress=True</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdf2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdf2</code><span class="sig-paren">(</span><em>namebinding</em>, <em>date</em>, <em>useDaily='daily'</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>cut=True</em>, <em>zeros=0.0</em>, <em>meteo=False</em>, <em>usefilename=False</em>, <em>compress=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdf2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdf2" title="Permalink to this definition">¶</a></dt>
 <dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> &#8211; file name</li>
-<li><strong>date</strong> &#8211; </li>
-<li><strong>useDaily</strong> &#8211; if True daily values are used</li>
-<li><strong>value</strong> &#8211; if set the name of the parameter is defined</li>
-<li><strong>addZeros</strong> &#8211; </li>
-<li><strong>cut</strong> &#8211; if True the map is clipped to mask map</li>
-<li><strong>zeros</strong> &#8211; default value</li>
+<li><strong>namebinding</strong> – file name in settings file</li>
+<li><strong>date</strong> – </li>
+<li><strong>useDaily</strong> – if True daily values are used</li>
+<li><strong>value</strong> – if set the name of the parameter is defined</li>
+<li><strong>addZeros</strong> – </li>
+<li><strong>cut</strong> – if True the map is clipped to mask map</li>
+<li><strong>zeros</strong> – default value</li>
+<li><strong>meteo</strong> – if map are meteo maps</li>
+<li><strong>usefilename</strong> – if True filename is given False: filename is in settings file</li>
+<li><strong>compress</strong> – True - compress data to 1D</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Compressed 1D array of netcdf stored data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>if netcdf file cannot be opened</strong> – <a class="reference internal" href="#management_modules.messages.CWATMFileError" title="management_modules.messages.CWATMFileError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMFileError()</span></code></a></li>
+<li><strong>if netcdf file is not of the size of mask map</strong> – <a class="reference internal" href="#management_modules.messages.CWATMWarning" title="management_modules.messages.CWATMWarning"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMWarning()</span></code></a></li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -389,46 +495,119 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.readnetcdfInitial">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfInitial</code><span class="sig-paren">(</span><em>name</em>, <em>value</em>, <em>default=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdfInitial" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfInitial</code><span class="sig-paren">(</span><em>name</em>, <em>value</em>, <em>default=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdfInitial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdfInitial" title="Permalink to this definition">¶</a></dt>
 <dd><p>load initial condition from netcdf format</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="management_modules.data_handling.readnetcdfWithoutTime">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfWithoutTime</code><span class="sig-paren">(</span><em>name</em>, <em>value='None'</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.readnetcdfWithoutTime" title="Permalink to this definition">¶</a></dt>
-<dd><p>load stack of maps in netcdf format</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="management_modules.data_handling.returnBool">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">returnBool</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.returnBool" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test if parameter is a boolean and return an error message if not, and the boolean if everything is ok
-:param inBinding: parameter in settings file
-:return: boolean of inBinding</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="management_modules.data_handling.setmaskmapAttr">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">setmaskmapAttr</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>col</em>, <em>row</em>, <em>cell</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.setmaskmapAttr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Definition of cell size, coordinates of the meteo maps and maskmap</p>
-<dl class="docutils">
-<dt>Todo</dt>
-<dd>need some love for error handling</dd>
-</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>x</strong> &#8211; upper left corner x</li>
-<li><strong>y</strong> &#8211; upper left corner y</li>
-<li><strong>col</strong> &#8211; number of cols</li>
-<li><strong>row</strong> &#8211; number of rows</li>
-<li><strong>cell</strong> &#8211; cell size</li>
+<li><strong>name</strong> – file name</li>
+<li><strong>value</strong> – netcdf variable name</li>
+<li><strong>default</strong> – (optional) if no variable is found a warning is given and value is set to default</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Compressed 1D array of netcdf stored data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>if netcdf file is not of the size of mask map</strong> – <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMError()</span></code></a></li>
+<li><strong>if varibale name is not included in the netcdf file</strong> – <a class="reference internal" href="#management_modules.messages.CWATMWarning" title="management_modules.messages.CWATMWarning"><code class="xref py py-meth docutils literal notranslate"><span class="pre">management_modules.messages.CWATMWarning()</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.readnetcdfWithoutTime">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">readnetcdfWithoutTime</code><span class="sig-paren">(</span><em>name</em>, <em>value='None'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#readnetcdfWithoutTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.readnetcdfWithoutTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>load maps in netcdf format (has no time format)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>namebinding</strong> – file name in settings file</li>
+<li><strong>value</strong> – (optional) netcdf variable name. If not given -&gt; last variable is taken</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Compressed 1D array of netcdf stored data</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.report">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">report</code><span class="sig-paren">(</span><em>name</em>, <em>valueIn</em>, <em>compr=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>For debugging: Save the 2D array as .map or .tif</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> – Filename of the map</li>
+<li><strong>valueIn</strong> – 1D or 2D array in</li>
+<li><strong>compr</strong> – (optional) array is 1D (default) or 2D</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li></li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Example</span><span class="p">:</span>
+<span class="o">&gt;</span> <span class="n">report</span><span class="p">(</span><span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">temp</span><span class="o">/</span><span class="n">ksat1</span><span class="o">.</span><span class="n">map</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ksat1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.returnBool">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">returnBool</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#returnBool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.returnBool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if parameter is a boolean and return an error message if not, and the boolean if everything is ok</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inBinding</strong> – parameter in settings file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean of inBinding</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="management_modules.data_handling.setmaskmapAttr">
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">setmaskmapAttr</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>col</em>, <em>row</em>, <em>cell</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#setmaskmapAttr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.setmaskmapAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Definition of cell size, coordinates of the meteo maps and maskmap</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> – upper left corner x</li>
+<li><strong>y</strong> – upper left corner y</li>
+<li><strong>col</strong> – number of cols</li>
+<li><strong>row</strong> – number of rows</li>
+<li><strong>cell</strong> – cell size</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li></li>
+</ul>
+</p>
 </td>
 </tr>
 </tbody>
@@ -437,20 +616,19 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.valuecell">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">valuecell</code><span class="sig-paren">(</span><em>mask</em>, <em>coordx</em>, <em>coordstr</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.valuecell" title="Permalink to this definition">¶</a></dt>
-<dd><p>to put a value into a pc raster map -&gt; invert of cellvalue, map is converted into a numpy array first</p>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">valuecell</code><span class="sig-paren">(</span><em>coordx</em>, <em>coordstr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#valuecell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.valuecell" title="Permalink to this definition">¶</a></dt>
+<dd><p>to put a value into a raster map -&gt; invert of cellvalue, map is converted into a numpy array first</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mask</strong> &#8211; Mask map</li>
-<li><strong>coordx</strong> &#8211; x,y or lon/lat coordinate</li>
-<li><strong>coordstr</strong> &#8211; String of coordinates</li>
+<li><strong>coordx</strong> – x,y or lon/lat coordinate</li>
+<li><strong>coordstr</strong> – String of coordinates</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">1D array with new value</p>
 </td>
 </tr>
 </tbody>
@@ -459,14 +637,57 @@ and define the rectangular of the mask map inside the netcdf map</p>
 
 <dl class="function">
 <dt id="management_modules.data_handling.writeIniNetcdf">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">writeIniNetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>varlist</em>, <em>inputlist</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.writeIniNetcdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">writeIniNetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>varlist</em>, <em>inputlist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#writeIniNetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.writeIniNetcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>write variables to netcdf init file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>netfile</strong> – file name</li>
+<li><strong>varlist</strong> – list of variable to be written in the netcdf file</li>
+<li><strong>inputlist</strong> – stack of 1D arrays</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li></li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="management_modules.data_handling.writenetcdf">
-<code class="descclassname">management_modules.data_handling.</code><code class="descname">writenetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>prename</em>, <em>addname</em>, <em>varunits</em>, <em>inputmap</em>, <em>timeStamp</em>, <em>posCnt</em>, <em>flag</em>, <em>flagTime</em>, <em>nrdays=None</em>, <em>dateunit='days'</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.data_handling.writenetcdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.data_handling.</code><code class="descname">writenetcdf</code><span class="sig-paren">(</span><em>netfile</em>, <em>prename</em>, <em>addname</em>, <em>varunits</em>, <em>inputmap</em>, <em>timeStamp</em>, <em>posCnt</em>, <em>flag</em>, <em>flagTime</em>, <em>nrdays=None</em>, <em>dateunit='days'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/data_handling.html#writenetcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.data_handling.writenetcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>write a netcdf stack</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>netfile</strong> – file name</li>
+<li><strong>prename</strong> – 1st part of variable name with tell which variable e.g. discharge</li>
+<li><strong>addname</strong> – part of the variable name with tells about the timestep e.g. daily, monthly</li>
+<li><strong>varunits</strong> – unit of the variable</li>
+<li><strong>inputmap</strong> – 1D array to be put as netcdf</li>
+<li><strong>timeStamp</strong> – time</li>
+<li><strong>posCnt</strong> – calculate nummer of the indece for time</li>
+<li><strong>flag</strong> – to indicate if the file is new -&gt; netcdf header has to be written,or simply appending data</li>
+<li><strong>flagtime</strong> – to indicate the variable is time dependend (not a single array!)</li>
+<li><strong>nrdays</strong> – (optional) if indicate number of days are set in the time variable (makes files smaller!)</li>
+<li><strong>dateunit</strong> – (optional) dateunit indicate if the timestep in netcdf is days, month or years</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">flag: to indicate if the file is set up</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -474,38 +695,36 @@ and define the rectangular of the mask map inside the netcdf map</p>
 <span id="management-modules-globals-module"></span><h2>management_modules.globals module<a class="headerlink" href="#module-management_modules.globals" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.globals.globalFlags">
-<code class="descclassname">management_modules.globals.</code><code class="descname">globalFlags</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.globals.globalFlags" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.globals.</code><code class="descname">globalFlags</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/globals.html#globalFlags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.globals.globalFlags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read flags - according to the flags the output is adjusted
 quiet,veryquiet, loud, checkfiles, noheader,printtime, warranty</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-management_modules.improvepcraster">
-<span id="management-modules-improvepcraster-module"></span><h2>management_modules.improvepcraster module<a class="headerlink" href="#module-management_modules.improvepcraster" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-management_modules.dynamicModel">
+<span id="management-modules-dynamicmodel-module"></span><h2>management_modules.dynamicModel module<a class="headerlink" href="#module-management_modules.dynamicModel" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="management_modules.improvepcraster.DynamicFramework2">
-<em class="property">class </em><code class="descclassname">management_modules.improvepcraster.</code><code class="descname">DynamicFramework2</code><span class="sig-paren">(</span><em>userModel</em>, <em>lastTimeStep=0</em>, <em>firstTimestep=1</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pcraster2.dynamicFramework.DynamicFramework</span></code></p>
-<p>Framework class for dynamic models.
-<cite>userModel</cite>
-Instance that models the Dynamic Model Concept &lt;dynamicModelConcept&gt;.
-<cite>lastTimeStep</cite>   Last timestep to run.
-<cite>firstTimestep</cite>  Sets the starting timestep of the model (optional, default is 1).
-Updated by improvepcraster.py</p>
+<dt id="management_modules.dynamicModel.DynamicModel">
+<em class="property">class </em><code class="descclassname">management_modules.dynamicModel.</code><code class="descname">DynamicModel</code><a class="reference internal" href="_modules/management_modules/dynamicModel.html#DynamicModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.dynamicModel.DynamicModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="attribute">
-<dt id="management_modules.improvepcraster.DynamicFramework2.rquiet">
-<code class="descname">rquiet</code><em class="property"> = False</em><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2.rquiet" title="Permalink to this definition">¶</a></dt>
+<dt id="management_modules.dynamicModel.DynamicModel.i">
+<code class="descname">i</code><em class="property"> = 1</em><a class="headerlink" href="#management_modules.dynamicModel.DynamicModel.i" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="management_modules.improvepcraster.DynamicFramework2.rtrace">
-<code class="descname">rtrace</code><em class="property"> = False</em><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2.rtrace" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+</dd></dl>
 
+<dl class="class">
+<dt id="management_modules.dynamicModel.ModelFrame">
+<em class="property">class </em><code class="descclassname">management_modules.dynamicModel.</code><code class="descname">ModelFrame</code><span class="sig-paren">(</span><em>model</em>, <em>lastTimeStep=1</em>, <em>firstTimestep=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/dynamicModel.html#ModelFrame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.dynamicModel.ModelFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Frame of the dynamic hydrological model</p>
+<p>lastTimeStep:  Last time step to run
+firstTimestep: Starting time step of the model</p>
 <dl class="method">
-<dt id="management_modules.improvepcraster.DynamicFramework2.run">
-<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.improvepcraster.DynamicFramework2.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run the dynamic user model.</p>
+<dt id="management_modules.dynamicModel.ModelFrame.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/dynamicModel.html#ModelFrame.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.dynamicModel.ModelFrame.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the dynamic part of the model</p>
 </dd></dl>
 
 </dd></dl>
@@ -515,24 +734,24 @@ Updated by improvepcraster.py</p>
 <span id="management-modules-messages-module"></span><h2>management_modules.messages module<a class="headerlink" href="#module-management_modules.messages" title="Permalink to this headline">¶</a></h2>
 <dl class="exception">
 <dt id="management_modules.messages.CWATMError">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.messages.CWATMError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>The error handling class
 prints out an error</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="management_modules.messages.CWATMFileError">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMFileError</code><span class="sig-paren">(</span><em>filename</em>, <em>msg=''</em>, <em>sname=''</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.messages.CWATMFileError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-class docutils literal"><span class="pre">management_modules.messages.CWATMError</span></code></a></p>
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMFileError</code><span class="sig-paren">(</span><em>filename</em>, <em>msg=''</em>, <em>sname=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMFileError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMFileError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#management_modules.messages.CWATMError" title="management_modules.messages.CWATMError"><code class="xref py py-class docutils literal notranslate"><span class="pre">management_modules.messages.CWATMError</span></code></a></p>
 <p>The error handling class
 prints out an error</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="management_modules.messages.CWATMRunInfo">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMRunInfo</code><span class="sig-paren">(</span><em>outputDir</em>, <em>Steps=1</em>, <em>ensMembers=1</em>, <em>Cores=1</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.messages.CWATMRunInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Warning</span></code></p>
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMRunInfo</code><span class="sig-paren">(</span><em>outputDir</em>, <em>Steps=1</em>, <em>ensMembers=1</em>, <em>Cores=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMRunInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMRunInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></p>
 <p>prints out an error</p>
 <dl class="docutils">
 <dt>Warning</dt>
@@ -542,8 +761,8 @@ prints out an error</p>
 
 <dl class="exception">
 <dt id="management_modules.messages.CWATMWarning">
-<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMWarning</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.messages.CWATMWarning" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Warning</span></code></p>
+<em class="property">exception </em><code class="descclassname">management_modules.messages.</code><code class="descname">CWATMWarning</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/messages.html#CWATMWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.messages.CWATMWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></p>
 <p>the error handling class
 prints out an error</p>
 </dd></dl>
@@ -553,18 +772,18 @@ prints out an error</p>
 <span id="management-modules-output-module"></span><h2>management_modules.output module<a class="headerlink" href="#module-management_modules.output" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="management_modules.output.outputTssMap">
-<em class="property">class </em><code class="descclassname">management_modules.output.</code><code class="descname">outputTssMap</code><span class="sig-paren">(</span><em>out_variable</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.output.outputTssMap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<em class="property">class </em><code class="descclassname">management_modules.output.</code><code class="descname">outputTssMap</code><span class="sig-paren">(</span><em>out_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Output of time series and map</p>
 <dl class="method">
 <dt id="management_modules.output.outputTssMap.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><em>ef=False</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.output.outputTssMap.dynamic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dynamic</code><span class="sig-paren">(</span><em>ef=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the output module</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="management_modules.output.outputTssMap.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.output.outputTssMap.initial" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/output.html#outputTssMap.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.output.outputTssMap.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the output module</p>
 </dd></dl>
 
@@ -575,15 +794,15 @@ prints out an error</p>
 <span id="management-modules-replace-pcr-module"></span><h2>management_modules.replace_pcr module<a class="headerlink" href="#module-management_modules.replace_pcr" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.replace_pcr.npareaaverage">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareaaverage</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.replace_pcr.npareaaverage" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareaaverage</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareaaverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareaaverage" title="Permalink to this definition">¶</a></dt>
 <dd><p>numpy area average procedure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>values</strong> &#8211; </li>
-<li><strong>areaclass</strong> &#8211; </li>
+<li><strong>values</strong> – </li>
+<li><strong>areaclass</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -596,15 +815,15 @@ prints out an error</p>
 
 <dl class="function">
 <dt id="management_modules.replace_pcr.npareamajority">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamajority</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.replace_pcr.npareamajority" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamajority</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamajority"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamajority" title="Permalink to this definition">¶</a></dt>
 <dd><p>numpy area majority procedure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>values</strong> &#8211; </li>
-<li><strong>areaclass</strong> &#8211; </li>
+<li><strong>values</strong> – </li>
+<li><strong>areaclass</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -617,15 +836,15 @@ prints out an error</p>
 
 <dl class="function">
 <dt id="management_modules.replace_pcr.npareamaximum">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamaximum</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.replace_pcr.npareamaximum" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareamaximum</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareamaximum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareamaximum" title="Permalink to this definition">¶</a></dt>
 <dd><p>numpy area maximum procedure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>values</strong> &#8211; </li>
-<li><strong>areaclass</strong> &#8211; </li>
+<li><strong>values</strong> – </li>
+<li><strong>areaclass</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -638,15 +857,15 @@ prints out an error</p>
 
 <dl class="function">
 <dt id="management_modules.replace_pcr.npareatotal">
-<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareatotal</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.replace_pcr.npareatotal" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.replace_pcr.</code><code class="descname">npareatotal</code><span class="sig-paren">(</span><em>values</em>, <em>areaclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/replace_pcr.html#npareatotal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.replace_pcr.npareatotal" title="Permalink to this definition">¶</a></dt>
 <dd><p>numpy area total procedure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>values</strong> &#8211; </li>
-<li><strong>areaclass</strong> &#8211; </li>
+<li><strong>values</strong> – </li>
+<li><strong>areaclass</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -662,16 +881,21 @@ prints out an error</p>
 <span id="management-modules-timestep-module"></span><h2>management_modules.timestep module<a class="headerlink" href="#module-management_modules.timestep" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="management_modules.timestep.Calendar">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">Calendar</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.Calendar" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">Calendar</code><span class="sig-paren">(</span><em>input</em>, <em>errorNo=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#Calendar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.Calendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the date from CalendarDayStart in the settings xml
 Reformatting the date till it fits to datetime</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input</strong> &#8211; string from the settingsfile should be somehow a date</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input</strong> – string from the settingsfile should be somehow a date</li>
+<li><strong>errorNo</strong> – 0: check startdate, enddate 1: check startinit</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a datetime date</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a datetime date</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -679,7 +903,7 @@ Reformatting the date till it fits to datetime</p>
 
 <dl class="function">
 <dt id="management_modules.timestep.checkifDate">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">checkifDate</code><span class="sig-paren">(</span><em>start</em>, <em>end</em>, <em>spinup</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.checkifDate" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">checkifDate</code><span class="sig-paren">(</span><em>start</em>, <em>end</em>, <em>spinup</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#checkifDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.checkifDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if start date is earlier than end date etc
 And set some date variables</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -687,9 +911,9 @@ And set some date variables</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start</strong> &#8211; start date</li>
-<li><strong>end</strong> &#8211; end date</li>
-<li><strong>spinup</strong> &#8211; date till no output is generated = warming up time</li>
+<li><strong>start</strong> – start date</li>
+<li><strong>end</strong> – end date</li>
+<li><strong>spinup</strong> – date till no output is generated = warming up time</li>
 </ul>
 </td>
 </tr>
@@ -702,31 +926,31 @@ And set some date variables</p>
 
 <dl class="function">
 <dt id="management_modules.timestep.ctbinding">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">ctbinding</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.ctbinding" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">ctbinding</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#ctbinding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.ctbinding" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="management_modules.timestep.date2indexNew">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">date2indexNew</code><span class="sig-paren">(</span><em>date</em>, <em>nctime</em>, <em>calendar</em>, <em>select='nearest'</em>, <em>name=''</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.date2indexNew" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">date2indexNew</code><span class="sig-paren">(</span><em>date</em>, <em>nctime</em>, <em>calendar</em>, <em>select='nearest'</em>, <em>name=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#date2indexNew"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.date2indexNew" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="management_modules.timestep.date2str">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">date2str</code><span class="sig-paren">(</span><em>date</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.date2str" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">date2str</code><span class="sig-paren">(</span><em>date</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#date2str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.date2str" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="management_modules.timestep.datetoInt">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">datetoInt</code><span class="sig-paren">(</span><em>dateIn</em>, <em>begin</em>, <em>both=False</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.datetoInt" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">datetoInt</code><span class="sig-paren">(</span><em>dateIn</em>, <em>begin</em>, <em>both=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#datetoInt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.datetoInt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the integer of a date from a reference date</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>dateIn</strong> &#8211; date</li>
-<li><strong>begin</strong> &#8211; reference date</li>
-<li><strong>both</strong> &#8211; if set to True both the int and the string of the date are returned</li>
+<li><strong>dateIn</strong> – date</li>
+<li><strong>begin</strong> – reference date</li>
+<li><strong>both</strong> – if set to True both the int and the string of the date are returned</li>
 </ul>
 </td>
 </tr>
@@ -738,18 +962,40 @@ And set some date variables</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="management_modules.timestep.datetosaveInit">
+<code class="descclassname">management_modules.timestep.</code><code class="descname">datetosaveInit</code><span class="sig-paren">(</span><em>initdates</em>, <em>begin</em>, <em>end</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#datetosaveInit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.datetosaveInit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the save init dates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>initdates</strong> – one or several dates</li>
+<li><strong>begin</strong> – reference date</li>
+<li><strong>end</strong> – end date</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">interger value of a dates, satarting from begin date</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="management_modules.timestep.timemeasure">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">timemeasure</code><span class="sig-paren">(</span><em>name</em>, <em>loops=0</em>, <em>update=False</em>, <em>sample=1</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.timemeasure" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">timemeasure</code><span class="sig-paren">(</span><em>name</em>, <em>loops=0</em>, <em>update=False</em>, <em>sample=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#timemeasure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.timemeasure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Measuring of the time for each subroutine</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> &#8211; name of the subroutine</li>
-<li><strong>loops</strong> &#8211; if it it called several times this is added to the name</li>
-<li><strong>update</strong> &#8211; </li>
-<li><strong>sample</strong> &#8211; </li>
+<li><strong>name</strong> – name of the subroutine</li>
+<li><strong>loops</strong> – if it it called several times this is added to the name</li>
+<li><strong>update</strong> – </li>
+<li><strong>sample</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -762,7 +1008,7 @@ And set some date variables</p>
 
 <dl class="function">
 <dt id="management_modules.timestep.timestep_dynamic">
-<code class="descclassname">management_modules.timestep.</code><code class="descname">timestep_dynamic</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#management_modules.timestep.timestep_dynamic" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">management_modules.timestep.</code><code class="descname">timestep_dynamic</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/management_modules/timestep.html#timestep_dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#management_modules.timestep.timestep_dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of setting the date
 Current date is increasing, checking if beginning of month, year</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -790,7 +1036,7 @@ Current date is increasing, checking if beginning of month, year</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
             </a></p>
-<h3><a href="index.html">Table Of Contents</a></h3>
+<h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
@@ -835,7 +1081,7 @@ Current date is increasing, checking if beginning of month, year</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
     </div>
   </body>
 </html>

@@ -1,34 +1,25 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>9. Calibration tool &#8212; Community Water Model</title>
-    
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="10. Calibration tutorial" href="calibration_tutorial.html" />
     <link rel="prev" title="8. Data" href="data.html" /> 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -64,7 +55,7 @@
 <div class="line"><a class="reference external" href="http://deap.readthedocs.io/en/master/">http://deap.readthedocs.io/en/master/</a></div>
 <div class="line"><a class="reference external" href="https://github.com/DEAP/deap/blob/master/README.md">https://github.com/DEAP/deap/blob/master/README.md</a></div>
 </div>
-<p>Félix-Antoine Fortin, François-Michel De Rainville, Marc-André Gardner, Marc Parizeau and Christian Gagné, &#8220;DEAP: Evolutionary Algorithms Made Easy&#8221;, Journal of Machine Learning Research, vol. 13, pp. 2171-2175</p>
+<p>Félix-Antoine Fortin, François-Michel De Rainville, Marc-André Gardner, Marc Parizeau and Christian Gagné, “DEAP: Evolutionary Algorithms Made Easy”, Journal of Machine Learning Research, vol. 13, pp. 2171-2175</p>
 <div class="line-block">
 <div class="line">The calibration tool was created by Hylke Beck 2014 (JRC, Princeton) <a class="reference external" href="mailto:hylkeb&#37;&#52;&#48;princeton&#46;edu">hylkeb<span>&#64;</span>princeton<span>&#46;</span>edu</a></div>
 <div class="line">Thanks Hylke for making it available for use and modification</div>
@@ -109,7 +100,7 @@ The calibration uses general a population size (µ) of 256, a recombination pool
 <div class="line">7.    Recession coefficient factor: factor to adjust the base flow recession constant (the contribution from groundwater to baseflow)</div>
 <div class="line"><strong>Routing</strong></div>
 <div class="line">8.    Runoff concentration factor: a factor for the concentration time of run-off in each grid-cell</div>
-<div class="line">9.    Channel Manning&#8217;s n factor: a factor roughness in channel routing</div>
+<div class="line">9.    Channel Manning’s n factor: a factor roughness in channel routing</div>
 <div class="line">10.   Channel, lake and river evaporation factor: factor to adjust open water evaporation</div>
 <div class="line"><strong>Reservoir &amp; lakes</strong></div>
 <div class="line">11.   Normal storage limit: the fraction of storage capacity used as normal storage limit</div>
@@ -118,7 +109,7 @@ The calibration uses general a population size (µ) of 256, a recombination pool
 </div>
 <div class="section" id="calibration-tool-structure">
 <h2>Calibration tool structure<a class="headerlink" href="#calibration-tool-structure" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-rest"><div class="highlight"><pre><span></span>calibration
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span>calibration
 │-  readme.txt
 │-  readme.txt
 │
@@ -153,7 +144,7 @@ For each run it triggers the run of the hydrological model:</p>
 <li>The actual version of a cwatm settings file has to modified:</li>
 <li>replacing the output folder with the placeholder: %run_rand_id</li>
 </ul>
-<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>28
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>28
 29
 30
 31
@@ -177,7 +168,7 @@ For each run it triggers the run of the hydrological model:</p>
 <ul class="simple">
 <li>putting the output variables in e.g. OUT_TSS_Daily = discharge or monthly average discharge OUT_TSS_MonthAvg = discharge</li>
 </ul>
-<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>38
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>38
 39</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="na">OUT_TSS_Daily</span> <span class="o">=</span> <span class="s">discharge</span>
 <span class="na">OUT_TSS_MonthAvg</span> <span class="o">=</span> <span class="s">discharge</span>
 </pre></div>
@@ -186,7 +177,7 @@ For each run it triggers the run of the hydrological model:</p>
 <li>delete all the output variables in the template (mostly at the end of the file)</li>
 <li>replacing calibration parameter values with a placeholder: e.g. %SnowMelt</li>
 </ul>
-<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>42
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>42
 43
 44
 45
@@ -236,7 +227,7 @@ For each run it triggers the run of the hydrological model:</p>
 <div class="line-block">
 <div class="line"><strong>2.</strong> the range of parameter space has to be defined in ParamRanges.csv</div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ParameterName</span><span class="p">,</span><span class="n">MinValue</span><span class="p">,</span><span class="n">MaxValue</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ParameterName</span><span class="p">,</span><span class="n">MinValue</span><span class="p">,</span><span class="n">MaxValue</span>
 <span class="n">SnowMelt</span><span class="p">,</span><span class="mf">0.001</span><span class="p">,</span><span class="mf">0.007</span>
 <span class="n">crop</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">3.0</span>
 <span class="n">soildepthF</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span><span class="mf">1.8</span>
@@ -258,7 +249,7 @@ For each run it triggers the run of the hydrological model:</p>
 <div class="line-block">
 <div class="line">In the template settings the date has to be set, so that the period of observed discharge is between SpinUp and StepEnd</div>
 </div>
-<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -287,7 +278,7 @@ For each run it triggers the run of the hydrological model:</p>
 <div class="line-block">
 <div class="line"><strong>5.</strong> A few option in the settings.txt have to be adjusted (how many runs?, a first run with standard parameters? etc)</div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
 <span class="n">Root</span> <span class="o">=</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">watmodel</span><span class="o">/</span><span class="n">CWATM</span>
 <span class="n">RootPC</span> <span class="o">=</span> <span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">watmodel</span><span class="o">/</span><span class="n">CWATM</span>
 <span class="n">Rootbasin</span> <span class="o">=</span> <span class="n">calibration_rhine</span>
@@ -352,7 +343,7 @@ For each run it triggers the run of the hydrological model:</p>
 <div class="line-block">
 <div class="line">Best is to use a long term run for this.</div>
 </div>
-<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>146
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>146
 147
 148
 149
@@ -395,13 +386,13 @@ For each run it triggers the run of the hydrological model:</p>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Beck, H. E., A. I. J. M. van Dijk, A. de Roo, D. G. Miralles, T. R. McVicar, J. Schellekens and L. A. Bruijnzeel (2016). &#8220;Global-scale regionalization of hydrologic model parameters.&#8221; Water Resources Research 52(5): 3599-3622.</li>
-<li>Deb, K., A. Pratap, S. Agarwal and T. Meyarivan (2002). &#8220;A fast and elitist multiobjective genetic algorithm: NSGA-II.&#8221; IEEE Transactions on Evolutionary Computation 6(2): 182-197.</li>
-<li>Fortin, F. A., F. M. De Rainville, M. A. Gardner, M. Parizeau and C. Gagńe (2012). &#8220;DEAP: Evolutionary algorithms made easy.&#8221; Journal of Machine Learning Research 13: 2171-2175.</li>
-<li>Greve, P., L. Gudmundsson, B. Orlowsky and S. I. Seneviratne (2016). &#8220;A two-parameter Budyko function to represent conditions under which evapotranspiration exceeds precipitation.&#8221; Hydrology and Earth System Sciences 20(6): 2195-2205.</li>
-<li>Gupta, H. V., H. Kling, K. K. Yilmaz and G. F. Martinez (2009). &#8220;Decomposition of the mean squared error and NSE performance criteria: Implications for improving hydrological modelling.&#8221; Journal of Hydrology 377(1-2): 80-91.</li>
-<li>Kling, H., M. Fuchs and M. Paulin (2012). &#8220;Runoff conditions in the upper Danube basin under an ensemble of climate change scenarios.&#8221; Journal of Hydrology 424-425: 264-277.</li>
-<li>Samaniego, L., R. Kumar, S. Thober, O. Rakovec, M. Zink, N. Wanders, S. Eisner, H. Müller Schmied, E. Sutanudjaja, K. Warrach-Sagi and S. Attinger (2017). &#8220;Toward seamless hydrologic predictions across spatial scales.&#8221; Hydrology and Earth System Sciences 21(9): 4323-4346.</li>
+<li>Beck, H. E., A. I. J. M. van Dijk, A. de Roo, D. G. Miralles, T. R. McVicar, J. Schellekens and L. A. Bruijnzeel (2016). “Global-scale regionalization of hydrologic model parameters.” Water Resources Research 52(5): 3599-3622.</li>
+<li>Deb, K., A. Pratap, S. Agarwal and T. Meyarivan (2002). “A fast and elitist multiobjective genetic algorithm: NSGA-II.” IEEE Transactions on Evolutionary Computation 6(2): 182-197.</li>
+<li>Fortin, F. A., F. M. De Rainville, M. A. Gardner, M. Parizeau and C. Gagńe (2012). “DEAP: Evolutionary algorithms made easy.” Journal of Machine Learning Research 13: 2171-2175.</li>
+<li>Greve, P., L. Gudmundsson, B. Orlowsky and S. I. Seneviratne (2016). “A two-parameter Budyko function to represent conditions under which evapotranspiration exceeds precipitation.” Hydrology and Earth System Sciences 20(6): 2195-2205.</li>
+<li>Gupta, H. V., H. Kling, K. K. Yilmaz and G. F. Martinez (2009). “Decomposition of the mean squared error and NSE performance criteria: Implications for improving hydrological modelling.” Journal of Hydrology 377(1-2): 80-91.</li>
+<li>Kling, H., M. Fuchs and M. Paulin (2012). “Runoff conditions in the upper Danube basin under an ensemble of climate change scenarios.” Journal of Hydrology 424-425: 264-277.</li>
+<li>Samaniego, L., R. Kumar, S. Thober, O. Rakovec, M. Zink, N. Wanders, S. Eisner, H. Müller Schmied, E. Sutanudjaja, K. Warrach-Sagi and S. Attinger (2017). “Toward seamless hydrologic predictions across spatial scales.” Hydrology and Earth System Sciences 21(9): 4323-4346.</li>
 </ul>
 </div>
 </div>
@@ -415,7 +406,7 @@ For each run it triggers the run of the hydrological model:</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
             </a></p>
-<h3><a href="index.html">Table Of Contents</a></h3>
+<h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
@@ -469,7 +460,7 @@ For each run it triggers the run of the hydrological model:</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
     </div>
   </body>
 </html>

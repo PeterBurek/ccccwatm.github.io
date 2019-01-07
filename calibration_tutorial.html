@@ -1,34 +1,25 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>10. Calibration tutorial &#8212; Community Water Model</title>
-    
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="top" title="Community Water Model" href="index.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="11. Model download" href="license.html" />
     <link rel="prev" title="9. Calibration tool" href="calibration.html" /> 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -60,7 +51,7 @@
 <p>Python 2.7.x 64 bit and a running CWATM (libraries netCDF4, numpy, scipy, GDAL)
 In addition: <strong>library deap</strong></p>
 <p>Calibration is using a distributed evolutionary algorithms in python: DEAP library</p>
-<p>Félix-Antoine Fortin, François-Michel De Rainville, Marc-André Gardner, Marc Parizeau and Christian Gagné, &#8220;DEAP: Evolutionary Algorithms Made Easy&#8221;, Journal of Machine Learning Research, vol. 13, pp. 2171-2175</p>
+<p>Félix-Antoine Fortin, François-Michel De Rainville, Marc-André Gardner, Marc Parizeau and Christian Gagné, “DEAP: Evolutionary Algorithms Made Easy”, Journal of Machine Learning Research, vol. 13, pp. 2171-2175</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Deap can also be used in Python 3.7 but at the moment we did not translate the scripts to Python3.7. it is on the TODO list</p>
@@ -83,7 +74,7 @@ Pip install deap (you might change into the folder ../python/Scripts/)</p>
 <li><p class="first">look into templates/runpy.bat. Put the path to python in if necessary</p>
 </li>
 <li><p class="first">look into templates/settings.ini. Put the pathes in a right way that it fits to your computer:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>[FILE_PATHS]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[FILE_PATHS]
 #-------------------------------------------------------
 PathRoot = P:/watmodel/CWATM/calibration_tutorial
 PathOut = $(PathRoot)/output
@@ -93,7 +84,7 @@ PathMeteo = $(PathRoot)/climate
 </div>
 </li>
 <li><p class="first">in observed_data/yukon2001.cvs you find the observed data:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">the</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">header</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">same</span> <span class="k">as</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ObservedData</span><span class="p">]</span> <span class="n">Column</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">the</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">header</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">same</span> <span class="k">as</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ObservedData</span><span class="p">]</span> <span class="n">Column</span>
 <span class="o">-</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">that</span> <span class="n">there</span> <span class="n">are</span> <span class="n">enough</span> <span class="n">data</span> <span class="ow">in</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">ForcingStart</span> <span class="n">to</span> <span class="n">ForcingEnd</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -135,7 +126,7 @@ PathMeteo = $(PathRoot)/climate
 <li><p class="first">(but maybe you have already parts of it on your computer – like the big climate input files)</p>
 </li>
 <li><p class="first">Make it work on your computer:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Changing</span> <span class="n">file</span> <span class="n">paths</span> <span class="ow">in</span> <span class="n">templates</span><span class="o">/</span><span class="n">settings</span><span class="o">.</span><span class="n">ini</span><span class="p">,</span> <span class="n">setting</span><span class="o">.</span><span class="n">txt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Changing</span> <span class="n">file</span> <span class="n">paths</span> <span class="ow">in</span> <span class="n">templates</span><span class="o">/</span><span class="n">settings</span><span class="o">.</span><span class="n">ini</span><span class="p">,</span> <span class="n">setting</span><span class="o">.</span><span class="n">txt</span>
 <span class="n">Changing</span> <span class="n">the</span> <span class="n">path</span> <span class="k">for</span> <span class="n">python</span> <span class="ow">in</span> <span class="n">runCalibration</span><span class="o">.</span><span class="n">bat</span> <span class="ow">and</span> <span class="n">templates</span><span class="o">/</span><span class="n">runpy</span><span class="o">.</span><span class="n">bat</span>
 </pre></div>
 </div>
@@ -154,7 +145,7 @@ Here we use the Kling-Gupta Efficiency but we can also use Nash-Sutcliffe Effici
 <li><p class="first">The observed values should be at least cover 5 years (best is 10-15 years)</p>
 </li>
 <li><p class="first">The observed discharge has to be stored as textfile in:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>./observed_data/nameofstation.cvs
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./observed_data/nameofstation.cvs
 And has to look like this:
 date,yukon_pilot_station
 2001-04-01,1302.6
@@ -168,7 +159,7 @@ date,yukon_pilot_station
 </div>
 </li>
 <li><p class="first">Or:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">date</span> <span class="p">,</span><span class="n">zhutuo</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">date</span> <span class="p">,</span><span class="n">zhutuo</span>
 <span class="mi">2002</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span><span class="mf">3229.0</span>
 <span class="mi">2002</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span><span class="mf">2979.2</span>
 <span class="mi">2002</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span><span class="mf">3229.0</span>
@@ -185,7 +176,7 @@ date,yukon_pilot_station
 <li><p class="first">Discharge in [m3/s]</p>
 </li>
 <li><p class="first">If a value is missing that is not a problem (as long as the time series is long enough):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">it</span> <span class="n">should</span> <span class="n">like</span> <span class="n">this</span><span class="p">:</span> <span class="p">(</span><span class="n">no</span> <span class="n">value</span> <span class="n">after</span> <span class="n">the</span> <span class="n">comma</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">it</span> <span class="n">should</span> <span class="n">like</span> <span class="n">this</span><span class="p">:</span> <span class="p">(</span><span class="n">no</span> <span class="n">value</span> <span class="n">after</span> <span class="n">the</span> <span class="n">comma</span><span class="p">)</span>
 <span class="mi">2002</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span>
 </pre></div>
 </div>
@@ -195,7 +186,7 @@ date,yukon_pilot_station
 </ul>
 <p><strong>Settings.txt</strong></p>
 <p>In the settings file the lines:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">ObservedData</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">ObservedData</span><span class="p">]</span>
 <span class="n">Qtss</span> <span class="o">=</span> <span class="n">observed_data</span><span class="o">/</span><span class="n">zhutuo_2002month</span><span class="o">.</span><span class="n">csv</span>
 <span class="n">Column</span> <span class="o">=</span> <span class="n">zhutuo</span>
 <span class="n">Header</span> <span class="o">=</span> <span class="n">River</span><span class="p">:</span> <span class="n">Yangtze</span>  <span class="n">station</span><span class="p">:</span> <span class="n">Zhutuo</span>
@@ -203,9 +194,8 @@ date,yukon_pilot_station
 </div>
 <p>Should correspondent to the name and header in the observed discharge.cvs</p>
 <p>The lines:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ForcingStart</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">2002</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ForcingStart</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">2002</span>
 <span class="n">ForcingEnd</span> <span class="o">=</span> <span class="mi">31</span><span class="o">/</span><span class="mi">12</span><span class="o">/</span><span class="mi">2013</span>
-<span class="o">.</span>
 </pre></div>
 </div>
 <p>Should correspondent to the amount of lines in the observed discharge.cvs</p>
@@ -288,7 +278,7 @@ Creating the 2 potential evaporation files in advance</p>
 There should be a folder catchments00_001 with a working run for 001.</p>
 <p><strong>Open the settings-Run_001.init</strong></p>
 <p>Change:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>[Option] calc_evaporation = True
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[Option] calc_evaporation = True
 [TIME-RELATED_CONSTANTS] SpinUp = None
 [EVAPORATION]
 OUT_Dir = $(FILE_PATHS:PathOut)
@@ -300,7 +290,7 @@ OUT_MAP_Daily = ETRef, EWRef
 <p>Rename the files e.g. ETRef.nc to ETRef_yangtze.nc, EWRef.nc to EWRef_yangtze.nc and copy it to PathMeteo (or somewhere else, you have to put the path in)</p>
 <p><strong>Open the settings-Run_001.init</strong></p>
 <p>Change:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>[Option] calc_evaporation = False
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[Option] calc_evaporation = False
 [TIME-RELATED_CONSTANTS] SpinUp = -&gt; to the time it was before
 [Meteo]
 daily reference evaporation (free water)
@@ -341,7 +331,7 @@ OUT_MAP_Daily = ETRef, EWRef
 1. Creating catchment for Zhutuo: catchment 105.75 28.75 ldd_yangtze.map zhu1.map
 2. Creating catchment for Yichang: catchment 111.25 30.75 ldd_yangtze.map yi1.map
 3. Creating Yichang without Zhutuo:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pcrcalc</span> <span class="n">a2</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">cover</span><span class="p">(</span><span class="n">scalar</span><span class="p">(</span><span class="n">zhu1</span><span class="o">.</span><span class="n">map</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">scalar</span><span class="p">(</span><span class="n">yi1</span><span class="o">.</span><span class="n">map</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pcrcalc</span> <span class="n">a2</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">cover</span><span class="p">(</span><span class="n">scalar</span><span class="p">(</span><span class="n">zhu1</span><span class="o">.</span><span class="n">map</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">scalar</span><span class="p">(</span><span class="n">yi1</span><span class="o">.</span><span class="n">map</span><span class="p">))</span>
 <span class="n">pcrcalc</span> <span class="n">yichang</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">boolean</span><span class="p">(</span><span class="k">if</span><span class="p">(</span><span class="n">a2</span><span class="o">.</span><span class="n">map</span> <span class="n">eq</span> <span class="mi">1</span><span class="p">,</span><span class="n">a2</span><span class="o">.</span><span class="n">map</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -363,14 +353,14 @@ OUT_MAP_Daily = ETRef, EWRef
 <li><p class="first">Change into the folder ../catchments/best</p>
 </li>
 <li><p class="first">Change settings file from:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">StepStart</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">1996</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">StepStart</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">1996</span>
 <span class="n">SpinUp</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">2002</span>
 <span class="n">StepEnd</span> <span class="o">=</span>  <span class="mi">31</span><span class="o">/</span><span class="mi">12</span><span class="o">/</span><span class="mi">2013</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">To:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">StepStart</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">1990</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">StepStart</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">1990</span>
 <span class="n">SpinUp</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">1996</span>
 <span class="n">StepEnd</span> <span class="o">=</span>  <span class="mi">31</span><span class="o">/</span><span class="mi">12</span><span class="o">/</span><span class="mi">2013</span>
 </pre></div>
@@ -403,7 +393,7 @@ OUT_MAP_Daily = ETRef, EWRef
 <h3>Change the settings file<a class="headerlink" href="#change-the-settings-file" title="Permalink to this headline">¶</a></h3>
 <p>Change the settings file of the downstream calibration so that it includes the inflow from upstream
 Change the part of the settings.ini:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>[Option]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[Option]
 inflow = True
 [INFLOW]
 #-------------------------------------------------------
@@ -439,7 +429,7 @@ Use initial file for calibration</p>
 <li><p class="first">You need a working PCRaster installation</p>
 </li>
 <li><p class="first">The settings file settings.txt has to be changed:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
 <span class="n">Root</span> <span class="o">=</span> <span class="n">P</span><span class="p">:</span><span class="o">/</span><span class="n">watmodel</span><span class="o">/</span><span class="n">CWATM</span><span class="o">/</span><span class="n">calibration</span><span class="o">/</span><span class="n">calibration_zambezi</span>
 <span class="c1"># root directory where all subbasin are in</span>
 <span class="o">.</span>
@@ -485,7 +475,7 @@ Use initial file for calibration</p>
 <div class="line">7.    Recession coefficient factor: factor to adjust the base flow recession constant (the contribution from groundwater to baseflow)</div>
 <div class="line"><strong>Routing</strong></div>
 <div class="line">8.    Runoff concentration factor: a factor for the concentration time of run-off in each grid-cell</div>
-<div class="line">9.    Channel Manning&#8217;s n factor: a factor roughness in channel routing</div>
+<div class="line">9.    Channel Manning’s n factor: a factor roughness in channel routing</div>
 <div class="line">10.   Channel, lake and river evaporation factor: factor to adjust open water evaporation</div>
 <div class="line"><strong>Reservoir &amp; lakes</strong></div>
 <div class="line">11.   Normal storage limit: the fraction of storage capacity used as normal storage limit</div>
@@ -498,13 +488,13 @@ Use initial file for calibration</p>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Beck, H. E., A. I. J. M. van Dijk, A. de Roo, D. G. Miralles, T. R. McVicar, J. Schellekens and L. A. Bruijnzeel (2016). &#8220;Global-scale regionalization of hydrologic model parameters.&#8221; Water Resources Research 52(5): 3599-3622.</li>
-<li>Deb, K., A. Pratap, S. Agarwal and T. Meyarivan (2002). &#8220;A fast and elitist multiobjective genetic algorithm: NSGA-II.&#8221; IEEE Transactions on Evolutionary Computation 6(2): 182-197.</li>
-<li>Fortin, F. A., F. M. De Rainville, M. A. Gardner, M. Parizeau and C. Gagńe (2012). &#8220;DEAP: Evolutionary algorithms made easy.&#8221; Journal of Machine Learning Research 13: 2171-2175.</li>
-<li>Greve, P., L. Gudmundsson, B. Orlowsky and S. I. Seneviratne (2016). &#8220;A two-parameter Budyko function to represent conditions under which evapotranspiration exceeds precipitation.&#8221; Hydrology and Earth System Sciences 20(6): 2195-2205.</li>
-<li>Gupta, H. V., H. Kling, K. K. Yilmaz and G. F. Martinez (2009). &#8220;Decomposition of the mean squared error and NSE performance criteria: Implications for improving hydrological modelling.&#8221; Journal of Hydrology 377(1-2): 80-91.</li>
-<li>Kling, H., M. Fuchs and M. Paulin (2012). &#8220;Runoff conditions in the upper Danube basin under an ensemble of climate change scenarios.&#8221; Journal of Hydrology 424-425: 264-277.</li>
-<li>Samaniego, L., R. Kumar, S. Thober, O. Rakovec, M. Zink, N. Wanders, S. Eisner, H. Müller Schmied, E. Sutanudjaja, K. Warrach-Sagi and S. Attinger (2017). &#8220;Toward seamless hydrologic predictions across spatial scales.&#8221; Hydrology and Earth System Sciences 21(9): 4323-4346.</li>
+<li>Beck, H. E., A. I. J. M. van Dijk, A. de Roo, D. G. Miralles, T. R. McVicar, J. Schellekens and L. A. Bruijnzeel (2016). “Global-scale regionalization of hydrologic model parameters.” Water Resources Research 52(5): 3599-3622.</li>
+<li>Deb, K., A. Pratap, S. Agarwal and T. Meyarivan (2002). “A fast and elitist multiobjective genetic algorithm: NSGA-II.” IEEE Transactions on Evolutionary Computation 6(2): 182-197.</li>
+<li>Fortin, F. A., F. M. De Rainville, M. A. Gardner, M. Parizeau and C. Gagńe (2012). “DEAP: Evolutionary algorithms made easy.” Journal of Machine Learning Research 13: 2171-2175.</li>
+<li>Greve, P., L. Gudmundsson, B. Orlowsky and S. I. Seneviratne (2016). “A two-parameter Budyko function to represent conditions under which evapotranspiration exceeds precipitation.” Hydrology and Earth System Sciences 20(6): 2195-2205.</li>
+<li>Gupta, H. V., H. Kling, K. K. Yilmaz and G. F. Martinez (2009). “Decomposition of the mean squared error and NSE performance criteria: Implications for improving hydrological modelling.” Journal of Hydrology 377(1-2): 80-91.</li>
+<li>Kling, H., M. Fuchs and M. Paulin (2012). “Runoff conditions in the upper Danube basin under an ensemble of climate change scenarios.” Journal of Hydrology 424-425: 264-277.</li>
+<li>Samaniego, L., R. Kumar, S. Thober, O. Rakovec, M. Zink, N. Wanders, S. Eisner, H. Müller Schmied, E. Sutanudjaja, K. Warrach-Sagi and S. Attinger (2017). “Toward seamless hydrologic predictions across spatial scales.” Hydrology and Earth System Sciences 21(9): 4323-4346.</li>
 </ul>
 </div>
 </div>
@@ -518,7 +508,7 @@ Use initial file for calibration</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
             </a></p>
-<h3><a href="index.html">Table Of Contents</a></h3>
+<h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
@@ -578,7 +568,7 @@ Use initial file for calibration</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
     </div>
   </body>
 </html>

@@ -1,35 +1,25 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>cwatm_dynamic module &#8212; Community Water Model</title>
-    
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="11. Model download" href="license.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cwatm_initial module" href="cwatm_initial.html" />
-    <link rel="prev" title="cwatm module" href="cwatm.html" /> 
-  </head>
-  <body role="document">
+    <link rel="prev" title="cwatm module" href="cwatm3.html" /> 
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,7 +33,7 @@
           <a href="cwatm_initial.html" title="cwatm_initial module"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="cwatm.html" title="cwatm module"
+          <a href="cwatm3.html" title="cwatm module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="license.html" accesskey="U">11. Model download</a> &#187;</li> 
@@ -59,18 +49,12 @@
 <span id="cwatm-dynamic-module"></span><h1>cwatm_dynamic module<a class="headerlink" href="#module-cwatm_dynamic" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="cwatm_dynamic.CWATModel_dyn">
-<em class="property">class </em><code class="descclassname">cwatm_dynamic.</code><code class="descname">CWATModel_dyn</code><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pcraster2.dynamicPCRasterBase.DynamicModel</span></code></p>
-<dl class="method">
-<dt id="cwatm_dynamic.CWATModel_dyn.currentTimeStep">
-<code class="descname">currentTimeStep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn.currentTimeStep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the current time step in the range from firstTimeStep to nrTimeSteps.</p>
-</dd></dl>
-
+<em class="property">class </em><code class="descclassname">cwatm_dynamic.</code><code class="descname">CWATModel_dyn</code><a class="reference internal" href="_modules/cwatm_dynamic.html#CWATModel_dyn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="management_modules.html#management_modules.dynamicModel.DynamicModel" title="management_modules.dynamicModel.DynamicModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">management_modules.dynamicModel.DynamicModel</span></code></a></p>
 <dl class="method">
 <dt id="cwatm_dynamic.CWATModel_dyn.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of LISFLOOD
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm_dynamic.html#CWATModel_dyn.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of CWATM
 calls the dynamic part of the hydrological modules
 Looping through time and space</p>
 <div class="admonition note">
@@ -84,34 +68,10 @@ Looping through time and space</p>
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="cwatm_dynamic.CWATModel_dyn.firstTimeStep">
-<code class="descname">firstTimeStep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn.firstTimeStep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return first timestep of a model.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm_dynamic.CWATModel_dyn.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn.initial" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="cwatm_dynamic.CWATModel_dyn.i">
+<code class="descname">i</code><em class="property"> = 1</em><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn.i" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="method">
-<dt id="cwatm_dynamic.CWATModel_dyn.nrTimeSteps">
-<code class="descname">nrTimeSteps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn.nrTimeSteps" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of time steps</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm_dynamic.CWATModel_dyn.setQuiet">
-<code class="descname">setQuiet</code><span class="sig-paren">(</span><em>quiet=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn.setQuiet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Disables the progress display of timesteps.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm_dynamic.CWATModel_dyn.timeSteps">
-<code class="descname">timeSteps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_dynamic.CWATModel_dyn.timeSteps" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of time steps</p>
-</dd></dl>
 
 </dd></dl>
 
@@ -126,7 +86,7 @@ Looping through time and space</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
             </a></p>
-<h3><a href="index.html">Table Of Contents</a></h3>
+<h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
@@ -147,7 +107,7 @@ Looping through time and space</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="cwatm.html"
+  <p class="topless"><a href="cwatm3.html"
                         title="previous chapter">cwatm module</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="cwatm_initial.html"
@@ -169,7 +129,7 @@ Looping through time and space</p>
           <a href="cwatm_initial.html" title="cwatm_initial module"
              >next</a> |</li>
         <li class="right" >
-          <a href="cwatm.html" title="cwatm module"
+          <a href="cwatm3.html" title="cwatm module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="license.html" >11. Model download</a> &#187;</li> 
@@ -177,7 +137,7 @@ Looping through time and space</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
     </div>
   </body>
 </html>

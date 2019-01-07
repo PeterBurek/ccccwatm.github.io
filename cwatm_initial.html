@@ -1,35 +1,25 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>cwatm_initial module &#8212; Community Water Model</title>
-    
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="top" title="Community Water Model" href="index.html" />
-    <link rel="up" title="11. Model download" href="license.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="hydrological_modules package" href="hydrological_modules.html" />
     <link rel="prev" title="cwatm_dynamic module" href="cwatm_dynamic.html" /> 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -55,62 +45,19 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="cwatm-initial-module">
-<h1>cwatm_initial module<a class="headerlink" href="#cwatm-initial-module" title="Permalink to this headline">¶</a></h1>
-<img src="_images/inheritance-e48e9dc46fa9673b29c1422791367cb7951305c7.png" alt="Inheritance diagram of cwatm_initial" usemap="#inheritance2ea4237f1b" class="inheritance"/>
-<map id="inheritance2ea4237f1b" name="inheritance2ea4237f1b">
-<area shape="rect" id="node1" href="#cwatm_initial.CWATModel_ini" target="_top" title="CWATN initial part" alt="" coords="161,5,276,31"/>
-</map>
-<img src="_images/inheritance-5f77ab75df2ad73dcf52f426e2961d5b98272a35.png" alt="Inheritance diagram of cwatm_dynamic" usemap="#inheritancea7c11522e7" class="inheritance"/>
-<map id="inheritancea7c11522e7" name="inheritancea7c11522e7">
-<area shape="rect" id="node1" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" target="_top" title="CWATModel_dyn" alt="" coords="161,5,284,31"/>
-</map>
-<span class="target" id="module-cwatm_initial"></span><dl class="class">
+  <div class="section" id="module-cwatm_initial">
+<span id="cwatm-initial-module"></span><h1>cwatm_initial module<a class="headerlink" href="#module-cwatm_initial" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
 <dt id="cwatm_initial.CWATModel_ini">
-<em class="property">class </em><code class="descclassname">cwatm_initial.</code><code class="descname">CWATModel_ini</code><a class="headerlink" href="#cwatm_initial.CWATModel_ini" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pcraster2.dynamicPCRasterBase.DynamicModel</span></code></p>
+<em class="property">class </em><code class="descclassname">cwatm_initial.</code><code class="descname">CWATModel_ini</code><a class="reference internal" href="_modules/cwatm_initial.html#CWATModel_ini"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm_initial.CWATModel_ini" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="management_modules.html#management_modules.dynamicModel.DynamicModel" title="management_modules.dynamicModel.DynamicModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">management_modules.dynamicModel.DynamicModel</span></code></a></p>
 <p>CWATN initial part
 this part is to initialize the variables.
 It will call the initial part of the hydrological modules</p>
-<dl class="method">
-<dt id="cwatm_initial.CWATModel_ini.currentTimeStep">
-<code class="descname">currentTimeStep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_initial.CWATModel_ini.currentTimeStep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the current time step in the range from firstTimeStep to nrTimeSteps.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm_initial.CWATModel_ini.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_initial.CWATModel_ini.dynamic" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="cwatm_initial.CWATModel_ini.i">
+<code class="descname">i</code><em class="property"> = 1</em><a class="headerlink" href="#cwatm_initial.CWATModel_ini.i" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="method">
-<dt id="cwatm_initial.CWATModel_ini.firstTimeStep">
-<code class="descname">firstTimeStep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_initial.CWATModel_ini.firstTimeStep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return first timestep of a model.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm_initial.CWATModel_ini.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_initial.CWATModel_ini.initial" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="cwatm_initial.CWATModel_ini.nrTimeSteps">
-<code class="descname">nrTimeSteps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_initial.CWATModel_ini.nrTimeSteps" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of time steps</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm_initial.CWATModel_ini.setQuiet">
-<code class="descname">setQuiet</code><span class="sig-paren">(</span><em>quiet=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_initial.CWATModel_ini.setQuiet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Disables the progress display of timesteps.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm_initial.CWATModel_ini.timeSteps">
-<code class="descname">timeSteps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm_initial.CWATModel_ini.timeSteps" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of time steps</p>
-</dd></dl>
 
 </dd></dl>
 
@@ -125,7 +72,7 @@ It will call the initial part of the hydrological modules</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
             </a></p>
-<h3><a href="index.html">Table Of Contents</a></h3>
+<h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
@@ -176,7 +123,7 @@ It will call the initial part of the hydrological modules</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
     </div>
   </body>
 </html>
