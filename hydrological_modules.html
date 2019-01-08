@@ -36,7 +36,7 @@
           <a href="cwatm_initial.html" title="cwatm_initial module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="license.html" accesskey="U">11. Model download</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="sourcecode.html" accesskey="U">12. Source code</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -641,6 +641,10 @@ for each gridcell and for each land cover class the generated runoff is concentr
 this concentration needs some lag-time (and peak time) and leads to diffusion
 lag-time/ peak time is calculated using slope, length and land cover class
 diffusion is calculated using a triangular-weighting-function</p>
+<p><img class="math" src="_images/math/888187a6babfe523f681e320d9a6b2eb56e6464c.png" alt="Q(t) = \sum_{i=0}^{max} c(i) * Q_{\mathrm{GW}} (t - i + 1)"/></p>
+<p>where <img class="math" src="_images/math/176e92950a683e2d07c5bd5b238b127186e17552.png" alt="c(i) = \int_{i-1}^{i} {2 \over{max}} - | u - {max \over {2}} | * {4 \over{max^2}} du"/></p>
+<p>see also:</p>
+<p><a class="reference external" href="http://stackoverflow.com/questions/24040984/transformation-using-triangular-weighting-function-in-python">http://stackoverflow.com/questions/24040984/transformation-using-triangular-weighting-function-in-python</a></p>
 <dl class="method">
 <dt id="hydrological_modules.runoff_concentration.runoff_concentration.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/runoff_concentration.html#runoff_concentration.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.runoff_concentration.runoff_concentration.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -735,42 +739,32 @@ Agricultural water demand based on water need by plants</p>
 See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
 <p>for Modified Puls Method the Q(inflow)1 has to be used. It is assumed that this is the same as Q(inflow)2 for the first timestep
 has to be checked if this works in forecasting mode!</p>
-<p>Lake Routine using Modified Puls Method (see Maniak, p.331ff)
-<img class="math" src="_images/math/81dae2adcc5bbda79b1e66ac779da29900b5e584.png" alt="(Qin1 + Qin2)/2 - (Qout1 + Qout2)/2 = (S2 - S1)/dtime"/></p>
+<p>Lake Routine using Modified Puls Method (see Maniak, p.331ff)</p>
+<p><img class="math" src="_images/math/cf5d9ce04d9159db766d0be7557c3bde44369a7f.png" alt="{Qin1 + Qin2 \over{2}} - {Qout1 + Qout2 \over{2}} = {S2 - S1 \over{\delta time}}"/></p>
 <p>changed into:</p>
-<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
-<p>outgoing discharge (Qout) are linked to storage (S) by elevation.</p>
+<p><img class="math" src="_images/math/779a9088732c235d3c6a1351b4e354800eb639c0.png" alt="{S2 \over{time + Qout2/2}} = {S1 \over{dtime + Qout1/2}} - Qout1 + {Qin1 + Qin2 \over{2}}"/></p>
+<p>Outgoing discharge (Qout) are linked to storage (S) by elevation.</p>
 <p>Now some assumption to make life easier:</p>
 <p>1.) storage volume is increase proportional to elevation: S = A * H where: H: elevation, A: area of lake</p>
-<p>2.) <img class="math" src="_images/math/63e0cd8680ca67984305e039181f162bfa51c398.png" alt="outgoing discharge = c * b * H^2.0"/> (c: weir constant, b: width)</p>
+<p>2.) <img class="math" src="_images/math/7e128e1a8a6f241c585cdadbc9ea238af3252984.png" alt="Q_{\mathrm{out}} = c * b * H^{2.0}"/> (c: weir constant, b: width)</p>
 <blockquote>
 <div>2.0 because it fits to a parabolic cross section see (Aigner 2008) (and it is much easier to calculate (that’s the main reason)</div></blockquote>
-<p>c: for a perfect weir with mu=0.577 and Poleni: <img class="math" src="_images/math/e70a4d8fb2dba6c1d321fb6fccba8f0b6732e0a3.png" alt="2/3 \mu * \sqrt{2*g} = 1.7"/></p>
+<p>c: for a perfect weir with mu=0.577 and Poleni: <img class="math" src="_images/math/16ae2a03ad6d0d9eee0eb08a1698605d3dce459d.png" alt="{2 \over{3}} \mu * \sqrt{2*g} = 1.7"/></p>
 <p>c: for a parabolic weir: around 1.8</p>
-<p>because it is a imperfect weir:<img class="math" src="_images/math/dcc4fd5f328db8e74d8916b7d64b2df0a5c4d3ee.png" alt="C = c * 0.85 = 1.5"/></p>
-<p>results in a formular: <img class="math" src="_images/math/adae7c7da299210b22fcf9264993e15c5bcadad5.png" alt="Q = 1.5 * b * H ** 2 = a*H**2 -&gt; H = \sqrt{Q/a}"/></p>
+<p>because it is a imperfect weir: <img class="math" src="_images/math/dcc4fd5f328db8e74d8916b7d64b2df0a5c4d3ee.png" alt="C = c * 0.85 = 1.5"/></p>
+<p>results in formular: <img class="math" src="_images/math/397162cd119add829f32611f571973b6b6935a07.png" alt="Q = 1.5 * b * H^2 = a*H^2 -&gt; H = \sqrt{Q/a}"/></p>
 <p>Solving the equation:</p>
-<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
-<p><img class="math" src="_images/math/de28b749c6762d70cb5fd7be4847aad90941cd8e.png" alt="SI = (S2/dtime + Qout2/2) =  (A*H)/DtRouting + Q/2 = A/(DtRouting*\sqrt(a)  * \sqrt(Q) + Q/2"/></p>
-<p>-&gt; replacement: <img class="math" src="_images/math/cfa5516c000fc1fc311f939378a9baf8373f7d5d.png" alt="A/(DtRouting*sqrt(a)) = Lakefactor, Y = \sqrt(Q)"/></p>
-<p><img class="math" src="_images/math/6c62e5c4124113e1da4f81f4231ab5b224db5bdd.png" alt="Y^2 + 2 *L akefactor *Y - 2 * SI=0"/></p>
+<p><img class="math" src="_images/math/04a75f6307cdd1b29de2e50565acc86359023fe7.png" alt="{S2 \over{dtime + Qout2/2}} = {S1 \over{dtime + Qout1/2}} - Qout1 + {Qin1 + Qin2 \over{2}}"/></p>
+<p><img class="math" src="_images/math/a81d707f6d2fe9f975c2eaef4d2349067f455e26.png" alt="SI = {S2 \over{dtime}} + {Qout2 \over{2}} = {A*H \over{DtRouting}} + {Q \over{2}} = {A \over{DtRouting*\sqrt{a}* \sqrt{Q}}} + {Q \over{2}}"/></p>
+<p>-&gt; replacement: <img class="math" src="_images/math/83ba4810a63c58f01676f07eb9114c31558c658c.png" alt="{A \over{DtSec * \sqrt{a}}} = Lakefactor, Y = \sqrt{Q}"/></p>
+<p><img class="math" src="_images/math/ea8f22587ea866ce3ea180ddbc61bf1babe631b6.png" alt="Y^2 + 2 * Lakefactor *Y - 2 * SI=0"/></p>
 <p>solution of this quadratic equation:</p>
-<p class="last"><img class="math" src="_images/math/fe09166e1a73dda8e15d861c3f7aad816f39834d.png" alt="Q = (-LakeFactor + sqrt{LakeFactor^2+2*SI})^2"/></p>
+<p class="last"><img class="math" src="_images/math/73899ebaa83edc11fb3b7278a9b6a08897807aee.png" alt="Q = (-LakeFactor + \sqrt{LakeFactor^2+2*SI})^2"/></p>
 </div>
 <dl class="method">
 <dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part set lakes and reservoirs for each year</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p><strong>Flow out of lake:</strong> solving the equation:</p>
-<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
-<p><img class="math" src="_images/math/a23d6423b54056da28e040926700e6511f14f51e.png" alt="SI = (S2 / dtime + Qout2 / 2) =  (A*H) / DtSec + Q/2 = A/(DtSec * \sqrt{a} * \sqrt{Q} + Q/2"/></p>
-<p>-&gt; replacement: <img class="math" src="_images/math/838e7862728652e50453042ca2b061f482358a6d.png" alt="A / (DtSec * sqrt(a)) = Lakefactor, Y = sqrt(Q)"/></p>
-<p><img class="math" src="_images/math/a1d3396cfd7810b0abff6736d710c0b8b65137c2.png" alt="Y^2 + 2 * Lakefactor * Y - 2 * SI = 0"/></p>
-<p>solution of this quadratic equation:</p>
-<p class="last"><img class="math" src="_images/math/dd6d947fbfce14cd3e223a2e21f0f2d38e3c768f.png" alt="Q = (-LakeFactor + \sqrt{LakeFactor^2 + 2 * SI})^2"/></p>
-</div>
 </dd></dl>
 
 <dl class="method">
@@ -839,31 +833,8 @@ Using the appraoch of LISFLOOD</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Calculate water retention in lakes and reservoirs</p>
-<p>Using the <strong>Modified Puls approach</strong> to calculate retention of a lake
+<p class="last">Using the <strong>Modified Puls approach</strong> to calculate retention of a lake
 See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
-<p>for Modified Puls Method the Q(inflow)1 has to be used. It is assumed that this is the same as Q(inflow)2 for the first timestep
-has to be checked if this works in forecasting mode!</p>
-<p>Lake Routine using Modified Puls Method (see Maniak, p.331ff)
-<img class="math" src="_images/math/81dae2adcc5bbda79b1e66ac779da29900b5e584.png" alt="(Qin1 + Qin2)/2 - (Qout1 + Qout2)/2 = (S2 - S1)/dtime"/></p>
-<p>changed into:</p>
-<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
-<p>outgoing discharge (Qout) are linked to storage (S) by elevation.</p>
-<p>Now some assumption to make life easier:</p>
-<p>1.) storage volume is increase proportional to elevation: S = A * H where: H: elevation, A: area of lake</p>
-<p>2.) <img class="math" src="_images/math/63e0cd8680ca67984305e039181f162bfa51c398.png" alt="outgoing discharge = c * b * H^2.0"/> (c: weir constant, b: width)</p>
-<blockquote>
-<div>2.0 because it fits to a parabolic cross section see (Aigner 2008) (and it is much easier to calculate (that’s the main reason)</div></blockquote>
-<p>c: for a perfect weir with mu=0.577 and Poleni: <img class="math" src="_images/math/e70a4d8fb2dba6c1d321fb6fccba8f0b6732e0a3.png" alt="2/3 \mu * \sqrt{2*g} = 1.7"/></p>
-<p>c: for a parabolic weir: around 1.8</p>
-<p>because it is a imperfect weir:<img class="math" src="_images/math/dcc4fd5f328db8e74d8916b7d64b2df0a5c4d3ee.png" alt="C = c * 0.85 = 1.5"/></p>
-<p>results in a formular: <img class="math" src="_images/math/adae7c7da299210b22fcf9264993e15c5bcadad5.png" alt="Q = 1.5 * b * H ** 2 = a*H**2 -&gt; H = \sqrt{Q/a}"/></p>
-<p>Solving the equation:</p>
-<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
-<p><img class="math" src="_images/math/de28b749c6762d70cb5fd7be4847aad90941cd8e.png" alt="SI = (S2/dtime + Qout2/2) =  (A*H)/DtRouting + Q/2 = A/(DtRouting*\sqrt(a)  * \sqrt(Q) + Q/2"/></p>
-<p>-&gt; replacement: <img class="math" src="_images/math/cfa5516c000fc1fc311f939378a9baf8373f7d5d.png" alt="A/(DtRouting*sqrt(a)) = Lakefactor, Y = \sqrt(Q)"/></p>
-<p><img class="math" src="_images/math/6c62e5c4124113e1da4f81f4231ab5b224db5bdd.png" alt="Y^2 + 2 *L akefactor *Y - 2 * SI=0"/></p>
-<p>solution of this quadratic equation:</p>
-<p class="last"><img class="math" src="_images/math/fe09166e1a73dda8e15d861c3f7aad816f39834d.png" alt="Q = (-LakeFactor + sqrt{LakeFactor^2+2*SI})^2"/></p>
 </div>
 <dl class="method">
 <dt id="hydrological_modules.lakes_res_small.lakes_res_small.dynamic">
@@ -873,16 +844,7 @@ has to be checked if this works in forecasting mode!</p>
 <li>lakes with modified Puls approach</li>
 <li>reservoirs with special filling levels</li>
 </ul>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p><strong>Flow out of lake:</strong> solving the equation:</p>
-<p><img class="math" src="_images/math/4d55283f7665c6c335a9ffd523c794356248c39e.png" alt="(S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2"/></p>
-<p><img class="math" src="_images/math/a23d6423b54056da28e040926700e6511f14f51e.png" alt="SI = (S2 / dtime + Qout2 / 2) =  (A*H) / DtSec + Q/2 = A/(DtSec * \sqrt{a} * \sqrt{Q} + Q/2"/></p>
-<p>-&gt; replacement: <img class="math" src="_images/math/838e7862728652e50453042ca2b061f482358a6d.png" alt="A / (DtSec * sqrt(a)) = Lakefactor, Y = sqrt(Q)"/></p>
-<p><img class="math" src="_images/math/a1d3396cfd7810b0abff6736d710c0b8b65137c2.png" alt="Y^2 + 2 * Lakefactor * Y - 2 * SI = 0"/></p>
-<p>solution of this quadratic equation:</p>
-<p class="last"><img class="math" src="_images/math/dd6d947fbfce14cd3e223a2e21f0f2d38e3c768f.png" alt="Q = (-LakeFactor + \sqrt{LakeFactor^2 + 2 * SI})^2"/></p>
-</div>
+<p><strong>Flow out of lake:</strong></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1307,10 +1269,14 @@ and sums it up for a catchment</p>
 <li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="license.html">11. Model download</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="license.html#gnu-general-public-license">GNU General public license</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#download">Download</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="license.html#id1">Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">11. License and download info</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="sourcecode.html">12. Source code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#source-code-on-github">Source code on Github</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="sourcecode.html#id1">Source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#download-manual-as-pdf">Download Manual as pdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#global-dataset">Global dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#contact-cwatm">Contact CWATM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#remarks">Remarks</a></li>
 </ul>
 </li>
 </ul>
@@ -1341,7 +1307,7 @@ and sums it up for a catchment</p>
           <a href="cwatm_initial.html" title="cwatm_initial module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="license.html" >11. Model download</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="sourcecode.html" >12. Source code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

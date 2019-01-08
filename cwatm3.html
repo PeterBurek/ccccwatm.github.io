@@ -1,0 +1,217 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>cwatm module &#8212; Community Water Model</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cwatm_dynamic module" href="cwatm_dynamic.html" />
+    <link rel="prev" title="12. Source code" href="sourcecode.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sourcecode.html" title="12. Source code"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="sourcecode.html" accesskey="U">12. Source code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cwatm-module">
+<h1>cwatm module<a class="headerlink" href="#cwatm-module" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Base module: run with settings file e.g. python cwatm.py settings.ini</p>
+</div>
+<span class="target" id="module-cwatm3"></span><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-------------------------------------------------</span>
+<span class="c1">######## ##          ##  ####  ######  ##    ##</span>
+<span class="c1">##       ##          ## ##  ##   ##   ####  ####</span>
+<span class="c1">##        ##        ##  ##  ##   ##   ## #### ##</span>
+<span class="c1">##        ##   ##   ## ########  ##  ##   ##   ##</span>
+<span class="c1">##         ## #### ##  ##    ##  ##  ##        ##</span>
+<span class="c1">##         ####  #### ##      ## ## ##          ##</span>
+<span class="c1">##########  ##    ##  ##      ## ## ##          ##</span>
+
+<span class="n">Community</span> <span class="n">WATer</span> <span class="n">Model</span>
+</pre></div>
+</div>
+<p>CWATM is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.</p>
+<p>CWATM is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details
+&lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<p># ————————————————–</p>
+<dl class="function">
+<dt id="cwatm3.CWATMexe">
+<code class="descclassname">cwatm3.</code><code class="descname">CWATMexe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm3.html#CWATMexe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.CWATMexe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base subroutine of the CWATM model</p>
+<ul class="simple">
+<li>parses the settings file</li>
+<li>read the information for the netcdf files</li>
+<li>check if dates are alright</li>
+<li>check flags for screen output</li>
+<li>runs the model</li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="cwatm3.CWATModel">
+<em class="property">class </em><code class="descclassname">cwatm3.</code><code class="descname">CWATModel</code><a class="reference internal" href="_modules/cwatm3.html#CWATModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.CWATModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" title="cwatm_initial.CWATModel_ini"><code class="xref py py-class docutils literal notranslate"><span class="pre">cwatm_initial.CWATModel_ini</span></code></a>, <a class="reference internal" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" title="cwatm_dynamic.CWATModel_dyn"><code class="xref py py-class docutils literal notranslate"><span class="pre">cwatm_dynamic.CWATModel_dyn</span></code></a></p>
+<p>Initial and dynamic part of the CWATM model</p>
+<ul class="simple">
+<li>initial part takes care of all the non temporal initialiation procedures</li>
+<li>dynamic part loops over time</li>
+</ul>
+<dl class="method">
+<dt id="cwatm3.CWATModel.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm3.CWATModel.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of CWATM
+calls the dynamic part of the hydrological modules
+Looping through time and space</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>if flags set the output on the screen can be changed e.g.</p>
+<ul class="last simple">
+<li>v: no output at all</li>
+<li>l: time and first gauge discharge</li>
+<li>t: timing of different processes at the end</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cwatm3.CWATModel.i">
+<code class="descname">i</code><em class="property"> = 1</em><a class="headerlink" href="#cwatm3.CWATModel.i" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="cwatm3.GNU">
+<code class="descclassname">cwatm3.</code><code class="descname">GNU</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm3.html#GNU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.GNU" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints GNU General Public License information</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cwatm3.headerinfo">
+<code class="descclassname">cwatm3.</code><code class="descname">headerinfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm3.html#headerinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.headerinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the information on top of each run</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cwatm3.usage">
+<code class="descclassname">cwatm3.</code><code class="descname">usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm3.html#usage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints some lines describing how to use this program which arguments and parameters it accepts, etc</p>
+<ul class="simple">
+<li>-q –quiet       output progression given as .</li>
+<li>-v –veryquiet   no output progression is given</li>
+<li>-l –loud        output progression given as time step, date and discharge</li>
+<li>-c –check       input maps and stack maps are checked, output for each input map BUT no model run</li>
+<li>-h –noheader    .tss file have no header and start immediately with the time series</li>
+<li>-t –printtime   the computation time for hydrological modules are printed</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWATM1.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">4. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">5. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">7. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">10. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">11. License and download info</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="sourcecode.html">12. Source code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#source-code-on-github">Source code on Github</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="sourcecode.html#id1">Source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#download-manual-as-pdf">Download Manual as pdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#global-dataset">Global dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#contact-cwatm">Contact CWATM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#remarks">Remarks</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sourcecode.html"
+                        title="previous chapter">12. Source code</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cwatm_dynamic.html"
+                        title="next chapter">cwatm_dynamic module</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sourcecode.html" title="12. Source code"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="sourcecode.html" >12. Source code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+    </div>
+  </body>
+</html>
