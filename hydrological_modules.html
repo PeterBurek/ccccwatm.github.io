@@ -740,10 +740,12 @@ See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
 <p>for Modified Puls Method the Q(inflow)1 has to be used. It is assumed that this is the same as Q(inflow)2 for the first timestep
 has to be checked if this works in forecasting mode!</p>
 <p>Lake Routine using Modified Puls Method (see Maniak, p.331ff)</p>
-<p><img class="math" src="_images/math/cf5d9ce04d9159db766d0be7557c3bde44369a7f.png" alt="{Qin1 + Qin2 \over{2}} - {Qout1 + Qout2 \over{2}} = {S2 - S1 \over{\delta time}}"/></p>
-<p>changed into:</p>
-<p><img class="math" src="_images/math/779a9088732c235d3c6a1351b4e354800eb639c0.png" alt="{S2 \over{time + Qout2/2}} = {S1 \over{dtime + Qout1/2}} - Qout1 + {Qin1 + Qin2 \over{2}}"/></p>
-<p>Outgoing discharge (Qout) are linked to storage (S) by elevation.</p>
+<div class="math">
+<p><img src="_images/math/51633fd47a332554b634ec38c9d1dbf271e13df3.png" alt="{Qin1 + Qin2 \over{2}} - {Qout1 + Qout2 \over{2}} = {S2 - S1 \over{\delta time}}"/></p>
+</div><p>changed into:</p>
+<div class="math">
+<p><img src="_images/math/1743aad86247d35890f7a9f1dc7b3cb8ca0a248a.png" alt="{S2 \over{time + Qout2/2}} = {S1 \over{dtime + Qout1/2}} - Qout1 + {Qin1 + Qin2 \over{2}}"/></p>
+</div><p>Outgoing discharge (Qout) are linked to storage (S) by elevation.</p>
 <p>Now some assumption to make life easier:</p>
 <p>1.) storage volume is increase proportional to elevation: S = A * H where: H: elevation, A: area of lake</p>
 <p>2.) <img class="math" src="_images/math/7e128e1a8a6f241c585cdadbc9ea238af3252984.png" alt="Q_{\mathrm{out}} = c * b * H^{2.0}"/> (c: weir constant, b: width)</p>
