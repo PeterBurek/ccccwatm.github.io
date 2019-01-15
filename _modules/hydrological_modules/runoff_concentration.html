@@ -63,6 +63,16 @@
 <span class="sd">    this concentration needs some lag-time (and peak time) and leads to diffusion</span>
 <span class="sd">    lag-time/ peak time is calculated using slope, length and land cover class</span>
 <span class="sd">    diffusion is calculated using a triangular-weighting-function</span>
+
+<span class="sd">    :math:`Q(t) = \sum_{i=0}^{max} c(i) * Q_{\mathrm{GW}} (t - i + 1)`</span>
+
+<span class="sd">    where :math:`c(i) = \int_{i-1}^{i} {2 \over{max}} - | u - {max \over {2}} | * {4 \over{max^2}} du`</span>
+
+<span class="sd">    see also:</span>
+
+<span class="sd">    http://stackoverflow.com/questions/24040984/transformation-using-triangular-weighting-function-in-python</span>
+
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runoff_concentration_variable</span><span class="p">):</span>
@@ -275,7 +285,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../data.html">8. Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../calibration.html">9. Calibration tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../license.html">11. Model download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">11. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sourcecode.html">12. Source code</a></li>
 </ul>
 
         </div>

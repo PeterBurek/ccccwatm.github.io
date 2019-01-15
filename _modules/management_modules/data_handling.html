@@ -228,7 +228,7 @@
 
 
         <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
-            <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="n">flagmap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="n">flagmap</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Maskmap: &quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> \
@@ -262,6 +262,9 @@
 
     <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">])</span>
 
+    <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+        <span class="n">checkmap</span><span class="p">(</span><span class="s2">&quot;Mask+Ldd&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="n">mask</span><span class="p">),</span> <span class="n">flagmap</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">mapC</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">mapC</span></div>
 
 
@@ -285,6 +288,8 @@
         <span class="n">mapC</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="n">flagmap</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">load</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+            <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapC</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
         <span class="n">load</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -355,12 +360,14 @@
             <span class="n">ii</span><span class="o">=</span><span class="mi">0</span>
 
 
-
-        <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
-            <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">compress</span><span class="p">:</span>  <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">mapC</span> <span class="o">=</span> <span class="n">mapnp</span>
+        <span class="k">if</span> <span class="n">compress</span><span class="p">:</span>
+            <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+                <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">mapC</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mapC</span> <span class="o">=</span> <span class="n">mapnp</span>
+            <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+                <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
 
     <span class="k">return</span> <span class="n">mapC</span></div>
@@ -778,9 +785,12 @@
             <span class="k">raise</span> <span class="n">CWATMWarning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span><span class="n">zeros</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+            <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">mapC</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span> <span class="c1"># if static map extend not equal meteo maps -&gt; downscaling in readmeteo</span>
         <span class="n">mapC</span> <span class="o">=</span> <span class="n">mapnp</span>
-
+        <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+            <span class="n">checkmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># increase index and check if next file</span>
     <span class="c1">#if (dateVar[&#39;leapYear&#39;] == 1) and calendar.isleap(date.year):</span>
@@ -895,6 +905,8 @@
         <span class="k">raise</span> <span class="n">CWATMWarning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+        <span class="n">checkmap</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">mapC</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mapC</span></div>
 
 
@@ -921,6 +933,8 @@
     <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
     <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+        <span class="n">checkmap</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">mapC</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mapC</span></div>
 
 
@@ -950,6 +964,8 @@
             <span class="n">mapnp</span> <span class="o">=</span> <span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][:]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
             <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+                <span class="n">checkmap</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">mapC</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">mapC</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="c1">#nf1.close()</span>
@@ -1458,7 +1474,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../data.html">8. Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../calibration.html">9. Calibration tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../license.html">11. Model download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">11. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sourcecode.html">12. Source code</a></li>
 </ul>
 
         </div>

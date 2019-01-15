@@ -121,7 +121,7 @@
         <span class="c1"># if meteo maps have the same extend as the other spatial static maps -&gt; meteomapsscale = True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">meteomapsscale</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">invcellmeteo</span> <span class="o">!=</span> <span class="n">invcellldd</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;quiet&#39;</span><span class="p">]))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;veryquiet&#39;</span><span class="p">])):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;quiet&#39;</span><span class="p">]))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;veryquiet&#39;</span><span class="p">]))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">])):</span>
                 <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Resolution of meteo forcing is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; times higher than base maps.&quot;</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">meteomapsscale</span> <span class="o">=</span> <span class="kc">False</span>
@@ -248,7 +248,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../data.html">8. Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../calibration.html">9. Calibration tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html">11. Model download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">11. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sourcecode.html">12. Source code</a></li>
 </ul>
 
         </div>
