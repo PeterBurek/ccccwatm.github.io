@@ -61,18 +61,6 @@
 <span class="sd">    snow zones 1 -7 which each occupy a part of the pixel surface</span>
 
 <span class="sd">    Variables *snow* and *rain* at end of this module are the pixel-average snowfall and rain</span>
-
-
-<span class="sd">    Inheritance: ``inheritance-diagram``</span>
-
-
-<span class="sd">    .. inheritance-diagram:: cwatm_initial.CWATModel_ini</span>
-<span class="sd">       :parts: 1</span>
-
-<span class="sd">    .. inheritance-diagram:: hydrological_modules.snow_frost.snow</span>
-
-<span class="sd">    .. _extensions-literal:</span>
-
 <span class="sd">	</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -88,19 +76,6 @@
 
 <span class="sd">        * loads all the parameters for the day-degree approach for rain, snow and snowmelt</span>
 <span class="sd">        * loads the parameter for frost</span>
-
-<span class="sd">        .. inheritance-diagram: snow</span>
-
-
-<span class="sd">        .. inheritance-diagram: initial</span>
-
-
-<span class="sd">        .. graphviz::</span>
-
-<span class="sd">            digraph foo {</span>
-<span class="sd">                &quot;snow&quot; -&gt; &quot;initial&quot;;</span>
-<span class="sd">            }</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">numberSnowLayersFloat</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;NumberSnowLayers&#39;</span><span class="p">)</span>    <span class="c1"># default 3</span>
@@ -210,14 +185,6 @@
 
 <span class="sd">        Todo:</span>
 <span class="sd">            calculate sinus shape function for the southern hemisspere</span>
-
-<span class="sd">        test of math1</span>
-
-<span class="sd">        .. math::</span>
-<span class="sd">              a = \sqrt{2} </span>
-
-
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prevSnowCover</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCover</span>
