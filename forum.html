@@ -44,8 +44,20 @@
 <h1>14. Forum<a class="headerlink" href="#forum" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="questions-and-answer-forum">
 <h2>Questions and answer forum<a class="headerlink" href="#questions-and-answer-forum" title="Permalink to this headline">¶</a></h2>
-<p>test</p>
-</div>
+<iframe id="forum_embed"
+  src="javascript:void(0)"
+  scrolling="no"
+  frameborder="0"
+  width="900"
+  height="700">
+</iframe>
+
+<script type="text/javascript">
+  document.getElementById('forum_embed').src =
+     'https://groups.google.com/forum/embed/?place=forum/cwatm'
+     + '&showsearch=true&showpopout=true&showtabs=false'
+     + '&parenturl=' + encodeURIComponent(window.location.href);
+</script></div>
 </div>
 
 
