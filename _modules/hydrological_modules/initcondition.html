@@ -135,10 +135,11 @@
 
         <span class="c1"># lakes &amp; reservoirs</span>
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">):</span>
-            <span class="n">Var1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;smalllakeInflow&quot;</span><span class="p">,</span><span class="s2">&quot;smalllakeStorage&quot;</span><span class="p">,</span><span class="s2">&quot;smalllakeOutflow&quot;</span><span class="p">]</span>
-            <span class="n">Var2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;smalllakeInflowOld&quot;</span><span class="p">,</span><span class="s2">&quot;smalllakeVolumeM3&quot;</span><span class="p">,</span><span class="s2">&quot;smalllakeOutflow&quot;</span><span class="p">]</span>
-            <span class="n">initCondVar</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">Var1</span><span class="p">)</span>
-            <span class="n">initCondVarValue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">Var2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;useSmallLakes&#39;</span><span class="p">):</span>
+                <span class="n">Var1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;smalllakeInflow&quot;</span><span class="p">,</span><span class="s2">&quot;smalllakeStorage&quot;</span><span class="p">,</span><span class="s2">&quot;smalllakeOutflow&quot;</span><span class="p">]</span>
+                <span class="n">Var2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;smalllakeInflowOld&quot;</span><span class="p">,</span><span class="s2">&quot;smalllakeVolumeM3&quot;</span><span class="p">,</span><span class="s2">&quot;smalllakeOutflow&quot;</span><span class="p">]</span>
+                <span class="n">initCondVar</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">Var1</span><span class="p">)</span>
+                <span class="n">initCondVarValue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">Var2</span><span class="p">)</span>
 
 
 

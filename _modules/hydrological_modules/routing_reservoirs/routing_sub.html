@@ -296,8 +296,10 @@
 <span class="sd">    :return: ldd variables</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1">#ldd2D = decompress(ldd, pcr1=False).astype(np.int64)</span>
-    <span class="n">ldd2D</span> <span class="o">=</span> <span class="n">ldd</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="c1"># decompressing ldd from 1D -&gt; 2D</span>
+    <span class="n">dmap</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">dmap</span><span class="p">[</span><span class="o">~</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;maskflat&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ldd</span><span class="p">[:]</span>
+    <span class="n">ldd2D</span> <span class="o">=</span> <span class="n">dmap</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="n">ldd2D</span><span class="p">[</span><span class="n">ldd2D</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="c1"># every cell gets an order starting from 0 ...</span>
@@ -356,12 +358,12 @@
 
     <span class="n">check</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="n">lib2</span><span class="o">.</span><span class="n">repairLdd2</span><span class="p">(</span><span class="n">lddcomp</span><span class="p">,</span> <span class="n">dirshort</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
-
+    <span class="n">ii</span><span class="o">=</span><span class="mi">2</span>
 	
 	
 	
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    for i in xrange(maskattr[&quot;compshape&quot;]):</span>
+<span class="sd">    for i in range(maskinfo[&#39;mapC&#39;][0]):</span>
 <span class="sd">       path=[]</span>
 <span class="sd">       j=i</span>
 <span class="sd">       while 1:</span>
@@ -374,6 +376,7 @@
 <span class="sd">          j = dirshort[j]</span>
 <span class="sd">       check[path]=1</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 
     <span class="k">return</span> <span class="n">lddcomp</span><span class="p">,</span> <span class="n">dirshort</span></div>
 </pre></div>
