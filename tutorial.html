@@ -1,11 +1,9 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>5. Tutorial &#8212; Community Water Model</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,35 +47,41 @@
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#tutorial" id="id2">Tutorial</a><ul>
-<li><a class="reference internal" href="#requirements" id="id3">Requirements</a><ul>
-<li><a class="reference internal" href="#id1" id="id4">Requirements</a><ul>
-<li><a class="reference internal" href="#python-version" id="id5">Python version</a></li>
-<li><a class="reference internal" href="#libraries" id="id6">Libraries</a></li>
-<li><a class="reference internal" href="#windows-executeable-python-version" id="id7">Windows executeable Python version</a></li>
+<li><p><a class="reference internal" href="#tutorial" id="id2">Tutorial</a></p>
+<ul>
+<li><p><a class="reference internal" href="#requirements" id="id3">Requirements</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id4">Requirements</a></p>
+<ul>
+<li><p><a class="reference internal" href="#python-version" id="id5">Python version</a></p></li>
+<li><p><a class="reference internal" href="#libraries" id="id6">Libraries</a></p></li>
+<li><p><a class="reference internal" href="#windows-executeable-python-version" id="id7">Windows executeable Python version</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#test-the-executable-model-version" id="id8">Test the executable model version</a><ul>
-<li><a class="reference internal" href="#test-1" id="id9">Test 1</a></li>
-<li><a class="reference internal" href="#test-2" id="id10">Test 2</a></li>
+<li><p><a class="reference internal" href="#test-the-executable-model-version" id="id8">Test the executable model version</a></p>
+<ul>
+<li><p><a class="reference internal" href="#test-1" id="id9">Test 1</a></p></li>
+<li><p><a class="reference internal" href="#test-2" id="id10">Test 2</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#test-the-python-model-version" id="id11">Test the Python model version</a><ul>
-<li><a class="reference internal" href="#error-because-you-did-not-run-it-with-python" id="id12">Error because you did not run it with Python</a></li>
-<li><a class="reference internal" href="#error-because-the-python-libraries-are-installed-incorrectly" id="id13">Error because the python libraries are installed incorrectly</a></li>
+<li><p><a class="reference internal" href="#test-the-python-model-version" id="id11">Test the Python model version</a></p>
+<ul>
+<li><p><a class="reference internal" href="#error-because-you-did-not-run-it-with-python" id="id12">Error because you did not run it with Python</a></p></li>
+<li><p><a class="reference internal" href="#error-because-the-python-libraries-are-installed-incorrectly" id="id13">Error because the python libraries are installed incorrectly</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#running-the-model-1" id="id14">Running the model 1</a></li>
-<li><a class="reference internal" href="#downloading-and-installing-the-spatial-dataset" id="id15">Downloading and installing the spatial dataset</a></li>
-<li><a class="reference internal" href="#changing-the-settings-file" id="id16">Changing the Settings file</a></li>
-<li><a class="reference internal" href="#running-the-model-2" id="id17">Running the model 2</a></li>
-<li><a class="reference internal" href="#changing-parameters-of-the-model" id="id18">Changing parameters of the model</a></li>
-<li><a class="reference internal" href="#changing-the-output" id="id19">Changing the Output</a><ul>
-<li><a class="reference internal" href="#output-variables" id="id20">Output variables</a></li>
-<li><a class="reference internal" href="#daily-monthly-at-the-end-or-average" id="id21">Daily, monthly - at the end or average</a></li>
-<li><a class="reference internal" href="#most-important-output-variables-a-selection" id="id22">Most important output variables - a selection</a></li>
+<li><p><a class="reference internal" href="#running-the-model-1" id="id14">Running the model 1</a></p></li>
+<li><p><a class="reference internal" href="#downloading-and-installing-the-spatial-dataset" id="id15">Downloading and installing the spatial dataset</a></p></li>
+<li><p><a class="reference internal" href="#changing-the-settings-file" id="id16">Changing the Settings file</a></p></li>
+<li><p><a class="reference internal" href="#running-the-model-2" id="id17">Running the model 2</a></p></li>
+<li><p><a class="reference internal" href="#changing-parameters-of-the-model" id="id18">Changing parameters of the model</a></p></li>
+<li><p><a class="reference internal" href="#changing-the-output" id="id19">Changing the Output</a></p>
+<ul>
+<li><p><a class="reference internal" href="#output-variables" id="id20">Output variables</a></p></li>
+<li><p><a class="reference internal" href="#daily-monthly-at-the-end-or-average" id="id21">Daily, monthly - at the end or average</a></p></li>
+<li><p><a class="reference internal" href="#most-important-output-variables-a-selection" id="id22">Most important output variables - a selection</a></p></li>
 </ul>
 </li>
 </ul>
@@ -93,22 +97,26 @@
 <p>NEW from 2019 on:
 Requirements are a 64 bit <a class="reference external" href="https://www.python.org/downloads/release/python-372/">Python 3.7.x version</a></p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">a 32 bit version is not able to handle the data requirements!</p>
+<p class="admonition-title">Warning</p>
+<p>a 32 bit version is not able to handle the data requirements!</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">From 2019 on we are changing to Python37. We do not provide further support for Python 2.7</p>
+<p class="admonition-title">Warning</p>
+<p>From 2019 on we are changing to Python37. We do not provide further support for Python 2.7</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>CWATM is tested for Python 3.7 and will for sure not work with Python versions lower than 3.6. We recommend using Python 3.7</p>
 </div>
 </div>
 <div class="section" id="libraries">
 <h4><a class="toc-backref" href="#id6">Libraries</a><a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h4>
 <p>These external libraries are needed:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://www.numpy.org">Numpy</a></li>
-<li><a class="reference external" href="https://www.scipy.org">Scipy</a></li>
-<li><a class="reference external" href="https://pypi.python.org/pypi/netCDF4">netCDF4</a></li>
-<li><a class="reference external" href="http://www.gdal.org">GDAL</a></li>
+<li><p><a class="reference external" href="http://www.numpy.org">Numpy</a></p></li>
+<li><p><a class="reference external" href="https://www.scipy.org">Scipy</a></p></li>
+<li><p><a class="reference external" href="https://pypi.python.org/pypi/netCDF4">netCDF4</a></p></li>
+<li><p><a class="reference external" href="http://www.gdal.org">GDAL</a></p></li>
 </ul>
 <p><strong>Windows</strong></p>
 <p>The five libraries can be installed with pip or
@@ -201,8 +209,8 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If python is not set in the environment path, the full path of python has to be used</p>
+<p class="admonition-title">Warning</p>
+<p>If python is not set in the environment path, the full path of python has to be used</p>
 </div>
 <div class="section" id="error-because-you-did-not-run-it-with-python">
 <h3><a class="toc-backref" href="#id12">Error because you did not run it with Python</a><a class="headerlink" href="#error-because-you-did-not-run-it-with-python" title="Permalink to this headline">¶</a></h3>
@@ -230,8 +238,8 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 <div class="section" id="running-the-model-1">
 <h2><a class="toc-backref" href="#id14">Running the model 1</a><a class="headerlink" href="#running-the-model-1" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The model needs a settings file as an argument. See: <a class="reference internal" href="setup.html#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
+<p class="admonition-title">Warning</p>
+<p>The model needs a settings file as an argument. See: <a class="reference internal" href="setup.html#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
 </div>
 <p>python &lt;modelpath&gt;/cwatm.py settingsfile flags</p>
 <p>example:</p>
@@ -251,24 +259,24 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 <h2><a class="toc-backref" href="#id15">Downloading and installing the spatial dataset</a><a class="headerlink" href="#downloading-and-installing-the-spatial-dataset" title="Permalink to this headline">¶</a></h2>
 <p>The spatial dataset contains:</p>
 <ul class="simple">
-<li>static data ie. data that does not change over time (a model assumption) e.g. soil data</li>
-<li>time dependend (inter annual) data that change periodical during a year e.g. crop coefficient of vegetation</li>
-<li>time dependend (intra annual) data that change by month or year e.g. fraction of landcover</li>
+<li><p>static data ie. data that does not change over time (a model assumption) e.g. soil data</p></li>
+<li><p>time dependend (inter annual) data that change periodical during a year e.g. crop coefficient of vegetation</p></li>
+<li><p>time dependend (intra annual) data that change by month or year e.g. fraction of landcover</p></li>
 </ul>
 <p>These data are stored as global dataset:</p>
 <ul class="simple">
-<li>cwat_input.zip  for the 30’ global version</li>
-<li>cwat_input5min.zip  for the 5’ global version</li>
+<li><p>cwat_input.zip  for the 30’ global version</p></li>
+<li><p>cwat_input5min.zip  for the 5’ global version</p></li>
 </ul>
 <p>As climate data different forcings can be used e.g:</p>
 <ul class="simple">
-<li>PGMFD v.2 (Princeton), GSWP3, etc.</li>
-<li>precipitation from e.g. MSWEP <a class="reference external" href="http://www.gloh2o.org/">http://www.gloh2o.org/</a></li>
-<li>WATCH+WFDEI  <a class="reference external" href="https://www.isimip.org/gettingstarted/details/5/">https://www.isimip.org/gettingstarted/details/5/</a></li>
+<li><p>PGMFD v.2 (Princeton), GSWP3, etc.</p></li>
+<li><p>precipitation from e.g. MSWEP <a class="reference external" href="http://www.gloh2o.org/">http://www.gloh2o.org/</a></p></li>
+<li><p>WATCH+WFDEI  <a class="reference external" href="https://www.isimip.org/gettingstarted/details/5/">https://www.isimip.org/gettingstarted/details/5/</a></p></li>
 </ul>
 <p>and as projection e.g.:</p>
 <ul class="simple">
-<li>ISI-MIP dataset <a class="reference external" href="https://www.isimip.org/gettingstarted/#input-data-bias-correction">https://www.isimip.org/gettingstarted/#input-data-bias-correction</a></li>
+<li><p>ISI-MIP dataset <a class="reference external" href="https://www.isimip.org/gettingstarted/#input-data-bias-correction">https://www.isimip.org/gettingstarted/#input-data-bias-correction</a></p></li>
 </ul>
 <div class="line-block">
 <div class="line">For the tutorial we cut out Rhine basin and included the WATCH+WFDEI precipitation, average temperature and the calculated potential evaporation .</div>
@@ -280,16 +288,16 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 <div class="line">Weedon, G. P., G. Balsamo, N. Bellouin, S. Gomes, M. J. Best, and P. Viterbo (2014), The WFDEI meteorological forcing data set: WATCH Forcing Data methodology applied to ERA-Interim reanalysis data, Water Resour. Res., 50, 7505–7514, doi:10.1002/2014WR015638.</div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<div class="last line-block">
+<p class="admonition-title">Note</p>
+<div class="line-block">
 <div class="line">Please copy and unpack the spatial dataset (either 30’ or 5’)in a folder</div>
 <div class="line">Please copy the the climate dataset 30min_meteo_rhine.zip or 5min_meteo_rhine.zip in a seperate folder</div>
 <div class="line">Please create a folder called output</div>
 </div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<div class="last line-block">
+<p class="admonition-title">Note</p>
+<div class="line-block">
 <div class="line">For testing purpose there is a file rhine_basin.zip on GitHub</div>
 <div class="line">it has all the necessary data to run the River Rhine on 30 arcmin from 1990-2010</div>
 </div>
@@ -312,8 +320,8 @@ metaNetcdfFile = $(FILE_PATHS:PathRoot)/CWATM/source/metaNetcdf.xml
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Please change the pathes according to your file system</p>
+<p class="admonition-title">Note</p>
+<p>Please change the pathes according to your file system</p>
 </div>
 </div>
 <div class="section" id="running-the-model-2">
@@ -374,8 +382,8 @@ Ldd = $(FILE_PATHS:PathMaps)/routing/ldd.map
 <div class="section" id="changing-parameters-of-the-model">
 <h2><a class="toc-backref" href="#id18">Changing parameters of the model</a><a class="headerlink" href="#changing-parameters-of-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">An overview of possibilities is given in  see <a class="reference internal" href="setup.html#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
+<p class="admonition-title">Note</p>
+<p>An overview of possibilities is given in  see <a class="reference internal" href="setup.html#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
 </div>
 </div>
 <div class="section" id="changing-the-output">
@@ -386,19 +394,19 @@ Ldd = $(FILE_PATHS:PathMaps)/routing/ldd.map
 Variable are e.g. Precipitation, runoff, baseflow</p>
 <p>but also not so common variables as:</p>
 <ul class="simple">
-<li>reservoirStorage (amount of water in the reservoirs in [m3])</li>
-<li>nonIrrReturnFlowFraction (returnflow from domenstic and industrial water use [m3])</li>
-<li>actualET[1] (actual evapotranspiration from grassland [m/day])</li>
-<li>…</li>
+<li><p>reservoirStorage (amount of water in the reservoirs in [m3])</p></li>
+<li><p>nonIrrReturnFlowFraction (returnflow from domenstic and industrial water use [m3])</p></li>
+<li><p>actualET[1] (actual evapotranspiration from grassland [m/day])</p></li>
+<li><p>…</p></li>
 </ul>
 </div>
 <div class="section" id="daily-monthly-at-the-end-or-average">
 <h3><a class="toc-backref" href="#id21">Daily, monthly - at the end or average</a><a class="headerlink" href="#daily-monthly-at-the-end-or-average" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>per day</li>
-<li>total month, average month, end of month</li>
-<li>total year, average year, end of year</li>
-<li>total average, total at the end</li>
+<li><p>per day</p></li>
+<li><p>total month, average month, end of month</p></li>
+<li><p>total year, average year, end of year</p></li>
+<li><p>total average, total at the end</p></li>
 </ul>
 <p>for example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[OUTPUT]
@@ -414,12 +422,12 @@ OUT_TSS_AnnualAvg = Precipitation
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For each variable the meta data information can be defined in <a class="reference internal" href="setup.html#rst-metadata"><span class="std std-ref">Output Meta NetCDF information</span></a></p>
+<p class="admonition-title">Note</p>
+<p>For each variable the meta data information can be defined in <a class="reference internal" href="setup.html#rst-metadata"><span class="std std-ref">Output Meta NetCDF information</span></a></p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For information how to adjust the output in the settings file see <a class="reference internal" href="setup.html#rst-outputone"><span class="std std-ref">Output</span></a></p>
+<p class="admonition-title">Note</p>
+<p>For information how to adjust the output in the settings file see <a class="reference internal" href="setup.html#rst-outputone"><span class="std std-ref">Output</span></a></p>
 </div>
 </div>
 <div class="section" id="most-important-output-variables-a-selection">
@@ -473,9 +481,10 @@ OUT_TSS_AnnualAvg = Precipitation
 <li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">10. Calibration tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">12. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">13. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="forum.html">14. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zambezi.html">12. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">13. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">14. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forum.html">15. Forum</a></li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -508,7 +517,7 @@ OUT_TSS_AnnualAvg = Precipitation
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     </div>
   </body>
 </html>

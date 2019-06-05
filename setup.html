@@ -1,11 +1,9 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>4. Setup of the model &#8212; Community Water Model</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,75 +47,88 @@
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#setup-of-the-model" id="id6">Setup of the model</a><ul>
-<li><a class="reference internal" href="#setup" id="id7">Setup</a><ul>
-<li><a class="reference internal" href="#requirements" id="id8">Requirements</a><ul>
-<li><a class="reference internal" href="#python-version" id="id9">Python version</a></li>
-<li><a class="reference internal" href="#libraries" id="id10">Libraries</a></li>
-<li><a class="reference internal" href="#windows-executeable-python-version" id="id11">Windows executeable Python version</a></li>
-<li><a class="reference internal" href="#pcraster" id="id12">PCRaster</a></li>
+<li><p><a class="reference internal" href="#setup-of-the-model" id="id6">Setup of the model</a></p>
+<ul>
+<li><p><a class="reference internal" href="#setup" id="id7">Setup</a></p>
+<ul>
+<li><p><a class="reference internal" href="#requirements" id="id8">Requirements</a></p>
+<ul>
+<li><p><a class="reference internal" href="#python-version" id="id9">Python version</a></p></li>
+<li><p><a class="reference internal" href="#libraries" id="id10">Libraries</a></p></li>
+<li><p><a class="reference internal" href="#windows-executeable-python-version" id="id11">Windows executeable Python version</a></p></li>
+<li><p><a class="reference internal" href="#pcraster" id="id12">PCRaster</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#c-libraries" id="id13">C++ libraries</a><ul>
-<li><a class="reference internal" href="#compiled-versions" id="id14">Compiled versions</a></li>
-<li><a class="reference internal" href="#compiling-a-version" id="id15">Compiling a version</a></li>
+<li><p><a class="reference internal" href="#c-libraries" id="id13">C++ libraries</a></p>
+<ul>
+<li><p><a class="reference internal" href="#compiled-versions" id="id14">Compiled versions</a></p></li>
+<li><p><a class="reference internal" href="#compiling-a-version" id="id15">Compiling a version</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#test-the-model" id="id16">Test the model</a></li>
+<li><p><a class="reference internal" href="#test-the-model" id="id16">Test the model</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#running-the-model" id="id17">Running the model</a><ul>
-<li><a class="reference internal" href="#start-the-model" id="id18">Start the model</a><ul>
-<li><a class="reference internal" href="#flags" id="id19">Flags</a></li>
-<li><a class="reference internal" href="#settings-file" id="id20">Settings file</a></li>
-<li><a class="reference internal" href="#netcdf-meta-data" id="id21">NetCDF meta data</a></li>
+<li><p><a class="reference internal" href="#running-the-model" id="id17">Running the model</a></p>
+<ul>
+<li><p><a class="reference internal" href="#start-the-model" id="id18">Start the model</a></p>
+<ul>
+<li><p><a class="reference internal" href="#flags" id="id19">Flags</a></p></li>
+<li><p><a class="reference internal" href="#settings-file" id="id20">Settings file</a></p></li>
+<li><p><a class="reference internal" href="#netcdf-meta-data" id="id21">NetCDF meta data</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#test-the-data" id="id22">Test the data</a></li>
-<li><a class="reference internal" href="#rst-settingdoc" id="id23">Settings file</a><ul>
-<li><a class="reference internal" href="#components-of-the-settings-file" id="id24">Components of the settings file</a><ul>
-<li><a class="reference internal" href="#general-flags" id="id25">General flags</a></li>
-<li><a class="reference internal" href="#id2" id="id26">NetCDF meta data</a></li>
-<li><a class="reference internal" href="#path-of-data-output" id="id27">Path of data, output</a></li>
-<li><a class="reference internal" href="#defining-the-modeling-area" id="id28">Defining the modeling area</a></li>
-<li><a class="reference internal" href="#defining-the-time" id="id29">Defining the time</a></li>
-<li><a class="reference internal" href="#initial-conditions" id="id30">Initial conditions</a></li>
-<li><a class="reference internal" href="#output" id="id31">Output</a></li>
-<li><a class="reference internal" href="#reading-information" id="id32">Reading information</a></li>
+<li><p><a class="reference internal" href="#test-the-data" id="id22">Test the data</a></p></li>
+<li><p><a class="reference internal" href="#rst-settingdoc" id="id23">Settings file</a></p>
+<ul>
+<li><p><a class="reference internal" href="#components-of-the-settings-file" id="id24">Components of the settings file</a></p>
+<ul>
+<li><p><a class="reference internal" href="#general-flags" id="id25">General flags</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id26">NetCDF meta data</a></p></li>
+<li><p><a class="reference internal" href="#path-of-data-output" id="id27">Path of data, output</a></p></li>
+<li><p><a class="reference internal" href="#defining-the-modeling-area" id="id28">Defining the modeling area</a></p></li>
+<li><p><a class="reference internal" href="#defining-the-time" id="id29">Defining the time</a></p></li>
+<li><p><a class="reference internal" href="#initial-conditions" id="id30">Initial conditions</a></p></li>
+<li><p><a class="reference internal" href="#output" id="id31">Output</a></p></li>
+<li><p><a class="reference internal" href="#reading-information" id="id32">Reading information</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#sections-of-information" id="id33">Sections of information</a></li>
-<li><a class="reference internal" href="#complete-settings-file" id="id34">Complete settings file</a></li>
+<li><p><a class="reference internal" href="#sections-of-information" id="id33">Sections of information</a></p></li>
+<li><p><a class="reference internal" href="#complete-settings-file" id="id34">Complete settings file</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id3" id="id35">NetCDF meta data</a><ul>
-<li><a class="reference internal" href="#output-meta-netcdf-information" id="id36">Output Meta NetCDF information</a></li>
-<li><a class="reference internal" href="#name-and-location-of-the-netcdf-meta-data-file" id="id37">Name and location of the NetCDF meta data file</a></li>
+<li><p><a class="reference internal" href="#id3" id="id35">NetCDF meta data</a></p>
+<ul>
+<li><p><a class="reference internal" href="#output-meta-netcdf-information" id="id36">Output Meta NetCDF information</a></p></li>
+<li><p><a class="reference internal" href="#name-and-location-of-the-netcdf-meta-data-file" id="id37">Name and location of the NetCDF meta data file</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#initialisation" id="id38">Initialisation</a><ul>
-<li><a class="reference internal" href="#example-of-soil-moisture" id="id39">Example of soil moisture</a></li>
-<li><a class="reference internal" href="#cold-start" id="id40">Cold start</a><ul>
-<li><a class="reference internal" href="#set-up-a-cold-start-in-the-settingsfile" id="id41">Set up a cold start in the settingsfile</a></li>
+<li><p><a class="reference internal" href="#initialisation" id="id38">Initialisation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#example-of-soil-moisture" id="id39">Example of soil moisture</a></p></li>
+<li><p><a class="reference internal" href="#cold-start" id="id40">Cold start</a></p>
+<ul>
+<li><p><a class="reference internal" href="#set-up-a-cold-start-in-the-settingsfile" id="id41">Set up a cold start in the settingsfile</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#storing-initial-variables" id="id42">Storing initial variables</a></li>
-<li><a class="reference internal" href="#warm-start" id="id43">Warm start</a><ul>
-<li><a class="reference internal" href="#id4" id="id44">Set up a cold start in the settingsfile</a></li>
+<li><p><a class="reference internal" href="#storing-initial-variables" id="id42">Storing initial variables</a></p></li>
+<li><p><a class="reference internal" href="#warm-start" id="id43">Warm start</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id4" id="id44">Set up a cold start in the settingsfile</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#rst-initialcondition" id="id45">Initial conditions</a></li>
+<li><p><a class="reference internal" href="#rst-initialcondition" id="id45">Initial conditions</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#model-output" id="id46">Model Output</a><ul>
-<li><a class="reference internal" href="#time-depending-and-non-depending-output-maps" id="id47">Time depending and non depending output maps</a></li>
-<li><a class="reference internal" href="#or-time-series-at-specified-points" id="id48">Or time series at specified points</a></li>
-<li><a class="reference internal" href="#output-variables" id="id49">Output variables</a></li>
-<li><a class="reference internal" href="#daily-monthly-at-the-end-or-average" id="id50">Daily, monthly - at the end or average</a></li>
-<li><a class="reference internal" href="#most-important-output-variables-a-selection" id="id51">Most important output variables - a selection</a></li>
-<li><a class="reference internal" href="#output-variables-starting-a-list" id="id52">Output variables - starting a list</a></li>
+<li><p><a class="reference internal" href="#model-output" id="id46">Model Output</a></p>
+<ul>
+<li><p><a class="reference internal" href="#time-depending-and-non-depending-output-maps" id="id47">Time depending and non depending output maps</a></p></li>
+<li><p><a class="reference internal" href="#or-time-series-at-specified-points" id="id48">Or time series at specified points</a></p></li>
+<li><p><a class="reference internal" href="#output-variables" id="id49">Output variables</a></p></li>
+<li><p><a class="reference internal" href="#daily-monthly-at-the-end-or-average" id="id50">Daily, monthly - at the end or average</a></p></li>
+<li><p><a class="reference internal" href="#most-important-output-variables-a-selection" id="id51">Most important output variables - a selection</a></p></li>
+<li><p><a class="reference internal" href="#output-variables-starting-a-list" id="id52">Output variables - starting a list</a></p></li>
 </ul>
 </li>
 </ul>
@@ -134,27 +145,31 @@
 Requirements are a 64 bit <a class="reference external" href="https://www.python.org/downloads/release/python-372/">Python 3.7.x version</a></p>
 <p>Reason for this step:</p>
 <ul class="simple">
-<li>Python 2.7 support ends in 2019</li>
-<li>We will be able to provide a better error handling</li>
-<li>We are able to provide an executable of CWATM for Windows</li>
+<li><p>Python 2.7 support ends in 2019</p></li>
+<li><p>We will be able to provide a better error handling</p></li>
+<li><p>We are able to provide an executable of CWATM for Windows</p></li>
 </ul>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">a 32 bit version is not able to handle the data requirements!</p>
+<p class="admonition-title">Warning</p>
+<p>a 32 bit version is not able to handle the data requirements!</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">From 2019 on we are changing to Python 3.7. We do not provide further support for Python 2.7</p>
+<p class="admonition-title">Warning</p>
+<p>From 2019 on we are changing to Python 3.7. We do not provide further support for Python 2.7</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>CWATM is tested for Python 3.7 and will for sure not work with Python versions lower than 3.6. We recommend using Python 3.7</p>
 </div>
 </div>
 <div class="section" id="libraries">
 <h4><a class="toc-backref" href="#id10">Libraries</a><a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h4>
 <p>These external libraries are needed:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://www.numpy.org">Numpy</a></li>
-<li><a class="reference external" href="https://www.scipy.org">Scipy</a></li>
-<li><a class="reference external" href="https://pypi.python.org/pypi/netCDF4">netCDF4</a></li>
-<li><a class="reference external" href="http://www.gdal.org">GDAL</a></li>
+<li><p><a class="reference external" href="http://www.numpy.org">Numpy</a></p></li>
+<li><p><a class="reference external" href="https://www.scipy.org">Scipy</a></p></li>
+<li><p><a class="reference external" href="https://pypi.python.org/pypi/netCDF4">netCDF4</a></p></li>
+<li><p><a class="reference external" href="http://www.gdal.org">GDAL</a></p></li>
 </ul>
 <p><strong>Windows</strong></p>
 <p>The five libraries can be installed with pip or
@@ -166,31 +181,31 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 <div class="line">A CWATM executable cwatm.exe can be used instead of the Python version</div>
 </div>
 <ul class="simple">
-<li>ADVANTAGE: You can run it without installing or knowledge of Python</li>
-<li>DISADVANTAGE 1: You cannot see the source code or change it</li>
-<li>DISADVANTAGE 2: We do not update this version as often as the Python version</li>
-<li>It is done with cx_freeze library</li>
-<li>It includes all Python libraries</li>
+<li><p>ADVANTAGE: You can run it without installing or knowledge of Python</p></li>
+<li><p>DISADVANTAGE 1: You cannot see the source code or change it</p></li>
+<li><p>DISADVANTAGE 2: We do not update this version as often as the Python version</p></li>
+<li><p>It is done with cx_freeze library</p></li>
+<li><p>It includes all Python libraries</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<div class="last line-block">
+<p class="admonition-title">Note</p>
+<div class="line-block">
 <div class="line">A cwatmexe.zip (around 300 MB with all Python libraries) is stored on:</div>
 <div class="line"><a class="reference external" href="https://github.com/CWatM/CWatM">Source code on Github repository of CWATM</a></div>
 <div class="line"><a class="reference external" href="https://github.com/CWatM/CWatM/blob/version091/cwatmexe.zip">Executable cwatmexe.zip on Github repository of CWATM</a></div>
 </div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<div class="last line-block">
+<p class="admonition-title">Note</p>
+<div class="line-block">
 <div class="line">We recommend using the Python 3.7.x version,</div>
 <div class="line">but if you not experienced in Python or have problems installing CWATM, please use the executable version.</div>
 <div class="line">Either start it in DOS box (command cmd), or use the batch file cwatmbat.bat to start it</div>
 </div>
 </div>
 <div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">We will put a whole example of 30 deg Rhine basin with all necessary data in another zip file. Just for an easier start.</p>
+<p class="admonition-title">Todo</p>
+<p>We will put a whole example of 30 deg Rhine basin with all necessary data in another zip file. Just for an easier start.</p>
 </div>
 </div>
 <div class="section" id="pcraster">
@@ -227,16 +242,16 @@ CWATM comes with a C++ library</p>
 </div>
 <p>For Linux Ubuntu a compiled version is provided as <em>t5_linux.so</em>. The file is in <em>../source/hydrological_modules/routing_reservoirs/</em></p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you use another Linux version or the compiled version is not working or you have a compiler which produce faster executables please compile a version on your own.</p>
+<p class="admonition-title">Note</p>
+<p>If you use another Linux version or the compiled version is not working or you have a compiler which produce faster executables please compile a version on your own.</p>
 </div>
 </div>
 <div class="section" id="compiling-a-version">
 <h4><a class="toc-backref" href="#id15">Compiling a version</a><a class="headerlink" href="#compiling-a-version" title="Permalink to this headline">¶</a></h4>
 <p>C++ sourcecode is in <em>../source/hydrological_modules/routing_reservoirs/t5.cpp</em></p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">A compiled version is already provided for Windows and Linux.</p>
+<p class="admonition-title">Note</p>
+<p>A compiled version is already provided for Windows and Linux.</p>
 </div>
 <p><strong>Windows</strong></p>
 <p>A compiled version is provided, but maybe you have a faster compiler than the “Minimalist GNU for Windows” or “Microsoft Visual Studio 14.0” we used.</p>
@@ -251,10 +266,9 @@ CWATM comes with a C++ library</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<dl class="last docutils">
-<dt>We used Visual Studio, because it seems to be computational faster</dt>
-<dd><div class="first last line-block">
+<p class="admonition-title">Note</p>
+<dl>
+<dt>We used Visual Studio, because it seems to be computational faster</dt><dd><div class="line-block">
 <div class="line">the libray used with Windows is named <em>t5.dll</em>, if you generate a libray <em>t5.so</em> the filename in <strong>../source/management_modules/globals.py</strong> has to be changed!</div>
 </div>
 </dd>
@@ -272,8 +286,8 @@ CWATM comes with a C++ library</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Please rename your compiled version to t5_linux.so! At the moment the file t5_linux.so is compiled with Ubuntu Linux</p>
+<p class="admonition-title">Warning</p>
+<p>Please rename your compiled version to t5_linux.so! At the moment the file t5_linux.so is compiled with Ubuntu Linux</p>
 </div>
 </div>
 </div>
@@ -290,12 +304,12 @@ CWATM comes with a C++ library</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If python is not set in the environment path, the full path of python has to be used</p>
+<p class="admonition-title">Warning</p>
+<p>If python is not set in the environment path, the full path of python has to be used</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Please use the right version of CWATM with the right version of Python (either 2.7 or 3.7)</p>
+<p class="admonition-title">Warning</p>
+<p>Please use the right version of CWATM with the right version of Python (either 2.7 or 3.7)</p>
 </div>
 </div>
 </div>
@@ -304,8 +318,8 @@ CWATM comes with a C++ library</p>
 <div class="section" id="start-the-model">
 <h3><a class="toc-backref" href="#id18">Start the model</a><a class="headerlink" href="#start-the-model" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The model needs a settings file as an argument. See: <a class="reference internal" href="#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
+<p class="admonition-title">Warning</p>
+<p>The model needs a settings file as an argument. See: <a class="reference internal" href="#rst-settingdoc"><span class="std std-ref">Settings file</span></a></p>
 </div>
 <p><strong>Windows</strong></p>
 <p>python &lt;modelpath&gt;/cwatm.py settingsfile flags</p>
@@ -316,8 +330,8 @@ CWATM comes with a C++ library</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If python is not set in the environment path, the full path of python has to be used</p>
+<p class="admonition-title">Warning</p>
+<p>If python is not set in the environment path, the full path of python has to be used</p>
 </div>
 <p><strong>Linux</strong></p>
 <p>&lt;modelpath&gt;/cwatm.py settingsfile flags</p>
@@ -348,8 +362,8 @@ CWATM comes with a C++ library</p>
 <p>The format for spatial data for output data is netCDF.
 In the meta data file information can be added  e.g. a description of the parameter</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is not necessary to change this file! This is an option to put additional information into output maps</p>
+<p class="admonition-title">Note</p>
+<p>It is not necessary to change this file! This is an option to put additional information into output maps</p>
 </div>
 </div>
 </div>
@@ -589,8 +603,8 @@ in the metaNetcdf.xml. See: <a class="reference internal" href="#rst-metadata"><
 <div class="section" id="path-of-data-output">
 <h4><a class="toc-backref" href="#id27">Path of data, output</a><a class="headerlink" href="#path-of-data-output" title="Permalink to this headline">¶</a></h4>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Further on the pathes can be used as placeholders</p>
+<p class="admonition-title">Note</p>
+<p>Further on the pathes can be used as placeholders</p>
 </div>
 <div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>88
 89
@@ -615,12 +629,12 @@ in the metaNetcdf.xml. See: <a class="reference internal" href="#rst-metadata"><
 <p>In general the input data are stored and used at global scale.
 The modeling area can be defined by:</p>
 <ul class="simple">
-<li>a mask map</li>
-<li>coordinates</li>
+<li><p>a mask map</p></li>
+<li><p>coordinates</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The mask map can be a .tif, PCraster or a netCDF format
+<p class="admonition-title">Note</p>
+<p>The mask map can be a .tif, PCraster or a netCDF format
 | The coordinates have the format: Number of Cols, Number of rows, cellsize, upper left corner X, upper left corner Y</p>
 </div>
 <div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>108
@@ -672,12 +686,12 @@ The modeling area can be defined by:</p>
 <p>The start and end time have to be defined.
 Spin-up time is the time for warming up (results will be stored after the spin-up time)</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The time can be given as date: dd/mm/yyyy or as relative date: number (but then CalendarDayStart has to be defined)</p>
+<p class="admonition-title">Note</p>
+<p>The time can be given as date: dd/mm/yyyy or as relative date: number (but then CalendarDayStart has to be defined)</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Spin-up time can be given as date or number</p>
+<p class="admonition-title">Note</p>
+<p>Spin-up time can be given as date or number</p>
 </div>
 <div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>130
 131
@@ -707,8 +721,8 @@ Spin-up time is the time for warming up (results will be stored after the spin-u
 <h4><a class="toc-backref" href="#id30">Initial conditions</a><a class="headerlink" href="#initial-conditions" title="Permalink to this headline">¶</a></h4>
 <p>Initial conditions can be stored and be loaded in order to initialise a warm start of the model</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Initial conditions are store as one netCDF file with all necessary variables</p>
+<p class="admonition-title">Note</p>
+<p>Initial conditions are store as one netCDF file with all necessary variables</p>
 </div>
 <div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>145
 146
@@ -750,33 +764,32 @@ Spin-up time is the time for warming up (results will be stored after the spin-u
 </div>
 <div class="section" id="output">
 <span id="rst-outputone"></span><h4><a class="toc-backref" href="#id31">Output</a><a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h4>
-<dl class="docutils">
-<dt>Output can be spatial/time as netCDF4 map stacks</dt>
-<dd><div class="first last line-block">
+<dl>
+<dt>Output can be spatial/time as netCDF4 map stacks</dt><dd><div class="line-block">
 <div class="line">and/or time series at specified points</div>
 </div>
 </dd>
 </dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For additional information see <a class="reference internal" href="#rst-outputtwo"><span class="std std-ref">Model Output</span></a></p>
+<p class="admonition-title">Note</p>
+<p>For additional information see <a class="reference internal" href="#rst-outputtwo"><span class="std std-ref">Model Output</span></a></p>
 </div>
 <p>Output can be as maps and time series:</p>
 <ul class="simple">
-<li>per day [Daily]</li>
-<li>total month [MonthTot],  average month [MonthAvg], end of month [MonthEnd]</li>
-<li>total year  [AnnualTot], average year [AnnualAvg], end of year [AnnualEnd]</li>
-<li>total sum [TotalTot], total average [TotalAvg]</li>
+<li><p>per day [Daily]</p></li>
+<li><p>total month [MonthTot],  average month [MonthAvg], end of month [MonthEnd]</p></li>
+<li><p>total year  [AnnualTot], average year [AnnualAvg], end of year [AnnualEnd]</p></li>
+<li><p>total sum [TotalTot], total average [TotalAvg]</p></li>
 </ul>
 <p>For each of the following sections output can be defined for different variables:</p>
 <ul class="simple">
-<li>Meteo</li>
-<li>Snow</li>
-<li>Soil for different land cover (forest, grassland, irrigated land, paddy irrigated)</li>
-<li>Water demand</li>
-<li>Groundwater</li>
-<li>River routing</li>
-<li>Lakes and reservoirs</li>
+<li><p>Meteo</p></li>
+<li><p>Snow</p></li>
+<li><p>Soil for different land cover (forest, grassland, irrigated land, paddy irrigated)</p></li>
+<li><p>Water demand</p></li>
+<li><p>Groundwater</p></li>
+<li><p>River routing</p></li>
+<li><p>Lakes and reservoirs</p></li>
 </ul>
 <p><strong>Or</strong> output can be defined in the section <em>[output]</em></p>
 <p>An output directory can be defined and for each sort of output the variable(s) can be set:</p>
@@ -803,8 +816,8 @@ OUT_TSS_AnnualEnd = discharge
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For each variable the meta data information can be defined in <a class="reference internal" href="#rst-metadata"><span class="std std-ref">Output Meta NetCDF information</span></a></p>
+<p class="admonition-title">Note</p>
+<p>For each variable the meta data information can be defined in <a class="reference internal" href="#rst-metadata"><span class="std std-ref">Output Meta NetCDF information</span></a></p>
 </div>
 </div>
 <div class="section" id="reading-information">
@@ -893,8 +906,8 @@ Here the value definitions for [SNOW] is shown:</p>
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">TemperatureLapseRate = 0.0065
+<p class="admonition-title">Note</p>
+<p>TemperatureLapseRate = 0.0065
 | for the variable TemperatureLapseRate the value of 0.0065 is set</p>
 </div>
 <p>Variables can also be defined by spatial maps or map stacks</p>
@@ -903,12 +916,12 @@ forest_coverFractionNC   = $(PathForest)\coverFractionInputForest366days.nc
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">suffix can be .map, but if there is no PCraster map it will look automatically for netCDF .nc</p>
+<p class="admonition-title">Note</p>
+<p>suffix can be .map, but if there is no PCraster map it will look automatically for netCDF .nc</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">in most cases values can be replaced by map</p>
+<p class="admonition-title">Warning</p>
+<p>in most cases values can be replaced by map</p>
 </div>
 <div class="line-block">
 <div class="line">____________________________________________________________________________________________________________</div>
@@ -919,30 +932,29 @@ forest_coverFractionNC   = $(PathForest)\coverFractionInputForest366days.nc
 <div class="section" id="sections-of-information">
 <h3><a class="toc-backref" href="#id33">Sections of information</a><a class="headerlink" href="#sections-of-information" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Snow</li>
-<li>Frost</li>
-<li>General information on land cover types</li>
-<li>Soil</li>
-<li><dl class="first docutils">
-<dt>Information for each of the six land cover types</dt>
-<dd><ul class="first last">
-<li>Forest</li>
-<li>Grassland</li>
-<li>Paddy irrigated area</li>
-<li>Irrigated area</li>
-<li>Sealed area</li>
-<li>Water covered area</li>
+<li><p>Snow</p></li>
+<li><p>Frost</p></li>
+<li><p>General information on land cover types</p></li>
+<li><p>Soil</p></li>
+<li><dl class="simple">
+<dt>Information for each of the six land cover types</dt><dd><ul>
+<li><p>Forest</p></li>
+<li><p>Grassland</p></li>
+<li><p>Paddy irrigated area</p></li>
+<li><p>Irrigated area</p></li>
+<li><p>Sealed area</p></li>
+<li><p>Water covered area</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li>Interflow</li>
-<li>Groundwater</li>
-<li>Water demand</li>
-<li>Runoff concentration</li>
-<li>Routing</li>
-<li>Lakes and reservoirs</li>
-<li>Inflow</li>
+<li><p>Interflow</p></li>
+<li><p>Groundwater</p></li>
+<li><p>Water demand</p></li>
+<li><p>Runoff concentration</p></li>
+<li><p>Routing</p></li>
+<li><p>Lakes and reservoirs</p></li>
+<li><p>Inflow</p></li>
 </ul>
 </div>
 <div class="section" id="complete-settings-file">
@@ -2540,14 +2552,14 @@ metaNetcdfFile = $(FILE_PATHS:PathRoot)/CWATM/source/metaNetcdf.xml
 <p>CWATM needs to have estimates of the initial state of the internal storage variables, e.g. the amount of water stored in snow, soil, groundwater etc.</p>
 <p>There are two possibilities:</p>
 <ol class="arabic simple">
-<li>The initial state of the internal storage variables are unknown and a <strong>first</strong> guess has to be used e.g. all storage variables are half filled.</li>
-<li>The initial state is known from a previous run, where the variables are stored at a certain time step. This is called <strong>warm start</strong></li>
+<li><p>The initial state of the internal storage variables are unknown and a <strong>first</strong> guess has to be used e.g. all storage variables are half filled.</p></li>
+<li><p>The initial state is known from a previous run, where the variables are stored at a certain time step. This is called <strong>warm start</strong></p></li>
 </ol>
 <p>The the <strong>warm start</strong> is usful for:</p>
 <ul class="simple">
-<li>using a long pre-run to find the steady-state storage of the groundwater storage and use it as initial value</li>
-<li>using the stored variables to shorten the warm-up period</li>
-<li>using the stored variables to restart every day with the values from the pre3vious day (forecasting mode)</li>
+<li><p>using a long pre-run to find the steady-state storage of the groundwater storage and use it as initial value</p></li>
+<li><p>using the stored variables to shorten the warm-up period</p></li>
+<li><p>using the stored variables to restart every day with the values from the pre3vious day (forecasting mode)</p></li>
 </ul>
 <div class="section" id="example-of-soil-moisture">
 <h3><a class="toc-backref" href="#id39">Example of soil moisture</a><a class="headerlink" href="#example-of-soil-moisture" title="Permalink to this headline">¶</a></h3>
@@ -2555,12 +2567,12 @@ metaNetcdfFile = $(FILE_PATHS:PathRoot)/CWATM/source/metaNetcdf.xml
 In one of the simulations the soil is initially almost ompletely saturated. In another simulation the soil is completely dry and the third simulation starts with initial conditions in between the two extremes.</p>
 <p>In the beginning the effect of different initial condition can be seen clearly. But after one year the three curves converge. The <strong>memory</strong> of the lower soil goes back for about one year.</p>
 <p>For all the initial condition apart from groundwater the memory is about 12 month. That means practically a spin-up of one year is sufficient to habve enough warm-up time.</p>
-<div class="figure">
+<div class="figure align-center">
 <a class="reference internal image-reference" href="_images/init_soilmoisture.jpg"><img alt="_images/init_soilmoisture.jpg" src="_images/init_soilmoisture.jpg" style="width: 600px;" /></a>
 </div>
 <p>Figure: Simulation of soil moisture in the lower soil with different initial conditions</p>
 <p>For the groundwater zone a longer warm-up period is needed, because of the slow response of groundwater. Here a rather fast reacting groundwater storage is shown with the three curves coverge after two years.</p>
-<div class="figure">
+<div class="figure align-center">
 <a class="reference internal image-reference" href="_images/init_groundwater.jpg"><img alt="_images/init_groundwater.jpg" src="_images/init_groundwater.jpg" style="width: 600px;" /></a>
 </div>
 <p>Figure: Simulation of groundwater storage with different initial conditions</p>
@@ -2590,8 +2602,8 @@ A list of variables and their default value for a <strong>cold start</strong> is
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is possible to exclude the warming up period of your model run for further analysis of results by setting the <strong>SpinUp</strong> option</p>
+<p class="admonition-title">Note</p>
+<p>It is possible to exclude the warming up period of your model run for further analysis of results by setting the <strong>SpinUp</strong> option</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">TIME</span><span class="o">-</span><span class="n">RELATED_CONSTANTS</span><span class="p">]</span>
 <span class="n">SpinUp</span> <span class="o">=</span>  <span class="mi">01</span><span class="o">/</span><span class="mi">01</span><span class="o">/</span><span class="mi">1995</span>
@@ -2621,16 +2633,16 @@ A list of variables and their default value for a <strong>cold start</strong> is
 <p>CWATM can write internal variables to a netCDF file for choosen timesteps. These netCDF files can be used as the initial conditions for a suceeding simulation.</p>
 <p>This is useful for establishing a steady-state with a long-term run and then using this steady-state for succeding simulations or for an every day run (forecasting mode)</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If the parameters are changes after a run(especially the groundwater parameters) the stored initial values do not represent the conditions of the storage variables. Stored initial conditions should <strong>not</strong> be used as initial values for a model run with another set of parameters. If you do this during calibration, you will not be able to reproduce the calibration results!</p>
+<p class="admonition-title">Warning</p>
+<p>If the parameters are changes after a run(especially the groundwater parameters) the stored initial values do not represent the conditions of the storage variables. Stored initial conditions should <strong>not</strong> be used as initial values for a model run with another set of parameters. If you do this during calibration, you will not be able to reproduce the calibration results!</p>
 </div>
 <div class="section" id="id4">
 <h4><a class="toc-backref" href="#id44">Set up a cold start in the settingsfile</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <p>In the settings file the option: <strong>load_initial</strong> has to be set on <strong>True</strong>
 And define the name of the netcdf4 file in <strong>initLoad</strong></p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Use the initial values of the previous day here. E.g. if you run the model from 01/01/2006 use the inital condition from 31/12/2005</p>
+<p class="admonition-title">Note</p>
+<p>Use the initial values of the previous day here. E.g. if you run the model from 01/01/2006 use the inital condition from 31/12/2005</p>
 </div>
 <div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>145
 146
@@ -2653,190 +2665,190 @@ And define the name of the netcdf4 file in <strong>initLoad</strong></p>
 </div>
 <div class="section" id="rst-initialcondition">
 <span id="id5"></span><h3><a class="toc-backref" href="#id45">Initial conditions</a><a class="headerlink" href="#rst-initialcondition" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-center">
 <colgroup>
-<col width="8%" />
-<col width="20%" />
-<col width="40%" />
-<col width="20%" />
-<col width="12%" />
+<col style="width: 8%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+<col style="width: 20%" />
+<col style="width: 12%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">No.</th>
-<th class="head">Variable</th>
-<th class="head">Description</th>
-<th class="head">Default value</th>
-<th class="head">Number of maps</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>No.</p></th>
+<th class="head"><p>Variable</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default value</p></th>
+<th class="head"><p>Number of maps</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>1</td>
-<td>SnowCover</td>
-<td>Snow cover for up to 7 zones</td>
-<td>0</td>
-<td>7</td>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>SnowCover</p></td>
+<td><p>Snow cover for up to 7 zones</p></td>
+<td><p>0</p></td>
+<td><p>7</p></td>
 </tr>
-<tr class="row-odd"><td>2</td>
-<td>FrostIndex</td>
-<td>Degree days frost threshold</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>FrostIndex</p></td>
+<td><p>Degree days frost threshold</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>3</td>
-<td>Forest state</td>
-<td>Interception storage</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Forest state</p></td>
+<td><p>Interception storage</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>&#160;</td>
-<td>Top water layer</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Top water layer</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>&#160;</td>
-<td>&#160;</td>
-<td>Soil storage for 3 soil layers</td>
-<td>0</td>
-<td>3</td>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>Soil storage for 3 soil layers</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
 </tr>
-<tr class="row-odd"><td>4</td>
-<td>Grassland state</td>
-<td>Interception storage</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Grassland state</p></td>
+<td><p>Interception storage</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>&#160;</td>
-<td>&#160;</td>
-<td>Top water layer</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>Top water layer</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>&#160;</td>
-<td>Soil storage for 3 soil layers</td>
-<td>0</td>
-<td>3</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Soil storage for 3 soil layers</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
 </tr>
-<tr class="row-even"><td>5</td>
-<td>Paddy irrigation state</td>
-<td>Interception storage</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Paddy irrigation state</p></td>
+<td><p>Interception storage</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>&#160;</td>
-<td>Top water layer</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Top water layer</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>&#160;</td>
-<td>&#160;</td>
-<td>Soil storage for 3 soil layers</td>
-<td>0</td>
-<td>3</td>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>Soil storage for 3 soil layers</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
 </tr>
-<tr class="row-odd"><td>6</td>
-<td>Irrigation state</td>
-<td>Interception storage</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Irrigation state</p></td>
+<td><p>Interception storage</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>&#160;</td>
-<td>&#160;</td>
-<td>Top water layer</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>Top water layer</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>&#160;</td>
-<td>Soil storage for 3 soil layers</td>
-<td>0</td>
-<td>3</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Soil storage for 3 soil layers</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
 </tr>
-<tr class="row-even"><td>7</td>
-<td>Sealed area state</td>
-<td>Interception storage</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Sealed area state</p></td>
+<td><p>Interception storage</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>8</td>
-<td>Groundwater</td>
-<td>Groundwater storage</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Groundwater</p></td>
+<td><p>Groundwater storage</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>9</td>
-<td>Runoff concentration</td>
-<td>10 layers of runoff concentration</td>
-<td>0</td>
-<td>10</td>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Runoff concentration</p></td>
+<td><p>10 layers of runoff concentration</p></td>
+<td><p>0</p></td>
+<td><p>10</p></td>
 </tr>
-<tr class="row-odd"><td>10</td>
-<td>Routing</td>
-<td>Channel storage</td>
-<td>0.2 * total cross section</td>
-<td>1</td>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>Routing</p></td>
+<td><p>Channel storage</p></td>
+<td><p>0.2 * total cross section</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>&#160;</td>
-<td>Routing</td>
-<td>Riverbed exchange</td>
-<td>0</td>
-<td>1</td>
+<tr class="row-even"><td></td>
+<td><p>Routing</p></td>
+<td><p>Riverbed exchange</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>Routing</td>
-<td>Discharge</td>
-<td>depending on ini channel stor.</td>
-<td>1</td>
+<tr class="row-odd"><td></td>
+<td><p>Routing</p></td>
+<td><p>Discharge</p></td>
+<td><p>depending on ini channel stor.</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>11</td>
-<td>Lakes and Reservoirs</td>
-<td>Lake inflow</td>
-<td>from HydroLakes database</td>
-<td>1</td>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>Lakes and Reservoirs</p></td>
+<td><p>Lake inflow</p></td>
+<td><p>from HydroLakes database</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>&#160;</td>
-<td>Lake outflow</td>
-<td>same as lake inflow</td>
-<td>1</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Lake outflow</p></td>
+<td><p>same as lake inflow</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>&#160;</td>
-<td>&#160;</td>
-<td>Lake&amp;Res outflow to other lakes&amp;res</td>
-<td>same as lake inflow</td>
-<td>1</td>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>Lake&amp;Res outflow to other lakes&amp;res</p></td>
+<td><p>same as lake inflow</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>&#160;</td>
-<td>Lake storage</td>
-<td>based on inflow and lake area</td>
-<td>1</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Lake storage</p></td>
+<td><p>based on inflow and lake area</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>&#160;</td>
-<td>&#160;</td>
-<td>Reservoir storage</td>
-<td>0.5 * max. reservoir storage</td>
-<td>1</td>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>Reservoir storage</p></td>
+<td><p>0.5 * max. reservoir storage</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>&#160;</td>
-<td>Small lake storage</td>
-<td>based on inflow and lake area</td>
-<td>1</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Small lake storage</p></td>
+<td><p>based on inflow and lake area</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>&#160;</td>
-<td>&#160;</td>
-<td>Small lake inflow</td>
-<td>from HydroLakes database</td>
-<td>1</td>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>Small lake inflow</p></td>
+<td><p>from HydroLakes database</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>&#160;</td>
-<td>Small lake outflow</td>
-<td>same as small lake inflow</td>
-<td>1</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Small lake outflow</p></td>
+<td><p>same as small lake inflow</p></td>
+<td><p>1</p></td>
 </tr>
 </tbody>
 </table>
@@ -2846,9 +2858,9 @@ And define the name of the netcdf4 file in <strong>initLoad</strong></p>
 <span id="rst-outputtwo"></span><h2><a class="toc-backref" href="#id46">Model Output</a><a class="headerlink" href="#model-output" title="Permalink to this headline">¶</a></h2>
 <p>An advantage of <strong>CWATM</strong> is the full flexibility of the output variables.</p>
 <ul class="simple">
-<li>All parameters and variables can be used for output as maps or time series.</li>
-<li>Even if the model is run at daily timestep, output can be daily, monthly, annual, at the end of a run</li>
-<li>all variables maps are stored as netcdf and the meta data information can be added</li>
+<li><p>All parameters and variables can be used for output as maps or time series.</p></li>
+<li><p>Even if the model is run at daily timestep, output can be daily, monthly, annual, at the end of a run</p></li>
+<li><p>all variables maps are stored as netcdf and the meta data information can be added</p></li>
 </ul>
 <div class="section" id="time-depending-and-non-depending-output-maps">
 <h3><a class="toc-backref" href="#id47">Time depending and non depending output maps</a><a class="headerlink" href="#time-depending-and-non-depending-output-maps" title="Permalink to this headline">¶</a></h3>
@@ -2859,12 +2871,12 @@ And define the name of the netcdf4 file in <strong>initLoad</strong></p>
 <p>The netCDF maps can be read with:</p>
 <p><strong>Windows</strong></p>
 <ul class="simple">
-<li><a class="reference external" href="http://www.giss.nasa.gov/tools/panoply">Panoply</a></li>
+<li><p><a class="reference external" href="http://www.giss.nasa.gov/tools/panoply">Panoply</a></p></li>
 </ul>
 <p><strong>Linux</strong></p>
 <ul class="simple">
-<li><a class="reference external" href="http://meteora.ucsd.edu/~pierce/ncview_home_page.html">ncview</a></li>
-<li><a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/workshops/2012/third_party/CDO.html">cdo</a></li>
+<li><p><a class="reference external" href="http://meteora.ucsd.edu/~pierce/ncview_home_page.html">ncview</a></p></li>
+<li><p><a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/workshops/2012/third_party/CDO.html">cdo</a></p></li>
 </ul>
 </div>
 <div class="section" id="or-time-series-at-specified-points">
@@ -2894,19 +2906,19 @@ And define the name of the netcdf4 file in <strong>initLoad</strong></p>
 Variable are e.g. Precipitation, runoff, baseflow</p>
 <p>but also not so common variables as:</p>
 <ul class="simple">
-<li>reservoirStorage (amount of water in the reservoirs in [m3])</li>
-<li>nonIrrReturnFlowFraction (returnflow from domenstic and industrial water use [m3])</li>
-<li>actualET[1] (actual evapotranspiration from grassland [m/day])</li>
-<li>…</li>
+<li><p>reservoirStorage (amount of water in the reservoirs in [m3])</p></li>
+<li><p>nonIrrReturnFlowFraction (returnflow from domenstic and industrial water use [m3])</p></li>
+<li><p>actualET[1] (actual evapotranspiration from grassland [m/day])</p></li>
+<li><p>…</p></li>
 </ul>
 </div>
 <div class="section" id="daily-monthly-at-the-end-or-average">
 <h3><a class="toc-backref" href="#id50">Daily, monthly - at the end or average</a><a class="headerlink" href="#daily-monthly-at-the-end-or-average" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>per day</li>
-<li>total month, average month, end of month</li>
-<li>total year, average year, end of year</li>
-<li>total average, total at the end</li>
+<li><p>per day</p></li>
+<li><p>total month, average month, end of month</p></li>
+<li><p>total year, average year, end of year</p></li>
+<li><p>total average, total at the end</p></li>
 </ul>
 <p>for example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[OUTPUT]
@@ -2922,12 +2934,12 @@ OUT_TSS_AnnualAvg = Precipitation
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For each variable the meta data information can be defined in <a class="reference internal" href="#rst-metadata"><span class="std std-ref">Output Meta NetCDF information</span></a></p>
+<p class="admonition-title">Note</p>
+<p>For each variable the meta data information can be defined in <a class="reference internal" href="#rst-metadata"><span class="std std-ref">Output Meta NetCDF information</span></a></p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For information how to adjust the output in the settings file see <a class="reference internal" href="#rst-outputone"><span class="std std-ref">Output</span></a></p>
+<p class="admonition-title">Note</p>
+<p>For information how to adjust the output in the settings file see <a class="reference internal" href="#rst-outputone"><span class="std std-ref">Output</span></a></p>
 </div>
 </div>
 <div class="section" id="most-important-output-variables-a-selection">
@@ -3046,9 +3058,10 @@ OUT_TSS_AnnualAvg = Precipitation
 <li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">10. Calibration tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">12. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">13. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="forum.html">14. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zambezi.html">12. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">13. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">14. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forum.html">15. Forum</a></li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -3081,7 +3094,7 @@ OUT_TSS_AnnualAvg = Precipitation
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     </div>
   </body>
 </html>
