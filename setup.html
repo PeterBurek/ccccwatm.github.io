@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="5. Tutorial" href="tutorial.html" />
-    <link rel="prev" title="3. Publication" href="publication.html" />
+    <link rel="prev" title="3. Publication" href="publication.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -33,15 +33,15 @@
         <li class="right" >
           <a href="publication.html" title="3. Publication"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
       </ul>
-    </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body" role="main">
-
+            
   <div class="section" id="setup-of-the-model">
 <h1><a class="toc-backref" href="#id6">4. Setup of the model</a><a class="headerlink" href="#setup-of-the-model" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
@@ -1778,7 +1778,7 @@ calc_environflow = False
 use_environflow = False
 
 #-----------------------------------------------
-# Soil
+# Soil 
 # use preferential flow, that bypasses the soil matrix and drains directly to the groundwater (not for irrPaddy)
 preferentialFlow = False
 # Capillar rise
@@ -1843,7 +1843,7 @@ metaNetcdfFile = $(FILE_PATHS:PathRoot)/source/metaNetcdf.xml
 
 # Area mask
 # A pcraster map, tif or netcdf map e.g.  $(FILE_PATHS:PathRoot)/data/areamaps/area_indus.map
-# or a retancle: Number of Cols, Number of rows, cellsize, upper left corner X, upper left corner Y
+# or a retancle: Number of Cols, Number of rows, cellsize, upper left corner X, upper left corner Y 
 MaskMap = $(FILE_PATHS:PathRoot)/source/rhine30min.tif
 #MaskMap = 14 12 0.5 5.0 52.0
 
@@ -1864,7 +1864,7 @@ GaugesLocal = True
 #-------------------------------------------------------
 
 # StepStart has to be a date e.g. 01/06/1990
-# SpinUp or StepEnd either date or numbers
+# SpinUp or StepEnd either date or numbers 
 # SpinUp: from this date output is generated (up to this day: warm up)
 
 StepStart = 1/1/1990
@@ -1898,9 +1898,9 @@ StepInit = 31/12/1989 31/12/2010
 # could be any parameter, but for an easier overview, tehey are collected here
 # in the calibration template a placeholder (e.g. %arnoBeta) instead of value
 
-# Snow
+# Snow  
 SnowMeltCoef = 0.0027
-# Cropf factor correction
+# Cropf factor correction  
 crop_correct =  1.11
 #Soil
 soildepth_factor = 1.28
@@ -1949,10 +1949,10 @@ TavgMaps = $(FILE_PATHS:PathMeteo)/30min/tavg_rhine*
 # ----------------------------------------
 # This is used if calc_evaporation = False
 
-# daily reference evaporation (free water)
+# daily reference evaporation (free water) 
 E0Maps = $(FILE_PATHS:PathMeteo)/30min/EWRef_rhine.nc
 #E0Maps = $(FILE_PATHS:PathMeteo)/EWRef_daily*
-# daily reference evapotranspiration (crop)
+# daily reference evapotranspiration (crop) 
 ETMaps = $(FILE_PATHS:PathMeteo)/30min/ETRef_rhine.nc
 #ETMaps = $(FILE_PATHS:PathMeteo)/ETRef_daily*
 
@@ -1977,7 +1977,7 @@ evaporation_coversion = 1.00
 # This is used if calc_evaporation = True
 # use albedo maps
 albedo = True
-albedoMaps = $(FILE_PATHS:PathMaps)/landsurface/albedo/albedo.nc
+albedoMaps = $(FILE_PATHS:PathMaps)/landsurface/albedo/albedo.nc 
 
 # if not albedo maps use fixed albedo
 # Albedo of bare soil surface (Supit et. al.)
@@ -2018,7 +2018,7 @@ NumberSnowLayers = 7
 GlacierTransportZone = 3
 
 # Temperature lapse rate with altitude [deg C / m]
-TemperatureLapseRate = 0.0065
+TemperatureLapseRate = 0.0065 
 # Multiplier applied to precipitation that falls as snow
 SnowFactor = 1.0
 # Range [m C-1 d-1] of the seasonal variation, SnowMeltCoef is the average value
@@ -2027,8 +2027,8 @@ SnowSeasonAdj = 0.001
 TempMelt =1.0
 # Average temperature below which precipitation is snow
 TempSnow = 1.0
-# Snow melt coefficient: default: 4.0
-# SRM: 0.0045 m/C/day ( = 4.50 mm/C/day), Kwadijk: 18 mm/C/month (= 0.59 mm/C/day)
+# Snow melt coefficient: default: 4.0 
+# SRM: 0.0045 m/C/day ( = 4.50 mm/C/day), Kwadijk: 18 mm/C/month (= 0.59 mm/C/day)  
 # See also Martinec et al., 1998.
 
 # use in CALIBRATION -&gt; copied to CALIBRATION
@@ -2064,7 +2064,7 @@ PathTopo = $(FILE_PATHS:PathMaps)/landsurface/topo
 PathSoil = $(FILE_PATHS:PathMaps)/landsurface/soil
 PathSoil1 =  $(FILE_PATHS:PathMaps)/others
 
-# Topography - tangent slope, slope length
+# Topography - tangent slope, slope length  
 tanslope = $(PathTopo)/tanslope.map
 slopeLength = $(PathTopo)/slopeLength.map
 
@@ -2085,11 +2085,11 @@ alpha3 = $(PathSoil1)/alpha3.map
 lambda1 = $(PathSoil1)/lambda1.map
 lambda2 = $(PathSoil1)/lambda2.map
 lambda3 = $(PathSoil1)/lambda3.map
-# thetas  is the volumetric water content θ saturated
+# thetas  is the volumetric water content θ saturated 
 thetas1 = $(PathSoil1)/thetas1.map
 thetas2 = $(PathSoil1)/thetas2.map
 thetas3 = $(PathSoil1)/thetas3.map
-# thetar is the volumetric water content θ residual
+# thetar is the volumetric water content θ residual 
 thetar1 = $(PathSoil1)/thetar1.map
 thetar2 = $(PathSoil1)/thetar2.map
 thetar3 = $(PathSoil1)/thetar3.map
@@ -2128,8 +2128,8 @@ fixLandcoverYear = 1961
 PathForest = $(FILE_PATHS:PathMaps)/landcover/forest
 PathSoil1 =  $(FILE_PATHS:PathMaps)/others
 
-# Parameters for the Arno&#39;s scheme
-# arnoBeta is defined by orographic,+ land cover add + calibration add, the soil water capacity distribution is based on this
+# Parameters for the Arno&#39;s scheme 
+# arnoBeta is defined by orographic,+ land cover add + calibration add, the soil water capacity distribution is based on this 
 # range [0.01 - 1.2]
 forest_arnoBeta = 0.2
 
@@ -2165,13 +2165,13 @@ forest_minSoilDepthFrac = $(PathForest)/minSoilDepthFrac.map
 forest_cropCoefficientNC = $(PathForest)/CropCoefficientForest_10days.nc
 forest_interceptCapNC    = $(PathForest)/interceptCapForest10days.nc
 
-# initial conditions: forest_interceptStor, forest_w1, forest_w2, forest_w3,
+# initial conditions: forest_interceptStor, forest_w1, forest_w2, forest_w3, 
 
 
 [__grassland]
 PathGrassland = $(FILE_PATHS:PathMaps)/landcover/grassland
 
-# Parameters for the Arno&#39;s scheme:
+# Parameters for the Arno&#39;s scheme: 
 grassland_arnoBeta = 0.0
 # arnoBeta is defined by orographic,+ land cover add + calibration add, the soil water capacity distribution is based on this
 # range [0.01 - 1.2]
@@ -2302,9 +2302,9 @@ irrigation_returnfraction = 0.5
 # -----------------------------------------------------------
 # Estimate of fractions of groundwater and surface water abstractions
 # Either a fixed fraction for surface water abstration
-# based on fraction of average baseflow and upstream average discharge
-# if swAbstractionFrac &lt; 0: fraction is taken from baseflow / discharge
-# if swAbstractionFrac &gt; 0 this value is taken as a fixed value
+# based on fraction of average baseflow and upstream average discharge 
+# if swAbstractionFrac &lt; 0: fraction is taken from baseflow / discharge 
+# if swAbstractionFrac &gt; 0 this value is taken as a fixed value 
 swAbstractionFrac = 0.9
 averageDischarge = $(FILE_PATHS:PathOut)/discharge_totalavg_rhine30min.nc
 # in [m3/s]
@@ -2320,12 +2320,12 @@ baseflowInM = True
 [RUNOFF_CONCENTRATION]
 
 # using triagular weigthning method
-# the bigger the factor, more lag time
+# the bigger the factor, more lag time 
 forest_runoff_peaktime = 1.0
 grassland_runoff_peaktime = 0.5
 irrPaddy_runoff_peaktime = 0.5
 irrNonPaddy_runoff_peaktime = 0.5
-sealed_runoff_peaktime = 0.15
+sealed_runoff_peaktime = 0.15 
 water_runoff_peaktime = 0.01
 
 interflow_runoff_peaktime =1.0
@@ -2363,7 +2363,7 @@ chanWidth = $(PathRouting)/kinematic/chanbw.nc
 #Bankfull channel depth [meters]
 chanDepth = $(PathRouting)/kinematic/chanbnkf.nc
 
-# initial conditions: channelStorageIni, riverbedExchangeIni, dischargeIni
+# initial conditions: channelStorageIni, riverbedExchangeIni, dischargeIni  
 
 #-------------------------------------------------------
 # LAKES AND RESERVOIRS
@@ -2390,7 +2390,7 @@ waterBodyTyp = $(PathLakesRes)/lakesResType.nc
 # Avergae discharge from HydroLakes Database
 waterBodyDis = $(PathLakesRes)/lakesResDis.nc
 
-# Lakes surface area from HydroLakes Database
+# Lakes surface area from HydroLakes Database 
 waterBodyArea = $(PathLakesRes)/lakesResArea.nc
 # a factor to scale the outlet of a lake
 #lakeAFactor = 1.0  -&gt; calibration
@@ -2411,13 +2411,13 @@ smallwaterBodyDis = $(PathLakesRes)/smalllakesresDis.nc
 #minStorage  = $(FILE_PATHS:PathOut)/minsmalllakeStorage_cali.nc
 
 
-# initial conditions: lakeInflowIni, lakeStorageIni, outLakeIni, lakeOutflowIni, reservoirStorageIni
+# initial conditions: lakeInflowIni, lakeStorageIni, outLakeIni, lakeOutflowIni, reservoirStorageIni 
 
 #------------------
 # Reservoirs
 # reservoir volume from HydroLakes database
 waterBodyVolRes = $(PathLakesRes)/lakesResVolRes.nc
-# reservoir starting year from HydroLakes database
+# reservoir starting year from HydroLakes database 
 waterBodyYear = $(PathLakesRes)/lakesResYear.nc
 
 #  Conservative, normal and flood storage limit (fraction of total storage, [-])
@@ -2433,7 +2433,7 @@ MinOutflowQ = 0.2
 NormalOutflowQ = 1.0
 NonDamagingOutflowQ = 4.0
 
-# initial conditions: lakeInflowIni, lakeStorageIni, outLakeIni, lakeOutflowIni, reservoirStorageIni
+# initial conditions: lakeInflowIni, lakeStorageIni, outLakeIni, lakeOutflowIni, reservoirStorageIni 
 
 
 #-------------------------------------------------------
@@ -3089,7 +3089,7 @@ OUT_TSS_AnnualAvg = Precipitation
         <li class="right" >
           <a href="publication.html" title="3. Publication"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

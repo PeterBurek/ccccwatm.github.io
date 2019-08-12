@@ -1,11 +1,9 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>7. The Model Itself &#8212; Community Water Model</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,12 +47,14 @@
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#the-model-itself" id="id1">The Model Itself</a><ul>
-<li><a class="reference internal" href="#performance" id="id2">Performance</a></li>
-<li><a class="reference internal" href="#updates" id="id3">Updates</a></li>
-<li><a class="reference internal" href="#todo" id="id4">TODO</a><ul>
-<li><a class="reference internal" href="#structural-improvements" id="id5">Structural improvements</a></li>
-<li><a class="reference internal" href="#model-improvements" id="id6">Model improvements</a></li>
+<li><p><a class="reference internal" href="#the-model-itself" id="id1">The Model Itself</a></p>
+<ul>
+<li><p><a class="reference internal" href="#performance" id="id2">Performance</a></p></li>
+<li><p><a class="reference internal" href="#updates" id="id3">Updates</a></p></li>
+<li><p><a class="reference internal" href="#todo" id="id4">TODO</a></p>
+<ul>
+<li><p><a class="reference internal" href="#structural-improvements" id="id5">Structural improvements</a></p></li>
+<li><p><a class="reference internal" href="#model-improvements" id="id6">Model improvements</a></p></li>
 </ul>
 </li>
 </ul>
@@ -66,107 +66,107 @@
 <p>Computational run time (on a linux single node - 2400 MHz with Intel Xeon CPU E5- 2699A v4):</p>
 <p>Daily timestep on 0.5 deg</p>
 <p><strong>Global:</strong> 100 years in appr. 12h = 7.2min per year</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-center">
 <colgroup>
-<col width="14%" />
-<col width="57%" />
-<col width="29%" />
+<col style="width: 14%" />
+<col style="width: 57%" />
+<col style="width: 29%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">&#160;</th>
-<th class="head">Process</th>
-<th class="head">sum % runtime</th>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Process</p></th>
+<th class="head"><p>sum % runtime</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>1</td>
-<td>Read Meteo Data</td>
-<td>6.2</td>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Read Meteo Data</p></td>
+<td><p>6.2</p></td>
 </tr>
-<tr class="row-odd"><td>2</td>
-<td>Et pot</td>
-<td>7.6</td>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Et pot</p></td>
+<td><p>7.6</p></td>
 </tr>
-<tr class="row-even"><td>3</td>
-<td>Snow</td>
-<td>8.8</td>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Snow</p></td>
+<td><p>8.8</p></td>
 </tr>
-<tr class="row-odd"><td>4</td>
-<td>Soil</td>
-<td>59.4</td>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Soil</p></td>
+<td><p>59.4</p></td>
 </tr>
-<tr class="row-even"><td>5</td>
-<td>Groundwater</td>
-<td>59.5</td>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Groundwater</p></td>
+<td><p>59.5</p></td>
 </tr>
-<tr class="row-odd"><td>6</td>
-<td>Runoff conc</td>
-<td>70.1</td>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Runoff conc</p></td>
+<td><p>70.1</p></td>
 </tr>
-<tr class="row-even"><td>7</td>
-<td>Lakes</td>
-<td>70.4</td>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Lakes</p></td>
+<td><p>70.4</p></td>
 </tr>
-<tr class="row-odd"><td>8</td>
-<td>Routing</td>
-<td>95.5</td>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Routing</p></td>
+<td><p>95.5</p></td>
 </tr>
-<tr class="row-even"><td>9</td>
-<td>Output</td>
-<td>100</td>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Output</p></td>
+<td><p>100</p></td>
 </tr>
 </tbody>
 </table>
 <p>For the global setting, soil processes with 50% computing time is the most time consuming part, followed by routing with 25% and runoff concentration with 10%.</p>
 <p><strong>Rhine:</strong>  640 years in appr. 4.5h = 0.4min per year</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-center">
 <colgroup>
-<col width="14%" />
-<col width="57%" />
-<col width="29%" />
+<col style="width: 14%" />
+<col style="width: 57%" />
+<col style="width: 29%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">&#160;</th>
-<th class="head">Process</th>
-<th class="head">sum % runtime</th>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Process</p></th>
+<th class="head"><p>sum % runtime</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>1</td>
-<td>Read Meteo Data</td>
-<td>79.4</td>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Read Meteo Data</p></td>
+<td><p>79.4</p></td>
 </tr>
-<tr class="row-odd"><td>2</td>
-<td>Et pot</td>
-<td>80.5</td>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Et pot</p></td>
+<td><p>80.5</p></td>
 </tr>
-<tr class="row-even"><td>3</td>
-<td>Snow</td>
-<td>80.9</td>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Snow</p></td>
+<td><p>80.9</p></td>
 </tr>
-<tr class="row-odd"><td>4</td>
-<td>Soil</td>
-<td>88.8</td>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Soil</p></td>
+<td><p>88.8</p></td>
 </tr>
-<tr class="row-even"><td>5</td>
-<td>Groundwater</td>
-<td>88.9</td>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Groundwater</p></td>
+<td><p>88.9</p></td>
 </tr>
-<tr class="row-odd"><td>6</td>
-<td>Runoff conc</td>
-<td>89.6</td>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Runoff conc</p></td>
+<td><p>89.6</p></td>
 </tr>
-<tr class="row-even"><td>7</td>
-<td>Lakes</td>
-<td>89.8</td>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Lakes</p></td>
+<td><p>89.8</p></td>
 </tr>
-<tr class="row-odd"><td>8</td>
-<td>Routing</td>
-<td>99.6</td>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Routing</p></td>
+<td><p>99.6</p></td>
 </tr>
-<tr class="row-even"><td>9</td>
-<td>Output</td>
-<td>100</td>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Output</p></td>
+<td><p>100</p></td>
 </tr>
 </tbody>
 </table>
@@ -175,8 +175,8 @@
 <div class="section" id="updates">
 <h2><a class="toc-backref" href="#id3">Updates</a><a class="headerlink" href="#updates" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<div class="last line-block">
+<p class="admonition-title">Note</p>
+<div class="line-block">
 <div class="line">Update history taken from github log</div>
 <div class="line">git log –pretty=format:”%ad - %an : %s” –date=short –graph &gt; github.log</div>
 </div>
@@ -300,163 +300,163 @@
 <div class="section" id="structural-improvements">
 <h3><a class="toc-backref" href="#id5">Structural improvements</a><a class="headerlink" href="#structural-improvements" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This has to be done. Importance: 1 to be changed first .. 3 to be changed later</p>
+<p class="admonition-title">Note</p>
+<p>This has to be done. Importance: 1 to be changed first .. 3 to be changed later</p>
 </div>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-center">
 <colgroup>
-<col width="18%" />
-<col width="24%" />
-<col width="29%" />
-<col width="18%" />
-<col width="12%" />
+<col style="width: 18%" />
+<col style="width: 24%" />
+<col style="width: 29%" />
+<col style="width: 18%" />
+<col style="width: 12%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Topic</th>
-<th class="head">TODO</th>
-<th class="head">Description</th>
-<th class="head">Importance</th>
-<th class="head">DONE</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>TODO</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Importance</p></th>
+<th class="head"><p>DONE</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Documentation</td>
-<td>Documentation</td>
-<td>start writing a user manual</td>
-<td>1</td>
-<td>.</td>
+<tbody>
+<tr class="row-even"><td><p>Documentation</p></td>
+<td><p>Documentation</p></td>
+<td><p>start writing a user manual</p></td>
+<td><p>1</p></td>
+<td><p>.</p></td>
 </tr>
-<tr class="row-odd"><td>Documentation</td>
-<td>Source code documentation</td>
-<td>Improve comment-lines in the code and include them in the autodocu sphinx</td>
-<td>1</td>
-<td>.</td>
+<tr class="row-odd"><td><p>Documentation</p></td>
+<td><p>Source code documentation</p></td>
+<td><p>Improve comment-lines in the code and include them in the autodocu sphinx</p></td>
+<td><p>1</p></td>
+<td><p>.</p></td>
 </tr>
-<tr class="row-even"><td>Documentation</td>
-<td>Include log file/change log</td>
-<td>document the changes in the code/settings</td>
-<td>2</td>
-<td>.</td>
+<tr class="row-even"><td><p>Documentation</p></td>
+<td><p>Include log file/change log</p></td>
+<td><p>document the changes in the code/settings</p></td>
+<td><p>2</p></td>
+<td><p>.</p></td>
 </tr>
-<tr class="row-odd"><td>Output</td>
-<td>GAMS output</td>
-<td>output/input in GAMS (gdx -files)</td>
-<td>2</td>
-<td>.</td>
+<tr class="row-odd"><td><p>Output</p></td>
+<td><p>GAMS output</p></td>
+<td><p>output/input in GAMS (gdx -files)</p></td>
+<td><p>2</p></td>
+<td><p>.</p></td>
 </tr>
-<tr class="row-even"><td>Output</td>
-<td>Extent output possibilities</td>
-<td>Output as e.g. yearly areatotal, catchment total as maps, as time series</td>
-<td>1</td>
-<td>.</td>
+<tr class="row-even"><td><p>Output</p></td>
+<td><p>Extent output possibilities</p></td>
+<td><p>Output as e.g. yearly areatotal, catchment total as maps, as time series</p></td>
+<td><p>1</p></td>
+<td><p>.</p></td>
 </tr>
-<tr class="row-odd"><td>Handling</td>
-<td>Improve error handling</td>
-<td>more messages for users if something goes wrong</td>
-<td>1</td>
-<td>.</td>
+<tr class="row-odd"><td><p>Handling</p></td>
+<td><p>Improve error handling</p></td>
+<td><p>more messages for users if something goes wrong</p></td>
+<td><p>1</p></td>
+<td><p>.</p></td>
 </tr>
-<tr class="row-even"><td>Handling</td>
-<td>Checks maps</td>
-<td>include a pre-run, where input data are checked for plausibility</td>
-<td>2</td>
-<td>.</td>
+<tr class="row-even"><td><p>Handling</p></td>
+<td><p>Checks maps</p></td>
+<td><p>include a pre-run, where input data are checked for plausibility</p></td>
+<td><p>2</p></td>
+<td><p>.</p></td>
 </tr>
-<tr class="row-odd"><td>Handling</td>
-<td>Load multiple netcd files</td>
-<td>read meteo input netcdf from split files</td>
-<td>2</td>
-<td>.</td>
+<tr class="row-odd"><td><p>Handling</p></td>
+<td><p>Load multiple netcd files</p></td>
+<td><p>read meteo input netcdf from split files</p></td>
+<td><p>2</p></td>
+<td><p>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="model-improvements">
 <h3><a class="toc-backref" href="#id6">Model improvements</a><a class="headerlink" href="#model-improvements" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-center">
 <colgroup>
-<col width="27%" />
-<col width="33%" />
-<col width="27%" />
-<col width="13%" />
+<col style="width: 27%" />
+<col style="width: 33%" />
+<col style="width: 27%" />
+<col style="width: 13%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">TODO</th>
-<th class="head">Description</th>
-<th class="head">Importance</th>
-<th class="head">DONE</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>TODO</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Importance</p></th>
+<th class="head"><p>DONE</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Frost</td>
-<td>include frost routine (no soil movement during strong frost)</td>
-<td>1</td>
-<td>X</td>
+<tbody>
+<tr class="row-even"><td><p>Frost</p></td>
+<td><p>include frost routine (no soil movement during strong frost)</p></td>
+<td><p>1</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-odd"><td>Snow</td>
-<td>include more than 3 vertical layers (make it flexible)</td>
-<td>2</td>
-<td>X</td>
+<tr class="row-odd"><td><p>Snow</p></td>
+<td><p>include more than 3 vertical layers (make it flexible)</p></td>
+<td><p>2</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-even"><td>Runoff concentration</td>
-<td>include a 1st routing to the edge of a grid cell</td>
-<td>1</td>
-<td>X</td>
+<tr class="row-even"><td><p>Runoff concentration</p></td>
+<td><p>include a 1st routing to the edge of a grid cell</p></td>
+<td><p>1</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-odd"><td>Include water &amp; sealed land cover</td>
-<td>include 2 more land cover types (water covered area, sealed area)</td>
-<td>1</td>
-<td>X</td>
+<tr class="row-odd"><td><p>Include water &amp; sealed land cover</p></td>
+<td><p>include 2 more land cover types (water covered area, sealed area)</p></td>
+<td><p>1</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-even"><td>Preferential flow</td>
-<td>include preferential flow to soil layers</td>
-<td>1</td>
-<td>X</td>
+<tr class="row-even"><td><p>Preferential flow</p></td>
+<td><p>include preferential flow to soil layers</p></td>
+<td><p>1</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-odd"><td>Calculate Evaporation on PM</td>
-<td>include Penman Monteith ET routine</td>
-<td>1</td>
-<td>X</td>
+<tr class="row-odd"><td><p>Calculate Evaporation on PM</p></td>
+<td><p>include Penman Monteith ET routine</p></td>
+<td><p>1</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-even"><td>Reduce reading of time series maps</td>
-<td>e.g. interception maps only 1 per month</td>
-<td>2</td>
-<td>X</td>
+<tr class="row-even"><td><p>Reduce reading of time series maps</p></td>
+<td><p>e.g. interception maps only 1 per month</p></td>
+<td><p>2</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-odd"><td>Kinematic wave</td>
-<td>Add C++ kinematic wave procedure</td>
-<td>2</td>
-<td>X</td>
+<tr class="row-odd"><td><p>Kinematic wave</p></td>
+<td><p>Add C++ kinematic wave procedure</p></td>
+<td><p>2</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-even"><td>soil depend on land cover</td>
-<td>include hydropedo transfer function landcover -&gt; soil</td>
-<td>2</td>
-<td>.</td>
+<tr class="row-even"><td><p>soil depend on land cover</p></td>
+<td><p>include hydropedo transfer function landcover -&gt; soil</p></td>
+<td><p>2</p></td>
+<td><p>.</p></td>
 </tr>
-<tr class="row-odd"><td>Improve lakes&amp; reservoirs</td>
-<td>Add another way of including lakes/reservoirs</td>
-<td>2</td>
-<td>X</td>
+<tr class="row-odd"><td><p>Improve lakes&amp; reservoirs</p></td>
+<td><p>Add another way of including lakes/reservoirs</p></td>
+<td><p>2</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-even"><td>Inflow points</td>
-<td>add points where water can be added/substracted</td>
-<td>1</td>
-<td>X</td>
+<tr class="row-even"><td><p>Inflow points</p></td>
+<td><p>add points where water can be added/substracted</p></td>
+<td><p>1</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-odd"><td>Include Environmental flow</td>
-<td>use environmental flow concept on the fly not only post-processing</td>
-<td>2</td>
-<td>X</td>
+<tr class="row-odd"><td><p>Include Environmental flow</p></td>
+<td><p>use environmental flow concept on the fly not only post-processing</p></td>
+<td><p>2</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-even"><td>Water allocation</td>
-<td>include water demand &lt;-&gt; water supply functionality</td>
-<td>2-3</td>
-<td>.</td>
+<tr class="row-even"><td><p>Water allocation</p></td>
+<td><p>include water demand &lt;-&gt; water supply functionality</p></td>
+<td><p>2-3</p></td>
+<td><p>.</p></td>
 </tr>
-<tr class="row-odd"><td>Include EPIC approach</td>
-<td>to be in line with ESM include the EPIC approach</td>
-<td>3</td>
-<td>.</td>
+<tr class="row-odd"><td><p>Include EPIC approach</p></td>
+<td><p>to be in line with ESM include the EPIC approach</p></td>
+<td><p>3</p></td>
+<td><p>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -491,9 +491,10 @@
 <li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">10. Calibration tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">12. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">13. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="forum.html">14. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zambezi.html">12. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">13. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">14. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forum.html">15. Forum</a></li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -526,7 +527,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     </div>
   </body>
 </html>
