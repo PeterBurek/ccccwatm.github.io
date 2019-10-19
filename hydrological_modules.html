@@ -849,6 +849,16 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <p>ROUTING</p>
 <p>routing using the kinematic wave</p>
 <dl class="method">
+<dt id="hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.catchment">
+<code class="descname">catchment</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.catchment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.catchment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the catchment from “global”  LDD and a point</p>
+<ul class="simple">
+<li><p>load and create a river network</p></li>
+<li><p>calculate catchment upstream of point</p></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
 <dt id="hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the routing module</p>
@@ -1007,6 +1017,23 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>repaired ldd</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="hydrological_modules.routing_reservoirs.routing_sub.lddshort">
+<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">lddshort</code><span class="sig-paren">(</span><em>lddnp</em>, <em>lddOrder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#lddshort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.lddshort" title="Permalink to this definition">¶</a></dt>
+<dd><p>return short for calculating a catchment from a river network</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lddnp</strong> – rivernetwork as 1D array</p></li>
+<li><p><strong>lddOrder</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>short ldd</p>
 </dd>
 </dl>
 </dd></dl>
