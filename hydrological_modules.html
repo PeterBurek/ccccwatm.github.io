@@ -50,9 +50,9 @@
 <div class="section" id="miscinitial-module">
 <h3>miscInitial module<a class="headerlink" href="#miscinitial-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Initializing some variables</strong></p>
-<span class="target" id="module-hydrological_modules.miscInitial"></span><dl class="class">
-<dt id="hydrological_modules.miscInitial.miscInitial">
-<em class="property">class </em><code class="descclassname">hydrological_modules.miscInitial.</code><code class="descname">miscInitial</code><span class="sig-paren">(</span><em>misc_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/miscInitial.html#miscInitial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.miscInitial.miscInitial" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.miscInitial"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.miscInitial.miscInitial">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.miscInitial.</code><code class="descname">miscInitial</code><span class="sig-paren">(</span><em>misc_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/miscInitial.html#miscInitial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.miscInitial.miscInitial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Miscellaneous repeatedly used expressions
 Definition if cell area comes from regular grid e.g. 5x5km or from irregular lat/lon
@@ -62,8 +62,8 @@ Conversion factors between m3 and mm etc.</p>
 <p>Only used in the initial phase.</p>
 </div>
 <dl class="method">
-<dt id="hydrological_modules.miscInitial.miscInitial.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/miscInitial.html#miscInitial.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.miscInitial.miscInitial.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.miscInitial.miscInitial.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/miscInitial.html#miscInitial.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.miscInitial.miscInitial.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialization of some basic parameters e.g. cellArea</p>
 <ul class="simple">
 <li><p>grid area, length definition</p></li>
@@ -78,15 +78,15 @@ Conversion factors between m3 and mm etc.</p>
 <div class="section" id="initcondition-module">
 <h3>initcondition module<a class="headerlink" href="#initcondition-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Load initial storage parameter maps</strong></p>
-<span class="target" id="module-hydrological_modules.initcondition"></span><dl class="class">
-<dt id="hydrological_modules.initcondition.initcondition">
-<em class="property">class </em><code class="descclassname">hydrological_modules.initcondition.</code><code class="descname">initcondition</code><span class="sig-paren">(</span><em>initcondition_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/initcondition.html#initcondition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.initcondition.initcondition" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.initcondition"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.initcondition.initcondition">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.initcondition.</code><code class="descname">initcondition</code><span class="sig-paren">(</span><em>initcondition_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/initcondition.html#initcondition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.initcondition.initcondition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>READ/WRITE INITIAL CONDITIONS
 all initial condition can be stored at the end of a run to be used as a <strong>warm</strong> start for a following up run</p>
 <dl class="method">
-<dt id="hydrological_modules.initcondition.initcondition.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/initcondition.html#initcondition.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.initcondition.initcondition.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.initcondition.initcondition.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/initcondition.html#initcondition.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.initcondition.initcondition.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the initcondition module
 write initital conditions into a single netcdf file</p>
 <div class="admonition note">
@@ -96,8 +96,8 @@ write initital conditions into a single netcdf file</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.initcondition.initcondition.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/initcondition.html#initcondition.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.initcondition.initcondition.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.initcondition.initcondition.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/initcondition.html#initcondition.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.initcondition.initcondition.initial" title="Permalink to this definition">¶</a></dt>
 <dd><dl>
 <dt>initial part of the initcondition module</dt><dd><p>Puts all the variables which has to be stored in 2 lists:</p>
 <ul class="simple">
@@ -110,8 +110,8 @@ write initital conditions into a single netcdf file</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.initcondition.initcondition.load_initial">
-<code class="descname">load_initial</code><span class="sig-paren">(</span><em>name</em>, <em>default=0.0</em>, <em>number=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/initcondition.html#initcondition.load_initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.initcondition.initcondition.load_initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.initcondition.initcondition.load_initial">
+<code class="descname">load_initial</code><span class="sig-paren">(</span><em>name</em>, <em>default=0.0</em>, <em>number=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/initcondition.html#initcondition.load_initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.initcondition.initcondition.load_initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>First it is checked if the initial value is given in the settings file</p>
 <ul class="simple">
 <li><p>if it is &lt;&gt; None it is used directly</p></li>
@@ -137,16 +137,16 @@ write initital conditions into a single netcdf file</p>
 <div class="section" id="landcovertype-module">
 <h3>landcoverType module<a class="headerlink" href="#landcovertype-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Generate landcover types</strong></p>
-<span class="target" id="module-hydrological_modules.landcoverType"></span><dl class="class">
-<dt id="hydrological_modules.landcoverType.landcoverType">
-<em class="property">class </em><code class="descclassname">hydrological_modules.landcoverType.</code><code class="descname">landcoverType</code><span class="sig-paren">(</span><em>landcoverType_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.landcoverType"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.landcoverType.landcoverType">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.landcoverType.</code><code class="descname">landcoverType</code><span class="sig-paren">(</span><em>landcoverType_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/landcoverType.html#landcoverType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.landcoverType.landcoverType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>LAND COVER TYPE</p>
 <p>runs the 6 land cover types through soil procedures</p>
 <p>This routine calls the soil routine for each land cover type</p>
 <dl class="method">
-<dt id="hydrological_modules.landcoverType.landcoverType.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.landcoverType.landcoverType.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/landcoverType.html#landcoverType.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.landcoverType.landcoverType.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the land cover type module</p>
 <p>Calculating soil for each of the 6  land cover class</p>
 <ul class="simple">
@@ -159,8 +159,8 @@ write initital conditions into a single netcdf file</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation">
-<code class="descname">dynamic_fracIrrigation</code><span class="sig-paren">(</span><em>init=False</em>, <em>dynamic=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType.dynamic_fracIrrigation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation">
+<code class="descname">dynamic_fracIrrigation</code><span class="sig-paren">(</span><em>init=False</em>, <em>dynamic=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/landcoverType.html#landcoverType.dynamic_fracIrrigation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the land cover type module</p>
 <p>Calculating fraction of land cover</p>
 <ul class="simple">
@@ -184,17 +184,17 @@ write initital conditions into a single netcdf file</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.landcoverType.landcoverType.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/landcoverType.html#landcoverType.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.landcoverType.landcoverType.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.landcoverType.landcoverType.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/landcoverType.html#landcoverType.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.landcoverType.landcoverType.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the land cover type module
 Initialise the six land cover types</p>
 <ul class="simple">
-<li><p>Forest</p></li>
-<li><p>Grasland/non irrigated land</p></li>
-<li><p>Irrigation</p></li>
-<li><p>Paddy iirigation</p></li>
-<li><p>Sealed area</p></li>
-<li><p>Water covered area</p></li>
+<li><p>Forest No.0</p></li>
+<li><p>Grasland/non irrigated land No.1</p></li>
+<li><p>Paddy irrigation No.2</p></li>
+<li><p>non-Paddy irrigation No.3</p></li>
+<li><p>Sealed area No.4</p></li>
+<li><p>Water covered area No.5</p></li>
 </ul>
 <p>And initialize the soil variables</p>
 </dd></dl>
@@ -208,15 +208,15 @@ Initialise the six land cover types</p>
 <div class="section" id="readmeteo-module">
 <h3>readmeteo module<a class="headerlink" href="#readmeteo-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Read meteorological input data</strong></p>
-<span class="target" id="module-hydrological_modules.readmeteo"></span><dl class="class">
-<dt id="hydrological_modules.readmeteo.readmeteo">
-<em class="property">class </em><code class="descclassname">hydrological_modules.readmeteo.</code><code class="descname">readmeteo</code><span class="sig-paren">(</span><em>readmeteo_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.readmeteo"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.readmeteo.readmeteo">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.readmeteo.</code><code class="descname">readmeteo</code><span class="sig-paren">(</span><em>readmeteo_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>READ METEOROLOGICAL DATA</p>
 <p>reads all meteorological data from netcdf4 files</p>
 <dl class="method">
-<dt id="hydrological_modules.readmeteo.readmeteo.downscaling1">
-<code class="descname">downscaling1</code><span class="sig-paren">(</span><em>input</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo.downscaling1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo.downscaling1" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.readmeteo.readmeteo.downscaling1">
+<code class="descname">downscaling1</code><span class="sig-paren">(</span><em>input</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo.downscaling1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo.downscaling1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Downscaling based on elevation correction for temperature and pressure</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -232,8 +232,8 @@ Initialise the six land cover types</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.readmeteo.readmeteo.downscaling2">
-<code class="descname">downscaling2</code><span class="sig-paren">(</span><em>input</em>, <em>downscaleName=''</em>, <em>wc2=0</em>, <em>wc4=0</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo.downscaling2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo.downscaling2" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.readmeteo.readmeteo.downscaling2">
+<code class="descname">downscaling2</code><span class="sig-paren">(</span><em>input</em>, <em>downscaleName=''</em>, <em>wc2=0</em>, <em>wc4=0</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo.downscaling2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo.downscaling2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Downscaling based on Delta method:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -268,8 +268,8 @@ Initialise the six land cover types</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.readmeteo.readmeteo.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.readmeteo.readmeteo.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the readmeteo module</p>
 <p>Read meteo input maps from netcdf files</p>
 <div class="admonition note">
@@ -284,8 +284,8 @@ Otherwise all the variable needed for Penman-Monteith</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.readmeteo.readmeteo.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/readmeteo.html#readmeteo.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.readmeteo.readmeteo.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.readmeteo.readmeteo.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of meteo</p>
 <p>read multiple file of input</p>
 </dd></dl>
@@ -296,22 +296,22 @@ Otherwise all the variable needed for Penman-Monteith</p>
 <div class="section" id="inflow-module">
 <h3>inflow module<a class="headerlink" href="#inflow-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Read river discharge time series as inflow data</strong></p>
-<span class="target" id="module-hydrological_modules.inflow"></span><dl class="class">
-<dt id="hydrological_modules.inflow.inflow">
-<em class="property">class </em><code class="descclassname">hydrological_modules.inflow.</code><code class="descname">inflow</code><span class="sig-paren">(</span><em>inflow_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/inflow.html#inflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.inflow.inflow" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.inflow"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.inflow.inflow">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.inflow.</code><code class="descname">inflow</code><span class="sig-paren">(</span><em>inflow_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/inflow.html#inflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.inflow.inflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>READ INFLOW HYDROGRAPHS (OPTIONAL)
 If option “inflow” is set to 1 the inflow hydrograph code is used otherwise dummy code is used</p>
 <dl class="method">
-<dt id="hydrological_modules.inflow.inflow.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/inflow.html#inflow.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.inflow.inflow.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.inflow.inflow.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/inflow.html#inflow.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.inflow.inflow.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the inflow module
 Use the inflow points to add inflow from time series file(s)</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.inflow.inflow.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/inflow.html#inflow.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.inflow.inflow.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.inflow.inflow.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/inflow.html#inflow.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.inflow.inflow.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the inflow module
 Get the inflow points</p>
 <p>calls function <code class="xref py py-meth docutils literal notranslate"><span class="pre">hydrological_modules.getlocOutpoints()</span></code>
@@ -324,17 +324,17 @@ calls function <code class="xref py py-meth docutils literal notranslate"><span 
 <div class="section" id="snow-frost-module">
 <h3>snow_frost module<a class="headerlink" href="#snow-frost-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate snow and frost</strong></p>
-<span class="target" id="module-hydrological_modules.snow_frost"></span><dl class="class">
-<dt id="hydrological_modules.snow_frost.snow">
-<em class="property">class </em><code class="descclassname">hydrological_modules.snow_frost.</code><code class="descname">snow</code><span class="sig-paren">(</span><em>snow_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/snow_frost.html#snow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.snow_frost.snow" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.snow_frost"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.snow_frost.snow">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.snow_frost.</code><code class="descname">snow</code><span class="sig-paren">(</span><em>snow_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/snow_frost.html#snow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.snow_frost.snow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>RAIN AND SNOW</p>
 <p>Domain: snow calculations evaluated for center points of up to 7 sub-pixel
 snow zones 1 -7 which each occupy a part of the pixel surface</p>
 <p>Variables <em>snow</em> and <em>rain</em> at end of this module are the pixel-average snowfall and rain</p>
 <dl class="method">
-<dt id="hydrological_modules.snow_frost.snow.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/snow_frost.html#snow.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.snow_frost.snow.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.snow_frost.snow.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/snow_frost.html#snow.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.snow_frost.snow.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the snow module</p>
 <p>Distinguish between rain/snow and calculates snow melt and glacier melt
 The equation is a modification of:</p>
@@ -350,8 +350,8 @@ The equation is a modification of:</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.snow_frost.snow.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/snow_frost.html#snow.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.snow_frost.snow.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.snow_frost.snow.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/snow_frost.html#snow.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.snow_frost.snow.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the snow and frost module</p>
 <ul class="simple">
 <li><p>loads all the parameters for the day-degree approach for rain, snow and snowmelt</p></li>
@@ -365,9 +365,9 @@ The equation is a modification of:</p>
 <div class="section" id="evaporationpot-module">
 <h3>evaporationPot module<a class="headerlink" href="#evaporationpot-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate potential Evaporation</strong></p>
-<span class="target" id="module-hydrological_modules.evaporationPot"></span><dl class="class">
-<dt id="hydrological_modules.evaporationPot.evaporationPot">
-<em class="property">class </em><code class="descclassname">hydrological_modules.evaporationPot.</code><code class="descname">evaporationPot</code><span class="sig-paren">(</span><em>evaporationPot_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporationPot.html#evaporationPot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporationPot.evaporationPot" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.evaporationPot"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.evaporationPot.</code><code class="descname">evaporationPot</code><span class="sig-paren">(</span><em>evaporationPot_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>POTENTIAL REFERENCE EVAPO(TRANSPI)RATION
 Calculate potential evapotranspiration from climate data mainly based on FAO 56 and LISVAP
@@ -377,32 +377,37 @@ Based on Penman Monteith</p>
 <a class="reference external" href="http://www.fao.org/docrep/X0490E/x0490e06.htm">http://www.fao.org/docrep/X0490E/x0490e06.htm</a>  <a class="reference external" href="http://www.fao.org/docrep/X0490E/x0490e06.htm">http://www.fao.org/docrep/X0490E/x0490e06.htm</a>
 <a class="reference external" href="https://ec.europa.eu/jrc/en/publication/eur-scientific-and-technical-research-reports/lisvap-evaporation-pre-processor-lisflood-water-balance-and-flood-simulation-model">https://ec.europa.eu/jrc/en/publication/eur-scientific-and-technical-research-reports/lisvap-evaporation-pre-processor-lisflood-water-balance-and-flood-simulation-model</a></p>
 <dl class="method">
-<dt id="hydrological_modules.evaporationPot.evaporationPot.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporationPot.html#evaporationPot.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporationPot.evaporationPot.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the potential evaporation module
-:returns: ETRef - potential reference evapotranspiration rate [m/day]</p>
-<blockquote>
-<div><p>EWRef - potential evaporation rate from water surface [m/day]</p>
-</div></blockquote>
+<dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of the potential evaporation module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>ETRef - potential reference evapotranspiration rate [m/day]</p></li>
+<li><p>EWRef - potential evaporation rate from water surface [m/day]</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.evaporationPot.evaporationPot.dynamic_1">
-<code class="descname">dynamic_1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporationPot.html#evaporationPot.dynamic_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporationPot.evaporationPot.dynamic_1" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_1">
+<code class="descname">dynamic_1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.dynamic_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the potential evaporation module
 Based on Penman Monteith - FAO 56</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.evaporationPot.evaporationPot.dynamic_2">
-<code class="descname">dynamic_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporationPot.html#evaporationPot.dynamic_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporationPot.evaporationPot.dynamic_2" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_2">
+<code class="descname">dynamic_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.dynamic_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the potential evaporation module
 Based on xxxxxxxxxxxxxxxxxxx</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.evaporationPot.evaporationPot.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporationPot.html#evaporationPot.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporationPot.evaporationPot.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of evaporation type module
 Load inictial parameters</p>
 <div class="admonition note">
@@ -412,16 +417,16 @@ Load inictial parameters</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.evaporationPot.evaporationPot.initial_1">
-<code class="descname">initial_1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporationPot.html#evaporationPot.initial_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporationPot.evaporationPot.initial_1" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot.initial_1">
+<code class="descname">initial_1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.initial_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.initial_1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of evaporation type module
 Load initial parameters
 1: Penman Monteith</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.evaporationPot.evaporationPot.initial_2">
-<code class="descname">initial_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporationPot.html#evaporationPot.initial_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporationPot.evaporationPot.initial_2" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot.initial_2">
+<code class="descname">initial_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.initial_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.initial_2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of evaporation type module
 Load initial parameters
 2: xxxx method</p>
@@ -433,15 +438,15 @@ Load initial parameters
 <div class="section" id="evaporation-module">
 <h3>evaporation module<a class="headerlink" href="#evaporation-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate actual evapotranspiration</strong></p>
-<span class="target" id="module-hydrological_modules.evaporation"></span><dl class="class">
-<dt id="hydrological_modules.evaporation.evaporation">
-<em class="property">class </em><code class="descclassname">hydrological_modules.evaporation.</code><code class="descname">evaporation</code><span class="sig-paren">(</span><em>evaporation_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporation.html#evaporation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporation.evaporation" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.evaporation"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.evaporation.evaporation">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.evaporation.</code><code class="descname">evaporation</code><span class="sig-paren">(</span><em>evaporation_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporation.html#evaporation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporation.evaporation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Evaporation module
 Calculate potential evaporation and pot. transpiration</p>
 <dl class="method">
-<dt id="hydrological_modules.evaporation.evaporation.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/evaporation.html#evaporation.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.evaporation.evaporation.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.evaporation.evaporation.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporation.html#evaporation.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporation.evaporation.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the soil module</p>
 <p>calculating potential Evaporation for each land cover class with kc factor
 get crop coefficient, use potential ET, calculate potential bare soil evaporation and transpiration</p>
@@ -464,14 +469,14 @@ get crop coefficient, use potential ET, calculate potential bare soil evaporatio
 <div class="section" id="interception-module">
 <h3>interception module<a class="headerlink" href="#interception-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate interception</strong></p>
-<span class="target" id="module-hydrological_modules.interception"></span><dl class="class">
-<dt id="hydrological_modules.interception.interception">
-<em class="property">class </em><code class="descclassname">hydrological_modules.interception.</code><code class="descname">interception</code><span class="sig-paren">(</span><em>interception_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/interception.html#interception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.interception.interception" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.interception"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.interception.interception">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.interception.</code><code class="descname">interception</code><span class="sig-paren">(</span><em>interception_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/interception.html#interception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.interception.interception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>INTERCEPTION</p>
 <dl class="method">
-<dt id="hydrological_modules.interception.interception.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/interception.html#interception.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.interception.interception.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.interception.interception.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/interception.html#interception.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.interception.interception.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the interception module
 calculating interception for each land cover class</p>
 <dl class="field-list simple">
@@ -493,15 +498,15 @@ calculating interception for each land cover class</p>
 <div class="section" id="sealed-water-module">
 <h3>sealed_water module<a class="headerlink" href="#sealed-water-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate water runoff from impermeable surface</strong></p>
-<span class="target" id="module-hydrological_modules.sealed_water"></span><dl class="class">
-<dt id="hydrological_modules.sealed_water.sealed_water">
-<em class="property">class </em><code class="descclassname">hydrological_modules.sealed_water.</code><code class="descname">sealed_water</code><span class="sig-paren">(</span><em>sealed_water_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/sealed_water.html#sealed_water"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.sealed_water.sealed_water" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.sealed_water"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.sealed_water.sealed_water">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.sealed_water.</code><code class="descname">sealed_water</code><span class="sig-paren">(</span><em>sealed_water_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/sealed_water.html#sealed_water"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.sealed_water.sealed_water" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Sealed and open water runoff</p>
 <p>calculated runoff from impermeable surface (sealed) and into water bodies</p>
 <dl class="method">
-<dt id="hydrological_modules.sealed_water.sealed_water.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/sealed_water.html#sealed_water.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.sealed_water.sealed_water.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.sealed_water.sealed_water.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/sealed_water.html#sealed_water.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.sealed_water.sealed_water.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the sealed_water module</p>
 <p>runoff calculation for open water and sealed areas</p>
 <dl class="field-list simple">
@@ -523,15 +528,15 @@ calculating interception for each land cover class</p>
 <div class="section" id="soil-module">
 <h3>soil module<a class="headerlink" href="#soil-module" title="Permalink to this headline">¶</a></h3>
 <p>** Calculate fluxes in 3 layer soil**</p>
-<span class="target" id="module-hydrological_modules.soil"></span><dl class="class">
-<dt id="hydrological_modules.soil.soil">
-<em class="property">class </em><code class="descclassname">hydrological_modules.soil.</code><code class="descname">soil</code><span class="sig-paren">(</span><em>soil_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/soil.html#soil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.soil.soil" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.soil"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.soil.soil">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.soil.</code><code class="descname">soil</code><span class="sig-paren">(</span><em>soil_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/soil.html#soil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.soil.soil" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>SOIL</p>
 <p>Caclulation vertical transfer of water based on Arno scheme</p>
 <dl class="method">
-<dt id="hydrological_modules.soil.soil.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/soil.html#soil.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.soil.soil.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.soil.soil.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/soil.html#soil.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.soil.soil.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the soil module</p>
 <p>For each of the land cover classes the vertical water transport is simulated
 Distribution of water holding capiacity in 3 soil layers based on saturation excess overland flow, preferential flow
@@ -539,8 +544,8 @@ Dependend on soil depth, soil hydraulic parameters</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.soil.soil.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/soil.html#soil.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.soil.soil.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.soil.soil.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/soil.html#soil.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.soil.soil.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the soil module</p>
 <ul class="simple">
 <li><p>Initialize all the hydraulic properties of soil</p></li>
@@ -554,15 +559,15 @@ Dependend on soil depth, soil hydraulic parameters</p>
 <div class="section" id="capillarrise-module">
 <h3>capillarRise module<a class="headerlink" href="#capillarrise-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate capillar rise from groundwater</strong></p>
-<span class="target" id="module-hydrological_modules.capillarRise"></span><dl class="class">
-<dt id="hydrological_modules.capillarRise.capillarRise">
-<em class="property">class </em><code class="descclassname">hydrological_modules.capillarRise.</code><code class="descname">capillarRise</code><span class="sig-paren">(</span><em>capillarRise_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/capillarRise.html#capillarRise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.capillarRise.capillarRise" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.capillarRise"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.capillarRise.capillarRise">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.capillarRise.</code><code class="descname">capillarRise</code><span class="sig-paren">(</span><em>capillarRise_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/capillarRise.html#capillarRise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.capillarRise.capillarRise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>CAPPILAR RISE
 calculate cell fraction influenced by capillary rise</p>
 <dl class="method">
-<dt id="hydrological_modules.capillarRise.capillarRise.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/capillarRise.html#capillarRise.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.capillarRise.capillarRise.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.capillarRise.capillarRise.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/capillarRise.html#capillarRise.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.capillarRise.capillarRise.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the capillar Rise module
 calculate cell fraction influenced by capillary rise
 depending on appr. height of groundwater and relative elevation of grid cell</p>
@@ -579,21 +584,21 @@ depending on appr. height of groundwater and relative elevation of grid cell</p>
 <div class="section" id="groundwater-module">
 <h3>groundwater module<a class="headerlink" href="#groundwater-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate groundwater</strong></p>
-<span class="target" id="module-hydrological_modules.groundwater"></span><dl class="class">
-<dt id="hydrological_modules.groundwater.groundwater">
-<em class="property">class </em><code class="descclassname">hydrological_modules.groundwater.</code><code class="descname">groundwater</code><span class="sig-paren">(</span><em>groundwater_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/groundwater.html#groundwater"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.groundwater.groundwater" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.groundwater"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.groundwater.groundwater">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.groundwater.</code><code class="descname">groundwater</code><span class="sig-paren">(</span><em>groundwater_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/groundwater.html#groundwater"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.groundwater.groundwater" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>GROUNDWATER</p>
 <dl class="method">
-<dt id="hydrological_modules.groundwater.groundwater.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/groundwater.html#groundwater.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.groundwater.groundwater.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.groundwater.groundwater.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/groundwater.html#groundwater.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.groundwater.groundwater.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the groundwater module
 Calculate groundweater storage and baseflow</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.groundwater.groundwater.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/groundwater.html#groundwater.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.groundwater.groundwater.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.groundwater.groundwater.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/groundwater.html#groundwater.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.groundwater.groundwater.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the groundwater module</p>
 <ul class="simple">
 <li><p>load parameters from settings file</p></li>
@@ -607,9 +612,9 @@ Calculate groundweater storage and baseflow</p>
 <div class="section" id="runoff-concentration-module">
 <h3>runoff_concentration module<a class="headerlink" href="#runoff-concentration-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate runoff concentration - from grid cell to grid cell corner</strong></p>
-<span class="target" id="module-hydrological_modules.runoff_concentration"></span><dl class="class">
-<dt id="hydrological_modules.runoff_concentration.runoff_concentration">
-<em class="property">class </em><code class="descclassname">hydrological_modules.runoff_concentration.</code><code class="descname">runoff_concentration</code><span class="sig-paren">(</span><em>runoff_concentration_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/runoff_concentration.html#runoff_concentration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.runoff_concentration.runoff_concentration" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.runoff_concentration"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.runoff_concentration.runoff_concentration">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.runoff_concentration.</code><code class="descname">runoff_concentration</code><span class="sig-paren">(</span><em>runoff_concentration_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/runoff_concentration.html#runoff_concentration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.runoff_concentration.runoff_concentration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Runoff concentration</p>
 <p>this is the part between runoff generation and routing
@@ -622,8 +627,8 @@ diffusion is calculated using a triangular-weighting-function</p>
 <p>see also:</p>
 <p><a class="reference external" href="http://stackoverflow.com/questions/24040984/transformation-using-triangular-weighting-function-in-python">http://stackoverflow.com/questions/24040984/transformation-using-triangular-weighting-function-in-python</a></p>
 <dl class="method">
-<dt id="hydrological_modules.runoff_concentration.runoff_concentration.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/runoff_concentration.html#runoff_concentration.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.runoff_concentration.runoff_concentration.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.runoff_concentration.runoff_concentration.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/runoff_concentration.html#runoff_concentration.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.runoff_concentration.runoff_concentration.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the runoff concentration module</p>
 <p>For surface runoff for each land cover class  and for interflow and for baseflow the
 runoff concentration time is calculated</p>
@@ -634,8 +639,8 @@ runoff concentration time is calculated</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.runoff_concentration.runoff_concentration.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/runoff_concentration.html#runoff_concentration.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.runoff_concentration.runoff_concentration.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.runoff_concentration.runoff_concentration.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/runoff_concentration.html#runoff_concentration.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.runoff_concentration.runoff_concentration.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the  runoff concentration module</p>
 <p>Setting the peak time for:</p>
 <ul class="simple">
@@ -659,7 +664,7 @@ runoff concentration time is calculated</p>
 <div class="section" id="waterdemand-module">
 <h3>waterdemand module<a class="headerlink" href="#waterdemand-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate water demand from different sectors</strong></p>
-<span class="target" id="module-hydrological_modules.waterdemand"></span><dl class="simple">
+<span class="target" id="module-cwatm.hydrological_modules.waterdemand"></span><dl class="simple">
 <dt>Naming convention:</dt><dd><ul class="simple">
 <li></li>
 <li></li>
@@ -669,16 +674,16 @@ runoff concentration time is calculated</p>
 </dd>
 </dl>
 <dl class="class">
-<dt id="hydrological_modules.waterdemand.waterdemand">
-<em class="property">class </em><code class="descclassname">hydrological_modules.waterdemand.</code><code class="descname">waterdemand</code><span class="sig-paren">(</span><em>waterdemand_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterdemand.html#waterdemand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.waterdemand.waterdemand">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.waterdemand.</code><code class="descname">waterdemand</code><span class="sig-paren">(</span><em>waterdemand_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterdemand.html#waterdemand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterdemand.waterdemand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>WATERDEMAND</p>
 <p>calculating water demand -
 Industrial, domenstic based on precalculated maps
 Agricultural water demand based on water need by plants</p>
 <dl class="method">
-<dt id="hydrological_modules.waterdemand.waterdemand.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterdemand.html#waterdemand.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.waterdemand.waterdemand.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterdemand.html#waterdemand.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterdemand.waterdemand.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the water demand module</p>
 <ul class="simple">
 <li><p>calculate the fraction of water from surface water vs. groundwater</p></li>
@@ -687,8 +692,8 @@ Agricultural water demand based on water need by plants</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.waterdemand.waterdemand.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterdemand.html#waterdemand.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterdemand.waterdemand.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.waterdemand.waterdemand.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterdemand.html#waterdemand.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterdemand.waterdemand.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the water demand module</p>
 <p>Set the water allocation</p>
 </dd></dl>
@@ -702,9 +707,9 @@ Agricultural water demand based on water need by plants</p>
 <div class="section" id="lakes-reservoirs-module">
 <h3>lakes_reservoirs module<a class="headerlink" href="#lakes-reservoirs-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate water retention in lakes</strong></p>
-<span class="target" id="module-hydrological_modules.lakes_reservoirs"></span><dl class="class">
-<dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs">
-<em class="property">class </em><code class="descclassname">hydrological_modules.lakes_reservoirs.</code><code class="descname">lakes_reservoirs</code><span class="sig-paren">(</span><em>lakes_reservoirs_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.lakes_reservoirs"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.lakes_reservoirs.</code><code class="descname">lakes_reservoirs</code><span class="sig-paren">(</span><em>lakes_reservoirs_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>LAKES AND RESERVOIRS</p>
 <div class="admonition note">
@@ -740,14 +745,14 @@ has to be checked if this works in forecasting mode!</p>
 <p><img class="math" src="_images/math/73899ebaa83edc11fb3b7278a9b6a08897807aee.png" alt="Q = (-LakeFactor + \sqrt{LakeFactor^2+2*SI})^2"/></p>
 </div>
 <dl class="method">
-<dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part set lakes and reservoirs for each year</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic_inloop">
-<code class="descname">dynamic_inloop</code><span class="sig-paren">(</span><em>NoRoutingExecuted</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.dynamic_inloop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic_inloop" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic_inloop">
+<code class="descname">dynamic_inloop</code><span class="sig-paren">(</span><em>NoRoutingExecuted</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.dynamic_inloop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic_inloop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part to calculate outflow from lakes and reservoirs</p>
 <ul class="simple">
 <li><p>lakes with modified Puls approach</p></li>
@@ -768,8 +773,8 @@ has to be checked if this works in forecasting mode!</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs.initWaterbodies">
-<code class="descname">initWaterbodies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.initWaterbodies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.initWaterbodies" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.initWaterbodies">
+<code class="descname">initWaterbodies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.initWaterbodies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.initWaterbodies" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize water bodies
 Read parameters from maps e.g
 area, location, initial average discharge, type 9reservoir or lake) etc.</p>
@@ -778,15 +783,15 @@ area, location, initial average discharge, type 9reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_lakes">
-<code class="descname">initial_lakes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.initial_lakes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_lakes" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_lakes">
+<code class="descname">initial_lakes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.initial_lakes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_lakes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the lakes module
 Using the <strong>Modified Puls approach</strong> to calculate retention of a lake</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_reservoirs">
-<code class="descname">initial_reservoirs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.initial_reservoirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_reservoirs" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_reservoirs">
+<code class="descname">initial_reservoirs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.initial_reservoirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_reservoirs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the reservoir module
 Using the appraoch of LISFLOOD</p>
 <div class="admonition seealso">
@@ -801,9 +806,9 @@ Using the appraoch of LISFLOOD</p>
 <div class="section" id="lakes-res-small-module">
 <h3>lakes_res_small module<a class="headerlink" href="#lakes-res-small-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate water retention in small lakes</strong></p>
-<span class="target" id="module-hydrological_modules.lakes_res_small"></span><dl class="class">
-<dt id="hydrological_modules.lakes_res_small.lakes_res_small">
-<em class="property">class </em><code class="descclassname">hydrological_modules.lakes_res_small.</code><code class="descname">lakes_res_small</code><span class="sig-paren">(</span><em>lakes_res_small_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_res_small.html#lakes_res_small"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_res_small.lakes_res_small" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.lakes_res_small"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.lakes_res_small.lakes_res_small">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.lakes_res_small.</code><code class="descname">lakes_res_small</code><span class="sig-paren">(</span><em>lakes_res_small_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_res_small.html#lakes_res_small"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_res_small.lakes_res_small" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Small LAKES AND RESERVOIRS</p>
 <div class="admonition note">
@@ -813,8 +818,8 @@ Using the appraoch of LISFLOOD</p>
 See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
 </div>
 <dl class="method">
-<dt id="hydrological_modules.lakes_res_small.lakes_res_small.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_res_small.html#lakes_res_small.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_res_small.lakes_res_small.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.lakes_res_small.lakes_res_small.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_res_small.html#lakes_res_small.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_res_small.lakes_res_small.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part to calculate outflow from small lakes and reservoirs</p>
 <ul class="simple">
 <li><p>lakes with modified Puls approach</p></li>
@@ -829,8 +834,8 @@ See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.lakes_res_small.lakes_res_small.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/lakes_res_small.html#lakes_res_small.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.lakes_res_small.lakes_res_small.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.lakes_res_small.lakes_res_small.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_res_small.html#lakes_res_small.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_res_small.lakes_res_small.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize small lakes and reservoirs
 Read parameters from maps e.g
 area, location, initial average discharge, type: reservoir or lake) etc.</p>
@@ -842,15 +847,15 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <div class="section" id="routing-reservoirs-routing-kinematic-module">
 <h3>routing_reservoirs.routing_kinematic module<a class="headerlink" href="#routing-reservoirs-routing-kinematic-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>River routing - kinematic wave</strong></p>
-<span class="target" id="module-hydrological_modules.routing_reservoirs.routing_kinematic"></span><dl class="class">
-<dt id="hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic">
-<em class="property">class </em><code class="descclassname">hydrological_modules.routing_reservoirs.routing_kinematic.</code><code class="descname">routing_kinematic</code><span class="sig-paren">(</span><em>routing_kinematic_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.routing_reservoirs.routing_kinematic"></span><dl class="class">
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.</code><code class="descname">routing_kinematic</code><span class="sig-paren">(</span><em>routing_kinematic_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>ROUTING</p>
 <p>routing using the kinematic wave</p>
 <dl class="method">
-<dt id="hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.catchment">
-<code class="descname">catchment</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.catchment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.catchment" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.catchment">
+<code class="descname">catchment</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.catchment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.catchment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the catchment from “global”  LDD and a point</p>
 <ul class="simple">
 <li><p>load and create a river network</p></li>
@@ -859,8 +864,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the routing module</p>
 <ul class="simple">
 <li><p>calculate evaporation from channels</p></li>
@@ -872,8 +877,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the routing module</p>
 <ul class="simple">
 <li><p>load and create a river network</p></li>
@@ -889,9 +894,9 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <div class="section" id="routing-reservoirs-routing-sub-module">
 <h3>routing_reservoirs.routing_sub module<a class="headerlink" href="#routing-reservoirs-routing-sub-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Sub routines for river routing</strong></p>
-<span class="target" id="module-hydrological_modules.routing_reservoirs.routing_sub"></span><dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.Compress">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">Compress</code><span class="sig-paren">(</span><em>map</em>, <em>mask</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#Compress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.Compress" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-cwatm.hydrological_modules.routing_reservoirs.routing_sub"></span><dl class="function">
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.Compress">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">Compress</code><span class="sig-paren">(</span><em>map</em>, <em>mask</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#Compress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.Compress" title="Permalink to this definition">¶</a></dt>
 <dd><p>compressing map from 2D to 1D without missing values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -907,8 +912,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.catchment1">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">catchment1</code><span class="sig-paren">(</span><em>dirUp</em>, <em>points</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#catchment1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.catchment1" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.catchment1">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">catchment1</code><span class="sig-paren">(</span><em>dirUp</em>, <em>points</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#catchment1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.catchment1" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculates all cells which belongs to a catchment from point onward</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -924,8 +929,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.decompress">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">decompress</code><span class="sig-paren">(</span><em>map</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.decompress" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.decompress1">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">decompress1</code><span class="sig-paren">(</span><em>map</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#decompress1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.decompress1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decompressing map from 1D to 2D with missing values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -938,8 +943,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.defLdd2">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">defLdd2</code><span class="sig-paren">(</span><em>ldd</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#defLdd2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.defLdd2" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.defLdd2">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">defLdd2</code><span class="sig-paren">(</span><em>ldd</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#defLdd2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.defLdd2" title="Permalink to this definition">¶</a></dt>
 <dd><p>defines river network</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -952,8 +957,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.dirDownstream">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">dirDownstream</code><span class="sig-paren">(</span><em>dirUp</em>, <em>lddcomp</em>, <em>dirDown</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#dirDownstream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.dirDownstream" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.dirDownstream">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">dirDownstream</code><span class="sig-paren">(</span><em>dirUp</em>, <em>lddcomp</em>, <em>dirDown</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#dirDownstream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.dirDownstream" title="Permalink to this definition">¶</a></dt>
 <dd><p>runs the river network tree downstream - from source to outlet</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -970,8 +975,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.dirUpstream">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">dirUpstream</code><span class="sig-paren">(</span><em>dirshort</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#dirUpstream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.dirUpstream" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.dirUpstream">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">dirUpstream</code><span class="sig-paren">(</span><em>dirshort</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#dirUpstream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.dirUpstream" title="Permalink to this definition">¶</a></dt>
 <dd><p>runs the network tree upstream from outlet to source</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -984,8 +989,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.downstream1">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">downstream1</code><span class="sig-paren">(</span><em>dirUp</em>, <em>weight</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#downstream1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.downstream1" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.downstream1">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">downstream1</code><span class="sig-paren">(</span><em>dirUp</em>, <em>weight</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#downstream1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.downstream1" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculated 1 cell downstream</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1001,8 +1006,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.lddrepair">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">lddrepair</code><span class="sig-paren">(</span><em>lddnp</em>, <em>lddOrder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#lddrepair"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.lddrepair" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.lddrepair">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">lddrepair</code><span class="sig-paren">(</span><em>lddnp</em>, <em>lddOrder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#lddrepair"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.lddrepair" title="Permalink to this definition">¶</a></dt>
 <dd><p>repairs a river network</p>
 <ul class="simple">
 <li><p>eliminate unsound parts</p></li>
@@ -1022,8 +1027,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.lddshort">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">lddshort</code><span class="sig-paren">(</span><em>lddnp</em>, <em>lddOrder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#lddshort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.lddshort" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.lddshort">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">lddshort</code><span class="sig-paren">(</span><em>lddnp</em>, <em>lddOrder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#lddshort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.lddshort" title="Permalink to this definition">¶</a></dt>
 <dd><p>return short for calculating a catchment from a river network</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1039,8 +1044,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.postorder">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">postorder</code><span class="sig-paren">(</span><em>dirUp</em>, <em>catchment</em>, <em>node</em>, <em>catch</em>, <em>dirDown</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#postorder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.postorder" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.postorder">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">postorder</code><span class="sig-paren">(</span><em>dirUp</em>, <em>catchment</em>, <em>node</em>, <em>catch</em>, <em>dirDown</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#postorder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.postorder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Routine to run a postorder tree traversal</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1059,8 +1064,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.subcatchment1">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">subcatchment1</code><span class="sig-paren">(</span><em>dirUp</em>, <em>points</em>, <em>ups</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#subcatchment1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.subcatchment1" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.subcatchment1">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">subcatchment1</code><span class="sig-paren">(</span><em>dirUp</em>, <em>points</em>, <em>ups</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#subcatchment1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.subcatchment1" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculates subcatchments of points</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1077,8 +1082,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.upstream1">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">upstream1</code><span class="sig-paren">(</span><em>downstruct</em>, <em>weight</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#upstream1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.upstream1" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.upstream1">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">upstream1</code><span class="sig-paren">(</span><em>downstruct</em>, <em>weight</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#upstream1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.upstream1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates 1 cell upstream</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1094,8 +1099,8 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="hydrological_modules.routing_reservoirs.routing_sub.upstreamArea">
-<code class="descclassname">hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">upstreamArea</code><span class="sig-paren">(</span><em>dirDown</em>, <em>dirshort</em>, <em>area</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/routing_reservoirs/routing_sub.html#upstreamArea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.routing_reservoirs.routing_sub.upstreamArea" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.routing_reservoirs.routing_sub.upstreamArea">
+<code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_sub.</code><code class="descname">upstreamArea</code><span class="sig-paren">(</span><em>dirDown</em>, <em>dirshort</em>, <em>area</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_sub.html#upstreamArea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_sub.upstreamArea" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculates upstream area</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1115,11 +1120,11 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </div>
 <div class="section" id="hydrology-v-water-balance">
 <h2>Hydrology V - Water balance<a class="headerlink" href="#hydrology-v-water-balance" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="module-hydrological_modules.waterbalance">
-<span id="waterbalance-module"></span><h3>waterbalance module<a class="headerlink" href="#module-hydrological_modules.waterbalance" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-cwatm.hydrological_modules.waterbalance">
+<span id="waterbalance-module"></span><h3>waterbalance module<a class="headerlink" href="#module-cwatm.hydrological_modules.waterbalance" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="hydrological_modules.waterbalance.waterbalance">
-<em class="property">class </em><code class="descclassname">hydrological_modules.waterbalance.</code><code class="descname">waterbalance</code><span class="sig-paren">(</span><em>waterbalance_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterbalance.html#waterbalance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterbalance.waterbalance" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.waterbalance.waterbalance">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.waterbalance.</code><code class="descname">waterbalance</code><span class="sig-paren">(</span><em>waterbalance_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterbalance.html#waterbalance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterbalance.waterbalance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>WATER BALANCE</p>
 <ul class="simple">
@@ -1127,27 +1132,27 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <li><p>produce an annual overview - income, outcome storage</p></li>
 </ul>
 <dl class="method">
-<dt id="hydrological_modules.waterbalance.waterbalance.checkWaterSoilGround">
-<code class="descname">checkWaterSoilGround</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterbalance.html#waterbalance.checkWaterSoilGround"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterbalance.waterbalance.checkWaterSoilGround" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.waterbalance.waterbalance.checkWaterSoilGround">
+<code class="descname">checkWaterSoilGround</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterbalance.html#waterbalance.checkWaterSoilGround"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterbalance.waterbalance.checkWaterSoilGround" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check water balance of snow, vegetation, soil, groundwater</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.waterbalance.waterbalance.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterbalance.html#waterbalance.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterbalance.waterbalance.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.waterbalance.waterbalance.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterbalance.html#waterbalance.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterbalance.waterbalance.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the water balance module
 If option <strong>sumWaterBalance</strong> sum water balance for certain variables</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.waterbalance.waterbalance.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterbalance.html#waterbalance.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterbalance.waterbalance.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.waterbalance.waterbalance.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterbalance.html#waterbalance.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterbalance.waterbalance.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the water balance module</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.waterbalance.waterbalance.waterBalanceCheck">
-<code class="descname">waterBalanceCheck</code><span class="sig-paren">(</span><em>fluxesIn</em>, <em>fluxesOut</em>, <em>preStorages</em>, <em>endStorages</em>, <em>processName</em>, <em>printTrue=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterbalance.html#waterbalance.waterBalanceCheck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterbalance.waterbalance.waterBalanceCheck" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.waterbalance.waterbalance.waterBalanceCheck">
+<code class="descname">waterBalanceCheck</code><span class="sig-paren">(</span><em>fluxesIn</em>, <em>fluxesOut</em>, <em>preStorages</em>, <em>endStorages</em>, <em>processName</em>, <em>printTrue=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterbalance.html#waterbalance.waterBalanceCheck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterbalance.waterbalance.waterBalanceCheck" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the water balance module</p>
 <p>Returns the water balance for a list of input, output, and storage map files</p>
 <dl class="field-list simple">
@@ -1171,8 +1176,8 @@ If option <strong>sumWaterBalance</strong> sum water balance for certain variabl
 </dd></dl>
 
 <dl class="method">
-<dt id="hydrological_modules.waterbalance.waterbalance.waterBalanceCheckSum">
-<code class="descname">waterBalanceCheckSum</code><span class="sig-paren">(</span><em>fluxesIn</em>, <em>fluxesOut</em>, <em>preStorages</em>, <em>endStorages</em>, <em>processName</em>, <em>printTrue=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hydrological_modules/waterbalance.html#waterbalance.waterBalanceCheckSum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hydrological_modules.waterbalance.waterbalance.waterBalanceCheckSum" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.waterbalance.waterbalance.waterBalanceCheckSum">
+<code class="descname">waterBalanceCheckSum</code><span class="sig-paren">(</span><em>fluxesIn</em>, <em>fluxesOut</em>, <em>preStorages</em>, <em>endStorages</em>, <em>processName</em>, <em>printTrue=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterbalance.html#waterbalance.waterBalanceCheckSum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterbalance.waterbalance.waterBalanceCheckSum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the water balance for a list of input, output, and storage map files
 and sums it up for a catchment</p>
 <dl class="field-list simple">
@@ -1194,7 +1199,7 @@ and sums it up for a catchment</p>
 
 </dd></dl>
 
-<span class="target" id="module-hydrological_modules"></span></div>
+<span class="target" id="module-cwatm.hydrological_modules"></span></div>
 </div>
 </div>
 

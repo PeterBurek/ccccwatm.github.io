@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>cwatm module &#8212; Community Water Model</title>
+    <title>run_cwatm &#8212; Community Water Model</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="cwatm_dynamic module" href="cwatm_dynamic.html" />
+    <link rel="next" title="cwatm module" href="cwatm.html" />
     <link rel="prev" title="14. Source code" href="sourcecode.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,7 +28,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
+          <a href="cwatm.html" title="cwatm module"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="sourcecode.html" title="14. Source code"
@@ -43,37 +43,15 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="cwatm-module">
-<h1>cwatm module<a class="headerlink" href="#cwatm-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="run-cwatm">
+<h1>run_cwatm<a class="headerlink" href="#run-cwatm" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Base module: run with settings file e.g. python cwatm.py settings.ini</p>
+<p>Base module: base module to start CWatM: e.g. python run_cwatm.py settings.ini</p>
 </div>
-<span class="target" id="module-cwatm3"></span><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-------------------------------------------------</span>
-<span class="c1">######## ##          ##  ####  ######  ##    ##</span>
-<span class="c1">##       ##          ## ##  ##   ##   ####  ####</span>
-<span class="c1">##        ##        ##  ##  ##   ##   ## #### ##</span>
-<span class="c1">##        ##   ##   ## ########  ##  ##   ##   ##</span>
-<span class="c1">##         ## #### ##  ##    ##  ##  ##        ##</span>
-<span class="c1">##         ####  #### ##      ## ## ##          ##</span>
-<span class="c1">##########  ##    ##  ##      ## ## ##          ##</span>
-
-<span class="n">Community</span> <span class="n">WATer</span> <span class="n">Model</span>
-</pre></div>
-</div>
-<p>CWATM is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-any later version.</p>
-<p>CWATM is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details
-&lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
-<p># ————————————————–</p>
-<dl class="function">
-<dt id="cwatm3.CWATMexe">
-<code class="descclassname">cwatm3.</code><code class="descname">CWATMexe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm3.html#CWATMexe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.CWATMexe" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-run_cwatm"></span><dl class="function">
+<dt id="run_cwatm.CWATMexe">
+<code class="descclassname">run_cwatm.</code><code class="descname">CWATMexe</code><span class="sig-paren">(</span><em>settings</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#CWATMexe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.CWATMexe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base subroutine of the CWATM model</p>
 <ul class="simple">
 <li><p>parses the settings file</p></li>
@@ -84,48 +62,15 @@ GNU General Public License for more details
 </ul>
 </dd></dl>
 
-<dl class="class">
-<dt id="cwatm3.CWATModel">
-<em class="property">class </em><code class="descclassname">cwatm3.</code><code class="descname">CWATModel</code><a class="reference internal" href="_modules/cwatm3.html#CWATModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.CWATModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cwatm_initial.html#cwatm_initial.CWATModel_ini" title="cwatm_initial.CWATModel_ini"><code class="xref py py-class docutils literal notranslate"><span class="pre">cwatm_initial.CWATModel_ini</span></code></a>, <a class="reference internal" href="cwatm_dynamic.html#cwatm_dynamic.CWATModel_dyn" title="cwatm_dynamic.CWATModel_dyn"><code class="xref py py-class docutils literal notranslate"><span class="pre">cwatm_dynamic.CWATModel_dyn</span></code></a></p>
-<p>Initial and dynamic part of the CWATM model</p>
-<ul class="simple">
-<li><p>initial part takes care of all the non temporal initialiation procedures</p></li>
-<li><p>dynamic part loops over time</p></li>
-</ul>
-<dl class="method">
-<dt id="cwatm3.CWATModel.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cwatm3.CWATModel.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of CWATM
-calls the dynamic part of the hydrological modules
-Looping through time and space</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>if flags set the output on the screen can be changed e.g.</p>
-<ul class="simple">
-<li><p>v: no output at all</p></li>
-<li><p>l: time and first gauge discharge</p></li>
-<li><p>t: timing of different processes at the end</p></li>
-</ul>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cwatm3.CWATModel.i">
-<code class="descname">i</code><em class="property"> = 1</em><a class="headerlink" href="#cwatm3.CWATModel.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 <dl class="function">
-<dt id="cwatm3.GNU">
-<code class="descclassname">cwatm3.</code><code class="descname">GNU</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm3.html#GNU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.GNU" title="Permalink to this definition">¶</a></dt>
+<dt id="run_cwatm.GNU">
+<code class="descclassname">run_cwatm.</code><code class="descname">GNU</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#GNU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.GNU" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints GNU General Public License information</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="cwatm3.headerinfo">
-<code class="descclassname">cwatm3.</code><code class="descname">headerinfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm3.html#headerinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.headerinfo" title="Permalink to this definition">¶</a></dt>
+<dt id="run_cwatm.headerinfo">
+<code class="descclassname">run_cwatm.</code><code class="descname">headerinfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#headerinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.headerinfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the information on top of each run</p>
 <p>this is collecting the last change of one of the source files
 in order to give more information of the settingsfile and the version of cwatm
@@ -133,8 +78,13 @@ this information is put in the result files .tss and .nc</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="cwatm3.usage">
-<code class="descclassname">cwatm3.</code><code class="descname">usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm3.html#usage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm3.usage" title="Permalink to this definition">¶</a></dt>
+<dt id="run_cwatm.main">
+<code class="descclassname">run_cwatm.</code><code class="descname">main</code><span class="sig-paren">(</span><em>settings</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="run_cwatm.usage">
+<code class="descclassname">run_cwatm.</code><code class="descname">usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#usage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.usage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints some lines describing how to use this program which arguments and parameters it accepts, etc</p>
 <ul class="simple">
 <li><p>-q –quiet       output progression given as .</p></li>
@@ -188,8 +138,8 @@ this information is put in the result files .tss and .nc</p>
   <p class="topless"><a href="sourcecode.html"
                         title="previous chapter">14. Source code</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="cwatm_dynamic.html"
-                        title="next chapter">cwatm_dynamic module</a></p>
+  <p class="topless"><a href="cwatm.html"
+                        title="next chapter">cwatm module</a></p>
         </div>
       </div>
       <div class="clearer"></div>
@@ -204,7 +154,7 @@ this information is put in the result files .tss and .nc</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cwatm_dynamic.html" title="cwatm_dynamic module"
+          <a href="cwatm.html" title="cwatm module"
              >next</a> |</li>
         <li class="right" >
           <a href="sourcecode.html" title="14. Source code"

@@ -15,7 +15,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="cwatm module" href="cwatm3.html" />
+    <link rel="next" title="run_cwatm" href="run_cwatm.html" />
     <link rel="prev" title="13. License and download info" href="license.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,7 +28,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cwatm3.html" title="cwatm module"
+          <a href="run_cwatm.html" title="run_cwatm"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="license.html" title="13. License and download info"
@@ -110,11 +110,11 @@ are in the <strong>management_modules</strong> folder.</p>
 <div class="line">Fig. 1 shows the modules of CWATM and their connections</div>
 <div class="line">Fig. 2 shows a profile with of the workflow and timing of CWATM.</div>
 </div>
-<div class="graphviz"><img src="_images/graphviz-daf39dc3444fd49826a060779c4a5b731c295b61.png" alt="digraph {
+<div class="graphviz"><img src="_images/graphviz-19d39839fcf8cbaf0e84b5f5536f584173c17db7.png" alt="digraph {
         compound=true
         overlap=false
         graph [layout = neato]
-        node [shape=circle,style=filled,fillcolor=red,fixedsize=true,width=1.3,fontsize=23] cwatm3;
+        node [shape=circle,style=filled,fillcolor=red,fixedsize=true,width=1.3,fontsize=23] cwatm;
         node [shape=box,style = filled,fillcolor=Tomato,fontsize=14,width=3] dynamicModel;
         node [shape=box,style=filled,fillcolor=orange,fontsize=14,width=2] data_handling; configuration; globals; messages; output; replace_pcr; timestep; checks;
 
@@ -132,11 +132,11 @@ are in the <strong>management_modules</strong> folder.</p>
         node [shape=circle,style=filled,fillcolor=RoyalBlue,fixedsize=true,width=1.0] routing_kinematic; runoff_concentration; lakes_reservoirs; lakes_res_small
         node [shape=circle,style=filled,fillcolor=RoyalBlue,fixedsize=true,width=0.8] routing_sub; &quot;t5.dll&quot;
 
-        cwatm3 -&gt; dynamicModel[color=red,penwidth=3.5];
+        cwatm -&gt; dynamicModel[color=red,penwidth=3.5];
         dynamicModel -&gt; cwatm_initial[color=Tomato,penwidth=2.5];
         dynamicModel -&gt; cwatm_dynamic[color=Tomato,penwidth=2.5];
-        cwatm3 -&gt; globals
-        cwatm3 -&gt; configuration
+        cwatm -&gt; globals
+        cwatm -&gt; configuration
 
         cwatm_initial -&gt; miscInitial[color=RoyalBlue3];
         cwatm_initial -&gt; initcondition[color=RoyalBlue3];
@@ -204,7 +204,7 @@ are in the <strong>management_modules</strong> folder.</p>
 <p class="admonition-title">Note</p>
 <div class="line-block">
 <div class="line">Figure created with:</div>
-<div class="line">python -m cProfile -o  l1.pstats cwatm3.py settings1.ini -l</div>
+<div class="line">python -m cProfile -o  l1.pstats run_cwatm.py settings1.ini -l</div>
 <div class="line">gprof2dot -f pstats l1.pstats | dot -T png -o callgraph.png</div>
 </div>
 </div>
@@ -213,7 +213,8 @@ are in the <strong>management_modules</strong> folder.</p>
 <h3><a class="toc-backref" href="#id6">Source code description</a><a class="headerlink" href="#source-code-description" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cwatm3.html">cwatm module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_cwatm.html">run_cwatm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cwatm.html">cwatm module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cwatm_dynamic.html">cwatm_dynamic module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cwatm_initial.html">cwatm_initial module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hydrological_modules.html">hydrological_modules package</a><ul>
@@ -252,7 +253,7 @@ are in the <strong>management_modules</strong> folder.</p>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#hydrology-v-water-balance">Hydrology V - Water balance</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-hydrological_modules.waterbalance">waterbalance module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#module-cwatm.hydrological_modules.waterbalance">waterbalance module</a></li>
 </ul>
 </li>
 </ul>
@@ -263,7 +264,7 @@ are in the <strong>management_modules</strong> folder.</p>
 <li class="toctree-l3"><a class="reference internal" href="management_modules.html#timestep-module">timestep module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="management_modules.html#configuration-module">configuration module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="management_modules.html#management-modules-messages-module">management_modules.messages module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-management_modules.output">management_modules.output module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="management_modules.html#module-cwatm.management_modules.output">management_modules.output module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="management_modules.html#management-modules-checks-module">management_modules.checks module</a></li>
 </ul>
 </li>
@@ -348,8 +349,8 @@ are in the <strong>management_modules</strong> folder.</p>
   <p class="topless"><a href="license.html"
                         title="previous chapter">13. License and download info</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="cwatm3.html"
-                        title="next chapter">cwatm module</a></p>
+  <p class="topless"><a href="run_cwatm.html"
+                        title="next chapter">run_cwatm</a></p>
         </div>
       </div>
       <div class="clearer"></div>
@@ -364,7 +365,7 @@ are in the <strong>management_modules</strong> folder.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cwatm3.html" title="cwatm module"
+          <a href="run_cwatm.html" title="run_cwatm"
              >next</a> |</li>
         <li class="right" >
           <a href="license.html" title="13. License and download info"
