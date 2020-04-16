@@ -110,11 +110,11 @@ are in the <strong>management_modules</strong> folder.</p>
 <div class="line">Fig. 1 shows the modules of CWATM and their connections</div>
 <div class="line">Fig. 2 shows a profile with of the workflow and timing of CWATM.</div>
 </div>
-<div class="graphviz"><img src="_images/graphviz-19d39839fcf8cbaf0e84b5f5536f584173c17db7.png" alt="digraph {
+<div class="graphviz"><img src="_images/graphviz-be9a009076b4b8c4dc8a4251a7862f0cacb7b50a.png" alt="digraph {
         compound=true
         overlap=false
         graph [layout = neato]
-        node [shape=circle,style=filled,fillcolor=red,fixedsize=true,width=1.3,fontsize=23] cwatm;
+        node [shape=circle,style=filled,fillcolor=red,fixedsize=true,width=1.3,fontsize=23] cwatm_model;
         node [shape=box,style = filled,fillcolor=Tomato,fontsize=14,width=3] dynamicModel;
         node [shape=box,style=filled,fillcolor=orange,fontsize=14,width=2] data_handling; configuration; globals; messages; output; replace_pcr; timestep; checks;
 
@@ -132,11 +132,11 @@ are in the <strong>management_modules</strong> folder.</p>
         node [shape=circle,style=filled,fillcolor=RoyalBlue,fixedsize=true,width=1.0] routing_kinematic; runoff_concentration; lakes_reservoirs; lakes_res_small
         node [shape=circle,style=filled,fillcolor=RoyalBlue,fixedsize=true,width=0.8] routing_sub; &quot;t5.dll&quot;
 
-        cwatm -&gt; dynamicModel[color=red,penwidth=3.5];
+        cwatm_model -&gt; dynamicModel[color=red,penwidth=3.5];
         dynamicModel -&gt; cwatm_initial[color=Tomato,penwidth=2.5];
         dynamicModel -&gt; cwatm_dynamic[color=Tomato,penwidth=2.5];
-        cwatm -&gt; globals
-        cwatm -&gt; configuration
+        cwatm_model -&gt; globals
+        cwatm_model -&gt; configuration
 
         cwatm_initial -&gt; miscInitial[color=RoyalBlue3];
         cwatm_initial -&gt; initcondition[color=RoyalBlue3];
@@ -214,7 +214,7 @@ are in the <strong>management_modules</strong> folder.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="run_cwatm.html">run_cwatm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cwatm.html">cwatm module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cwatm_model.html">cwatm_model module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cwatm_dynamic.html">cwatm_dynamic module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cwatm_initial.html">cwatm_initial module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hydrological_modules.html">hydrological_modules package</a><ul>
@@ -316,7 +316,7 @@ are in the <strong>management_modules</strong> folder.</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/cwatmlogo1.png" alt="Logo"/>
+              <img class="logo" src="_static/CWatM_logo.png" alt="Logo"/>
             </a></p>
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">

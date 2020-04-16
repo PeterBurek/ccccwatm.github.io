@@ -182,7 +182,7 @@ Data used to get the geometry are mainly taken from elevation model and channel 
 <h4>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">¶</a></h4>
 <p>Flow through the channel is simulated using the kinematic wave equations. The basic equations used are the equations of continuity and momentum.
 The continuity equation is:</p>
-<p><img class="math" src="_images/math/63e354fb54f9da8c9c77e88282bf725687110045.png" alt="{\delta Q \over{\delta x}} + {\delta A \over{\delta t}} = q"/></p>
+<p><img class="math" src="_images/math/febc3712505e83022303fc64cd352b667b55e740.png" alt="{\frac{\delta Q}{\delta x}} + {\frac{\delta A }{\delta t}} = q"/></p>
 <div class="line-block">
 <div class="line">where:</div>
 <div class="line">Q: channel discharge [m3 s-1],</div>
@@ -192,7 +192,7 @@ The continuity equation is:</p>
 <p>The momentum equation can also be expressed as (Chow et al., 1988):</p>
 <p><img class="math" src="_images/math/cfdff1c0e5aea6e808e02c42fbf2f69aa0d6aade.png" alt="{A = \alpha Q^\beta}"/></p>
 <p>The coefficients α and β are calculated by putting in Manning’s equation</p>
-<p><img class="math" src="_images/math/24b2264022628e7cf559d867e92da7535de488c4.png" alt="Q = A v = {AR^{2/3} \sqrt{So} \over{n}} = {A^{5/3} \sqrt{So} \over{n P^{2/3}}}"/></p>
+<p><img class="math" src="_images/math/a91011c6b049aa924f915f47d5e5b08b8a6c1fa8.png" alt="Q = A v = \frac{AR^{2/3} \sqrt{So}}{n} = \frac{A^{5/3} \sqrt{So}}{n P^{2/3}}"/></p>
 <div class="line-block">
 <div class="line">where:</div>
 <div class="line">v: velocity [m/s]</div>
@@ -201,7 +201,7 @@ The continuity equation is:</p>
 <div class="line">R: hydraulic Radius R=A/P</div>
 </div>
 <p>Solving this for α and β gives:</p>
-<p><img class="math" src="_images/math/bbf731c92cb2c61ef00292041bbe6223a1cb31fd.png" alt="\alpha = ({nP^{2/3} \over{\sqrt{So}}})^\beta"/> and  <img class="math" src="_images/math/58129edf3b34fd5809337ac080acf818a23a05a8.png" alt="\beta = 0.6"/></p>
+<p><img class="math" src="_images/math/2837bb67adefa3957a9fe2821d95e1e917af6572.png" alt="\alpha = (\frac{nP^{2/3}}{\sqrt{So}})^\beta"/> and  <img class="math" src="_images/math/58129edf3b34fd5809337ac080acf818a23a05a8.png" alt="\beta = 0.6"/></p>
 <div class="line-block">
 <div class="line">To calculate α CWATM uses static maps of:</div>
 <div class="line">P: wetted perimeter approximated in CWATM: P = channel width + 2 * channel bankful depth</div>
@@ -268,7 +268,7 @@ First the channel bottom width is calculated by a simply regression between upst
 </div>
 <p>Discharge for bankful discharge is assumed to be two times the average discharge (Qavg)</p>
 <p><img class="math" src="_images/math/d09d9ef9cc18fe5cb1292e47e38c989fe210f626.png" alt="Q = 2 * Qavg"/></p>
-<p><img class="math" src="_images/math/a580e40b382812f70f182274983ed94dc8e15bcf.png" alt="Q = {A^{5/3} \sqrt{So} \over{n P^{2/3}}}  ≈ {Wh^{5/3} \sqrt{So} \over{n (1.01W)^{2/3}}}"/></p>
+<p><img class="math" src="_images/math/834de00496bf12bec4970a04bfd7bb6059509042.png" alt="Q = \frac{A^{5/3} \sqrt{So}}{n P^{2/3}} \approx \frac{Wh^{5/3} \sqrt{So}}{n (1.01W)^{2/3}}"/></p>
 <div class="line-block">
 <div class="line">Where:</div>
 <div class="line">W: Channel width</div>
@@ -288,7 +288,7 @@ First the channel bottom width is calculated by a simply regression between upst
 <div class="section" id="soil-and-soil-hydraulic-properties">
 <h3><a class="toc-backref" href="#id67">Soil and soil hydraulic properties</a><a class="headerlink" href="#soil-and-soil-hydraulic-properties" title="Permalink to this headline">¶</a></h3>
 <p>Modeling of unsaturated flow and transport processes can be done with the 1D Richard equation, which requires a high spatial and temporal distribution of the soil hydraulic properties</p>
-<p><img class="math" src="_images/math/77cf3af2e05f7e5a23e1f22a3659641d0b6e7905.png" alt="{\delta \Theta \over{\delta t}} = {\delta \over{\delta z}}[K(\Theta({\delta h(\Theta) \over{\delta z}}-1)]-S(\Theta)"/>  (1D Richard equation)</p>
+<p><img class="math" src="_images/math/8f349e286a490a4e06b00a2a77ad69dcf450df78.png" alt="\frac{\delta \Theta}{\delta t} = \frac{\delta}{\delta z}[K(\Theta(\frac{\delta h(\Theta)}{\delta z}-1)]-S(\Theta)"/>  (1D Richard equation)</p>
 <div class="line-block">
 <div class="line">Where:</div>
 <div class="line">θ: soil volumetric moisture content [L3/L3]</div>
@@ -299,13 +299,13 @@ First the channel bottom width is calculated by a simply regression between upst
 <div class="line">S: source sink term [T-1]</div>
 </div>
 <p>With the simplification the 1D Richard equation e.g.  flow of soil moisture is entirely gravitu-driven and matrix potential gradient is zero this implies a flow tha tis always in downward direction at a rate that equals the conductivity of the soil. The relationship can now be described with the model of Mualem (1976) <a class="footnote-reference brackets" href="#id39" id="id11">10</a> and with the van Genuchten model (1980) <a class="footnote-reference brackets" href="#id40" id="id12">11</a> equation.</p>
-<p><img class="math" src="_images/math/6955fa41a4358ed0653780260c1749407e7988c4.png" alt="K(\Theta) = K_s({\Theta - \Theta_r \over{\Theta_s - \Theta_r}})^{0.5} \lbrace 1-[1-({\Theta - \Theta_r \over{\Theta_s - \Theta_r}})^{1/m}]^{m} \rbrace^{2}"/>  (Van Genuchten equation)</p>
+<p><img class="math" src="_images/math/f92dd7feac1e0b474f15caee7719bc7d52961cfb.png" alt="K(\Theta) = K_s(\frac{\Theta - \Theta_r}{\Theta_s - \Theta_r})^{0.5} \lbrace 1-[1-(\frac{\Theta - \Theta_r}{\Theta_s - \Theta_r})^{1/m}]^{m} \rbrace^{2}"/>  (Van Genuchten equation)</p>
 <div class="line-block">
 <div class="line">Where:</div>
 <div class="line">Ks: saturated conductivity of the soil [cm/d-1]</div>
 <div class="line">K(θ): unsaturated conductivity</div>
 <div class="line"><img class="math" src="_images/math/bf5f70f6b431ca28235cd7c01cef26683ae7738f.png" alt="\Theta"/> <img class="math" src="_images/math/1058b5c8ac38a5d814c7ecbc9d62059a4250f579.png" alt="\Theta_s"/> <img class="math" src="_images/math/dc2d46ccee4775e8e4c09bbe612be61ba4cfb0f2.png" alt="\Theta_r"/> : actual, maximum and residual amounts of moisture in the soil [mm]</div>
-<div class="line">m: is calculated from the pore-size index <img class="math" src="_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/> : <img class="math" src="_images/math/d0b74df9d25a67aab550b3d7f7aa297885c522b3.png" alt="m = {\lambda \over{\lambda + 1}}"/></div>
+<div class="line">m: is calculated from the pore-size index <img class="math" src="_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/> : <img class="math" src="_images/math/a8b2f588c920272e4397a4d2fa8fc9974fa5e2ce.png" alt="m = \frac{\lambda}{\lambda + 1}"/></div>
 </div>
 <p>The soil hydraulic parameter <img class="math" src="_images/math/1058b5c8ac38a5d814c7ecbc9d62059a4250f579.png" alt="\Theta_s"/> <img class="math" src="_images/math/dc2d46ccee4775e8e4c09bbe612be61ba4cfb0f2.png" alt="\Theta_r"/> <img class="math" src="_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/> and <img class="math" src="_images/math/af115195c8b6c13c7f47455427b364a26eef1356.png" alt="K_s"/> are needed to simulated soil water transport for the van Genuchten model.</p>
 <div class="line-block">
@@ -532,7 +532,7 @@ MIRCA2000—Global data set of monthly irrigated and rainfed crop areas around t
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/cwatmlogo1.png" alt="Logo"/>
+              <img class="logo" src="_static/CWatM_logo.png" alt="Logo"/>
             </a></p>
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
