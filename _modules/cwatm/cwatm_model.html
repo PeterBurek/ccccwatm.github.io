@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>cwatm.cwatm_model &#8212; Community Water Model</title>
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for cwatm.cwatm_model</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">cwatm.cwatm_initial</span> <span class="k">import</span> <span class="n">CWATModel_ini</span>
+<span class="kn">from</span> <span class="nn">cwatm.cwatm_dynamic</span> <span class="k">import</span> <span class="n">CWATModel_dyn</span>
+
+<div class="viewcode-block" id="CWATModel"><a class="viewcode-back" href="../../cwatm_model.html#cwatm.cwatm_model.CWATModel">[docs]</a><span class="k">class</span> <span class="nc">CWATModel</span><span class="p">(</span><span class="n">CWATModel_ini</span><span class="p">,</span> <span class="n">CWATModel_dyn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initial and dynamic part of the CWATM model</span>
+<span class="sd">    * initial part takes care of all the non temporal initialiation procedures</span>
+<span class="sd">    * dynamic part loops over time</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/CWatM_logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modeldesign.html">2. Model Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">3. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">4. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">5. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">6. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../todo.html">7. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">8. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../calibration.html">9. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../calibration_tutorial.html">10. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resolution.html">11. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../zambezi.html">12. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">13. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sourcecode.html">14. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forum.html">15. Forum</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>
