@@ -402,7 +402,17 @@ Based on Penman Monteith - FAO 56</p>
 <dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_2">
 <code class="descname">dynamic_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.dynamic_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the potential evaporation module
-Based on xxxxxxxxxxxxxxxxxxx</p>
+2: Milly and Dunne method
+P. C. D. Milly* and K. A. Dunne, 2016: Potential evapotranspiration and continental drying, Nature Climate Change, DOI: 10.1038/NCLIMATE3046
+Energy only PET = 0.8(Rn −G)   equation 8</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_4">
+<code class="descname">dynamic_4</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.dynamic_4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic part of the potential evaporation module
+4. Priestley-Taylor  1.26 * delat
+<a class="reference external" href="https://wetlandscapes.github.io/blog/blog/penman-monteith-and-priestley-taylor/">https://wetlandscapes.github.io/blog/blog/penman-monteith-and-priestley-taylor/</a></p>
 </dd></dl>
 
 <dl class="method">
@@ -421,15 +431,13 @@ Load inictial parameters</p>
 <code class="descname">initial_1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.initial_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.initial_1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of evaporation type module
 Load initial parameters
-1: Penman Monteith</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot.initial_2">
-<code class="descname">initial_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot.initial_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot.initial_2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of evaporation type module
-Load initial parameters
-2: xxxx method</p>
+1: Penman Monteith
+2: Milly and Dunne method
+P. C. D. Milly* and K. A. Dunne, 2016: Potential evapotranspiration and continental drying, Nature Climate Change, DOI: 10.1038/NCLIMATE3046
+Energy only PET: ET=0.8(Rn −G)   equation 8
+3: Yang et al. Penman Montheith correction method
+Yang, Y., Roderick, M. L., Zhang, S., McVicar, T. R., and Donohue, R. J.: Hydrologic implications of vegetation response to elevated CO2 in climate projections, Nat. Clim. Change, 9, 44-48, 10.1038/s41558-018-0361-0, 2019.
+Equation 14: where the term 2.×41−40([CO]2 −300) accounts for changing [CO2] on rs</p>
 </dd></dl>
 
 </dd></dl>
@@ -527,13 +535,42 @@ calculating interception for each land cover class</p>
 <h2>Hydrology II - from soil to river<a class="headerlink" href="#hydrology-ii-from-soil-to-river" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="soil-module">
 <h3>soil module<a class="headerlink" href="#soil-module" title="Permalink to this headline">¶</a></h3>
-<p>** Calculate fluxes in 3 layer soil**</p>
+<p><strong>Calculate fluxes in 3 layer soil</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.soil"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.soil.soil">
 <em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.soil.</code><code class="descname">soil</code><span class="sig-paren">(</span><em>soil_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/soil.html#soil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.soil.soil" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>SOIL</p>
-<p>Caclulation vertical transfer of water based on Arno scheme</p>
+<p><strong>SOIL</strong></p>
+<p>Calculation vertical transfer of water based on Arno scheme</p>
+<p><strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 58%" />
+<col style="width: 6%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+<th class="head"><p>Appears in</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>soilLayers</p></td>
+<td><p>Number of soil layers Unit</p></td>
+<td><p>–</p></td>
+<td><p>soil</p></td>
+</tr>
+<tr class="row-odd"><td><p>percolationImp</p></td>
+<td><p>Fraction of area where percolation to groundwater is impeded</p></td>
+<td><p>–</p></td>
+<td><p>soil,waterdemand</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.soil.soil.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/soil.html#soil.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.soil.soil.dynamic" title="Permalink to this definition">¶</a></dt>
