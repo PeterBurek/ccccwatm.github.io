@@ -316,10 +316,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">#begin = Calendar(ctbinding(&#39;CalendarDayStart&#39;))</span>
-
-    <span class="n">name</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">name</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">name</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">except</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">)</span>
+
     <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;calendar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">calendar</span>
@@ -330,7 +331,7 @@
     <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
     <span class="n">unitconv1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DAYS&quot;</span><span class="p">,</span><span class="s2">&quot;HOUR&quot;</span><span class="p">,</span><span class="s2">&quot;MINU&quot;</span><span class="p">,</span><span class="s2">&quot;SECO&quot;</span><span class="p">]</span>
-    <span class="n">unitconv2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">144086400</span><span class="p">]</span>
+    <span class="n">unitconv2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1440</span><span class="p">,</span><span class="mi">86400</span><span class="p">]</span>
     <span class="n">unitconv3</span> <span class="o">=</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span> <span class="p">[:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;unitConv&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unitconv2</span><span class="p">[</span><span class="n">unitconv1</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">unitconv3</span><span class="p">)]</span>

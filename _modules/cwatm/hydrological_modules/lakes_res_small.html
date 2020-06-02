@@ -65,15 +65,46 @@
 <span class="sd">        Using the **Modified Puls approach** to calculate retention of a lake</span>
 <span class="sd">        See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</span>
 
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    load_initial                                                                                                     </span>
+<span class="sd">    waterbalance_module                                                                                              </span>
+<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
+<span class="sd">    lakeEvaFactor         a factor which increases evaporation from lake because of wind                    --       </span>
+<span class="sd">    InvDtSec                                                                                                         </span>
+<span class="sd">    runoff                                                                                                           </span>
+<span class="sd">    cellArea              Cell area [m�] of each simulated mesh                                                      </span>
+<span class="sd">    smallpart                                                                                                        </span>
+<span class="sd">    smalllakeArea                                                                                                    </span>
+<span class="sd">    smalllakeDis0                                                                                                    </span>
+<span class="sd">    smalllakeA                                                                                                       </span>
+<span class="sd">    smalllakeFactor                                                                                                  </span>
+<span class="sd">    smalllakeFactorSqr                                                                                               </span>
+<span class="sd">    smalllakeInflowOld                                                                                               </span>
+<span class="sd">    smalllakeVolumeM3                                                                                                </span>
+<span class="sd">    smalllakeOutflow                                                                                                 </span>
+<span class="sd">    smalllakeLevel                                                                                                   </span>
+<span class="sd">    smalllakeStorage                                                                                                 </span>
+<span class="sd">    minsmalllakeVolumeM3                                                                                             </span>
+<span class="sd">    preSmalllakeStorage                                                                                              </span>
+<span class="sd">    smallLakeIn                                                                                                      </span>
+<span class="sd">    smallevapWaterBody                                                                                               </span>
+<span class="sd">    smallLakeout                                                                                                     </span>
+<span class="sd">    smallLakeDiff                                                                                                    </span>
+<span class="sd">    smallrunoffDiff                                                                                                  </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lakes_res_small_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">lakes_res_small_variable</span>
-
-
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
-
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
 <div class="viewcode-block" id="lakes_res_small.initial"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.lakes_res_small.lakes_res_small.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -115,10 +146,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactorSqr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeFactor</span><span class="p">)</span>
             <span class="c1"># for faster calculation inside dynamic section</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;smalllakeInflow&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeDis0</span><span class="p">)</span>  <span class="c1"># inflow in m3/s estimate</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;smalllakeInflow&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeDis0</span><span class="p">)</span>  <span class="c1"># inflow in m3/s estimate</span>
             
             <span class="n">old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeA</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;smalllakeStorage&quot;</span><span class="p">,</span><span class="n">old</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;smalllakeStorage&quot;</span><span class="p">,</span><span class="n">old</span><span class="p">)</span>
 
 
             <span class="n">smalllakeStorageIndicator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
@@ -127,7 +158,7 @@
             <span class="c1"># solution of quadratic equation</span>
             <span class="c1"># 1. storage volume is increase proportional to elevation</span>
             <span class="c1">#  2. Q= a *H **2.0  (if you choose Q= a *H **1.5 you have to solve the formula of Cardano)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeOutflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;smalllakeOutflow&quot;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeOutflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;smalllakeOutflow&quot;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
 
             <span class="c1"># lake storage ini</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeLevel</span> <span class="o">=</span> <span class="n">divideValues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span><span class="p">)</span>

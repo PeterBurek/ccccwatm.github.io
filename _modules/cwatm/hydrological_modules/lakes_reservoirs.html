@@ -49,8 +49,6 @@
 <span class="kn">from</span> <span class="nn">cwatm.management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.routing_reservoirs.routing_sub</span> <span class="k">import</span> <span class="o">*</span>
 
-
-
 <span class="kn">from</span> <span class="nn">cwatm.management_modules.globals</span> <span class="k">import</span> <span class="o">*</span>
 
 
@@ -111,15 +109,104 @@
 <span class="sd">        :math:`Q = (-LakeFactor + \sqrt{LakeFactor^2+2*SI})^2`</span>
 
 
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    load_initial                                                                                                     </span>
+<span class="sd">    waterbalance_module                                                                                              </span>
+<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
+<span class="sd">    saveInit              Flag: if true initial conditions are saved                                        --       </span>
+<span class="sd">    waterBodyID           lakes/reservoirs map with a single ID for each lake/reservoir                     --       </span>
+<span class="sd">    UpArea1               upstream area of a grid cell                                                      m2       </span>
+<span class="sd">    waterBodyOut          biggest outlet (biggest accumulation of ldd network) of a waterbody               --       </span>
+<span class="sd">    dirUp                 river network in upstream direction                                               --       </span>
+<span class="sd">    ldd_LR                change river network (put pits in where lakes are)                                --       </span>
+<span class="sd">    lddCompress           compressed river network (without missing values)                                 --       </span>
+<span class="sd">    lddCompress_LR        compressed river network lakes/reservoirs (without missing values)                --       </span>
+<span class="sd">    dirUp_LR              river network direction upstream lake/reservoirs                                  --       </span>
+<span class="sd">    dirupLen_LR           number of bifurcation upstream lake/reservoir                                     --       </span>
+<span class="sd">    dirupID_LR            index river upstream lake/reservoir                                               --       </span>
+<span class="sd">    downstruct_LR         river network downstream lake/reservoir                                           --       </span>
+<span class="sd">    catchment_LR          catchments lake/reservoir                                                         --       </span>
+<span class="sd">    dirDown_LR            river network direktion downstream lake/reservoir                                 --       </span>
+<span class="sd">    lendirDown_LR         number of river network connections lake/reservoir                                --       </span>
+<span class="sd">    compress_LR           boolean map as mask map for compressing lake/reservoir                            --       </span>
+<span class="sd">    decompress_LR         boolean map as mask map for decompressing lake/reservoir                          --       </span>
+<span class="sd">    waterBodyOutC         compressed map biggest outlet of each lake/reservoir                              --       </span>
+<span class="sd">    resYearC              compressed map of the year when the reservoirs is operating                       --       </span>
+<span class="sd">    waterBodyTypC         water body types 3 reservoirs and lakes (used as reservoirs but before the year   --       </span>
+<span class="sd">    lakeArea              area of each lake/reservoir                                                       m2       </span>
+<span class="sd">    lakeAreaC             compressed map of the area of each lake/reservoir                                 m2       </span>
+<span class="sd">    lakeDis0              compressed map average discharge at the outlet of a lake/reservoir                m3 s-1   </span>
+<span class="sd">    lakeDis0C             average discharge at the outlet of a lake/reservoir                               m3 s-1   </span>
+<span class="sd">    lakeAC                compressed map of parameter of channel width, gravity and weir coefficient        --       </span>
+<span class="sd">    resVolumeC            compressed map of reservoir volume                                                Million m</span>
+<span class="sd">    lakeEvaFactor         a factor which increases evaporation from lake because of wind                    --       </span>
+<span class="sd">    lakeEvaFactorC        compressed map of a factor which increases evaporation from lake because of wind  --       </span>
+<span class="sd">    reslakeoutflow                                                                                          m        </span>
+<span class="sd">    lakeVolume            volume of lakes                                                                   m3       </span>
+<span class="sd">    outLake               outflow from lakes                                                                m        </span>
+<span class="sd">    lakeStorage                                                                                                      </span>
+<span class="sd">    lakeInflow                                                                                                       </span>
+<span class="sd">    lakeOutflow                                                                                                      </span>
+<span class="sd">    reservoirStorage                                                                                                 </span>
+<span class="sd">    MtoM3C                conversion factor from m to m3 (compressed map)                                   --       </span>
+<span class="sd">    MtoM3                 Coefficient to change units                                                       --       </span>
+<span class="sd">    EvapWaterBodyM                                                                                                   </span>
+<span class="sd">    lakeResInflowM                                                                                                   </span>
+<span class="sd">    lakeResOutflowM                                                                                                  </span>
+<span class="sd">    lakeFactor            factor for the Modified Puls approach to calculate retention of the lake          --       </span>
+<span class="sd">    dtRouting             number of seconds per routing timestep                                            s        </span>
+<span class="sd">    lakeFactorSqr         square root factor for the Modified Puls approach to calculate retention of the   --       </span>
+<span class="sd">    lakeInflowOldC        inflow to the lake from previous days                                             m/3      </span>
+<span class="sd">    lakeVolumeM3C         compressed map of lake volume                                                     m3       </span>
+<span class="sd">    lakeStorageC                                                                                            m3       </span>
+<span class="sd">    lakeOutflowC          compressed map of lake outflow                                                    m3/s     </span>
+<span class="sd">    lakeLevelC            compressed map of lake level                                                      m        </span>
+<span class="sd">    conLimitC                                                                                                        </span>
+<span class="sd">    normLimitC                                                                                                       </span>
+<span class="sd">    floodLimitC                                                                                                      </span>
+<span class="sd">    adjust_Normal_FloodC                                                                                             </span>
+<span class="sd">    norm_floodLimitC                                                                                                 </span>
+<span class="sd">    minQC                                                                                                            </span>
+<span class="sd">    normQC                                                                                                           </span>
+<span class="sd">    nondmgQC                                                                                                         </span>
+<span class="sd">    deltaO                                                                                                           </span>
+<span class="sd">    deltaLN                                                                                                          </span>
+<span class="sd">    deltaLF                                                                                                          </span>
+<span class="sd">    deltaNFL                                                                                                         </span>
+<span class="sd">    reservoirFillC                                                                                                   </span>
+<span class="sd">    reservoirStorageM3C                                                                                              </span>
+<span class="sd">    lakeResStorageC                                                                                                  </span>
+<span class="sd">    lakeResStorage                                                                                                   </span>
+<span class="sd">    waterBodyTypCTemp                                                                                                </span>
+<span class="sd">    sumEvapWaterBodyC                                                                                                </span>
+<span class="sd">    sumlakeResInflow                                                                                                 </span>
+<span class="sd">    sumlakeResOutflow                                                                                                </span>
+<span class="sd">    lakeIn                                                                                                           </span>
+<span class="sd">    lakeEvapWaterBodyC                                                                                               </span>
+<span class="sd">    evapWaterBodyC                                                                                                   </span>
+<span class="sd">    sumLakeEvapWaterBody                                                                                             </span>
+<span class="sd">    noRoutingSteps                                                                                                   </span>
+<span class="sd">    resEvapWaterBodyC                                                                                                </span>
+<span class="sd">    sumResEvapWaterBodyC                                                                                             </span>
+<span class="sd">    InvDtSec                                                                                                         </span>
+<span class="sd">    discharge             discharge                                                                         m3/s     </span>
+<span class="sd">    runoff                                                                                                           </span>
+<span class="sd">    cellArea              Cell area [m�] of each simulated mesh                                                      </span>
+<span class="sd">    downstruct                                                                                                       </span>
+<span class="sd">    prelakeResStorage                                                                                                </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lakes_reservoirs_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">lakes_reservoirs_variable</span>
-
-
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
-
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
 <div class="viewcode-block" id="lakes_reservoirs.initWaterbodies"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.initWaterbodies">[docs]</a>    <span class="k">def</span> <span class="nf">initWaterbodies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -134,7 +221,6 @@
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">):</span>
 
             <span class="c1"># load lakes/reservoirs map with a single ID for each lake/reservoir</span>
-            <span class="c1">#self.var.waterBodyID = readnetcdf2(self.var.waterbody_file, dateVar[&#39;currDate&#39;], &quot;yearly&quot;,value=&#39;waterBodyIds&#39;).astype(np.int64)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyID</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;waterBodyID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 
             <span class="c1">#self.var.waterBodyID = np.where(self.var.waterBodyID == 887, 0, self.var.waterBodyID)</span>
@@ -187,7 +273,6 @@
             <span class="c1"># ================================</span>
             <span class="c1"># Lakes</span>
 
-            <span class="c1"># lake area - stored in km2</span>
             <span class="c1"># Surface area of each lake [m2]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeArea</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;waterBodyArea&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">*</span> <span class="mi">1000</span>    <span class="c1"># mult with 1000000 to convert from km2 to m2</span>
 
@@ -229,7 +314,7 @@
             <span class="c1"># initial only the big arrays are set to 0, the  initial values are loaded inside the subrouines of lakes and reservoirs</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">reslakeoutflow</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeVolume</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">outLake</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;outLake&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">outLake</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;outLake&quot;</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeStorage</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeInflow</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -251,9 +336,9 @@
 <span class="sd">        Using the **Modified Puls approach** to calculate retention of a lake</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># self.var.lakeInflowOldC = np.bincount(self.var.downstruct, weights=self.var.ChanQ)[self.var.LakeIndex]</span>
+        <span class="c1"># self_.var.lakeInflowOldC = np.bincount(self_.var.downstruct, weights=self.var.ChanQ)[self.var.LakeIndex]</span>
 
-        <span class="c1"># self.var.lakeInflowOldC = np.compress(self.var.compress_LR, self.var.chanQKin)</span>
+        <span class="c1"># self.var.lakeInflowOldC = np.compress(self_.var.compress_LR, self_.var.chanQKin)</span>
         <span class="c1"># for Modified Puls Method the Q(inflow)1 has to be used. It is assumed that this is the same as Q(inflow)2 for the first timestep</span>
         <span class="c1"># has to be checked if this works in forecasting mode!</span>
 
@@ -262,20 +347,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeFactorSqr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeFactor</span><span class="p">)</span>
         <span class="c1"># for faster calculation inside dynamic section</span>
 
-        <span class="n">lakeInflowIni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;lakeInflow&quot;</span><span class="p">)</span>  <span class="c1"># inflow in m3/s estimate</span>
+        <span class="n">lakeInflowIni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;lakeInflow&quot;</span><span class="p">)</span>  <span class="c1"># inflow in m3/s estimate</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">lakeInflowIni</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeInflowOldC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeDis0C</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeInflowOldC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compress_LR</span><span class="p">,</span> <span class="n">lakeInflowIni</span><span class="p">)</span>
 
-        <span class="n">lakeVolumeIni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;lakeStorage&quot;</span><span class="p">)</span>
+        <span class="n">lakeVolumeIni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;lakeStorage&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">lakeVolumeIni</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeVolumeM3C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeAreaC</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeInflowOldC</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeAC</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeVolumeM3C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">compress_LR</span><span class="p">,</span> <span class="n">lakeVolumeIni</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeStorageC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeVolumeM3C</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-        <span class="n">lakeOutflowIni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;lakeOutflow&quot;</span><span class="p">)</span>
+        <span class="n">lakeOutflowIni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;lakeOutflow&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">lakeOutflowIni</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
             <span class="n">lakeStorageIndicator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeVolumeM3C</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dtRouting</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeInflowOldC</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
             <span class="c1"># SI = S/dt + Q/2</span>
@@ -320,7 +405,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">deltaLF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">floodLimitC</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">normLimitC</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">deltaNFL</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">floodLimitC</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">norm_floodLimitC</span>
 
-        <span class="n">reservoirStorageIni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;reservoirStorage&quot;</span><span class="p">)</span>
+        <span class="n">reservoirStorageIni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;reservoirStorage&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">reservoirStorageIni</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">reservoirFillC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">normLimitC</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="c1"># Initial reservoir fill (fraction of total storage, [-])</span>
@@ -523,38 +608,6 @@
             <span class="n">reservoirOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">reservoirFillC</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">norm_floodLimitC</span><span class="p">,</span> <span class="n">reservoirOutflow3</span><span class="p">,</span> <span class="n">reservoirOutflow</span><span class="p">)</span>
             <span class="n">reservoirOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">reservoirFillC</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">floodLimitC</span><span class="p">,</span> <span class="n">reservoirOutflow4</span><span class="p">,</span> <span class="n">reservoirOutflow</span><span class="p">)</span>
 
-            
-            
-            <span class="c1"># This is a development inspired by the Upper Bhima basin. </span>
-            <span class="c1"># If reservoirs are closed off to the river system at some point, i.e. the reservoirs stop releasing water into the rivers</span>
-            <span class="c1"># When this feature is activated, for the months specified the reservoirs do not relase water into the river.</span>
-            <span class="c1"># TODO: put beginnning and end month in Settings file. </span>
-
-            <span class="k">if</span> <span class="s2">&quot;sometimes_closed&quot;</span> <span class="ow">in</span> <span class="n">binding</span><span class="p">:</span>
-
-                <span class="k">if</span> <span class="n">cbinding</span><span class="p">(</span><span class="s2">&quot;sometimes_closed&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;True&#39;</span><span class="p">:</span>
-                    <span class="n">sometimes_closed</span> <span class="o">=</span> <span class="kc">True</span>
-                    <span class="n">sometimes_closed_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;sometimes_closed_start&#39;</span><span class="p">))</span>
-                    <span class="n">sometimes_closed_end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;sometimes_closed_end&#39;</span><span class="p">))</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">sometimes_closed</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">sometimes_closed</span> <span class="o">=</span> <span class="kc">False</span>
-                
-            <span class="k">if</span> <span class="n">sometimes_closed</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-                <span class="n">month</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDatestr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-
-                <span class="k">if</span> <span class="n">sometimes_closed_end</span> <span class="o">&lt;=</span> <span class="n">sometimes_closed_start</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">month</span> <span class="o">&gt;=</span> <span class="n">sometimes_closed_start</span> <span class="ow">or</span> <span class="n">month</span> <span class="o">&lt;=</span> <span class="n">sometimes_closed_end</span><span class="p">:</span>
-                        <span class="c1">#only override if there is a possibility of flooding</span>
-                        <span class="n">reservoirOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">reservoirFillC</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">floodLimitC</span><span class="p">,</span> <span class="n">reservoirOutflow4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-
-                <span class="k">elif</span> <span class="n">sometimes_closed_start</span> <span class="o">&lt;</span> <span class="n">sometimes_closed_end</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">month</span> <span class="o">&gt;=</span> <span class="n">sometimes_closed_start</span> <span class="ow">and</span> <span class="n">month</span> <span class="o">&lt;=</span> <span class="n">sometimes_closed_end</span><span class="p">:</span>
-
-                        <span class="n">reservoirOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">reservoirFillC</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">floodLimitC</span><span class="p">,</span> <span class="n">reservoirOutflow4</span><span class="p">,</span>
-                                                    <span class="mf">0.0</span><span class="p">)</span>
-
             <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">reservoirOutflow</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">inflowC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">normQC</span><span class="p">))</span>
 
             <span class="n">reservoirOutflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">reservoirOutflow</span> <span class="o">&gt;</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="n">inflowC</span><span class="p">)</span> <span class="o">&amp;</span>
@@ -611,13 +664,13 @@
 
         <span class="c1"># ----------</span>
         <span class="c1"># inflow lakes</span>
-        <span class="c1"># 1.  dis = upstream1(self.var.downstruct_LR, self.var.discharge)   # from river upstream</span>
-        <span class="c1"># 2.  runoff = npareatotal(self.var.waterBodyID, self.var.waterBodyID)  # from cell itself</span>
+        <span class="c1"># 1.  dis = upstream1(self_.var.downstruct_LR, self_.var.discharge)   # from river upstream</span>
+        <span class="c1"># 2.  runoff = npareatotal(self.var_.waterBodyID, self_.var.waterBodyID)  # from cell itself</span>
         <span class="c1"># 3.                  # outflow from upstream lakes</span>
 
         <span class="c1"># ----------</span>
         <span class="c1"># outflow lakes res -&gt; inflow ldd_LR</span>
-        <span class="c1"># 1. out = upstream1(self.var.downstruct, self.var.outflow)</span>
+        <span class="c1"># 1. out = upstream1(self_.var.downstruct, self_.var.outflow)</span>
 
 
         <span class="c1"># collect discharge from above waterbodies</span>
@@ -657,7 +710,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumEvapWaterBodyC</span> <span class="o">+=</span> <span class="n">EvapWaterBodyC</span> <span class="c1"># in [m3]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumlakeResInflow</span> <span class="o">+=</span> <span class="n">inflowCorrC</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumlakeResOutflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumlakeResOutflow</span>  <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeOutflowC</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dtRouting</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumlakeResOutflow</span> <span class="o">+=</span> <span class="n">outflowC</span>
+        <span class="c1">#self.var.sumlakeResOutflow = self.var.sumlakeResOutflow  + self.var.lakeOutflowC * self.var.dtRouting</span>
 
         <span class="c1"># decompress to normal maskarea size waterbalance</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">noRoutingSteps</span> <span class="o">==</span> <span class="p">(</span><span class="n">NoRoutingExecuted</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>

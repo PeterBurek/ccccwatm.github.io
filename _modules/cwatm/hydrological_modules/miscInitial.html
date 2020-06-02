@@ -58,13 +58,35 @@
 
 <span class="sd">    Note:</span>
 <span class="sd">        Only used in the initial phase.</span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
+<span class="sd">    twothird              2/3                                                                               --       </span>
+<span class="sd">    MtoM3                 Coefficient to change units                                                       --       </span>
+<span class="sd">    InvDtSec                                                                                                         </span>
+<span class="sd">    cellArea              Cell area [m�] of each simulated mesh                                                      </span>
+<span class="sd">    cellLength            length of a grid cell                                                             m        </span>
+<span class="sd">    InvCellArea           Inverse of cell area of each simulated mesh                                       m-1      </span>
+<span class="sd">    DtDay                 seconds in a timestep (default=86400)                                             s        </span>
+<span class="sd">    InvDtDay              inverse seconds in a timestep (default=86400)                                     s-1      </span>
+<span class="sd">    MMtoM                 Coefficient to change units                                                       --       </span>
+<span class="sd">    MtoMM                 Coefficient to change units                                                       --       </span>
+<span class="sd">    M3toM                 Coefficient to change units                                                       --       </span>
+<span class="sd">    con_precipitation     conversion factor for precipitation                                               --       </span>
+<span class="sd">    con_e                 conversion factor for evaporation                                                 --       </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">misc_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">misc_variable</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="miscInitial.initial"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.miscInitial.miscInitial.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -98,9 +120,6 @@
             <span class="c1"># - Maps are in some equal-area projection</span>
             <span class="c1"># - Length units meters</span>
             <span class="c1"># - All grid cells have the same size</span>
-
-            <span class="c1"># Length of pixel [m]</span>
-            <span class="c1">#self.var.PixelLength = celllength()</span>
 
             <span class="c1"># Area of pixel [m2]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mapC&#39;</span><span class="p">])</span>

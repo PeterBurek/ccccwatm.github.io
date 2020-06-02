@@ -180,8 +180,6 @@
                     <span class="n">option</span><span class="p">[</span><span class="n">opt</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
                     <span class="c1">#msg = &quot;Value in: \&quot;&quot; + sec +&quot;, &quot; + opt + &quot;\&quot; is not True or False!&quot;</span>
                     <span class="c1">#raise CWATMError(msg)</span>
-
-
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># Check if config line = output line</span>
                 <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">lower</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;out_&quot;</span><span class="p">:</span>
@@ -207,7 +205,7 @@
      <span class="c1"># Output directory is stored in a separat global array</span>
 
 
-<div class="viewcode-block" id="read_metanetcdf"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.configuration.read_metanetcdf">[docs]</a><span class="k">def</span> <span class="nf">read_metanetcdf</span><span class="p">(</span><span class="n">metaxml</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="read_metanetcdf"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.configuration.read_metanetcdf">[docs]</a><span class="k">def</span> <span class="nf">read_metanetcdf</span><span class="p">(</span><span class="n">metaxml</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Read the metadata for netcdf output files</span>
 <span class="sd">    unit, long name, standard name and additional information</span>

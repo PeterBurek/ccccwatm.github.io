@@ -54,11 +54,57 @@
 <span class="sd">    READ METEOROLOGICAL DATA</span>
 
 <span class="sd">    reads all meteorological data from netcdf4 files</span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
+<span class="sd">    Precipitation         Precipitation (input for the model)                                               m        </span>
+<span class="sd">    DtDay                 seconds in a timestep (default=86400)                                             s        </span>
+<span class="sd">    con_precipitation     conversion factor for precipitation                                               --       </span>
+<span class="sd">    con_e                 conversion factor for evaporation                                                 --       </span>
+<span class="sd">    meteomapsscale        if meteo maps have the same extend as the other spatial static maps -&gt; meteomaps  --       </span>
+<span class="sd">    meteodown             if meteo maps should be downscaled                                                --       </span>
+<span class="sd">    modflowsteady         True if modflow_steadystate = True in settings file                               --       </span>
+<span class="sd">    preMaps               choose between steady state precipitation maps for steady state modflow or norma  --       </span>
+<span class="sd">    tempMaps              choose between steady state temperature maps for steady state modflow or normal   --       </span>
+<span class="sd">    evaTMaps              choose between steady state ETP water maps for steady state modflow or normal ma  --       </span>
+<span class="sd">    eva0Maps              choose between steady state ETP reference maps for steady state modflow or norma  --       </span>
+<span class="sd">    wc2_tavg              High resolution WorldClim map for average temperature                             K        </span>
+<span class="sd">    wc4_tavg              upscaled to low resolution WorldClim map for average temperature                  K        </span>
+<span class="sd">    wc2_tmin              High resolution WorldClim map for min temperature                                 K        </span>
+<span class="sd">    wc4_tmin              upscaled to low resolution WorldClim map for min temperature                      K        </span>
+<span class="sd">    wc2_tmax              High resolution WorldClim map for max temperature                                 K        </span>
+<span class="sd">    wc4_tmax              upscaled to low resolution WorldClim map for max temperature                      K        </span>
+<span class="sd">    wc2_prec              High resolution WorldClim map for precipitation                                   m        </span>
+<span class="sd">    wc4_prec              upscaled to low resolution WorldClim map for precipitation                        m        </span>
+<span class="sd">    demAnomaly            digital elevation model anomaly (high resolution - low resolution)                m        </span>
+<span class="sd">    demHigh               digital elevation model high resolution                                           m        </span>
+<span class="sd">    Tavg                  average air Temperature (input for the model)                                     K        </span>
+<span class="sd">    prec                  precipitation in m                                                                m        </span>
+<span class="sd">    temp                  average temperature in Celsius deg                                                C�       </span>
+<span class="sd">    TMin                  minimum air temperature                                                           K        </span>
+<span class="sd">    Tmin                  minimum temperature in Celsius deg                                                C�       </span>
+<span class="sd">    TMax                  maximum air temperature                                                           K        </span>
+<span class="sd">    Tmax                  maximum temperature in celsius deg                                                C�       </span>
+<span class="sd">    Psurf                 Instantaneous surface pressure                                                    Pa       </span>
+<span class="sd">    Wind                  wind speed                                                                        m/s      </span>
+<span class="sd">    Rsds                  short wave downward surface radiation fluxes                                      W/m2     </span>
+<span class="sd">    Rsdl                  long wave downward surface radiation fluxes                                       W/m2     </span>
+<span class="sd">    Qair                  specific humidity                                                                 kg/kg    </span>
+<span class="sd">    WtoMJ                 Conversion factor from [W] to [MJ] for radiation: 86400 * 1E-6                    --       </span>
+<span class="sd">    ETRef                 potential evapotranspiration rate from reference crop                             m        </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">readmeteo_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">readmeteo_variable</span>
-
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
 
 <div class="viewcode-block" id="readmeteo.initial"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.readmeteo.readmeteo.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -66,6 +112,64 @@
 
 <span class="sd">        read multiple file of input</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># fit meteorological forcing data to size and resolution of mask map</span>
+        <span class="c1">#-------------------------------------------------------------------</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">)</span>
+        <span class="n">nameall</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nameall</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">)</span>
+        <span class="n">namemeteo</span> <span class="o">=</span> <span class="n">nameall</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">latmeteo</span><span class="p">,</span> <span class="n">lonmeteo</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcellmeteo</span> <span class="o">=</span> <span class="n">readCoordNetCDF</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">)</span>
+
+        <span class="n">nameldd</span> <span class="o">=</span> <span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;Ldd&#39;</span><span class="p">)</span>
+        <span class="c1">#nameldd = os.path.splitext(nameldd)[0] + &#39;.nc&#39;</span>
+        <span class="c1">#latldd, lonldd, cell, invcellldd = readCoordNetCDF(nameldd)</span>
+        <span class="n">latldd</span><span class="p">,</span> <span class="n">lonldd</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcellldd</span> <span class="o">=</span> <span class="n">readCoord</span><span class="p">(</span><span class="n">nameldd</span><span class="p">)</span>
+        <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">invcellldd</span> <span class="o">/</span> <span class="n">invcellmeteo</span><span class="p">)</span>
+
+        <span class="c1"># if meteo maps have the same extend as the other spatial static maps -&gt; meteomapsscale = True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteomapsscale</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">invcellmeteo</span> <span class="o">!=</span> <span class="n">invcellldd</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;quiet&#39;</span><span class="p">]))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;veryquiet&#39;</span><span class="p">]))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">])):</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Resolution of meteo forcing is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; times higher than base maps.&quot;</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteomapsscale</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapattrNetCDF</span><span class="p">(</span><span class="n">nameldd</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cutmap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c1"># for downscaling meteomaps , Wordclim data at a finer resolution is used</span>
+        <span class="c1"># here it is necessary to clip the wordclim data so that they fit to meteo dataset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteodown</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="s2">&quot;usemeteodownscaling&quot;</span> <span class="ow">in</span> <span class="n">binding</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteodown</span> <span class="o">=</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;usemeteodownscaling&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteodown</span><span class="p">:</span>
+            <span class="n">check_clim</span> <span class="o">=</span> <span class="n">checkMeteo_Wordclim</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">,</span> <span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;downscale_wordclim_prec&#39;</span><span class="p">))</span>
+
+        <span class="c1"># in case other mapsets are used e.g. Cordex RCM meteo data</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">latldd</span> <span class="o">!=</span> <span class="n">latmeteo</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">lonldd</span> <span class="o">!=</span> <span class="n">lonmeteo</span><span class="p">):</span>
+            <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapattrNetCDFMeteo</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteomapsscale</span><span class="p">:</span>
+            <span class="c1"># if the cellsize of the spatial dataset e.g. ldd, soil etc is not the same as the meteo maps than:</span>
+            <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>  <span class="o">=</span> <span class="n">mapattrNetCDFMeteo</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">)</span>
+            <span class="c1"># downscaling wordlclim maps</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">cutmapGlobal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">check_clim</span><span class="p">):</span>
+               <span class="c1"># for downscaling it is always cut from the global map</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">latldd</span> <span class="o">!=</span> <span class="n">latmeteo</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">lonldd</span> <span class="o">!=</span> <span class="n">lonmeteo</span><span class="p">):</span>
+                    <span class="n">cutmapGlobal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">])</span>
+                    <span class="n">cutmapGlobal</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">])</span>
+                    <span class="n">cutmapGlobal</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">]</span><span class="o">+</span><span class="mf">0.999</span><span class="p">)</span>
+                    <span class="n">cutmapGlobal</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">]</span><span class="o">+</span><span class="mf">0.999</span><span class="p">)</span>
+
+        <span class="c1"># -------------------------------------------------------------------</span>
+
+
 
         <span class="c1"># test if ModFlow is in the settingsfile</span>
         <span class="c1"># if not, use default without Modflow</span>
@@ -269,8 +373,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">=</span> <span class="n">readmeteodata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preMaps</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mapsscale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteomapsscale</span><span class="p">,</span> <span class="n">modflowSteady</span> <span class="o">=</span> <span class="n">modflow</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtDay</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">con_precipitation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">)</span>
 
-
-
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteodown</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">wc2_prec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">wc4_prec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">downscaling2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="s2">&quot;downscale_wordclim_prec&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">wc2_prec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">wc4_prec</span><span class="p">,</span> <span class="n">downscale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -279,10 +381,9 @@
         <span class="c1">#self.var.Precipitation = self.var.Precipitation * 1000</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">con_precipitation</span>
-        <span class="c1"># precipitation (conversion to [mm] per time step)  `</span>
+        <span class="c1"># precipitation (conversion to [m] per time step)  `</span>
         <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
             <span class="n">checkmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preMaps</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">)</span>
-
 
         <span class="c1">#self.var.Tavg = readnetcdf2(&#39;TavgMaps&#39;, dateVar[&#39;currDate&#39;], addZeros = True, zeros = ZeroKelvin, meteo = True)</span>
 

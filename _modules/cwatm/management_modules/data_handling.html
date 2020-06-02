@@ -163,7 +163,7 @@
     <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;invcell&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">invcell</span></div>
 
 
-<div class="viewcode-block" id="loadsetclone"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.loadsetclone">[docs]</a><span class="k">def</span> <span class="nf">loadsetclone</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="loadsetclone"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.loadsetclone">[docs]</a><span class="k">def</span> <span class="nf">loadsetclone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    load the maskmap and set as clone</span>
 
@@ -286,13 +286,28 @@
 
     <span class="n">outpoints</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-       <span class="n">outpoints</span> <span class="o">=</span> <span class="n">valuecell</span><span class="p">(</span> <span class="n">coord</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+       <span class="n">outpoints</span> <span class="o">=</span> <span class="n">valuecell</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
        <span class="n">outpoints</span><span class="p">[</span><span class="n">outpoints</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="k">return</span> <span class="n">mapC</span><span class="p">,</span> <span class="n">outpoints</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span></div>
+       <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Create catchment from point and river network&quot;</span><span class="p">)</span>
+       <span class="n">mask2D</span><span class="p">,</span> <span class="n">xleft</span><span class="p">,</span> <span class="n">yup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">routing_kinematic_module</span><span class="o">.</span><span class="n">catchment</span><span class="p">(</span><span class="n">outpoints</span><span class="p">)</span>
+       <span class="n">mapC</span> <span class="o">=</span> <span class="n">maskfrompoint</span><span class="p">(</span><span class="n">mask2D</span><span class="p">,</span> <span class="n">xleft</span><span class="p">,</span> <span class="n">yup</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+       <span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;CellArea&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-6</span>
+       <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of cells in catchment: </span><span class="si">%6i</span><span class="s2"> = </span><span class="si">%7.0f</span><span class="s2"> km2&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask2D</span><span class="p">),</span> <span class="n">area</span><span class="p">))</span>
+
+    <span class="c1"># if the final results map should be cover up with some mask:</span>
+    <span class="k">if</span> <span class="s2">&quot;coverresult&quot;</span> <span class="ow">in</span> <span class="n">binding</span><span class="p">:</span>
+        <span class="n">coverresult</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;coverresult&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">coverresult</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">cover</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;covermap&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">cover</span><span class="p">[</span><span class="n">cover</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">cover</span><span class="p">[</span><span class="n">cover</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">coverresult</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cover</span>
+
+    <span class="k">return</span> <span class="n">mapC</span></div>
 
 
-<div class="viewcode-block" id="maskfrompoint"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.maskfrompoint">[docs]</a><span class="k">def</span> <span class="nf">maskfrompoint</span><span class="p">(</span><span class="n">mask2D</span><span class="p">,</span><span class="n">xleft</span><span class="p">,</span><span class="n">yup</span><span class="p">):</span>
+<div class="viewcode-block" id="maskfrompoint"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.maskfrompoint">[docs]</a><span class="k">def</span> <span class="nf">maskfrompoint</span><span class="p">(</span><span class="n">mask2D</span><span class="p">,</span> <span class="n">xleft</span><span class="p">,</span> <span class="n">yup</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    load a static map either value or pc raster map or netcdf</span>
 
@@ -504,7 +519,7 @@
 <span class="sd">    variable metaNetcdfVar</span>
 
 <span class="sd">    :param key: key</span>
-<span class="sd">    :param varname: variable name eg self.var.Precipitation</span>
+<span class="sd">    :param varname: variable name eg self_.var_.Precipitation</span>
 <span class="sd">    :return: metadata information</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -624,8 +639,6 @@
     <span class="n">lon</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">lon0</span> <span class="o">-</span> <span class="n">cell</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
     <span class="n">lat</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">lat0</span> <span class="o">+</span> <span class="n">cell</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
 
-
-
     <span class="k">return</span> <span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span><span class="n">invcell</span></div>
 
 <div class="viewcode-block" id="readCalendar"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.readCalendar">[docs]</a><span class="k">def</span> <span class="nf">readCalendar</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
@@ -702,7 +715,7 @@
 
     <span class="k">return</span> <span class="n">check</span></div>
 
-<div class="viewcode-block" id="mapattrNetCDF"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.mapattrNetCDF">[docs]</a><span class="k">def</span> <span class="nf">mapattrNetCDF</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="mapattrNetCDF"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.mapattrNetCDF">[docs]</a><span class="k">def</span> <span class="nf">mapattrNetCDF</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    get the 4 corners of a netcdf map to cut the map</span>
 <span class="sd">    defines the rectangular of the mask map inside the netcdf map</span>
@@ -861,21 +874,31 @@
                 <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="n">maps</span><span class="p">)</span>
             <span class="n">nctime</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
 
-            <span class="n">datestart</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span><span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
-            <span class="c1">#datestart = num2date(nctime[0], units=nctime.units, calendar=&#39;proleptic_gregorian&#39;)</span>
+            <span class="n">unitconv1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DAYS&quot;</span><span class="p">,</span> <span class="s2">&quot;HOUR&quot;</span><span class="p">,</span> <span class="s2">&quot;MINU&quot;</span><span class="p">,</span> <span class="s2">&quot;SECO&quot;</span><span class="p">]</span>
+            <span class="n">unitconv2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">1440</span><span class="p">,</span> <span class="mi">86400</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">unitconv3</span> <span class="o">=</span> <span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                <span class="n">datediv</span> <span class="o">=</span> <span class="n">unitconv2</span><span class="p">[</span><span class="n">unitconv1</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">unitconv3</span><span class="p">)]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">datediv</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="n">datestart</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span><span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
+
             <span class="c1"># sometime daily records have a strange hour to start with -&gt; it is changed to 0:00 to haqve the same record</span>
             <span class="n">datestart</span> <span class="o">=</span> <span class="n">datestart</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">dateend</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
 
-            <span class="n">datestartint</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">dateendint</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">datestartint</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">//</span> <span class="n">datediv</span>
+            <span class="n">dateendint</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="n">datediv</span>
 
-            <span class="c1">#dateend = num2date(nctime[-1], units=nctime.units, calendar=&#39;proleptic_gregorian&#39;)</span>
             <span class="n">dateend</span> <span class="o">=</span> <span class="n">dateend</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="c1">#if dateVar[&#39;leapYear&#39;] &gt; 0:</span>
             <span class="n">startint</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">date2num</span><span class="p">(</span><span class="n">dateVar</span><span class="p">[</span><span class="n">startcheck</span><span class="p">],</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span><span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">))</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">startint</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
+            <span class="n">startint</span> <span class="o">=</span> <span class="n">startint</span> <span class="o">//</span> <span class="n">datediv</span>
+
             <span class="n">endint</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">date2num</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">))</span>
+            <span class="n">endint</span> <span class="o">=</span> <span class="n">endint</span> <span class="o">//</span> <span class="n">datediv</span>
 
             <span class="c1">#else:</span>
             <span class="c1">#    start = dateVar[startcheck]</span>
@@ -894,7 +917,7 @@
                     <span class="c1">#start = dateend + datetime.timedelta(days=1)</span>
                     <span class="c1">#start = start.replace(hour=0, minute=0)</span>
                     <span class="n">startint</span> <span class="o">=</span> <span class="n">dateendint</span> <span class="o">+</span> <span class="mi">1</span>
-                    <span class="n">start</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">startint</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
+                    <span class="n">start</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">startint</span> <span class="o">*</span> <span class="n">datediv</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
 
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">datestartint</span> <span class="o">&gt;=</span> <span class="n">startint</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">datestartint</span> <span class="o">&lt;</span> <span class="n">endint</span> <span class="p">):</span>
@@ -905,7 +928,7 @@
                     <span class="c1">#start = dateend + datetime.timedelta(days=1)</span>
                     <span class="c1">#start = start.replace(hour=0, minute=0)</span>
                     <span class="n">startint</span> <span class="o">=</span> <span class="n">dateendint</span> <span class="o">+</span> <span class="mi">1</span>
-                    <span class="n">start</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">startint</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
+                    <span class="n">start</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">startint</span> <span class="o">*</span> <span class="n">datediv</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
 
             <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">meteofiles</span><span class="p">[</span><span class="n">maps</span><span class="p">]</span> <span class="o">=</span>  <span class="n">meteolist</span>
@@ -951,6 +974,10 @@
     <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+               <span class="n">value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="o">-</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+               <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">])</span> <span class="p">:</span> <span class="k">break</span>
 
     <span class="c1"># check if mask = map size -&gt; if yes do not cut the map</span>
     <span class="n">cutcheckmask</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
@@ -1401,9 +1428,6 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">mapnp</span> <span class="o">=</span> <span class="n">mapnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span>
 
-    <span class="c1">#date_time[posCnt] = date2num(timeStamp, date_time.units, date_time.calendar)</span>
-
-
     <span class="k">if</span> <span class="n">flagTime</span><span class="p">:</span>
         <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">varname</span><span class="p">][</span><span class="n">posCnt</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">mapnp</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1540,7 +1564,7 @@
 <span class="sd">    ::</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">        &gt; report(c:/temp/ksat1.map, self.var.ksat1)</span>
+<span class="sd">        &gt; report(c:/temp/ksat1.map, self_.var_.ksat1)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1647,7 +1671,7 @@
     <span class="k">if</span> <span class="n">test</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">option</span><span class="p">[</span><span class="n">inBinding</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">closest</span> <span class="o">=</span> <span class="n">difflib</span><span class="o">.</span><span class="n">get_close_matches</span><span class="p">(</span><span class="n">inBinding</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="n">close</span> <span class="o">=</span> <span class="n">difflib</span><span class="o">.</span><span class="n">get_close_matches</span><span class="p">(</span><span class="n">inBinding</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
         <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
             <span class="n">closest</span> <span class="o">=</span> <span class="n">close</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">settingsfile</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>

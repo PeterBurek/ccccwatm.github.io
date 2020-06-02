@@ -47,39 +47,58 @@
 <span class="c1"># -------------------------------------------------------------------------</span>
 
 
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.miscInitial</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.initcondition</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.miscInitial</span> <span class="k">import</span> <span class="n">miscInitial</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.initcondition</span> <span class="k">import</span> <span class="n">initcondition</span>
 
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.readmeteo</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.evaporationPot</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.inflow</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.snow_frost</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.soil</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.landcoverType</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.sealed_water</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.evaporation</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.groundwater</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.groundwater_modflow.groundwater_modflow</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.readmeteo</span> <span class="k">import</span> <span class="n">readmeteo</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.evaporationPot</span> <span class="k">import</span> <span class="n">evaporationPot</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.inflow</span> <span class="k">import</span> <span class="n">inflow</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.snow_frost</span> <span class="k">import</span> <span class="n">snow_frost</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.soil</span> <span class="k">import</span> <span class="n">soil</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.landcoverType</span> <span class="k">import</span> <span class="n">landcoverType</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.sealed_water</span> <span class="k">import</span> <span class="n">sealed_water</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.evaporation</span> <span class="k">import</span> <span class="n">evaporation</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.groundwater</span> <span class="k">import</span> <span class="n">groundwater</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.groundwater_modflow.groundwater_modflow</span> <span class="k">import</span> <span class="n">groundwater_modflow</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.water_demand</span> <span class="k">import</span> <span class="n">water_demand</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.capillarRise</span> <span class="k">import</span> <span class="n">capillarRise</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.interception</span> <span class="k">import</span> <span class="n">interception</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.runoff_concentration</span> <span class="k">import</span> <span class="n">runoff_concentration</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.lakes_res_small</span> <span class="k">import</span> <span class="n">lakes_res_small</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.waterbalance</span> <span class="k">import</span> <span class="n">waterbalance</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.environflow</span> <span class="k">import</span> <span class="n">environflow</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.routing_reservoirs.routing_kinematic</span> <span class="k">import</span> <span class="n">routing_kinematic</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.lakes_reservoirs</span> <span class="k">import</span> <span class="n">lakes_reservoirs</span>
+<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.waterquality1</span> <span class="k">import</span> <span class="n">waterquality1</span>
 
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.waterdemand</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.capillarRise</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.interception</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.runoff_concentration</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.lakes_res_small</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.waterbalance</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.environflow</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.routing_reservoirs.routing_kinematic</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.lakes_reservoirs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.hydrological_modules.waterquality1</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="c1"># --------------------------------------------</span>
-
-<span class="c1">#from cwatm.management_modules.data_handling import *</span>
 <span class="kn">from</span> <span class="nn">cwatm.management_modules.output</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">glob</span>
 
+
+<div class="viewcode-block" id="Variables"><a class="viewcode-back" href="../../cwatm_initial.html#cwatm.cwatm_initial.Variables">[docs]</a><span class="k">class</span> <span class="nc">Variables</span><span class="p">:</span>
+<div class="viewcode-block" id="Variables.load_initial"><a class="viewcode-back" href="../../cwatm_initial.html#cwatm.cwatm_initial.Variables.load_initial">[docs]</a>    <span class="k">def</span> <span class="nf">load_initial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        First it is checked if the initial value is given in the settings file</span>
+
+<span class="sd">        * if it is &lt;&gt; None it is used directly</span>
+<span class="sd">        * if None it is loaded from the init netcdf file</span>
+
+<span class="sd">        :param name: Name of the init value</span>
+<span class="sd">        :param default: default value -&gt; default is 0.0</span>
+<span class="sd">        :param number: in case of snow or runoff concentration several layers are included: number = no of the layer</span>
+<span class="sd">        :return: spatial map or value of initial condition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadInit</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">readnetcdfInitial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initLoadFile</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">default</span></div></div>
+
+<div class="viewcode-block" id="Config"><a class="viewcode-back" href="../../cwatm_initial.html#cwatm.cwatm_initial.Config">[docs]</a><span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+    <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="CWATModel_ini"><a class="viewcode-back" href="../../cwatm_initial.html#cwatm.cwatm_initial.CWATModel_ini">[docs]</a><span class="k">class</span> <span class="nc">CWATModel_ini</span><span class="p">(</span><span class="n">DynamicModel</span><span class="p">):</span>
@@ -99,125 +118,44 @@
 
         <span class="n">DynamicModel</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">Variables</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conf</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+
         <span class="c1"># ----------------------------------------</span>
         <span class="c1"># include output of tss and maps</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">output_module</span> <span class="o">=</span> <span class="n">outputTssMap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="c1"># include all the hydrological modules</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">misc_module</span> <span class="o">=</span> <span class="n">miscInitial</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">init_module</span> <span class="o">=</span> <span class="n">initcondition</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">waterbalance_module</span> <span class="o">=</span> <span class="n">waterbalance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">readmeteo_module</span> <span class="o">=</span> <span class="n">readmeteo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">environflow_module</span> <span class="o">=</span> <span class="n">environflow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">evaporationPot_module</span> <span class="o">=</span> <span class="n">evaporationPot</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inflow_module</span> <span class="o">=</span> <span class="n">inflow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">snowfrost_module</span> <span class="o">=</span> <span class="n">snow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">snowfrost_module</span> <span class="o">=</span> <span class="n">snow_frost</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">soil_module</span> <span class="o">=</span> <span class="n">soil</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span> <span class="o">=</span> <span class="n">landcoverType</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaporation_module</span> <span class="o">=</span> <span class="n">evaporation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">groundwater_module</span> <span class="o">=</span> <span class="n">groundwater</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">groundwater_modflow_module</span> <span class="o">=</span> <span class="n">groundwater_modflow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">waterdemand_module</span> <span class="o">=</span> <span class="n">waterdemand</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">waterdemand_module</span> <span class="o">=</span> <span class="n">water_demand</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">capillarRise_module</span> <span class="o">=</span> <span class="n">capillarRise</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interception_module</span> <span class="o">=</span> <span class="n">interception</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sealed_water_module</span> <span class="o">=</span> <span class="n">sealed_water</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runoff_concentration_module</span> <span class="o">=</span> <span class="n">runoff_concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lakes_res_small_module</span> <span class="o">=</span> <span class="n">lakes_res_small</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">routing_kinematic_module</span> <span class="o">=</span> <span class="n">routing_kinematic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span> <span class="o">=</span> <span class="n">lakes_reservoirs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">waterquality1</span> <span class="o">=</span> <span class="n">waterquality1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-        <span class="c1"># include output of tss and maps</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output_module</span> <span class="o">=</span> <span class="n">outputTssMap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="c1"># ----------------------------------------------------------------</span>
-
+        <span class="c1"># ----------------------------------------</span>
         <span class="c1">## MakMap: the maskmap is flexible e.g. col,row,x1,y1  or x1,x2,y1,y2</span>
         <span class="c1"># set the maskmap</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">MaskMap</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">lenmask</span> <span class="o">=</span> <span class="n">loadsetclone</span><span class="p">(</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MaskMap</span> <span class="o">=</span> <span class="n">loadsetclone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">lenmask</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Create catchment from point and river network&quot;</span><span class="p">)</span>
-            <span class="n">mask2D</span><span class="p">,</span> <span class="n">xleft</span><span class="p">,</span> <span class="n">yup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">routing_kinematic_module</span><span class="o">.</span><span class="n">catchment</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">MaskMap</span> <span class="o">=</span> <span class="n">maskfrompoint</span><span class="p">(</span><span class="n">mask2D</span><span class="p">,</span> <span class="n">xleft</span><span class="p">,</span> <span class="n">yup</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;CellArea&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-6</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of cells in catchment: </span><span class="si">%6i</span><span class="s2"> = </span><span class="si">%7.0f</span><span class="s2"> km2&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask2D</span><span class="p">),</span><span class="n">area</span><span class="p">))</span>
-
-        <span class="n">name</span> <span class="o">=</span> <span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">)</span>
-        <span class="n">nameall</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">nameall</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">)</span>
-        <span class="n">namemeteo</span> <span class="o">=</span> <span class="n">nameall</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">latmeteo</span><span class="p">,</span> <span class="n">lonmeteo</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcellmeteo</span> <span class="o">=</span> <span class="n">readCoordNetCDF</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">)</span>
-
-        <span class="n">nameldd</span> <span class="o">=</span> <span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;Ldd&#39;</span><span class="p">)</span>
-        <span class="c1">#nameldd = os.path.splitext(nameldd)[0] + &#39;.nc&#39;</span>
-        <span class="c1">#latldd, lonldd, cell, invcellldd = readCoordNetCDF(nameldd)</span>
-        <span class="n">latldd</span><span class="p">,</span> <span class="n">lonldd</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcellldd</span> <span class="o">=</span> <span class="n">readCoord</span><span class="p">(</span><span class="n">nameldd</span><span class="p">)</span>
-        <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">invcellldd</span> <span class="o">/</span> <span class="n">invcellmeteo</span><span class="p">)</span>
-
-
-        <span class="c1"># if meteo maps have the same extend as the other spatial static maps -&gt; meteomapsscale = True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">meteomapsscale</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">if</span> <span class="n">invcellmeteo</span> <span class="o">!=</span> <span class="n">invcellldd</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;quiet&#39;</span><span class="p">]))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;veryquiet&#39;</span><span class="p">]))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">])):</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Resolution of meteo forcing is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; times higher than base maps.&quot;</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">meteomapsscale</span> <span class="o">=</span> <span class="kc">False</span>
-
-        <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapattrNetCDF</span><span class="p">(</span><span class="n">nameldd</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cutmap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-
-        <span class="c1"># for downscaling meteomaps , Wordclim data at a finer resolution is used</span>
-        <span class="c1"># here it is necessary to clip the wordclim data so that they fit to meteo dataset</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">meteodown</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="s2">&quot;usemeteodownscaling&quot;</span> <span class="ow">in</span> <span class="n">binding</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">meteodown</span> <span class="o">=</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;usemeteodownscaling&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">meteodown</span><span class="p">:</span>
-            <span class="n">check_clim</span> <span class="o">=</span> <span class="n">checkMeteo_Wordclim</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">,</span> <span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;downscale_wordclim_prec&#39;</span><span class="p">))</span>
-
-
-
-        <span class="c1"># in case other mapsets are used e.g. Cordex RCM meteo data</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">latldd</span> <span class="o">!=</span> <span class="n">latmeteo</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">lonldd</span> <span class="o">!=</span> <span class="n">lonmeteo</span><span class="p">):</span>
-            <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapattrNetCDFMeteo</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">meteomapsscale</span><span class="p">:</span>
-            <span class="c1"># if the cellsize of the spatial dataset e.g. ldd, soil etc is not the same as the meteo maps than:</span>
-            <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>  <span class="o">=</span> <span class="n">mapattrNetCDFMeteo</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">)</span>
-            <span class="c1"># downscaling wordlclim maps</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">cutmapGlobal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-
-
-            <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">check_clim</span><span class="p">):</span>
-               <span class="c1"># for downscaling it is always cut from the global map</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">latldd</span> <span class="o">!=</span> <span class="n">latmeteo</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">lonldd</span> <span class="o">!=</span> <span class="n">lonmeteo</span><span class="p">):</span>
-                    <span class="n">cutmapGlobal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">])</span>
-                    <span class="n">cutmapGlobal</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">])</span>
-                    <span class="n">cutmapGlobal</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">]</span><span class="o">+</span><span class="mf">0.999</span><span class="p">)</span>
-                    <span class="n">cutmapGlobal</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">]</span><span class="o">+</span><span class="mf">0.999</span><span class="p">)</span>
-
-
-
-
-        <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;writeNetcdfStack&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;writeNetcdf&#39;</span><span class="p">):</span>
-            <span class="c1"># if NetCDF is writen, the pr.nc is read to get the metadata</span>
-            <span class="c1"># like projection</span>
-            <span class="n">metaNetCDF</span><span class="p">()</span>
-
-            <span class="k">if</span> <span class="s2">&quot;coverresult&quot;</span> <span class="ow">in</span> <span class="n">binding</span><span class="p">:</span>
-                <span class="n">coverresult</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;coverresult&#39;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">coverresult</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-                    <span class="n">cover</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;covermap&#39;</span><span class="p">,</span> <span class="n">compress</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-                    <span class="n">cover</span><span class="p">[</span><span class="n">cover</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="n">cover</span><span class="p">[</span><span class="n">cover</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-                    <span class="n">coverresult</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cover</span>
-                    <span class="c1">#coverresult[1] = np.ma.array(cover, mask = covermask)</span>
+        <span class="c1"># reading of the metainformation of variables to put into output netcdfs</span>
+        <span class="n">metaNetCDF</span><span class="p">()</span>
 
         <span class="c1"># run intial misc to get all global variables</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">misc_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
@@ -237,8 +175,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">groundwater_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
 
-
-
         <span class="bp">self</span><span class="o">.</span><span class="n">runoff_concentration_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lakes_res_small_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
 
@@ -247,7 +183,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span><span class="o">.</span><span class="n">initWaterbodies</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span><span class="o">.</span><span class="n">initial_lakes</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span><span class="o">.</span><span class="n">initial_reservoirs</span><span class="p">()</span>
-
 
         <span class="bp">self</span><span class="o">.</span><span class="n">waterdemand_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">initial</span><span class="p">()</span>

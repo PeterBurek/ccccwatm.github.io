@@ -70,12 +70,28 @@
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class: Output of time series and map</span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    dirUp                 river network in upstream direction                                               --       </span>
+<span class="sd">    discharge             discharge                                                                         m3/s     </span>
+<span class="sd">    cellArea              Cell area [m�] of each simulated mesh                                                      </span>
+<span class="sd">    sampleAdresses                                                                                                   </span>
+<span class="sd">    noOutpoints                                                                                                      </span>
+<span class="sd">    evalCatch                                                                                                        </span>
+<span class="sd">    catcharea                                                                                                        </span>
+<span class="sd">    firstout                                                                                                         </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">out_variable</span>
-
-
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
 <div class="viewcode-block" id="outputTssMap.initial"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.output.outputTssMap.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

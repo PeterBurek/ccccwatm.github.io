@@ -57,11 +57,89 @@
 <span class="sd">    ROUTING</span>
 
 <span class="sd">    routing using the kinematic wave</span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    load_initial                                                                                                     </span>
+<span class="sd">    waterbalance_module                                                                                              </span>
+<span class="sd">    QInM3Old              Inflow from previous day                                                          m3       </span>
+<span class="sd">    inflowM3              inflow to basin                                                                   m3       </span>
+<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
+<span class="sd">    waterBodyID           lakes/reservoirs map with a single ID for each lake/reservoir                     --       </span>
+<span class="sd">    UpArea1               upstream area of a grid cell                                                      m2       </span>
+<span class="sd">    dirUp                 river network in upstream direction                                               --       </span>
+<span class="sd">    lddCompress           compressed river network (without missing values)                                 --       </span>
+<span class="sd">    dirupLen_LR           number of bifurcation upstream lake/reservoir                                     --       </span>
+<span class="sd">    dirupID_LR            index river upstream lake/reservoir                                               --       </span>
+<span class="sd">    dirDown_LR            river network direktion downstream lake/reservoir                                 --       </span>
+<span class="sd">    lendirDown_LR         number of river network connections lake/reservoir                                --       </span>
+<span class="sd">    compress_LR           boolean map as mask map for compressing lake/reservoir                            --       </span>
+<span class="sd">    lakeArea              area of each lake/reservoir                                                       m2       </span>
+<span class="sd">    lakeEvaFactor         a factor which increases evaporation from lake because of wind                    --       </span>
+<span class="sd">    lakeEvaFactorC        compressed map of a factor which increases evaporation from lake because of wind  --       </span>
+<span class="sd">    EvapWaterBodyM                                                                                                   </span>
+<span class="sd">    lakeResInflowM                                                                                                   </span>
+<span class="sd">    lakeResOutflowM                                                                                                  </span>
+<span class="sd">    dtRouting             number of seconds per routing timestep                                            s        </span>
+<span class="sd">    lakeResStorage                                                                                                   </span>
+<span class="sd">    evapWaterBodyC                                                                                                   </span>
+<span class="sd">    sumLakeEvapWaterBody                                                                                             </span>
+<span class="sd">    noRoutingSteps                                                                                                   </span>
+<span class="sd">    sumResEvapWaterBodyC                                                                                             </span>
+<span class="sd">    discharge             discharge                                                                         m3/s     </span>
+<span class="sd">    runoff                                                                                                           </span>
+<span class="sd">    cellArea              Cell area [m�] of each simulated mesh                                                      </span>
+<span class="sd">    downstruct                                                                                                       </span>
+<span class="sd">    prelakeResStorage                                                                                                </span>
+<span class="sd">    act_SurfaceWaterAbst                                                                                             </span>
+<span class="sd">    fracVegCover          Fraction of area covered by the corresponding landcover type                               </span>
+<span class="sd">    openWaterEvap         Simulated evaporation from open areas                                             m        </span>
+<span class="sd">    catchmentAll                                                                                                     </span>
+<span class="sd">    chanLength                                                                                                       </span>
+<span class="sd">    totalCrossSectionAre                                                                                             </span>
+<span class="sd">    dirupLen                                                                                                         </span>
+<span class="sd">    dirupID                                                                                                          </span>
+<span class="sd">    catchment                                                                                                        </span>
+<span class="sd">    dirDown                                                                                                          </span>
+<span class="sd">    lendirDown                                                                                                       </span>
+<span class="sd">    UpArea                                                                                                           </span>
+<span class="sd">    beta                                                                                                             </span>
+<span class="sd">    chanMan                                                                                                          </span>
+<span class="sd">    chanGrad                                                                                                         </span>
+<span class="sd">    chanWidth                                                                                                        </span>
+<span class="sd">    chanDepth                                                                                                        </span>
+<span class="sd">    invbeta                                                                                                          </span>
+<span class="sd">    invchanLength                                                                                                    </span>
+<span class="sd">    invdtRouting                                                                                                     </span>
+<span class="sd">    totalCrossSectionAre                                                                                             </span>
+<span class="sd">    chanWettedPerimeterA                                                                                             </span>
+<span class="sd">    alpPower                                                                                                         </span>
+<span class="sd">    channelAlpha                                                                                                     </span>
+<span class="sd">    invchannelAlpha                                                                                                  </span>
+<span class="sd">    channelStorage                                                                                                   </span>
+<span class="sd">    riverbedExchange                                                                                                 </span>
+<span class="sd">    sumbalance                                                                                                       </span>
+<span class="sd">    prechannelStorage                                                                                                </span>
+<span class="sd">    EvapoChannel                                                                                                     </span>
+<span class="sd">    QDelta                                                                                                           </span>
+<span class="sd">    act_bigLakeResAbst                                                                                               </span>
+<span class="sd">    act_smallLakeResAbst                                                                                             </span>
+<span class="sd">    returnFlow                                                                                                       </span>
+<span class="sd">    sumsideflow                                                                                                      </span>
+<span class="sd">    inflowDt                                                                                                         </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routing_kinematic_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">routing_kinematic_variable</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span> <span class="o">=</span> <span class="n">lakes_reservoirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lakes_reservoirs_module</span> <span class="o">=</span> <span class="n">lakes_reservoirs</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 
 <div class="viewcode-block" id="routing_kinematic.catchment"><a class="viewcode-back" href="../../../../hydrological_modules.html#cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.catchment">[docs]</a>    <span class="k">def</span> <span class="nf">catchment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -209,17 +287,17 @@
         <span class="c1"># channel water volume [m3]</span>
         <span class="c1"># Initialise water volume in kinematic wave channels [m3]</span>
         <span class="n">channelStorageIni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalCrossSectionArea</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">chanLength</span> <span class="o">*</span> <span class="mf">0.1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;channelStorage&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">channelStorageIni</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;channelStorage&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">channelStorageIni</span><span class="p">)</span>
 
         <span class="c1"># Initialise discharge at kinematic wave pixels (note that InvBeta is</span>
         <span class="c1"># simply 1/beta, computational efficiency!)</span>
         <span class="c1">#self.var.chanQKin = np.where(self.var.channelAlpha &gt; 0, (self.var.totalCrossSectionArea / self.var.channelAlpha) ** self.var.invbeta, 0.)</span>
         <span class="n">dischargeIni</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorage</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">invchanLength</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">invchannelAlpha</span><span class="p">)</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">invbeta</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;discharge&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">dischargeIni</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;discharge&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">dischargeIni</span><span class="p">)</span>
         <span class="c1">#self.var.chanQKin = chanQKinIni</span>
 
         <span class="c1">#self.var.riverbedExchange = globals.inZero.copy()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">riverbedExchange</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;riverbedExchange&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">riverbedExchange</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;riverbedExchange&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
         <span class="c1">#self.var.discharge = self.var.chanQKin.copy()</span>
 
 
@@ -336,7 +414,12 @@
 
         <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterDemand&#39;</span><span class="p">):</span>
-             <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="c1"># self.var.act_SurfaceWaterAbstract includes channel abstractions as well as abstractions from lakes and reservoirs</span>
+            <span class="c1"># In waterdemand.py: self.var.act_SurfaceWaterAbstract = self.var.act_SurfaceWaterAbstract + self.var.act_bigLakeResAbst + self.var.act_smallLakeResAbst</span>
+            <span class="c1"># The abstractions from lakes and reservoirs have already been dealt with by removing these amounts from their storages in the same module</span>
+            <span class="c1"># The water abstractions from the channel are thus the surface water abstractions subtract the lake and reservoir abstractions</span>
+            
+             <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_bigLakeResAbst</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_smallLakeResAbst</span><span class="p">)</span>
              <span class="c1">#return flow from (m) non irrigation water demand</span>
              <span class="c1">#WDAddM3Dt = WDAddM3Dt - self.var.nonIrrReturnFlowFraction * self.var.act_nonIrrDemand</span>
              <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="n">WDAddM3Dt</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnFlow</span>

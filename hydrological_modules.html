@@ -52,7 +52,7 @@
 <p><strong>Initializing some variables</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.miscInitial"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.miscInitial.miscInitial">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.miscInitial.</code><code class="descname">miscInitial</code><span class="sig-paren">(</span><em>misc_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/miscInitial.html#miscInitial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.miscInitial.miscInitial" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.miscInitial.</code><code class="descname">miscInitial</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/miscInitial.html#miscInitial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.miscInitial.miscInitial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Miscellaneous repeatedly used expressions
 Definition if cell area comes from regular grid e.g. 5x5km or from irregular lat/lon
@@ -61,6 +61,79 @@ Conversion factors between m3 and mm etc.</p>
 <p class="admonition-title">Note</p>
 <p>Only used in the initial phase.</p>
 </div>
+<p><strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DtSec</p></td>
+<td><p>number of seconds per timestep (default = 86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-odd"><td><p>twothird</p></td>
+<td><p>2/3</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>MtoM3</p></td>
+<td><p>Coefficient to change units</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>InvDtSec</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>cellArea</p></td>
+<td><p>Cell area [m�] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>cellLength</p></td>
+<td><p>length of a grid cell</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>InvCellArea</p></td>
+<td><p>Inverse of cell area of each simulated mesh</p></td>
+<td><p>m-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>DtDay</p></td>
+<td><p>seconds in a timestep (default=86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>InvDtDay</p></td>
+<td><p>inverse seconds in a timestep (default=86400)</p></td>
+<td><p>s-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>MMtoM</p></td>
+<td><p>Coefficient to change units</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>MtoMM</p></td>
+<td><p>Coefficient to change units</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>M3toM</p></td>
+<td><p>Coefficient to change units</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>con_precipitation</p></td>
+<td><p>conversion factor for precipitation</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>con_e</p></td>
+<td><p>conversion factor for evaporation</p></td>
+<td><p>–</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.miscInitial.miscInitial.initial">
 <code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/miscInitial.html#miscInitial.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.miscInitial.miscInitial.initial" title="Permalink to this definition">¶</a></dt>
@@ -80,10 +153,47 @@ Conversion factors between m3 and mm etc.</p>
 <p><strong>Load initial storage parameter maps</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.initcondition"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.initcondition.initcondition">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.initcondition.</code><code class="descname">initcondition</code><span class="sig-paren">(</span><em>initcondition_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/initcondition.html#initcondition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.initcondition.initcondition" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.initcondition.</code><code class="descname">initcondition</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/initcondition.html#initcondition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.initcondition.initcondition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>READ/WRITE INITIAL CONDITIONS
-all initial condition can be stored at the end of a run to be used as a <strong>warm</strong> start for a following up run</p>
+all initial condition can be stored at the end of a run to be used as a <strong>warm</strong> start for a following up run
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>coverTypes</p></td>
+<td><p>land cover types - forest - grassland - irrPaddy - irrNonPaddy - water - sealed</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>loadInit</p></td>
+<td><p>Flag: if true initial conditions are loaded</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>initLoadFile</p></td>
+<td><p>load file name of the initial condition data</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>saveInit</p></td>
+<td><p>Flag: if true initial conditions are saved</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>saveInitFile</p></td>
+<td><p>save file name of the initial condition data</p></td>
+<td><p>–</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.initcondition.initcondition.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/initcondition.html#initcondition.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.initcondition.initcondition.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -109,28 +219,6 @@ write initital conditions into a single netcdf file</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="cwatm.hydrological_modules.initcondition.initcondition.load_initial">
-<code class="descname">load_initial</code><span class="sig-paren">(</span><em>name</em>, <em>default=0.0</em>, <em>number=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/initcondition.html#initcondition.load_initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.initcondition.initcondition.load_initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>First it is checked if the initial value is given in the settings file</p>
-<ul class="simple">
-<li><p>if it is &lt;&gt; None it is used directly</p></li>
-<li><p>if None it is loaded from the init netcdf file</p></li>
-</ul>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – Name of the init value</p></li>
-<li><p><strong>default</strong> – default value -&gt; default is 0.0</p></li>
-<li><p><strong>number</strong> – in case of snow or runoff concentration several layers are included: number = no of the layer</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>spatial map or value of initial condition</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -139,11 +227,456 @@ write initital conditions into a single netcdf file</p>
 <p><strong>Generate landcover types</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.landcoverType"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.landcoverType.landcoverType">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.landcoverType.</code><code class="descname">landcoverType</code><span class="sig-paren">(</span><em>landcoverType_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/landcoverType.html#landcoverType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.landcoverType.landcoverType" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.landcoverType.</code><code class="descname">landcoverType</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/landcoverType.html#landcoverType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.landcoverType.landcoverType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>LAND COVER TYPE</p>
 <p>runs the 6 land cover types through soil procedures</p>
-<p>This routine calls the soil routine for each land cover type</p>
+<p>This routine calls the soil routine for each land cover type
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>modflow</p></td>
+<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxGWCapRise</p></td>
+<td><p>influence of capillary rise above groundwater level</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>load_initial</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>baseflow</p></td>
+<td><p>simulated baseflow (= groundwater discharge to river)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>sum_gwRecharge</p></td>
+<td><p>groundwater recharge</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>waterbalance_module</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>coverTypes</p></td>
+<td><p>land cover types - forest - grassland - irrPaddy - irrNonPaddy - water - sealed</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>minInterceptCap</p></td>
+<td><p>Maximum interception read from file for forest and grassland land cover</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>interceptStor</p></td>
+<td><p>simulated vegetation interception storage</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rain</p></td>
+<td><p>Precipitation less snow</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>SnowMelt</p></td>
+<td><p>total snow melt from all layers</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>snowEvap</p></td>
+<td><p>total evaporation from snow for a snow layers</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>cellArea</p></td>
+<td><p>Cell area [m�] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>dynamicLandcover</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>soilLayers</p></td>
+<td><p>Number of soil layers</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>landcoverSum</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>totalET</p></td>
+<td><p>Total evapotranspiration for each cell including all landcover types</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>act_SurfaceWaterAbst</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_interceptStor</p></td>
+<td><p>Total of simulated vegetation interception storage including all landcover types</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>fracVegCover</p></td>
+<td><p>Fraction of area covered by the corresponding landcover type</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>minCropKC</p></td>
+<td><p>minimum crop factor (default 0.2)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>minTopWaterLayer</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>rootFraction1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>maxRootDepth</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>rootDepth</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>soildepth</p></td>
+<td><p>Thickness of the first soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>soildepth12</p></td>
+<td><p>Total thickness of layer 2 and 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>KSat1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>KSat2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>KSat3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>alpha1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>alpha2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>alpha3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lambda1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lambda2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lambda3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>thetas1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>thetas2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>thetas3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>thetar1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>thetar2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>thetar3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuM1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuM2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuM3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuInvM1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuInvM2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuInvM3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuInvN1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuInvN2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuInvN3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>invAlpha1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>invAlpha2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>invAlpha3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ws1</p></td>
+<td><p>Maximum storage capacity in layer 1</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>ws2</p></td>
+<td><p>Maximum storage capacity in layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>ws3</p></td>
+<td><p>Maximum storage capacity in layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>wres1</p></td>
+<td><p>Residual storage capacity in layer 1</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>wres2</p></td>
+<td><p>Residual storage capacity in layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>wres3</p></td>
+<td><p>Residual storage capacity in layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>wrange1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wrange2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wrange3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wfc1</p></td>
+<td><p>Soil moisture at field capacity in layer 1</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wfc2</p></td>
+<td><p>Soil moisture at field capacity in layer 2</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wfc3</p></td>
+<td><p>Soil moisture at field capacity in layer 3</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wwp1</p></td>
+<td><p>Soil moisture at wilting point in layer 1</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wwp2</p></td>
+<td><p>Soil moisture at wilting point in layer 2</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wwp3</p></td>
+<td><p>Soil moisture at wilting point in layer 3</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>kUnSat3FC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>kunSatFC12</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>kunSatFC23</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>cropCoefficientNC_fi</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>interceptCapNC_filen</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>coverFractionNC_file</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>w1</p></td>
+<td><p>Simulated water storage in the layer 1</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>w2</p></td>
+<td><p>Simulated water storage in the layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>w3</p></td>
+<td><p>Simulated water storage in the layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>topwater</p></td>
+<td><p>quantity of water above the soil (flooding)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_topwater</p></td>
+<td><p>quantity of water on the soil (flooding) (weighted sum for all landcover types)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>totalSto</p></td>
+<td><p>Total soil,snow and vegetation storage for each cell including all landcover typ</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnowCover</p></td>
+<td><p>snow cover (sum over all layers)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>sum_w1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_w2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_w3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>arnoBetaOro</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ElevationStD</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>arnoBeta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>adjRoot</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>maxtopwater</p></td>
+<td><p>maximum heigth of topwater</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>landcoverSumSum</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>totAvlWater</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>modflow_timestep</p></td>
+<td><p>Chosen ModFlow model timestep (1day, 7days, 30days�)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>presumed_sum_gwRecha</p></td>
+<td><p>Previous groundwater recharge [m/timestep] (used for the ModFlow version)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>sumed_sum_gwRecharge</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>pretotalSto</p></td>
+<td><p>Previous totalSto</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>sum_actTransTotal</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_actBareSoilEvap</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_openWaterEvap</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_interceptEvap</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>addtoevapotrans</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_runoff</p></td>
+<td><p>Runoff above the soil, more interflow, including all landcover types</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>sum_directRunoff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_interflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Precipitation</p></td>
+<td><p>Precipitation (input for the model)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>GWVolumeVariation</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_availWaterInfilt</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.landcoverType.landcoverType.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/landcoverType.html#landcoverType.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.landcoverType.landcoverType.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -210,10 +743,175 @@ Initialise the six land cover types</p>
 <p><strong>Read meteorological input data</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.readmeteo"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.readmeteo.readmeteo">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.readmeteo.</code><code class="descname">readmeteo</code><span class="sig-paren">(</span><em>readmeteo_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.readmeteo.</code><code class="descname">readmeteo</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>READ METEOROLOGICAL DATA</p>
-<p>reads all meteorological data from netcdf4 files</p>
+<p>reads all meteorological data from netcdf4 files
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>modflow</p></td>
+<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>Precipitation</p></td>
+<td><p>Precipitation (input for the model)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>DtDay</p></td>
+<td><p>seconds in a timestep (default=86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>con_precipitation</p></td>
+<td><p>conversion factor for precipitation</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>con_e</p></td>
+<td><p>conversion factor for evaporation</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>meteomapsscale</p></td>
+<td><p>if meteo maps have the same extend as the other spatial static maps -&gt; meteomaps</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>meteodown</p></td>
+<td><p>if meteo maps should be downscaled</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>modflowsteady</p></td>
+<td><p>True if modflow_steadystate = True in settings file</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>preMaps</p></td>
+<td><p>choose between steady state precipitation maps for steady state modflow or norma</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>tempMaps</p></td>
+<td><p>choose between steady state temperature maps for steady state modflow or normal</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>evaTMaps</p></td>
+<td><p>choose between steady state ETP water maps for steady state modflow or normal ma</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>eva0Maps</p></td>
+<td><p>choose between steady state ETP reference maps for steady state modflow or norma</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>wc2_tavg</p></td>
+<td><p>High resolution WorldClim map for average temperature</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-even"><td><p>wc4_tavg</p></td>
+<td><p>upscaled to low resolution WorldClim map for average temperature</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-odd"><td><p>wc2_tmin</p></td>
+<td><p>High resolution WorldClim map for min temperature</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-even"><td><p>wc4_tmin</p></td>
+<td><p>upscaled to low resolution WorldClim map for min temperature</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-odd"><td><p>wc2_tmax</p></td>
+<td><p>High resolution WorldClim map for max temperature</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-even"><td><p>wc4_tmax</p></td>
+<td><p>upscaled to low resolution WorldClim map for max temperature</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-odd"><td><p>wc2_prec</p></td>
+<td><p>High resolution WorldClim map for precipitation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>wc4_prec</p></td>
+<td><p>upscaled to low resolution WorldClim map for precipitation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>demAnomaly</p></td>
+<td><p>digital elevation model anomaly (high resolution - low resolution)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>demHigh</p></td>
+<td><p>digital elevation model high resolution</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tavg</p></td>
+<td><p>average air Temperature (input for the model)</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-even"><td><p>prec</p></td>
+<td><p>precipitation in m</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>temp</p></td>
+<td><p>average temperature in Celsius deg</p></td>
+<td><p>C�</p></td>
+</tr>
+<tr class="row-even"><td><p>TMin</p></td>
+<td><p>minimum air temperature</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tmin</p></td>
+<td><p>minimum temperature in Celsius deg</p></td>
+<td><p>C�</p></td>
+</tr>
+<tr class="row-even"><td><p>TMax</p></td>
+<td><p>maximum air temperature</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tmax</p></td>
+<td><p>maximum temperature in celsius deg</p></td>
+<td><p>C�</p></td>
+</tr>
+<tr class="row-even"><td><p>Psurf</p></td>
+<td><p>Instantaneous surface pressure</p></td>
+<td><p>Pa</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wind</p></td>
+<td><p>wind speed</p></td>
+<td><p>m/s</p></td>
+</tr>
+<tr class="row-even"><td><p>Rsds</p></td>
+<td><p>short wave downward surface radiation fluxes</p></td>
+<td><p>W/m2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rsdl</p></td>
+<td><p>long wave downward surface radiation fluxes</p></td>
+<td><p>W/m2</p></td>
+</tr>
+<tr class="row-even"><td><p>Qair</p></td>
+<td><p>specific humidity</p></td>
+<td><p>kg/kg</p></td>
+</tr>
+<tr class="row-odd"><td><p>WtoMJ</p></td>
+<td><p>Conversion factor from [W] to [MJ] for radiation: 86400 * 1E-6</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>ETRef</p></td>
+<td><p>potential evapotranspiration rate from reference crop</p></td>
+<td><p>m</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.readmeteo.readmeteo.downscaling1">
 <code class="descname">downscaling1</code><span class="sig-paren">(</span><em>input</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo.downscaling1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo.downscaling1" title="Permalink to this definition">¶</a></dt>
@@ -298,10 +996,55 @@ Otherwise all the variable needed for Penman-Monteith</p>
 <p><strong>Read river discharge time series as inflow data</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.inflow"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.inflow.inflow">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.inflow.</code><code class="descname">inflow</code><span class="sig-paren">(</span><em>inflow_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/inflow.html#inflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.inflow.inflow" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.inflow.</code><code class="descname">inflow</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/inflow.html#inflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.inflow.inflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>READ INFLOW HYDROGRAPHS (OPTIONAL)
-If option “inflow” is set to 1 the inflow hydrograph code is used otherwise dummy code is used</p>
+If option “inflow” is set to 1 the inflow hydrograph code is used otherwise dummy code is used
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sampleInflow</p></td>
+<td><p>location of inflow point</p></td>
+<td><p>lat/lon</p></td>
+</tr>
+<tr class="row-odd"><td><p>noinflowpoints</p></td>
+<td><p>number of inflow points</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>inflowTs</p></td>
+<td><p>inflow time series data</p></td>
+<td><p>m3/s</p></td>
+</tr>
+<tr class="row-odd"><td><p>QInM3Old</p></td>
+<td><p>Inflow from previous day</p></td>
+<td><p>m3</p></td>
+</tr>
+<tr class="row-even"><td><p>totalQInM3</p></td>
+<td><p>total inflow over time (for mass balance calculation)</p></td>
+<td><p>m3</p></td>
+</tr>
+<tr class="row-odd"><td><p>inflowM3</p></td>
+<td><p>inflow to basin</p></td>
+<td><p>m3</p></td>
+</tr>
+<tr class="row-even"><td><p>DtSec</p></td>
+<td><p>number of seconds per timestep (default = 86400)</p></td>
+<td><p>s</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.inflow.inflow.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/inflow.html#inflow.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.inflow.inflow.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -325,16 +1068,177 @@ calls function <code class="xref py py-meth docutils literal notranslate"><span 
 <h3>snow_frost module<a class="headerlink" href="#snow-frost-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate snow and frost</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.snow_frost"></span><dl class="class">
-<dt id="cwatm.hydrological_modules.snow_frost.snow">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.snow_frost.</code><code class="descname">snow</code><span class="sig-paren">(</span><em>snow_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/snow_frost.html#snow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.snow_frost.snow" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.snow_frost.snow_frost">
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.snow_frost.</code><code class="descname">snow_frost</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/snow_frost.html#snow_frost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.snow_frost.snow_frost" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>RAIN AND SNOW</p>
 <p>Domain: snow calculations evaluated for center points of up to 7 sub-pixel
 snow zones 1 -7 which each occupy a part of the pixel surface</p>
 <p>Variables <em>snow</em> and <em>rain</em> at end of this module are the pixel-average snowfall and rain</p>
+<p><strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>load_initial</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>waterbalance_module</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Rain</p></td>
+<td><p>Precipitation less snow</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnowMelt</p></td>
+<td><p>total snow melt from all layers</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>SnowCover</p></td>
+<td><p>snow cover (sum over all layers)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>ElevationStD</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Precipitation</p></td>
+<td><p>Precipitation (input for the model)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>DtDay</p></td>
+<td><p>seconds in a timestep (default=86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>Tavg</p></td>
+<td><p>average air Temperature (input for the model)</p></td>
+<td><p>K</p></td>
+</tr>
+<tr class="row-odd"><td><p>numberSnowLayersFloa</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>numberSnowLayers</p></td>
+<td><p>Number of snow layers (up to 10)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>glaciertransportZone</p></td>
+<td><p>Number of layers which can be mimiced as glacier transport zone</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>deltaInvNorm</p></td>
+<td><p>Quantile of the normal distribution (for different numbers of snow layers)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>DeltaTSnow</p></td>
+<td><p>Temperature lapse rate x std. deviation of elevation</p></td>
+<td><p>C�</p></td>
+</tr>
+<tr class="row-even"><td><p>SnowDayDegrees</p></td>
+<td><p>day of the year to degrees: 360/365.25 = 0.9856</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>summerSeasonStart</p></td>
+<td><p>day when summer season starts = 165</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>IceDayDegrees</p></td>
+<td><p>days of summer (15th June-15th Sept.) to degree: 180/(259-165)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnowSeason</p></td>
+<td><p>seasonal melt factor</p></td>
+<td><p>m C�-1 da</p></td>
+</tr>
+<tr class="row-even"><td><p>TempSnow</p></td>
+<td><p>Average temperature at which snow melts</p></td>
+<td><p>C�</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnowFactor</p></td>
+<td><p>Multiplier applied to precipitation that falls as snow</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>SnowMeltCoef</p></td>
+<td><p>Snow melt coefficient - default: 0.004</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>IceMeltCoef</p></td>
+<td><p>Ice melt coefficnet - default  0.007</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>TempMelt</p></td>
+<td><p>Average temperature at which snow melts</p></td>
+<td><p>C�</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnowCoverS</p></td>
+<td><p>snow cover for each layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>Kfrost</p></td>
+<td><p>Snow depth reduction coefficient, (HH, p. 7.28)</p></td>
+<td><p>m-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Afrost</p></td>
+<td><p>Daily decay coefficient, (Handbook of Hydrology, p. 7.28)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>FrostIndexThreshold</p></td>
+<td><p>Degree Days Frost Threshold (stops infiltration, percolation and capillary rise)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnowWaterEquivalent</p></td>
+<td><p>Snow water equivalent, (based on snow density of 450 kg/m3) (e.g. Tarboton and L</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>FrostIndex</p></td>
+<td><p>FrostIndex - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Floo</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>extfrostindex</p></td>
+<td><p>Flag for second frostindex</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>FrostIndexThreshold2</p></td>
+<td><p>FrostIndex2 - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Flo</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>frostInd1</p></td>
+<td><p>forstindex 1</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>frostInd2</p></td>
+<td><p>frostindex 2</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>frostindexS</p></td>
+<td><p>array for frostindex</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>prevSnowCover</p></td>
+<td><p>snow cover of previous day (only for water balance)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>Snow</p></td>
+<td><p>Snow (equal to a part of Precipitation)</p></td>
+<td><p>m</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
-<dt id="cwatm.hydrological_modules.snow_frost.snow.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/snow_frost.html#snow.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.snow_frost.snow.dynamic" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.snow_frost.snow_frost.dynamic">
+<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/snow_frost.html#snow_frost.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.snow_frost.snow_frost.dynamic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic part of the snow module</p>
 <p>Distinguish between rain/snow and calculates snow melt and glacier melt
 The equation is a modification of:</p>
@@ -350,8 +1254,8 @@ The equation is a modification of:</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cwatm.hydrological_modules.snow_frost.snow.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/snow_frost.html#snow.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.snow_frost.snow.initial" title="Permalink to this definition">¶</a></dt>
+<dt id="cwatm.hydrological_modules.snow_frost.snow_frost.initial">
+<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/snow_frost.html#snow_frost.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.snow_frost.snow_frost.initial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial part of the snow and frost module</p>
 <ul class="simple">
 <li><p>loads all the parameters for the day-degree approach for rain, snow and snowmelt</p></li>
@@ -367,7 +1271,7 @@ The equation is a modification of:</p>
 <p><strong>Calculate potential Evaporation</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.evaporationPot"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.evaporationPot.evaporationPot">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.evaporationPot.</code><code class="descname">evaporationPot</code><span class="sig-paren">(</span><em>evaporationPot_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.evaporationPot.</code><code class="descname">evaporationPot</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporationPot.html#evaporationPot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporationPot.evaporationPot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>POTENTIAL REFERENCE EVAPO(TRANSPI)RATION
 Calculate potential evapotranspiration from climate data mainly based on FAO 56 and LISVAP
@@ -448,10 +1352,31 @@ Equation 14: where the term 2.×41−40([CO]2 −300) accounts for changing [CO2
 <p><strong>Calculate actual evapotranspiration</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.evaporation"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.evaporation.evaporation">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.evaporation.</code><code class="descname">evaporation</code><span class="sig-paren">(</span><em>evaporation_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporation.html#evaporation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporation.evaporation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.evaporation.</code><code class="descname">evaporation</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporation.html#evaporation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporation.evaporation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Evaporation module
-Calculate potential evaporation and pot. transpiration</p>
+Calculate potential evaporation and pot. transpiration
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>cropKC</p></td>
+<td><p>crop coefficient for each of the 4 different land cover types (forest, irrigated</p></td>
+<td><p>–</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.evaporation.evaporation.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/evaporation.html#evaporation.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.evaporation.evaporation.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -479,9 +1404,78 @@ get crop coefficient, use potential ET, calculate potential bare soil evaporatio
 <p><strong>Calculate interception</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.interception"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.interception.interception">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.interception.</code><code class="descname">interception</code><span class="sig-paren">(</span><em>interception_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/interception.html#interception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.interception.interception" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.interception.</code><code class="descname">interception</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/interception.html#interception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.interception.interception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>INTERCEPTION</p>
+<p>INTERCEPTION
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>waterbalance_module</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>interceptCap</p></td>
+<td><p>interception capacity of vegetation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>minInterceptCap</p></td>
+<td><p>Maximum interception read from file for forest and grassland land cover</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>interceptStor</p></td>
+<td><p>simulated vegetation interception storage</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>Rain</p></td>
+<td><p>Precipitation less snow</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>availWaterInfiltrati</p></td>
+<td><p>quantity of water reaching the soil after interception, more snowmelt</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>SnowMelt</p></td>
+<td><p>total snow melt from all layers</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>twothird</p></td>
+<td><p>2/3</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>interceptEvap</p></td>
+<td><p>simulated evaporation from water intercepted by vegetation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>potTranspiration</p></td>
+<td><p>Potential transpiration (after removing of evaporation)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>actualET</p></td>
+<td><p>simulated evapotranspiration from soil, flooded area and vegetation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>snowEvap</p></td>
+<td><p>total evaporation from snow for a snow layers</p></td>
+<td><p>m</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.interception.interception.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/interception.html#interception.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.interception.interception.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -508,10 +1502,67 @@ calculating interception for each land cover class</p>
 <p><strong>Calculate water runoff from impermeable surface</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.sealed_water"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.sealed_water.sealed_water">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.sealed_water.</code><code class="descname">sealed_water</code><span class="sig-paren">(</span><em>sealed_water_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/sealed_water.html#sealed_water"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.sealed_water.sealed_water" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.sealed_water.</code><code class="descname">sealed_water</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/sealed_water.html#sealed_water"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.sealed_water.sealed_water" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Sealed and open water runoff</p>
-<p>calculated runoff from impermeable surface (sealed) and into water bodies</p>
+<p>calculated runoff from impermeable surface (sealed) and into water bodies
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>modflow</p></td>
+<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>capillar</p></td>
+<td><p>Simulated flow from groundwater to the third CWATM soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>waterbalance_module</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>availWaterInfiltrati</p></td>
+<td><p>quantity of water reaching the soil after interception, more snowmelt</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>actualET</p></td>
+<td><p>simulated evapotranspiration from soil, flooded area and vegetation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>directRunoff</p></td>
+<td><p>Simulated surface runoff</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>openWaterEvap</p></td>
+<td><p>Simulated evaporation from open areas</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>actTransTotal</p></td>
+<td><p>Total actual transpiration from the three soil layers</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>actBareSoilEvap</p></td>
+<td><p>Simulated evaporation from the first soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.sealed_water.sealed_water.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><em>coverType</em>, <em>No</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/sealed_water.html#sealed_water.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.sealed_water.sealed_water.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -538,35 +1589,331 @@ calculating interception for each land cover class</p>
 <p><strong>Calculate fluxes in 3 layer soil</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.soil"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.soil.soil">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.soil.</code><code class="descname">soil</code><span class="sig-paren">(</span><em>soil_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/soil.html#soil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.soil.soil" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.soil.</code><code class="descname">soil</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/soil.html#soil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.soil.soil" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p><strong>SOIL</strong></p>
 <p>Calculation vertical transfer of water based on Arno scheme</p>
 <p><strong>Global variables</strong></p>
 <table class="docutils align-center">
 <colgroup>
-<col style="width: 17%" />
-<col style="width: 58%" />
-<col style="width: 6%" />
-<col style="width: 20%" />
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
 <th class="head"><p>Description</p></th>
 <th class="head"><p>Unit</p></th>
-<th class="head"><p>Appears in</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>soilLayers</p></td>
-<td><p>Number of soil layers Unit</p></td>
+<tr class="row-even"><td><p>modflow</p></td>
+<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
 <td><p>–</p></td>
-<td><p>soil</p></td>
 </tr>
-<tr class="row-odd"><td><p>percolationImp</p></td>
-<td><p>Fraction of area where percolation to groundwater is impeded</p></td>
+<tr class="row-odd"><td><p>storGroundwater</p></td>
+<td><p>simulated groundwater storage</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>capRiseFrac</p></td>
+<td><p>fraction of a grid cell where capillar rise may happen</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>cropKC</p></td>
+<td><p>crop coefficient for each of the 4 different land cover types (forest, irrigated</p></td>
 <td><p>–</p></td>
-<td><p>soil,waterdemand</p></td>
+</tr>
+<tr class="row-even"><td><p>capillar</p></td>
+<td><p>Simulated flow from groundwater to the third CWATM soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>availWaterInfiltrati</p></td>
+<td><p>quantity of water reaching the soil after interception, more snowmelt</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>potTranspiration</p></td>
+<td><p>Potential transpiration (after removing of evaporation)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>actualET</p></td>
+<td><p>simulated evapotranspiration from soil, flooded area and vegetation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>soilLayers</p></td>
+<td><p>Number of soil layers</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>fracVegCover</p></td>
+<td><p>Fraction of area covered by the corresponding landcover type</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>rootDepth</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>soildepth</p></td>
+<td><p>Thickness of the first soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>soildepth12</p></td>
+<td><p>Total thickness of layer 2 and 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>KSat1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>KSat2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>KSat3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuM1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuM2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuM3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuInvM1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuInvM2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuInvM3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ws1</p></td>
+<td><p>Maximum storage capacity in layer 1</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>ws2</p></td>
+<td><p>Maximum storage capacity in layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>ws3</p></td>
+<td><p>Maximum storage capacity in layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>wres1</p></td>
+<td><p>Residual storage capacity in layer 1</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>wres2</p></td>
+<td><p>Residual storage capacity in layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>wres3</p></td>
+<td><p>Residual storage capacity in layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>wrange1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wrange2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wrange3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wfc1</p></td>
+<td><p>Soil moisture at field capacity in layer 1</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wfc2</p></td>
+<td><p>Soil moisture at field capacity in layer 2</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wfc3</p></td>
+<td><p>Soil moisture at field capacity in layer 3</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wwp1</p></td>
+<td><p>Soil moisture at wilting point in layer 1</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wwp2</p></td>
+<td><p>Soil moisture at wilting point in layer 2</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wwp3</p></td>
+<td><p>Soil moisture at wilting point in layer 3</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>kunSatFC12</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>kunSatFC23</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>w1</p></td>
+<td><p>Simulated water storage in the layer 1</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>w2</p></td>
+<td><p>Simulated water storage in the layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>w3</p></td>
+<td><p>Simulated water storage in the layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>topwater</p></td>
+<td><p>quantity of water above the soil (flooding)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>arnoBeta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>adjRoot</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>maxtopwater</p></td>
+<td><p>maximum heigth of topwater</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>directRunoff</p></td>
+<td><p>Simulated surface runoff</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>interflow</p></td>
+<td><p>Simulated flow reaching runoff instead of groundwater</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>openWaterEvap</p></td>
+<td><p>Simulated evaporation from open areas</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>actTransTotal</p></td>
+<td><p>Total actual transpiration from the three soil layers</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>actBareSoilEvap</p></td>
+<td><p>Simulated evaporation from the first soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>FrostIndexThreshold</p></td>
+<td><p>Degree Days Frost Threshold (stops infiltration, percolation and capillary rise)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>FrostIndex</p></td>
+<td><p>FrostIndex - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Floo</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>percolationImp</p></td>
+<td><p>Fraction of area covered by the corresponding landcover type</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>cropGroupNumber</p></td>
+<td><p>soil water depletion fraction, Van Diepen et al., 1988: WOFOST 6.0, p.86, Dooren</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>cPrefFlow</p></td>
+<td><p>Factor influencing preferential flow (flow from surface to GW)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>act_irrConsumption</p></td>
+<td><p>actual irrgation water consumption</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>potBareSoilEvap</p></td>
+<td><p>potential bare soil evaporation (calculated with minus snow evaporation)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>totalPotET</p></td>
+<td><p>Potential evaporation per land use class</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>rws</p></td>
+<td><p>Transpiration reduction factor (in case of water stress)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>prefFlow</p></td>
+<td><p>Flow going directly from rainfall to groundwater</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>infiltration</p></td>
+<td><p>Water actually infiltrating the soil</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>capRiseFromGW</p></td>
+<td><p>Simulated capillary rise from groundwater</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>NoSubSteps</p></td>
+<td><p>Number of sub steps to calculate soil percolation</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>perc1to2</p></td>
+<td><p>Simulated water flow from soil layer 1 to soil layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>perc2to3</p></td>
+<td><p>Simulated water flow from soil layer 2 to soil layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>perc3toGW</p></td>
+<td><p>Simulated water flow from soil layer 3 to groundwater</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>theta1</p></td>
+<td><p>fraction of water in soil compartment 1 for each land use class</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>theta2</p></td>
+<td><p>fraction of water in soil compartment 2 for each land use class</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>theta3</p></td>
+<td><p>fraction of water in soil compartment 3 for each land use class</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>actTransTotal_forest</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>actTransTotal_grassl</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>actTransTotal_paddy</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>actTransTotal_nonpad</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>before</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>gwRecharge</p></td>
+<td><p>groundwater recharge</p></td>
+<td><p>m</p></td>
 </tr>
 </tbody>
 </table>
@@ -598,10 +1945,95 @@ Dependend on soil depth, soil hydraulic parameters</p>
 <p><strong>Calculate capillar rise from groundwater</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.capillarRise"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.capillarRise.capillarRise">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.capillarRise.</code><code class="descname">capillarRise</code><span class="sig-paren">(</span><em>capillarRise_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/capillarRise.html#capillarRise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.capillarRise.capillarRise" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.capillarRise.</code><code class="descname">capillarRise</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/capillarRise.html#capillarRise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.capillarRise.capillarRise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>CAPPILAR RISE
 calculate cell fraction influenced by capillary rise</p>
+<p><strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>modflow</p></td>
+<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>storGroundwater</p></td>
+<td><p>simulated groundwater storage</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>specificYield</p></td>
+<td><p>groundwater reservoir parameters (if ModFlow is not used) used to compute ground</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxGWCapRise</p></td>
+<td><p>influence of capillary rise above groundwater level</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>dzRel0100</p></td>
+<td><p>map of relative elevation above flood plains (max elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>dzRel0090</p></td>
+<td><p>map of relative elevation above flood plains (90% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>dzRel0080</p></td>
+<td><p>map of relative elevation above flood plains (80% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>dzRel0070</p></td>
+<td><p>map of relative elevation above flood plains (70% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>dzRel0060</p></td>
+<td><p>map of relative elevation above flood plains (60% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>dzRel0050</p></td>
+<td><p>map of relative elevation above flood plains (median elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>dzRel0040</p></td>
+<td><p>map of relative elevation above flood plains (40% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>dzRel0030</p></td>
+<td><p>map of relative elevation above flood plains (30% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>dzRel0020</p></td>
+<td><p>map of relative elevation above flood plains (20% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>dzRel0010</p></td>
+<td><p>map of relative elevation above flood plains (10% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>dzRel0005</p></td>
+<td><p>map of relative elevation above flood plains (5% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>dzRel0001</p></td>
+<td><p>map of relative elevation above flood plains (1% elevation above plain)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>capRiseFrac</p></td>
+<td><p>fraction of a grid cell where capillar rise may happen</p></td>
+<td><p>m</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.capillarRise.capillarRise.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/capillarRise.html#capillarRise.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.capillarRise.capillarRise.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -623,9 +2055,86 @@ depending on appr. height of groundwater and relative elevation of grid cell</p>
 <p><strong>Calculate groundwater</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.groundwater"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.groundwater.groundwater">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.groundwater.</code><code class="descname">groundwater</code><span class="sig-paren">(</span><em>groundwater_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/groundwater.html#groundwater"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.groundwater.groundwater" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.groundwater.</code><code class="descname">groundwater</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/groundwater.html#groundwater"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.groundwater.groundwater" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>GROUNDWATER</p>
+<p>GROUNDWATER
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>modflow</p></td>
+<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>storGroundwater</p></td>
+<td><p>simulated groundwater storage</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>specificYield</p></td>
+<td><p>groundwater reservoir parameters (if ModFlow is not used) used to compute ground</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>recessionCoeff</p></td>
+<td><p>groundwater storage times this coefficient gives baseflow</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>kSatAquifer</p></td>
+<td><p>groundwater reservoir parameters (if ModFlow is not used), could be used to comp</p></td>
+<td><p>m day-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>load_initial</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>readAvlStorGroundwat</p></td>
+<td><p>same as storGroundwater but equal to 0 when inferior to a treshold</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>pumping_actual</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>capillar</p></td>
+<td><p>Simulated flow from groundwater to the third CWATM soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>baseflow</p></td>
+<td><p>simulated baseflow (= groundwater discharge to river)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>gwstore</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>prestorGroundwater</p></td>
+<td><p>storGroundwater at the beginning of each step</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>nonFossilGroundwater</p></td>
+<td><p>groundwater abstraction which is sustainable and not using fossil resources</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_gwRecharge</p></td>
+<td><p>groundwater recharge</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>waterbalance_module</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.groundwater.groundwater.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/groundwater.html#groundwater.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.groundwater.groundwater.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -651,7 +2160,7 @@ Calculate groundweater storage and baseflow</p>
 <p><strong>Calculate runoff concentration - from grid cell to grid cell corner</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.runoff_concentration"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.runoff_concentration.runoff_concentration">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.runoff_concentration.</code><code class="descname">runoff_concentration</code><span class="sig-paren">(</span><em>runoff_concentration_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/runoff_concentration.html#runoff_concentration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.runoff_concentration.runoff_concentration" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.runoff_concentration.</code><code class="descname">runoff_concentration</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/runoff_concentration.html#runoff_concentration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.runoff_concentration.runoff_concentration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Runoff concentration</p>
 <p>this is the part between runoff generation and routing
@@ -663,6 +2172,83 @@ diffusion is calculated using a triangular-weighting-function</p>
 <p>where <img class="math" src="_images/math/176e92950a683e2d07c5bd5b238b127186e17552.png" alt="c(i) = \int_{i-1}^{i} {2 \over{max}} - | u - {max \over {2}} | * {4 \over{max^2}} du"/></p>
 <p>see also:</p>
 <p><a class="reference external" href="http://stackoverflow.com/questions/24040984/transformation-using-triangular-weighting-function-in-python">http://stackoverflow.com/questions/24040984/transformation-using-triangular-weighting-function-in-python</a></p>
+<p><strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>load_initial</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>baseflow</p></td>
+<td><p>simulated baseflow (= groundwater discharge to river)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>coverTypes</p></td>
+<td><p>land cover types - forest - grassland - irrPaddy - irrNonPaddy - water - sealed</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>runoff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>fracVegCover</p></td>
+<td><p>Fraction of area covered by the corresponding landcover type</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_interflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>runoff_peak</p></td>
+<td><p>peak time of runoff in seconds for each land use class</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-odd"><td><p>tpeak_interflow</p></td>
+<td><p>peak time of interflow</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>tpeak_baseflow</p></td>
+<td><p>peak time of baseflow</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxtime_runoff_conc</p></td>
+<td><p>maximum time till all flow is at the outlet</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>runoff_conc</p></td>
+<td><p>runoff after concentration - triangular-weighting method</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_landSurfaceRunof</p></td>
+<td><p>Runoff concentration above the soil more interflow including all landcover types</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>landSurfaceRunoff</p></td>
+<td><p>Runoff concentration above the soil more interflow</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>directRunoff</p></td>
+<td><p>Simulated surface runoff</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>interflow</p></td>
+<td><p>Simulated flow reaching runoff instead of groundwater</p></td>
+<td><p>m</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.runoff_concentration.runoff_concentration.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/runoff_concentration.html#runoff_concentration.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.runoff_concentration.runoff_concentration.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -701,42 +2287,6 @@ runoff concentration time is calculated</p>
 <div class="section" id="waterdemand-module">
 <h3>waterdemand module<a class="headerlink" href="#waterdemand-module" title="Permalink to this headline">¶</a></h3>
 <p><strong>Calculate water demand from different sectors</strong></p>
-<span class="target" id="module-cwatm.hydrological_modules.waterdemand"></span><dl class="simple">
-<dt>Naming convention:</dt><dd><ul class="simple">
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
-</dd>
-</dl>
-<dl class="class">
-<dt id="cwatm.hydrological_modules.waterdemand.waterdemand">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.waterdemand.</code><code class="descname">waterdemand</code><span class="sig-paren">(</span><em>waterdemand_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterdemand.html#waterdemand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterdemand.waterdemand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>WATERDEMAND</p>
-<p>calculating water demand -
-Industrial, domenstic based on precalculated maps
-Agricultural water demand based on water need by plants</p>
-<dl class="method">
-<dt id="cwatm.hydrological_modules.waterdemand.waterdemand.dynamic">
-<code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterdemand.html#waterdemand.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterdemand.waterdemand.dynamic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic part of the water demand module</p>
-<ul class="simple">
-<li><p>calculate the fraction of water from surface water vs. groundwater</p></li>
-<li><p>get non-Irrigation water demand and its return flow fraction</p></li>
-</ul>
-</dd></dl>
-
-<dl class="method">
-<dt id="cwatm.hydrological_modules.waterdemand.waterdemand.initial">
-<code class="descname">initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterdemand.html#waterdemand.initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterdemand.waterdemand.initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial part of the water demand module</p>
-<p>Set the water allocation</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 <div class="section" id="hydrology-iv-lakes-reservoirs-and-river">
@@ -746,7 +2296,7 @@ Agricultural water demand based on water need by plants</p>
 <p><strong>Calculate water retention in lakes</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.lakes_reservoirs"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.lakes_reservoirs.</code><code class="descname">lakes_reservoirs</code><span class="sig-paren">(</span><em>lakes_reservoirs_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.lakes_reservoirs.</code><code class="descname">lakes_reservoirs</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>LAKES AND RESERVOIRS</p>
 <div class="admonition note">
@@ -781,6 +2331,359 @@ has to be checked if this works in forecasting mode!</p>
 <p>solution of this quadratic equation:</p>
 <p><img class="math" src="_images/math/73899ebaa83edc11fb3b7278a9b6a08897807aee.png" alt="Q = (-LakeFactor + \sqrt{LakeFactor^2+2*SI})^2"/></p>
 </div>
+<p><strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>load_initial</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>waterbalance_module</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>DtSec</p></td>
+<td><p>number of seconds per timestep (default = 86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-odd"><td><p>saveInit</p></td>
+<td><p>Flag: if true initial conditions are saved</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>waterBodyID</p></td>
+<td><p>lakes/reservoirs map with a single ID for each lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>UpArea1</p></td>
+<td><p>upstream area of a grid cell</p></td>
+<td><p>m2</p></td>
+</tr>
+<tr class="row-even"><td><p>waterBodyOut</p></td>
+<td><p>biggest outlet (biggest accumulation of ldd network) of a waterbody</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>dirUp</p></td>
+<td><p>river network in upstream direction</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>ldd_LR</p></td>
+<td><p>change river network (put pits in where lakes are)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>lddCompress</p></td>
+<td><p>compressed river network (without missing values)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>lddCompress_LR</p></td>
+<td><p>compressed river network lakes/reservoirs (without missing values)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>dirUp_LR</p></td>
+<td><p>river network direction upstream lake/reservoirs</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>dirupLen_LR</p></td>
+<td><p>number of bifurcation upstream lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>dirupID_LR</p></td>
+<td><p>index river upstream lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>downstruct_LR</p></td>
+<td><p>river network downstream lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>catchment_LR</p></td>
+<td><p>catchments lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>dirDown_LR</p></td>
+<td><p>river network direktion downstream lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>lendirDown_LR</p></td>
+<td><p>number of river network connections lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>compress_LR</p></td>
+<td><p>boolean map as mask map for compressing lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>decompress_LR</p></td>
+<td><p>boolean map as mask map for decompressing lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>waterBodyOutC</p></td>
+<td><p>compressed map biggest outlet of each lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>resYearC</p></td>
+<td><p>compressed map of the year when the reservoirs is operating</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>waterBodyTypC</p></td>
+<td><p>water body types 3 reservoirs and lakes (used as reservoirs but before the year</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeArea</p></td>
+<td><p>area of each lake/reservoir</p></td>
+<td><p>m2</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeAreaC</p></td>
+<td><p>compressed map of the area of each lake/reservoir</p></td>
+<td><p>m2</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeDis0</p></td>
+<td><p>compressed map average discharge at the outlet of a lake/reservoir</p></td>
+<td><p>m3 s-1</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeDis0C</p></td>
+<td><p>average discharge at the outlet of a lake/reservoir</p></td>
+<td><p>m3 s-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeAC</p></td>
+<td><p>compressed map of parameter of channel width, gravity and weir coefficient</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>resVolumeC</p></td>
+<td><p>compressed map of reservoir volume</p></td>
+<td><p>Million m</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeEvaFactor</p></td>
+<td><p>a factor which increases evaporation from lake because of wind</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeEvaFactorC</p></td>
+<td><p>compressed map of a factor which increases evaporation from lake because of wind</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>reslakeoutflow</p></td>
+<td></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeVolume</p></td>
+<td><p>volume of lakes</p></td>
+<td><p>m3</p></td>
+</tr>
+<tr class="row-odd"><td><p>outLake</p></td>
+<td><p>outflow from lakes</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lakeInflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeOutflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>reservoirStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>MtoM3C</p></td>
+<td><p>conversion factor from m to m3 (compressed map)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>MtoM3</p></td>
+<td><p>Coefficient to change units</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>EvapWaterBodyM</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lakeResInflowM</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeResOutflowM</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lakeFactor</p></td>
+<td><p>factor for the Modified Puls approach to calculate retention of the lake</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>dtRouting</p></td>
+<td><p>number of seconds per routing timestep</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeFactorSqr</p></td>
+<td><p>square root factor for the Modified Puls approach to calculate retention of the</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeInflowOldC</p></td>
+<td><p>inflow to the lake from previous days</p></td>
+<td><p>m/3</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeVolumeM3C</p></td>
+<td><p>compressed map of lake volume</p></td>
+<td><p>m3</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeStorageC</p></td>
+<td></td>
+<td><p>m3</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeOutflowC</p></td>
+<td><p>compressed map of lake outflow</p></td>
+<td><p>m3/s</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeLevelC</p></td>
+<td><p>compressed map of lake level</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>conLimitC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>normLimitC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>floodLimitC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>adjust_Normal_FloodC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>norm_floodLimitC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>minQC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>normQC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>nondmgQC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>deltaO</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>deltaLN</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>deltaLF</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>deltaNFL</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>reservoirFillC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>reservoirStorageM3C</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lakeResStorageC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeResStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>waterBodyTypCTemp</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sumEvapWaterBodyC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sumlakeResInflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sumlakeResOutflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lakeIn</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeEvapWaterBodyC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>evapWaterBodyC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sumLakeEvapWaterBody</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>noRoutingSteps</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>resEvapWaterBodyC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sumResEvapWaterBodyC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>InvDtSec</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>discharge</p></td>
+<td><p>discharge</p></td>
+<td><p>m3/s</p></td>
+</tr>
+<tr class="row-even"><td><p>runoff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>cellArea</p></td>
+<td><p>Cell area [m�] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>downstruct</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>prelakeResStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_reservoirs.html#lakes_reservoirs.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -845,7 +2748,7 @@ Using the appraoch of LISFLOOD</p>
 <p><strong>Calculate water retention in small lakes</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.lakes_res_small"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.lakes_res_small.lakes_res_small">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.lakes_res_small.</code><code class="descname">lakes_res_small</code><span class="sig-paren">(</span><em>lakes_res_small_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_res_small.html#lakes_res_small"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_res_small.lakes_res_small" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.lakes_res_small.</code><code class="descname">lakes_res_small</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_res_small.html#lakes_res_small"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_res_small.lakes_res_small" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Small LAKES AND RESERVOIRS</p>
 <div class="admonition note">
@@ -854,6 +2757,127 @@ Using the appraoch of LISFLOOD</p>
 <p>Using the <strong>Modified Puls approach</strong> to calculate retention of a lake
 See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
 </div>
+<p><strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>load_initial</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>waterbalance_module</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>DtSec</p></td>
+<td><p>number of seconds per timestep (default = 86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-odd"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeEvaFactor</p></td>
+<td><p>a factor which increases evaporation from lake because of wind</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>InvDtSec</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>runoff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>cellArea</p></td>
+<td><p>Cell area [m�] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smallpart</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smalllakeArea</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smalllakeDis0</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smalllakeA</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smalllakeFactor</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smalllakeFactorSqr</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smalllakeInflowOld</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smalllakeVolumeM3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smalllakeOutflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smalllakeLevel</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smalllakeStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>minsmalllakeVolumeM3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>preSmalllakeStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smallLakeIn</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smallevapWaterBody</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smallLakeout</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smallLakeDiff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smallrunoffDiff</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.lakes_res_small.lakes_res_small.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/lakes_res_small.html#lakes_res_small.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.lakes_res_small.lakes_res_small.dynamic" title="Permalink to this definition">¶</a></dt>
@@ -886,10 +2910,299 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <p><strong>River routing - kinematic wave</strong></p>
 <span class="target" id="module-cwatm.hydrological_modules.routing_reservoirs.routing_kinematic"></span><dl class="class">
 <dt id="cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.</code><code class="descname">routing_kinematic</code><span class="sig-paren">(</span><em>routing_kinematic_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.</code><code class="descname">routing_kinematic</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>ROUTING</p>
-<p>routing using the kinematic wave</p>
+<p>routing using the kinematic wave
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>load_initial</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>waterbalance_module</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>QInM3Old</p></td>
+<td><p>Inflow from previous day</p></td>
+<td><p>m3</p></td>
+</tr>
+<tr class="row-odd"><td><p>inflowM3</p></td>
+<td><p>inflow to basin</p></td>
+<td><p>m3</p></td>
+</tr>
+<tr class="row-even"><td><p>DtSec</p></td>
+<td><p>number of seconds per timestep (default = 86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-odd"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>waterBodyID</p></td>
+<td><p>lakes/reservoirs map with a single ID for each lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>UpArea1</p></td>
+<td><p>upstream area of a grid cell</p></td>
+<td><p>m2</p></td>
+</tr>
+<tr class="row-even"><td><p>dirUp</p></td>
+<td><p>river network in upstream direction</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>lddCompress</p></td>
+<td><p>compressed river network (without missing values)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>dirupLen_LR</p></td>
+<td><p>number of bifurcation upstream lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>dirupID_LR</p></td>
+<td><p>index river upstream lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>dirDown_LR</p></td>
+<td><p>river network direktion downstream lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>lendirDown_LR</p></td>
+<td><p>number of river network connections lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>compress_LR</p></td>
+<td><p>boolean map as mask map for compressing lake/reservoir</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeArea</p></td>
+<td><p>area of each lake/reservoir</p></td>
+<td><p>m2</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeEvaFactor</p></td>
+<td><p>a factor which increases evaporation from lake because of wind</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeEvaFactorC</p></td>
+<td><p>compressed map of a factor which increases evaporation from lake because of wind</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>EvapWaterBodyM</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lakeResInflowM</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeResOutflowM</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>dtRouting</p></td>
+<td><p>number of seconds per routing timestep</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeResStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>evapWaterBodyC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sumLakeEvapWaterBody</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>noRoutingSteps</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sumResEvapWaterBodyC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>discharge</p></td>
+<td><p>discharge</p></td>
+<td><p>m3/s</p></td>
+</tr>
+<tr class="row-even"><td><p>runoff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>cellArea</p></td>
+<td><p>Cell area [m�] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>downstruct</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>prelakeResStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>act_SurfaceWaterAbst</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>fracVegCover</p></td>
+<td><p>Fraction of area covered by the corresponding landcover type</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>openWaterEvap</p></td>
+<td><p>Simulated evaporation from open areas</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>catchmentAll</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>chanLength</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>totalCrossSectionAre</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>dirupLen</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>dirupID</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>catchment</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>dirDown</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lendirDown</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>UpArea</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>beta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>chanMan</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>chanGrad</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>chanWidth</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>chanDepth</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>invbeta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>invchanLength</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>invdtRouting</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>totalCrossSectionAre</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>chanWettedPerimeterA</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>alpPower</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>channelAlpha</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>invchannelAlpha</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>channelStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>riverbedExchange</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sumbalance</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>prechannelStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>EvapoChannel</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>QDelta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>act_bigLakeResAbst</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>act_smallLakeResAbst</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>returnFlow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sumsideflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>inflowDt</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.catchment">
 <code class="descname">catchment</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/routing_reservoirs/routing_kinematic.html#routing_kinematic.catchment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.routing_reservoirs.routing_kinematic.routing_kinematic.catchment" title="Permalink to this definition">¶</a></dt>
@@ -1161,13 +3474,54 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <span id="waterbalance-module"></span><h3>waterbalance module<a class="headerlink" href="#module-cwatm.hydrological_modules.waterbalance" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="cwatm.hydrological_modules.waterbalance.waterbalance">
-<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.waterbalance.</code><code class="descname">waterbalance</code><span class="sig-paren">(</span><em>waterbalance_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterbalance.html#waterbalance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterbalance.waterbalance" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.hydrological_modules.waterbalance.</code><code class="descname">waterbalance</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterbalance.html#waterbalance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterbalance.waterbalance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>WATER BALANCE</p>
 <ul class="simple">
 <li><p>check if water balnace per time step is ok ( = 0)</p></li>
 <li><p>produce an annual overview - income, outcome storage</p></li>
 </ul>
+<p><strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nonIrrReturnFlow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>localQW</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>channelStorageBefore</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_balanceStore</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_balanceFlux</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>catchmentAll</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.hydrological_modules.waterbalance.waterbalance.checkWaterSoilGround">
 <code class="descname">checkWaterSoilGround</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/waterbalance.html#waterbalance.checkWaterSoilGround"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.waterbalance.waterbalance.checkWaterSoilGround" title="Permalink to this definition">¶</a></dt>

@@ -52,13 +52,33 @@
 <div class="viewcode-block" id="interception"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.interception.interception">[docs]</a><span class="k">class</span> <span class="nc">interception</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    INTERCEPTION</span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    waterbalance_module                                                                                              </span>
+<span class="sd">    interceptCap          interception capacity of vegetation                                               m        </span>
+<span class="sd">    minInterceptCap       Maximum interception read from file for forest and grassland land cover           m        </span>
+<span class="sd">    interceptStor         simulated vegetation interception storage                                         m        </span>
+<span class="sd">    Rain                  Precipitation less snow                                                           m        </span>
+<span class="sd">    availWaterInfiltrati  quantity of water reaching the soil after interception, more snowmelt             m        </span>
+<span class="sd">    SnowMelt              total snow melt from all layers                                                   m        </span>
+<span class="sd">    twothird              2/3                                                                               --       </span>
+<span class="sd">    interceptEvap         simulated evaporation from water intercepted by vegetation                        m        </span>
+<span class="sd">    potTranspiration      Potential transpiration (after removing of evaporation)                           m        </span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
+<span class="sd">    actualET              simulated evapotranspiration from soil, flooded area and vegetation               m        </span>
+<span class="sd">    snowEvap              total evaporation from snow for a snow layers                                     m        </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interception_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">interception_variable</span>
-
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
     <span class="c1"># noinspection PyTypeChecker</span>
 <div class="viewcode-block" id="interception.dynamic"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.interception.interception.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">coverType</span><span class="p">,</span> <span class="n">No</span><span class="p">):</span>

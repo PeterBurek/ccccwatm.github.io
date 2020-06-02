@@ -52,16 +52,103 @@
 <div class="viewcode-block" id="soil"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.soil.soil">[docs]</a><span class="k">class</span> <span class="nc">soil</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    SOIL</span>
+<span class="sd">    **SOIL**</span>
 
-<span class="sd">    Caclulation vertical transfer of water based on Arno scheme</span>
+
+<span class="sd">    Calculation vertical transfer of water based on Arno scheme</span>
+
+<span class="sd">    </span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
+<span class="sd">    storGroundwater       simulated groundwater storage                                                     m        </span>
+<span class="sd">    capRiseFrac           fraction of a grid cell where capillar rise may happen                            m        </span>
+<span class="sd">    cropKC                crop coefficient for each of the 4 different land cover types (forest, irrigated  --       </span>
+<span class="sd">    capillar              Simulated flow from groundwater to the third CWATM soil layer                     m        </span>
+<span class="sd">    availWaterInfiltrati  quantity of water reaching the soil after interception, more snowmelt             m        </span>
+<span class="sd">    potTranspiration      Potential transpiration (after removing of evaporation)                           m        </span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
+<span class="sd">    actualET              simulated evapotranspiration from soil, flooded area and vegetation               m        </span>
+<span class="sd">    soilLayers            Number of soil layers                                                             --       </span>
+<span class="sd">    fracVegCover          Fraction of area covered by the corresponding landcover type                               </span>
+<span class="sd">    rootDepth                                                                                                        </span>
+<span class="sd">    soildepth             Thickness of the first soil layer                                                 m        </span>
+<span class="sd">    soildepth12           Total thickness of layer 2 and 3                                                  m        </span>
+<span class="sd">    KSat1                                                                                                            </span>
+<span class="sd">    KSat2                                                                                                            </span>
+<span class="sd">    KSat3                                                                                                            </span>
+<span class="sd">    genuM1                                                                                                           </span>
+<span class="sd">    genuM2                                                                                                           </span>
+<span class="sd">    genuM3                                                                                                           </span>
+<span class="sd">    genuInvM1                                                                                                        </span>
+<span class="sd">    genuInvM2                                                                                                        </span>
+<span class="sd">    genuInvM3                                                                                                        </span>
+<span class="sd">    ws1                   Maximum storage capacity in layer 1                                               m        </span>
+<span class="sd">    ws2                   Maximum storage capacity in layer 2                                               m        </span>
+<span class="sd">    ws3                   Maximum storage capacity in layer 3                                               m        </span>
+<span class="sd">    wres1                 Residual storage capacity in layer 1                                              m        </span>
+<span class="sd">    wres2                 Residual storage capacity in layer 2                                              m        </span>
+<span class="sd">    wres3                 Residual storage capacity in layer 3                                              m        </span>
+<span class="sd">    wrange1                                                                                                          </span>
+<span class="sd">    wrange2                                                                                                          </span>
+<span class="sd">    wrange3                                                                                                          </span>
+<span class="sd">    wfc1                  Soil moisture at field capacity in layer 1                                                 </span>
+<span class="sd">    wfc2                  Soil moisture at field capacity in layer 2                                                 </span>
+<span class="sd">    wfc3                  Soil moisture at field capacity in layer 3                                                 </span>
+<span class="sd">    wwp1                  Soil moisture at wilting point in layer 1                                                  </span>
+<span class="sd">    wwp2                  Soil moisture at wilting point in layer 2                                                  </span>
+<span class="sd">    wwp3                  Soil moisture at wilting point in layer 3                                                  </span>
+<span class="sd">    kunSatFC12                                                                                                       </span>
+<span class="sd">    kunSatFC23                                                                                                       </span>
+<span class="sd">    w1                    Simulated water storage in the layer 1                                            m        </span>
+<span class="sd">    w2                    Simulated water storage in the layer 2                                            m        </span>
+<span class="sd">    w3                    Simulated water storage in the layer 3                                            m        </span>
+<span class="sd">    topwater              quantity of water above the soil (flooding)                                       m        </span>
+<span class="sd">    arnoBeta                                                                                                         </span>
+<span class="sd">    adjRoot                                                                                                          </span>
+<span class="sd">    maxtopwater           maximum heigth of topwater                                                        m        </span>
+<span class="sd">    directRunoff          Simulated surface runoff                                                          m        </span>
+<span class="sd">    interflow             Simulated flow reaching runoff instead of groundwater                             m        </span>
+<span class="sd">    openWaterEvap         Simulated evaporation from open areas                                             m        </span>
+<span class="sd">    actTransTotal         Total actual transpiration from the three soil layers                             m        </span>
+<span class="sd">    actBareSoilEvap       Simulated evaporation from the first soil layer                                   m        </span>
+<span class="sd">    FrostIndexThreshold   Degree Days Frost Threshold (stops infiltration, percolation and capillary rise)  --       </span>
+<span class="sd">    FrostIndex            FrostIndex - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Floo  --       </span>
+<span class="sd">    percolationImp        Fraction of area covered by the corresponding landcover type                      m        </span>
+<span class="sd">    cropGroupNumber       soil water depletion fraction, Van Diepen et al., 1988: WOFOST 6.0, p.86, Dooren  --       </span>
+<span class="sd">    cPrefFlow             Factor influencing preferential flow (flow from surface to GW)                    --       </span>
+<span class="sd">    act_irrConsumption    actual irrgation water consumption                                                m        </span>
+<span class="sd">    potBareSoilEvap       potential bare soil evaporation (calculated with minus snow evaporation)          m        </span>
+<span class="sd">    totalPotET            Potential evaporation per land use class                                          m        </span>
+<span class="sd">    rws                   Transpiration reduction factor (in case of water stress)                          --       </span>
+<span class="sd">    prefFlow              Flow going directly from rainfall to groundwater                                  m        </span>
+<span class="sd">    infiltration          Water actually infiltrating the soil                                              m        </span>
+<span class="sd">    capRiseFromGW         Simulated capillary rise from groundwater                                         m        </span>
+<span class="sd">    NoSubSteps            Number of sub steps to calculate soil percolation                                 --       </span>
+<span class="sd">    perc1to2              Simulated water flow from soil layer 1 to soil layer 2                            m        </span>
+<span class="sd">    perc2to3              Simulated water flow from soil layer 2 to soil layer 3                            m        </span>
+<span class="sd">    perc3toGW             Simulated water flow from soil layer 3 to groundwater                             m        </span>
+<span class="sd">    theta1                fraction of water in soil compartment 1 for each land use class                   --       </span>
+<span class="sd">    theta2                fraction of water in soil compartment 2 for each land use class                   --       </span>
+<span class="sd">    theta3                fraction of water in soil compartment 3 for each land use class                   --       </span>
+<span class="sd">    actTransTotal_forest                                                                                             </span>
+<span class="sd">    actTransTotal_grassl                                                                                             </span>
+<span class="sd">    actTransTotal_paddy                                                                                              </span>
+<span class="sd">    actTransTotal_nonpad                                                                                             </span>
+<span class="sd">    before                                                                                                           </span>
+<span class="sd">    gwRecharge            groundwater recharge                                                              m        </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">soil_variable</span>
-
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
 <div class="viewcode-block" id="soil.initial"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.soil.soil.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -69,17 +156,11 @@
 
 <span class="sd">        * Initialize all the hydraulic properties of soil</span>
 <span class="sd">        * Set soil depth</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">soilLayers</span> <span class="o">=</span> <span class="mi">3</span>
         <span class="c1"># --- Topography -----------------------------------------------------</span>
-        <span class="c1">#self.var.tanslope = loadmap(&#39;tanslope&#39;)</span>
-        <span class="c1">#self.var.slopeLength = loadmap(&#39;slopeLength&#39;)</span>
-
-
-        <span class="c1">#self.var.tanslope = np.maximum(self.var.tanslope, 0.00001)</span>
-        <span class="c1"># setting slope &gt;= 0.00001 to prevent 0 value</span>
-
         <span class="c1"># maps of relative elevation above flood plains</span>
         <span class="n">dzRel</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dzRel0001&#39;</span><span class="p">,</span><span class="s1">&#39;dzRel0005&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;dzRel0010&#39;</span><span class="p">,</span><span class="s1">&#39;dzRel0020&#39;</span><span class="p">,</span><span class="s1">&#39;dzRel0030&#39;</span><span class="p">,</span><span class="s1">&#39;dzRel0040&#39;</span><span class="p">,</span><span class="s1">&#39;dzRel0050&#39;</span><span class="p">,</span>
@@ -382,11 +463,7 @@
         <span class="c1">#availWaterPlant1 = np.maximum(0., self.var.w1[No] - self.var.wwp1[No]) * self.var.rootDepth[0][No]</span>
         <span class="c1">#availWaterPlant2 = np.maximum(0., self.var.w2[No] - self.var.wwp2[No]) * self.var.rootDepth[1][No]</span>
         <span class="c1">#availWaterPlant3 = np.maximum(0., self.var.w3[No] - self.var.wwp3[No]) * self.var.rootDepth[2][No]</span>
-        <span class="c1">#self.var.readAvlWater = availWaterPlant1 + availWaterPlant2 + availWaterPlant3</span>
-
-
-
-
+        <span class="c1">#readAvlWater = availWaterPlant1 + availWaterPlant2 + availWaterPlant3</span>
 
         <span class="c1"># Percolation -----------------------------------------------</span>
         <span class="k">if</span> <span class="n">No</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -558,52 +635,26 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w3</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w3</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">perc2to3</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">perc3toGW</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
 
         <span class="c1"># Compute the amount of water that could not infiltrate and add this water to the surface runoff</span>
-       <span class="c1"># self.var.infiltration[No] = self.var.infiltration[No] - np.maximum(self.var.w1[No] - self.var.ws1[No], 0.0)</span>
-       <span class="c1"># self.var.directRunoff[No] = self.var.directRunoff[No] + np.maximum(self.var.w1[No] - self.var.ws1[No], 0.0)</span>
-       <span class="c1"># self.var.w1[No] = np.minimum(self.var.w1[No], self.var.ws1[No])</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">theta1</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w1</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootDepth</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">No</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">theta2</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w2</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootDepth</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">No</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">theta3</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w3</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">rootDepth</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">No</span><span class="p">]</span>
 
-
-
-
-
-
-
         <span class="c1"># ---------------------------------------------------------------------------------------------</span>
-        <span class="c1"># Calculate interflow</span>
-        <span class="c1">#self.var.interflow[No] = self.var.percolationImp * (perc[1] + self.var.capRiseFromGW[No] - (self.var.perc3toGW[No] + capRise[1]))</span>
-        <span class="c1">#self.var.interflow[No] = np.maximum(0.0, self.var.interflow[No])</span>
-
-
-
-
-
-
         <span class="c1"># total actual transpiration</span>
-        <span class="c1">#self.var.actTransTotal[No] = actTrans[0] + actTrans[1] + actTrans[2]</span>
-        <span class="c1">#self.var.actTransTotal[No] =  np.sum(actTrans, axis=0)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta1</span> <span class="o">+</span> <span class="n">ta2</span> <span class="o">+</span> <span class="n">ta3</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_forest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_grasslands</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_paddy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_nonpaddy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">before</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actualET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="c1"># total actual evaporation + transpiration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actualET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actualET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actBareSoilEvap</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">openWaterEvap</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
-        <span class="c1">#self.var.actualET[No] = self.var.actualET[No] + self.var.actBareSoilEvap[No] + self.var.actTransTotal[No]</span>
-
-
         <span class="c1">#  actual evapotranspiration can be bigger than pot, because openWater is taken from pot open water evaporation, therefore self.var.totalPotET[No] is adjusted</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalPotET</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actualET</span><span class="p">[</span><span class="n">No</span><span class="p">])</span>
-
-
-        <span class="c1"># net percolation between upperSoilStores (positive indicating downward direction)</span>
-        <span class="c1">#elf.var.netPerc[No] = perc[0] - capRise[0]</span>
-        <span class="c1">#self.var.netPercUpper[No] = perc[1] - capRise[1]</span>
-
         <span class="c1"># groundwater recharge</span>
-        <span class="c1">#self.var.gwRecharge[No] = self.var.perc3toGW[No] - self.var.capRiseFromGW[No] + self.var.prefFlow[No]</span>
         <span class="n">toGWorInterflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">perc3toGW</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prefFlow</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interflow</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">percolationImp</span> <span class="o">*</span> <span class="n">toGWorInterflow</span>
 
@@ -612,14 +663,6 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwRecharge</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">percolationImp</span><span class="p">)</span> <span class="o">*</span> <span class="n">toGWorInterflow</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">capRiseFromGW</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
 
-
-
-
-        <span class="c1"># landSurfaceRunoff (needed for routing)</span>
-        <span class="c1">#self.var.landSurfaceRunoff[No] = self.var.directRunoff[No] + self.var.interflowTotal[No]</span>
-
-        <span class="c1">#if (dateVar[&#39;curr&#39;] == 121) and (No==2):</span>
-        <span class="c1">#    ii=1</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        if checkOption(&#39;calcWaterBalance&#39;):</span>
 <span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>

@@ -164,7 +164,7 @@ variable metaNetcdfVar</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> – key</p></li>
-<li><p><strong>varname</strong> – variable name eg self.var.Precipitation</p></li>
+<li><p><strong>varname</strong> – variable name eg <a href="#id1"><span class="problematic" id="id2">self_</span></a>.var_.Precipitation</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -195,7 +195,7 @@ variable metaNetcdfVar</p>
 
 <dl class="function">
 <dt id="cwatm.management_modules.data_handling.loadsetclone">
-<code class="descclassname">cwatm.management_modules.data_handling.</code><code class="descname">loadsetclone</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/data_handling.html#loadsetclone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.data_handling.loadsetclone" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cwatm.management_modules.data_handling.</code><code class="descname">loadsetclone</code><span class="sig-paren">(</span><em>self</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/data_handling.html#loadsetclone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.data_handling.loadsetclone" title="Permalink to this definition">¶</a></dt>
 <dd><p>load the maskmap and set as clone</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -469,7 +469,7 @@ variable metaNetcdfVar</p>
 </dd>
 </dl>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Example</span><span class="p">:</span>
-<span class="o">&gt;</span> <span class="n">report</span><span class="p">(</span><span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">temp</span><span class="o">/</span><span class="n">ksat1</span><span class="o">.</span><span class="n">map</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ksat1</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">report</span><span class="p">(</span><span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">temp</span><span class="o">/</span><span class="n">ksat1</span><span class="o">.</span><span class="n">map</span><span class="p">,</span> <span class="n">self_</span><span class="o">.</span><span class="n">var_</span><span class="o">.</span><span class="n">ksat1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -910,9 +910,58 @@ prints out an error</p>
 <span id="management-modules-output-module"></span><h3>management_modules.output module<a class="headerlink" href="#module-cwatm.management_modules.output" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="cwatm.management_modules.output.outputTssMap">
-<em class="property">class </em><code class="descclassname">cwatm.management_modules.output.</code><code class="descname">outputTssMap</code><span class="sig-paren">(</span><em>out_variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/output.html#outputTssMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.output.outputTssMap" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cwatm.management_modules.output.</code><code class="descname">outputTssMap</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/output.html#outputTssMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.output.outputTssMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Class: Output of time series and map</p>
+<p>Class: Output of time series and map
+<strong>Global variables</strong></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 73%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable [self.var]</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dirUp</p></td>
+<td><p>river network in upstream direction</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>discharge</p></td>
+<td><p>discharge</p></td>
+<td><p>m3/s</p></td>
+</tr>
+<tr class="row-even"><td><p>cellArea</p></td>
+<td><p>Cell area [m�] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sampleAdresses</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>noOutpoints</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>evalCatch</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>catcharea</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>firstout</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
 <dl class="method">
 <dt id="cwatm.management_modules.output.outputTssMap.dynamic">
 <code class="descname">dynamic</code><span class="sig-paren">(</span><em>ef=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/output.html#outputTssMap.dynamic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.output.outputTssMap.dynamic" title="Permalink to this definition">¶</a></dt>

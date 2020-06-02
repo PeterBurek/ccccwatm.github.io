@@ -96,7 +96,7 @@
         <span class="sd">&quot;&quot;&quot; up to here it was fun, now the real stuff starts</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modflow</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">modflowsteady</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">modflow</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">modflowsteady</span><span class="p">):</span>
 
             <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calc_environflow&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;calc_ef_afterRun&#39;</span><span class="p">)</span>  <span class="o">==</span> <span class="kc">False</span><span class="p">):</span>
                 <span class="c1"># if only the dis is used for calculation of EF</span>
@@ -126,7 +126,7 @@
 
             <span class="c1"># ***** READ land use fraction maps***************************</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic_fracIrrigation</span><span class="p">(</span><span class="n">init</span> <span class="o">=</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newYear&#39;</span><span class="p">],</span> <span class="n">dynamic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamicLandcover</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic_fracIrrigation</span><span class="p">(</span><span class="n">init</span> <span class="o">=</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newYear&#39;</span><span class="p">],</span> <span class="n">dynamic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dynamicLandcover</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">capillarRise_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
             <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Soil 1.Part&quot;</span><span class="p">)</span>  <span class="c1"># 4. timing</span>
 
@@ -134,7 +134,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
             <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Soil main&quot;</span><span class="p">)</span>  <span class="c1"># 5. timing</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modflow</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">modflow</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">groundwater_modflow_module</span><span class="o">.</span><span class="n">dynamic_transient</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">groundwater_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
             <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Groundwater&quot;</span><span class="p">)</span>  <span class="c1"># 7. timing</span>
@@ -176,20 +176,15 @@
                     <span class="n">timeMesSum</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timeMes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">timeMes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="k">else</span><span class="p">:</span> <span class="n">timeMesSum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">timeMes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">timeMes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">sumsum_directRunoff</span> <span class="o">+=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">sum_directRunoff</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sumsum_Runoff</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum_directRunoff</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sumsum_Precipitation</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sumsum_gwRecharge</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum_gwRecharge</span>
-            <span class="n">runoff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseflow</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum_landSurfaceRunoff</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sumsum_Runoff</span> <span class="o">+=</span> <span class="n">runoff</span>
-
-
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsum_directRunoff</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsum_Runoff</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsum_Precipitation</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsum_gwRecharge</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_gwRecharge</span>
+            <span class="n">runoff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_landSurfaceRunoff</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsum_Runoff</span> <span class="o">+=</span> <span class="n">runoff</span>
 
             <span class="c1">#print self.sum_directRunoff,  self.sum_interflowTotal, self.sum_landSurfaceRunoff, self.baseflow, runoff</span>
             <span class="c1">#print self.sumsum_Precipitation, self.sumsum_Runoff</span>
-
 
               <span class="c1">#report(decompress(self.var.sum_potTranspiration), &quot;c:\work\output/trans.map&quot;)</span>
               <span class="c1">#r eport(decompress(self.var.directRunoff[3 ]), &quot;c:\work\output\dir.map&quot;)</span>
@@ -211,8 +206,6 @@
             <span class="k">for</span> <span class="n">compteur</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Ndays_steady</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
             <span class="c1">#for compteur in range(1, 1 + 1):</span>
 
-
-
                 <span class="k">if</span> <span class="n">compteur</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">readmeteo_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">evaporationPot_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
@@ -223,7 +216,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">SnowMelt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">Snow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">FrostIndex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic_fracIrrigation</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newYear&#39;</span><span class="p">],</span> <span class="n">dynamic</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamicLandcover</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic_fracIrrigation</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newYear&#39;</span><span class="p">],</span> <span class="n">dynamic</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dynamicLandcover</span><span class="p">)</span>
 
                     <span class="c1"># initial run of soil to get recharge in steady state</span>
                     <span class="k">for</span> <span class="n">days</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">365</span><span class="p">):</span>

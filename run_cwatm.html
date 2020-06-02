@@ -71,58 +71,6 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details
 &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
 <p># ————————————————–</p>
-<dl class="function">
-<dt id="run_cwatm.CWATMexe">
-<code class="descclassname">run_cwatm.</code><code class="descname">CWATMexe</code><span class="sig-paren">(</span><em>settings</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#CWATMexe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.CWATMexe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base subroutine of the CWATM model</p>
-<ul class="simple">
-<li><p>parses the settings file</p></li>
-<li><p>read the information for the netcdf files</p></li>
-<li><p>check if dates are alright</p></li>
-<li><p>check flags for screen output</p></li>
-<li><p>runs the model</p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="run_cwatm.GNU">
-<code class="descclassname">run_cwatm.</code><code class="descname">GNU</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#GNU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.GNU" title="Permalink to this definition">¶</a></dt>
-<dd><p>prints GNU General Public License information</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="run_cwatm.headerinfo">
-<code class="descclassname">run_cwatm.</code><code class="descname">headerinfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#headerinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.headerinfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the information on top of each run</p>
-<p>this is collecting the last change of one of the source files
-in order to give more information of the settingsfile and the version of cwatm
-this information is put in the result files .tss and .nc</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="run_cwatm.main">
-<code class="descclassname">run_cwatm.</code><code class="descname">main</code><span class="sig-paren">(</span><em>settings</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.main" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="run_cwatm.run_from_command_line">
-<code class="descclassname">run_cwatm.</code><code class="descname">run_from_command_line</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#run_from_command_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.run_from_command_line" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="run_cwatm.usage">
-<code class="descclassname">run_cwatm.</code><code class="descname">usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_cwatm.html#usage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run_cwatm.usage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints some lines describing how to use this program which arguments and parameters it accepts, etc</p>
-<ul class="simple">
-<li><p>-q –quiet       output progression given as .</p></li>
-<li><p>-v –veryquiet   no output progression is given</p></li>
-<li><p>-l –loud        output progression given as time step, date and discharge</p></li>
-<li><p>-c –check       input maps and stack maps are checked, output for each input map BUT no model run</p></li>
-<li><p>-h –noheader    .tss file have no header and start immediately with the time series</p></li>
-<li><p>-t –printtime   the computation time for hydrological modules are printed</p></li>
-</ul>
-</dd></dl>
-
 </div>
 
 

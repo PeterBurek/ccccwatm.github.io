@@ -53,12 +53,38 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    CAPPILAR RISE</span>
 <span class="sd">    calculate cell fraction influenced by capillary rise</span>
+
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
+<span class="sd">    storGroundwater       simulated groundwater storage                                                     m        </span>
+<span class="sd">    specificYield         groundwater reservoir parameters (if ModFlow is not used) used to compute ground  m        </span>
+<span class="sd">    maxGWCapRise          influence of capillary rise above groundwater level                               m        </span>
+<span class="sd">    dzRel0100             map of relative elevation above flood plains (max elevation above plain)          m        </span>
+<span class="sd">    dzRel0090             map of relative elevation above flood plains (90% elevation above plain)          m        </span>
+<span class="sd">    dzRel0080             map of relative elevation above flood plains (80% elevation above plain)          m        </span>
+<span class="sd">    dzRel0070             map of relative elevation above flood plains (70% elevation above plain)          m        </span>
+<span class="sd">    dzRel0060             map of relative elevation above flood plains (60% elevation above plain)          m        </span>
+<span class="sd">    dzRel0050             map of relative elevation above flood plains (median elevation above plain)       m        </span>
+<span class="sd">    dzRel0040             map of relative elevation above flood plains (40% elevation above plain)          m        </span>
+<span class="sd">    dzRel0030             map of relative elevation above flood plains (30% elevation above plain)          m        </span>
+<span class="sd">    dzRel0020             map of relative elevation above flood plains (20% elevation above plain)          m        </span>
+<span class="sd">    dzRel0010             map of relative elevation above flood plains (10% elevation above plain)          m        </span>
+<span class="sd">    dzRel0005             map of relative elevation above flood plains (5% elevation above plain)           m        </span>
+<span class="sd">    dzRel0001             map of relative elevation above flood plains (1% elevation above plain)           m        </span>
+<span class="sd">    capRiseFrac           fraction of a grid cell where capillar rise may happen                            m        </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capillarRise_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">capillarRise_variable</span>
-
-    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
 <div class="viewcode-block" id="capillarRise.dynamic"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.capillarRise.capillarRise.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

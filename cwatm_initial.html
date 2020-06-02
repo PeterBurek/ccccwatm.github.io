@@ -59,6 +59,40 @@ It will call the initial part of the hydrological modules</p>
 
 </dd></dl>
 
+<dl class="class">
+<dt id="cwatm.cwatm_initial.Config">
+<em class="property">class </em><code class="descclassname">cwatm.cwatm_initial.</code><code class="descname">Config</code><a class="reference internal" href="_modules/cwatm/cwatm_initial.html#Config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.cwatm_initial.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="cwatm.cwatm_initial.Variables">
+<em class="property">class </em><code class="descclassname">cwatm.cwatm_initial.</code><code class="descname">Variables</code><a class="reference internal" href="_modules/cwatm/cwatm_initial.html#Variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.cwatm_initial.Variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="cwatm.cwatm_initial.Variables.load_initial">
+<code class="descname">load_initial</code><span class="sig-paren">(</span><em>name</em>, <em>default=0.0</em>, <em>number=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/cwatm_initial.html#Variables.load_initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.cwatm_initial.Variables.load_initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>First it is checked if the initial value is given in the settings file</p>
+<ul class="simple">
+<li><p>if it is &lt;&gt; None it is used directly</p></li>
+<li><p>if None it is loaded from the init netcdf file</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the init value</p></li>
+<li><p><strong>default</strong> – default value -&gt; default is 0.0</p></li>
+<li><p><strong>number</strong> – in case of snow or runoff concentration several layers are included: number = no of the layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>spatial map or value of initial condition</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

@@ -54,15 +54,30 @@
 <span class="sd">    Sealed and open water runoff</span>
 
 <span class="sd">    calculated runoff from impermeable surface (sealed) and into water bodies</span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
+<span class="sd">    capillar              Simulated flow from groundwater to the third CWATM soil layer                     m        </span>
+<span class="sd">    waterbalance_module                                                                                              </span>
+<span class="sd">    availWaterInfiltrati  quantity of water reaching the soil after interception, more snowmelt             m        </span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
+<span class="sd">    actualET              simulated evapotranspiration from soil, flooded area and vegetation               m        </span>
+<span class="sd">    directRunoff          Simulated surface runoff                                                          m        </span>
+<span class="sd">    openWaterEvap         Simulated evaporation from open areas                                             m        </span>
+<span class="sd">    actTransTotal         Total actual transpiration from the three soil layers                             m        </span>
+<span class="sd">    actBareSoilEvap       Simulated evaporation from the first soil layer                                   m        </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sealed_water_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">sealed_water_variable</span>
-
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
-
- 
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
 <div class="viewcode-block" id="sealed_water.dynamic"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.sealed_water.sealed_water.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">coverType</span><span class="p">,</span> <span class="n">No</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

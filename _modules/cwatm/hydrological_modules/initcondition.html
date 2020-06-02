@@ -53,14 +53,27 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    READ/WRITE INITIAL CONDITIONS</span>
 <span class="sd">    all initial condition can be stored at the end of a run to be used as a **warm** start for a following up run</span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    coverTypes            land cover types - forest - grassland - irrPaddy - irrNonPaddy - water - sealed   --       </span>
+<span class="sd">    loadInit              Flag: if true initial conditions are loaded                                       --       </span>
+<span class="sd">    initLoadFile          load file name of the initial condition data                                      --       </span>
+<span class="sd">    saveInit              Flag: if true initial conditions are saved                                        --       </span>
+<span class="sd">    saveInitFile          save file name of the initial condition data                                      --       </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initcondition_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">initcondition_variable</span>
 
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="initcondition.initial"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.initcondition.initcondition.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -86,7 +99,6 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
                 <span class="n">initCondVar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;runoff_conc&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
                 <span class="n">initCondVarValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;runoff_conc[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">)</span>
-
 
         <span class="c1"># soil / landcover</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
@@ -141,7 +153,6 @@
                 <span class="n">initCondVarValue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">Var2</span><span class="p">)</span>
 
 
-
         <span class="c1"># ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span>
         <span class="c1"># Load init file - a single file can be loaded - needs path and file name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">loadInit</span> <span class="o">=</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;load_initial&#39;</span><span class="p">)</span>
@@ -165,36 +176,6 @@
             <span class="c1">#    dd = datetoInt(d, dateVar[&#39;dateBegin&#39;])</span>
             <span class="c1">#    dateVar[&#39;intInit&#39;].append(datetoInt(d, dateVar[&#39;dateBegin&#39;]))</span>
 
-
-
-
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
-
-<div class="viewcode-block" id="initcondition.load_initial"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.initcondition.initcondition.load_initial">[docs]</a>    <span class="k">def</span> <span class="nf">load_initial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span><span class="n">number</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        First it is checked if the initial value is given in the settings file</span>
-
-<span class="sd">        * if it is &lt;&gt; None it is used directly</span>
-<span class="sd">        * if None it is loaded from the init netcdf file</span>
-
-<span class="sd">        :param name: Name of the init value</span>
-<span class="sd">        :param default: default value -&gt; default is 0.0</span>
-<span class="sd">        :param number: in case of snow or runoff concentration several layers are included: number = no of the layer</span>
-<span class="sd">        :return: spatial map or value of initial condition</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="n">number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">loadInit</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">readnetcdfInitial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">initLoadFile</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">default</span></div>
-
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
-
 <div class="viewcode-block" id="initcondition.dynamic"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.initcondition.initcondition.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the initcondition module</span>
@@ -205,14 +186,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">saveInit</span><span class="p">:</span>
-
             <span class="k">if</span>  <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;curr&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;intInit&#39;</span><span class="p">]:</span>
-
-
-                <span class="c1">#self.var.avgDischarge = self.var.discharge</span>
-                <span class="c1">#self.var.waterBodyStorage = globals.inZero.copy()</span>
-
-                <span class="c1">#saveFile = self.var.saveInitFile + &quot;_&quot; + dateVar[&#39;currDate&#39;].strftime(&quot;%Y%m%d&quot;) +&quot;.nc&quot;</span>
                 <span class="n">saveFile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">saveInitFile</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%02d%02d%02d</span><span class="s2">.nc&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
                 <span class="n">initVar</span><span class="o">=</span><span class="p">[]</span>
                 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>

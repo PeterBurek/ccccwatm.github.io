@@ -55,13 +55,28 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    READ INFLOW HYDROGRAPHS (OPTIONAL)</span>
 <span class="sd">    If option &quot;inflow&quot; is set to 1 the inflow hydrograph code is used otherwise dummy code is used</span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    sampleInflow          location of inflow point                                                          lat/lon  </span>
+<span class="sd">    noinflowpoints        number of inflow points                                                           --       </span>
+<span class="sd">    inflowTs              inflow time series data                                                           m3/s     </span>
+<span class="sd">    QInM3Old              Inflow from previous day                                                          m3       </span>
+<span class="sd">    totalQInM3            total inflow over time (for mass balance calculation)                             m3       </span>
+<span class="sd">    inflowM3              inflow to basin                                                                   m3       </span>
+<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inflow_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">inflow_variable</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
 <div class="viewcode-block" id="inflow.initial"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.inflow.inflow.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial part of the inflow module</span>

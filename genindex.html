@@ -44,7 +44,6 @@
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#G"><strong>G</strong></a>
- | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
@@ -96,6 +95,8 @@
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.compressArray">compressArray() (in module cwatm.management_modules.data_handling)</a>
 </li>
+      <li><a href="cwatm_initial.html#cwatm.cwatm_initial.Config">Config (class in cwatm.cwatm_initial)</a>
+</li>
       <li><a href="management_modules.html#cwatm.management_modules.checks.counted">counted() (in module cwatm.management_modules.checks)</a>
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.timestep.ctbinding">ctbinding() (in module cwatm.management_modules.timestep)</a>
@@ -124,10 +125,10 @@
 </li>
       <li><a href="hydrological_modules.html#module-cwatm.hydrological_modules.lakes_res_small">cwatm.hydrological_modules.lakes_res_small (module)</a>
 </li>
-      <li><a href="hydrological_modules.html#module-cwatm.hydrological_modules.lakes_reservoirs">cwatm.hydrological_modules.lakes_reservoirs (module)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hydrological_modules.html#module-cwatm.hydrological_modules.lakes_reservoirs">cwatm.hydrological_modules.lakes_reservoirs (module)</a>
+</li>
       <li><a href="hydrological_modules.html#module-cwatm.hydrological_modules.landcoverType">cwatm.hydrological_modules.landcoverType (module)</a>
 </li>
       <li><a href="hydrological_modules.html#module-cwatm.hydrological_modules.miscInitial">cwatm.hydrological_modules.miscInitial (module)</a>
@@ -147,8 +148,6 @@
       <li><a href="hydrological_modules.html#module-cwatm.hydrological_modules.soil">cwatm.hydrological_modules.soil (module)</a>
 </li>
       <li><a href="hydrological_modules.html#module-cwatm.hydrological_modules.waterbalance">cwatm.hydrological_modules.waterbalance (module)</a>
-</li>
-      <li><a href="hydrological_modules.html#module-cwatm.hydrological_modules.waterdemand">cwatm.hydrological_modules.waterdemand (module)</a>
 </li>
       <li><a href="management_modules.html#module-cwatm.management_modules">cwatm.management_modules (module)</a>
 </li>
@@ -171,8 +170,6 @@
       <li><a href="management_modules.html#module-cwatm.management_modules.timestep">cwatm.management_modules.timestep (module)</a>
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.messages.CWATMError">CWATMError</a>
-</li>
-      <li><a href="run_cwatm.html#run_cwatm.CWATMexe">CWATMexe() (in module run_cwatm)</a>
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.messages.CWATMFileError">CWATMFileError</a>
 </li>
@@ -253,13 +250,11 @@
 </li>
         <li><a href="hydrological_modules.html#cwatm.hydrological_modules.sealed_water.sealed_water.dynamic">(cwatm.hydrological_modules.sealed_water.sealed_water method)</a>
 </li>
-        <li><a href="hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow.dynamic">(cwatm.hydrological_modules.snow_frost.snow method)</a>
+        <li><a href="hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow_frost.dynamic">(cwatm.hydrological_modules.snow_frost.snow_frost method)</a>
 </li>
         <li><a href="hydrological_modules.html#cwatm.hydrological_modules.soil.soil.dynamic">(cwatm.hydrological_modules.soil.soil method)</a>
 </li>
         <li><a href="hydrological_modules.html#cwatm.hydrological_modules.waterbalance.waterbalance.dynamic">(cwatm.hydrological_modules.waterbalance.waterbalance method)</a>
-</li>
-        <li><a href="hydrological_modules.html#cwatm.hydrological_modules.waterdemand.waterdemand.dynamic">(cwatm.hydrological_modules.waterdemand.waterdemand method)</a>
 </li>
         <li><a href="management_modules.html#cwatm.management_modules.output.outputTssMap.dynamic">(cwatm.management_modules.output.outputTssMap method)</a>
 </li>
@@ -269,6 +264,8 @@
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_1">dynamic_1() (cwatm.hydrological_modules.evaporationPot.evaporationPot method)</a>
 </li>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_2">dynamic_2() (cwatm.hydrological_modules.evaporationPot.evaporationPot method)</a>
+</li>
+      <li><a href="hydrological_modules.html#cwatm.hydrological_modules.evaporationPot.evaporationPot.dynamic_4">dynamic_4() (cwatm.hydrological_modules.evaporationPot.evaporationPot method)</a>
 </li>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.landcoverType.landcoverType.dynamic_fracIrrigation">dynamic_fracIrrigation() (cwatm.hydrological_modules.landcoverType.landcoverType method)</a>
 </li>
@@ -300,23 +297,13 @@
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.getmeta">getmeta() (in module cwatm.management_modules.data_handling)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="management_modules.html#cwatm.management_modules.globals.globalclear">globalclear() (in module cwatm.management_modules.globals)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="management_modules.html#cwatm.management_modules.globals.globalFlags">globalFlags() (in module cwatm.management_modules.globals)</a>
 </li>
-      <li><a href="run_cwatm.html#run_cwatm.GNU">GNU() (in module run_cwatm)</a>
-</li>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.groundwater.groundwater">groundwater (class in cwatm.hydrological_modules.groundwater)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="H">H</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="run_cwatm.html#run_cwatm.headerinfo">headerinfo() (in module run_cwatm)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -359,13 +346,11 @@
 </li>
         <li><a href="hydrological_modules.html#cwatm.hydrological_modules.runoff_concentration.runoff_concentration.initial">(cwatm.hydrological_modules.runoff_concentration.runoff_concentration method)</a>
 </li>
-        <li><a href="hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow.initial">(cwatm.hydrological_modules.snow_frost.snow method)</a>
+        <li><a href="hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow_frost.initial">(cwatm.hydrological_modules.snow_frost.snow_frost method)</a>
 </li>
         <li><a href="hydrological_modules.html#cwatm.hydrological_modules.soil.soil.initial">(cwatm.hydrological_modules.soil.soil method)</a>
 </li>
         <li><a href="hydrological_modules.html#cwatm.hydrological_modules.waterbalance.waterbalance.initial">(cwatm.hydrological_modules.waterbalance.waterbalance method)</a>
-</li>
-        <li><a href="hydrological_modules.html#cwatm.hydrological_modules.waterdemand.waterdemand.initial">(cwatm.hydrological_modules.waterdemand.waterdemand method)</a>
 </li>
         <li><a href="management_modules.html#cwatm.management_modules.output.outputTssMap.initial">(cwatm.management_modules.output.outputTssMap method)</a>
 </li>
@@ -373,8 +358,6 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.evaporationPot.evaporationPot.initial_1">initial_1() (cwatm.hydrological_modules.evaporationPot.evaporationPot method)</a>
-</li>
-      <li><a href="hydrological_modules.html#cwatm.hydrological_modules.evaporationPot.evaporationPot.initial_2">initial_2() (cwatm.hydrological_modules.evaporationPot.evaporationPot method)</a>
 </li>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs.initial_lakes">initial_lakes() (cwatm.hydrological_modules.lakes_reservoirs.lakes_reservoirs method)</a>
 </li>
@@ -404,7 +387,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.routing_reservoirs.routing_sub.lddshort">lddshort() (in module cwatm.hydrological_modules.routing_reservoirs.routing_sub)</a>
 </li>
-      <li><a href="hydrological_modules.html#cwatm.hydrological_modules.initcondition.initcondition.load_initial">load_initial() (cwatm.hydrological_modules.initcondition.initcondition method)</a>
+      <li><a href="cwatm_initial.html#cwatm.cwatm_initial.Variables.load_initial">load_initial() (cwatm.cwatm_initial.Variables method)</a>
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.loadmap">loadmap() (in module cwatm.management_modules.data_handling)</a>
 </li>
@@ -416,18 +399,16 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="run_cwatm.html#run_cwatm.main">main() (in module run_cwatm)</a>
-</li>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.mapattrNetCDF">mapattrNetCDF() (in module cwatm.management_modules.data_handling)</a>
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.mapattrNetCDFMeteo">mapattrNetCDFMeteo() (in module cwatm.management_modules.data_handling)</a>
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.mapattrTiff">mapattrTiff() (in module cwatm.management_modules.data_handling)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.maskfrompoint">maskfrompoint() (in module cwatm.management_modules.data_handling)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.metaNetCDF">metaNetCDF() (in module cwatm.management_modules.data_handling)</a>
 </li>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.miscInitial.miscInitial">miscInitial (class in cwatm.hydrological_modules.miscInitial)</a>
@@ -512,8 +493,6 @@
 </li>
       <li><a href="run_cwatm.html#module-run_cwatm">run_cwatm (module)</a>
 </li>
-      <li><a href="run_cwatm.html#run_cwatm.run_from_command_line">run_from_command_line() (in module run_cwatm)</a>
-</li>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.runoff_concentration.runoff_concentration">runoff_concentration (class in cwatm.hydrological_modules.runoff_concentration)</a>
 </li>
   </ul></td>
@@ -526,7 +505,7 @@
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.setmaskmapAttr">setmaskmapAttr() (in module cwatm.management_modules.data_handling)</a>
 </li>
-      <li><a href="hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow">snow (class in cwatm.hydrological_modules.snow_frost)</a>
+      <li><a href="hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow_frost">snow_frost (class in cwatm.hydrological_modules.snow_frost)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -560,8 +539,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.routing_reservoirs.routing_sub.upstreamArea">upstreamArea() (in module cwatm.hydrological_modules.routing_reservoirs.routing_sub)</a>
 </li>
-      <li><a href="run_cwatm.html#run_cwatm.usage">usage() (in module run_cwatm)</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -569,6 +546,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.valuecell">valuecell() (in module cwatm.management_modules.data_handling)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cwatm_initial.html#cwatm.cwatm_initial.Variables">Variables (class in cwatm.cwatm_initial)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -580,11 +561,9 @@
 </li>
       <li><a href="hydrological_modules.html#cwatm.hydrological_modules.waterbalance.waterbalance.waterBalanceCheck">waterBalanceCheck() (cwatm.hydrological_modules.waterbalance.waterbalance method)</a>
 </li>
-      <li><a href="hydrological_modules.html#cwatm.hydrological_modules.waterbalance.waterbalance.waterBalanceCheckSum">waterBalanceCheckSum() (cwatm.hydrological_modules.waterbalance.waterbalance method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="hydrological_modules.html#cwatm.hydrological_modules.waterdemand.waterdemand">waterdemand (class in cwatm.hydrological_modules.waterdemand)</a>
+      <li><a href="hydrological_modules.html#cwatm.hydrological_modules.waterbalance.waterbalance.waterBalanceCheckSum">waterBalanceCheckSum() (cwatm.hydrological_modules.waterbalance.waterbalance method)</a>
 </li>
       <li><a href="management_modules.html#cwatm.management_modules.data_handling.writeIniNetcdf">writeIniNetcdf() (in module cwatm.management_modules.data_handling)</a>
 </li>

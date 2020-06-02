@@ -49,7 +49,7 @@
 <span class="kn">from</span> <span class="nn">cwatm.management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
 
 
-<div class="viewcode-block" id="snow"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow">[docs]</a><span class="k">class</span> <span class="nc">snow</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="snow_frost"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow_frost">[docs]</a><span class="k">class</span> <span class="nc">snow_frost</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    RAIN AND SNOW</span>
@@ -59,15 +59,60 @@
 
 <span class="sd">    Variables *snow* and *rain* at end of this module are the pixel-average snowfall and rain</span>
 <span class="sd">	</span>
+<span class="sd">    **Global variables**</span>
+
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    load_initial                                                                                                     </span>
+<span class="sd">    waterbalance_module                                                                                              </span>
+<span class="sd">    Rain                  Precipitation less snow                                                           m        </span>
+<span class="sd">    SnowMelt              total snow melt from all layers                                                   m        </span>
+<span class="sd">    SnowCover             snow cover (sum over all layers)                                                  m        </span>
+<span class="sd">    ElevationStD                                                                                                     </span>
+<span class="sd">    Precipitation         Precipitation (input for the model)                                               m        </span>
+<span class="sd">    DtDay                 seconds in a timestep (default=86400)                                             s        </span>
+<span class="sd">    Tavg                  average air Temperature (input for the model)                                     K        </span>
+<span class="sd">    numberSnowLayersFloa                                                                                             </span>
+<span class="sd">    numberSnowLayers      Number of snow layers (up to 10)                                                  --       </span>
+<span class="sd">    glaciertransportZone  Number of layers which can be mimiced as glacier transport zone                   --       </span>
+<span class="sd">    deltaInvNorm          Quantile of the normal distribution (for different numbers of snow layers)        --       </span>
+<span class="sd">    DeltaTSnow            Temperature lapse rate x std. deviation of elevation                              C�       </span>
+<span class="sd">    SnowDayDegrees        day of the year to degrees: 360/365.25 = 0.9856                                   --       </span>
+<span class="sd">    summerSeasonStart     day when summer season starts = 165                                               --       </span>
+<span class="sd">    IceDayDegrees         days of summer (15th June-15th Sept.) to degree: 180/(259-165)                    --       </span>
+<span class="sd">    SnowSeason            seasonal melt factor                                                              m C�-1 da</span>
+<span class="sd">    TempSnow              Average temperature at which snow melts                                           C�       </span>
+<span class="sd">    SnowFactor            Multiplier applied to precipitation that falls as snow                            --       </span>
+<span class="sd">    SnowMeltCoef          Snow melt coefficient - default: 0.004                                            --       </span>
+<span class="sd">    IceMeltCoef           Ice melt coefficnet - default  0.007                                              --       </span>
+<span class="sd">    TempMelt              Average temperature at which snow melts                                           C�       </span>
+<span class="sd">    SnowCoverS            snow cover for each layer                                                         m        </span>
+<span class="sd">    Kfrost                Snow depth reduction coefficient, (HH, p. 7.28)                                   m-1      </span>
+<span class="sd">    Afrost                Daily decay coefficient, (Handbook of Hydrology, p. 7.28)                         --       </span>
+<span class="sd">    FrostIndexThreshold   Degree Days Frost Threshold (stops infiltration, percolation and capillary rise)  --       </span>
+<span class="sd">    SnowWaterEquivalent   Snow water equivalent, (based on snow density of 450 kg/m3) (e.g. Tarboton and L  --       </span>
+<span class="sd">    FrostIndex            FrostIndex - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Floo  --       </span>
+<span class="sd">    extfrostindex         Flag for second frostindex                                                        --       </span>
+<span class="sd">    FrostIndexThreshold2  FrostIndex2 - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Flo           </span>
+<span class="sd">    frostInd1             forstindex 1                                                                               </span>
+<span class="sd">    frostInd2             frostindex 2                                                                               </span>
+<span class="sd">    frostindexS           array for frostindex                                                                       </span>
+<span class="sd">    prevSnowCover         snow cover of previous day (only for water balance)                               m        </span>
+<span class="sd">    Snow                  Snow (equal to a part of Precipitation)                                           m        </span>
+<span class="sd">    ====================  ================================================================================  =========</span>
+
+<span class="sd">    **Functions**</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">snow_variable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">snow_variable</span>
 
-<span class="c1"># --------------------------------------------------------------------------</span>
-<span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
 
-<div class="viewcode-block" id="snow.initial"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="snow_frost.initial"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow_frost.initial">[docs]</a>    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial part of the snow and frost module</span>
 
@@ -80,13 +125,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">glaciertransportZone</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;GlacierTransportZone&#39;</span><span class="p">))</span>  <span class="c1"># default 1 -&gt; highest zone is transported to middle zone</span>
 
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TotalPrecipitation</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="c1"># Difference between (average) air temperature at average elevation of</span>
         <span class="c1"># pixel and centers of upper- and lower elevation zones [deg C]</span>
-        <span class="c1"># ElevationStD:   Standard Deviation of the DEM from Bodis (2009)</span>
-        <span class="c1"># 0.9674:    Quantile of the normal distribution: u(0,833)=0.9674</span>
-        <span class="c1">#              to split the pixel in 3 equal parts.</span>
+        <span class="c1"># ElevationStD:   Standard Deviation of the DEM</span>
+        <span class="c1"># 0.9674:    Quantile of the normal distribution: u(0,833)=0.9674 to split the pixel in 3 equal parts.</span>
         <span class="c1"># for different number of layers</span>
         <span class="c1">#  Number: 2 ,3, 4, 5, 6, 7, ,8, 9, 10</span>
         <span class="n">dn</span> <span class="o">=</span> <span class="p">{}</span>
@@ -129,7 +172,7 @@
         <span class="c1"># SnowCover1 is the highest zone</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCoverS</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">numberSnowLayers</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCoverS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;SnowCover&quot;</span><span class="p">,</span><span class="n">number</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCoverS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s2">&quot;SnowCover&quot;</span><span class="p">,</span><span class="n">number</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 
         <span class="c1"># initial snow depth in elevation zones A, B, and C, respectively  [mm]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCover</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCoverS</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">numberSnowLayersFloat</span> <span class="o">+</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span>
@@ -146,10 +189,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">FrostIndexThreshold</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;FrostIndexThreshold&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowWaterEquivalent</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;SnowWaterEquivalent&#39;</span><span class="p">)</span>
 
-        <span class="c1"># FrostIndexInit=ifthen(defined(self.var.MaskMap),scalar(loadmap(&#39;FrostIndexInitValue&#39;)))</span>
-
-        <span class="c1">#self.var.FrostIndex = loadmap(&#39;FrostIndexIni&#39;)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">FrostIndex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_module</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s1">&#39;FrostIndex&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">FrostIndex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s1">&#39;FrostIndex&#39;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">extfrostindex</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="s2">&quot;morefrost&quot;</span> <span class="ow">in</span> <span class="n">binding</span><span class="p">:</span>
@@ -165,7 +205,7 @@
     <span class="c1"># --------------------------------------------------------------------------</span>
 <span class="c1"># --------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="snow.dynamic"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="snow_frost.dynamic"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.snow_frost.snow_frost.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the snow module</span>
 
@@ -276,15 +316,12 @@
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCover</span><span class="p">],</span>
                 <span class="s2">&quot;Snow1&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-        <span class="c1">#map = decompress( self.var.TotalPrecipitation)</span>
-        <span class="c1">#report(map, &#39;C:\work\output\out3.map&#39;)</span>
 
         <span class="c1"># ---------------------------------------------------------------------------------</span>
         <span class="c1"># Dynamic part of frost index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Kfrost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Tavg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
         <span class="n">FrostIndexChangeRate</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Afrost</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">FrostIndex</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Tavg</span> <span class="o">*</span> \
             <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.4</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Kfrost</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCover</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowWaterEquivalent</span><span class="p">))</span>
-        <span class="c1"># FrostIndexChangeRate=self.var.AfrostIndex - self.var.Tavg*      pc raster.exp(self.var.Kfrost*self.var.SnowCover*self.var.InvSnowWaterEquivalent)</span>
         <span class="c1"># Rate of change of frost index (expressed as rate, [degree days/day])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">FrostIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">FrostIndex</span> <span class="o">+</span> <span class="n">FrostIndexChangeRate</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtDay</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># frost index in soil [degree days] based on Molnau and Bissel (1983, A Continuous Frozen Ground Index for Flood</span>
