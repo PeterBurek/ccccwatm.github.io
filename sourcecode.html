@@ -126,8 +126,8 @@ are in the <strong>management_modules</strong> folder.</p>
 
         node [shape=circle,style=filled,fillcolor=DodgerBlue,fixedsize=true,width=1.0]  soil; evaporation;capillarRise;groundwater;
 
-
-        node [shape=circle,style=filled,fillcolor=MediumOrchid,fixedsize=true,width=1.0] waterbalance; waterdemand; environflow
+        node [shape=circle,style=filled,fillcolor=MediumOrchid,fixedsize=true,width=1.0] waterbalance; environflow
+node [shape=circle,style=filled,fillcolor=MediumOrchid,fixedsize=true,width=1.0] water_demand; environmental_need, domestic, industry, irrigation, livestock
 
         node [shape=circle,style=filled,fillcolor=RoyalBlue,fixedsize=true,width=1.0] routing_kinematic; runoff_concentration; lakes_reservoirs; lakes_res_small
         node [shape=circle,style=filled,fillcolor=RoyalBlue,fixedsize=true,width=0.8] routing_sub; &quot;t5.dll&quot;
@@ -152,7 +152,7 @@ are in the <strong>management_modules</strong> folder.</p>
         cwatm_initial -&gt; evaporation[color=RoyalBlue3];
         cwatm_initial -&gt; environflow[color=RoyalBlue3];
         cwatm_initial -&gt; groundwater[color=RoyalBlue3];
-        cwatm_initial -&gt; waterdemand[color=RoyalBlue3];
+        cwatm_initial -&gt; water_demand[color=RoyalBlue3];
         cwatm_initial -&gt; routing_kinematic[color=RoyalBlue3];
 
         cwatm_dynamic -&gt; landcoverType[color=MidnightBlue];
@@ -170,9 +170,15 @@ are in the <strong>management_modules</strong> folder.</p>
         cwatm_dynamic -&gt; capillarRise[color=MidnightBlue];
         cwatm_dynamic -&gt; groundwater[color=MidnightBlue];
         cwatm_dynamic -&gt; interception[color=MidnightBlue];
-        cwatm_dynamic -&gt; waterdemand[color=MidnightBlue];
+        cwatm_dynamic -&gt; water_demand[color=MidnightBlue];
         cwatm_dynamic -&gt; routing_kinematic[color=MidnightBlue];
         cwatm_dynamic -&gt; waterbalance[color=MidnightBlue];
+
+water_demand -&gt; domestic[color=MidnightBlue];
+water_demand -&gt; industry[color=MidnightBlue];
+water_demand -&gt; livestock[color=MidnightBlue];
+water_demand -&gt; irrigation[color=MidnightBlue];
+water_demand -&gt; environmental_need[color=MidnightBlue];
 
         routing_kinematic -&gt; lakes_reservoirs[color=MidnightBlue];
         routing_kinematic -&gt; routing_sub[color=MidnightBlue];
@@ -190,7 +196,7 @@ are in the <strong>management_modules</strong> folder.</p>
         output -&gt; timestep[penwidth=0.5, style=dashed, arrowsize =0]
         readmeteo -&gt; checks[penwidth=0.5, style=dashed, arrowsize =0]
 
-        waterdemand -&gt; replace_pcr[penwidth=0.5, style=dashed, arrowsize =0]
+        water_demand -&gt; replace_pcr[penwidth=0.5, style=dashed, arrowsize =0]
         waterbalance -&gt; replace_pcr[penwidth=0.5, style=dashed, arrowsize =0]
         routing_kinematic -&gt; replace_pcr[penwidth=0.5, style=dashed, arrowsize =0]
         lakes_reservoirs -&gt; replace_pcr[penwidth=0.5, style=dashed, arrowsize =0]
@@ -247,7 +253,7 @@ are in the <strong>management_modules</strong> folder.</p>
 <li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#water-demand-industry">water_demand.industry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#water-demand-livestock">water_demand.livestock</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#water-demand-irrigation">water_demand.irrigation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#water-demand-environmental-flow">water_demand.environmental_flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrological_modules.html#water-demand-environmental-need">water_demand.environmental_need</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="hydrological_modules.html#hydrology-iv-lakes-reservoirs-and-river">Hydrology IV - Lakes, reservoirs and river</a><ul>
