@@ -54,12 +54,23 @@
 <span class="sd">    READ METEOROLOGICAL DATA</span>
 
 <span class="sd">    reads all meteorological data from netcdf4 files</span>
+
+
 <span class="sd">    **Global variables**</span>
 
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
+<span class="sd">    TMin                  minimum air temperature                                                           K        </span>
+<span class="sd">    TMax                  maximum air temperature                                                           K        </span>
+<span class="sd">    Psurf                 Instantaneous surface pressure                                                    Pa       </span>
+<span class="sd">    Qair                  specific humidity                                                                 kg/kg    </span>
+<span class="sd">    Tavg                  average air Temperature (input for the model)                                     K        </span>
+<span class="sd">    Rsdl                  long wave downward surface radiation fluxes                                       W/m2     </span>
+<span class="sd">    Rsds                  short wave downward surface radiation fluxes                                      W/m2     </span>
+<span class="sd">    Wind                  wind speed                                                                        m/s      </span>
+<span class="sd">    ETRef                 potential evapotranspiration rate from reference crop                             m        </span>
 <span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
 <span class="sd">    Precipitation         Precipitation (input for the model)                                               m        </span>
 <span class="sd">    DtDay                 seconds in a timestep (default=86400)                                             s        </span>
@@ -82,24 +93,14 @@
 <span class="sd">    wc4_prec              upscaled to low resolution WorldClim map for precipitation                        m        </span>
 <span class="sd">    demAnomaly            digital elevation model anomaly (high resolution - low resolution)                m        </span>
 <span class="sd">    demHigh               digital elevation model high resolution                                           m        </span>
-<span class="sd">    Tavg                  average air Temperature (input for the model)                                     K        </span>
 <span class="sd">    prec                  precipitation in m                                                                m        </span>
-<span class="sd">    temp                  average temperature in Celsius deg                                                C�       </span>
-<span class="sd">    TMin                  minimum air temperature                                                           K        </span>
-<span class="sd">    Tmin                  minimum temperature in Celsius deg                                                C�       </span>
-<span class="sd">    TMax                  maximum air temperature                                                           K        </span>
-<span class="sd">    Tmax                  maximum temperature in celsius deg                                                C�       </span>
-<span class="sd">    Psurf                 Instantaneous surface pressure                                                    Pa       </span>
-<span class="sd">    Wind                  wind speed                                                                        m/s      </span>
-<span class="sd">    Rsds                  short wave downward surface radiation fluxes                                      W/m2     </span>
-<span class="sd">    Rsdl                  long wave downward surface radiation fluxes                                       W/m2     </span>
-<span class="sd">    Qair                  specific humidity                                                                 kg/kg    </span>
+<span class="sd">    temp                  average temperature in Celsius deg                                                C°       </span>
+<span class="sd">    Tmin                  minimum temperature in Celsius deg                                                C°       </span>
+<span class="sd">    Tmax                  maximum temperature in celsius deg                                                C°       </span>
 <span class="sd">    WtoMJ                 Conversion factor from [W] to [MJ] for radiation: 86400 * 1E-6                    --       </span>
-<span class="sd">    ETRef                 potential evapotranspiration rate from reference crop                             m        </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 
 <span class="sd">    **Functions**</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>

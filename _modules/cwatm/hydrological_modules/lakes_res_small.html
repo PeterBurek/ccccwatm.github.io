@@ -65,19 +65,20 @@
 <span class="sd">        Using the **Modified Puls approach** to calculate retention of a lake</span>
 <span class="sd">        See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</span>
 
+
 <span class="sd">    **Global variables**</span>
 
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
 <span class="sd">    load_initial                                                                                                     </span>
 <span class="sd">    waterbalance_module                                                                                              </span>
 <span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
-<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
 <span class="sd">    lakeEvaFactor         a factor which increases evaporation from lake because of wind                    --       </span>
 <span class="sd">    InvDtSec                                                                                                         </span>
 <span class="sd">    runoff                                                                                                           </span>
-<span class="sd">    cellArea              Cell area [m�] of each simulated mesh                                                      </span>
+<span class="sd">    cellArea              Cell area [m²] of each simulated mesh                                                      </span>
 <span class="sd">    smallpart                                                                                                        </span>
 <span class="sd">    smalllakeArea                                                                                                    </span>
 <span class="sd">    smalllakeDis0                                                                                                    </span>
@@ -99,7 +100,6 @@
 <span class="sd">    ====================  ================================================================================  =========</span>
 
 <span class="sd">    **Functions**</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>

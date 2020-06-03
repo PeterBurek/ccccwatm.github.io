@@ -57,17 +57,19 @@
 <span class="sd">    ROUTING</span>
 
 <span class="sd">    routing using the kinematic wave</span>
+
+
 <span class="sd">    **Global variables**</span>
 
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
 <span class="sd">    load_initial                                                                                                     </span>
 <span class="sd">    waterbalance_module                                                                                              </span>
 <span class="sd">    QInM3Old              Inflow from previous day                                                          m3       </span>
 <span class="sd">    inflowM3              inflow to basin                                                                   m3       </span>
 <span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
-<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
 <span class="sd">    waterBodyID           lakes/reservoirs map with a single ID for each lake/reservoir                     --       </span>
 <span class="sd">    UpArea1               upstream area of a grid cell                                                      m2       </span>
 <span class="sd">    dirUp                 river network in upstream direction                                               --       </span>
@@ -91,7 +93,7 @@
 <span class="sd">    sumResEvapWaterBodyC                                                                                             </span>
 <span class="sd">    discharge             discharge                                                                         m3/s     </span>
 <span class="sd">    runoff                                                                                                           </span>
-<span class="sd">    cellArea              Cell area [m�] of each simulated mesh                                                      </span>
+<span class="sd">    cellArea              Cell area [m²] of each simulated mesh                                                      </span>
 <span class="sd">    downstruct                                                                                                       </span>
 <span class="sd">    prelakeResStorage                                                                                                </span>
 <span class="sd">    act_SurfaceWaterAbst                                                                                             </span>
@@ -133,7 +135,6 @@
 <span class="sd">    ====================  ================================================================================  =========</span>
 
 <span class="sd">    **Functions**</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>

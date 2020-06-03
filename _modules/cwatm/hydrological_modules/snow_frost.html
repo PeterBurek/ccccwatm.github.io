@@ -58,12 +58,14 @@
 <span class="sd">    snow zones 1 -7 which each occupy a part of the pixel surface</span>
 
 <span class="sd">    Variables *snow* and *rain* at end of this module are the pixel-average snowfall and rain</span>
-<span class="sd">	</span>
+
+
 <span class="sd">    **Global variables**</span>
 
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    Tavg                  average air Temperature (input for the model)                                     K        </span>
 <span class="sd">    load_initial                                                                                                     </span>
 <span class="sd">    waterbalance_module                                                                                              </span>
 <span class="sd">    Rain                  Precipitation less snow                                                           m        </span>
@@ -72,21 +74,20 @@
 <span class="sd">    ElevationStD                                                                                                     </span>
 <span class="sd">    Precipitation         Precipitation (input for the model)                                               m        </span>
 <span class="sd">    DtDay                 seconds in a timestep (default=86400)                                             s        </span>
-<span class="sd">    Tavg                  average air Temperature (input for the model)                                     K        </span>
 <span class="sd">    numberSnowLayersFloa                                                                                             </span>
 <span class="sd">    numberSnowLayers      Number of snow layers (up to 10)                                                  --       </span>
 <span class="sd">    glaciertransportZone  Number of layers which can be mimiced as glacier transport zone                   --       </span>
 <span class="sd">    deltaInvNorm          Quantile of the normal distribution (for different numbers of snow layers)        --       </span>
-<span class="sd">    DeltaTSnow            Temperature lapse rate x std. deviation of elevation                              C�       </span>
+<span class="sd">    DeltaTSnow            Temperature lapse rate x std. deviation of elevation                              C°       </span>
 <span class="sd">    SnowDayDegrees        day of the year to degrees: 360/365.25 = 0.9856                                   --       </span>
 <span class="sd">    summerSeasonStart     day when summer season starts = 165                                               --       </span>
 <span class="sd">    IceDayDegrees         days of summer (15th June-15th Sept.) to degree: 180/(259-165)                    --       </span>
-<span class="sd">    SnowSeason            seasonal melt factor                                                              m C�-1 da</span>
-<span class="sd">    TempSnow              Average temperature at which snow melts                                           C�       </span>
+<span class="sd">    SnowSeason            seasonal melt factor                                                              m C°-1 da</span>
+<span class="sd">    TempSnow              Average temperature at which snow melts                                           C°       </span>
 <span class="sd">    SnowFactor            Multiplier applied to precipitation that falls as snow                            --       </span>
 <span class="sd">    SnowMeltCoef          Snow melt coefficient - default: 0.004                                            --       </span>
 <span class="sd">    IceMeltCoef           Ice melt coefficnet - default  0.007                                              --       </span>
-<span class="sd">    TempMelt              Average temperature at which snow melts                                           C�       </span>
+<span class="sd">    TempMelt              Average temperature at which snow melts                                           C°       </span>
 <span class="sd">    SnowCoverS            snow cover for each layer                                                         m        </span>
 <span class="sd">    Kfrost                Snow depth reduction coefficient, (HH, p. 7.28)                                   m-1      </span>
 <span class="sd">    Afrost                Daily decay coefficient, (Handbook of Hydrology, p. 7.28)                         --       </span>
@@ -103,7 +104,6 @@
 <span class="sd">    ====================  ================================================================================  =========</span>
 
 <span class="sd">    **Functions**</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
 

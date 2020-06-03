@@ -46,11 +46,8 @@
 <span class="c1"># Copyright:   (c) PB 2016</span>
 <span class="c1"># -------------------------------------------------------------------------</span>
 
-
-
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">calendar</span>
-
 
 <span class="c1">#import numpy as np</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="nb">globals</span>
@@ -63,7 +60,6 @@
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">cwatm.management_modules.dynamicModel</span> <span class="k">import</span> <span class="o">*</span>
 
-
 <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span><span class="p">,</span><span class="n">num2date</span><span class="p">,</span><span class="n">date2num</span><span class="p">,</span><span class="n">date2index</span>
 <span class="c1">#from netcdftime import utime</span>
 
@@ -71,8 +67,6 @@
 <span class="kn">from</span> <span class="nn">osgeo</span> <span class="k">import</span> <span class="n">osr</span>
 <span class="kn">from</span> <span class="nn">gdalconst</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-
-
 
 <div class="viewcode-block" id="valuecell"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.valuecell">[docs]</a><span class="k">def</span> <span class="nf">valuecell</span><span class="p">(</span> <span class="n">coordx</span><span class="p">,</span> <span class="n">coordstr</span><span class="p">,</span> <span class="n">returnmap</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -519,7 +513,7 @@
 <span class="sd">    variable metaNetcdfVar</span>
 
 <span class="sd">    :param key: key</span>
-<span class="sd">    :param varname: variable name eg self_.var_.Precipitation</span>
+<span class="sd">    :param varname: variable name e.g. self.var.Precipitation</span>
 <span class="sd">    :return: metadata information</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
