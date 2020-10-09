@@ -1,0 +1,587 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>6. Error handling &#8212; Community Water Model</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Demo of the model" href="results.html" />
+    <link rel="prev" title="5. Tutorial" href="tutorial.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="results.html" title="7. Demo of the model"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorial.html" title="5. Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="error-handling">
+<h1>6. Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
+<p>We try to make our program behave properly when encountering unexpected conditions. The problematic situations that a program can encounter fall into two categories.</p>
+<ul class="simple">
+<li><p>Programmer mistakes: If someone forgets to pass a required argument to a function, that is an example of the first kind of problem.</p></li>
+<li><p>Genuine problems: If the program asks the user to enter a name and it gets back an empty string, that is something the programmer can not prevent.</p></li>
+</ul>
+<p>This part deals with genuine problems. Please look for your error number</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error number</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Settingsfile</p></th>
+<th class="head"><p>Measure</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#e101">E101</a></p></td>
+<td><p>Gauges in settingsfile is not a coordinate e.g. Gauges = bad bad</p></td>
+<td><p>Gauges</p></td>
+<td><p>Put in pairs of coordinates or a map with coordinates</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e102">E102</a></p></td>
+<td><p>One of the gauges is outside the map extend of the mask map</p></td>
+<td><p>Gauges</p></td>
+<td><p>Make sure that all gauges are inside the mask map area</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#e103">E103</a></p></td>
+<td><p>Maskmap is not a valid mask map nor valid coordinates nor valid point e.g. MaskMap = 1 2 3 4 5 6</p></td>
+<td><p>MaskMap</p></td>
+<td><p>Put in a pair of coordinates, a defined rectangle (5 numbers) or a filename</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e104">E104</a></p></td>
+<td><p>MaskMap point does not have a valid value in the river network (LDD)</p></td>
+<td><p>MaskMap</p></td>
+<td><p>You put in a coordinate as MaskMap, but at this coordinate there is no valid river network value</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#e105">E105</a></p></td>
+<td><p>The map you are loading has a different shape (different cols,rows) than the other maps</p></td>
+<td><p>Any map</p></td>
+<td><p>Make sure your map has the same resolution, rows, cols than the river network map</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e106">E106</a></p></td>
+<td><p>The map you are loading has missing cell values (NaNs) where the river network and the mask map has valid values</p></td>
+<td><p>Any map</p></td>
+<td><p>Check the map and include cell values where the river network map has valid (non NaNs) values</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#e107">E107</a></p></td>
+<td><p>The netCDF map has different attributes (resolution, rows,cols) than your standard map</p></td>
+<td><p>Any netCDF map</p></td>
+<td><p>Make sure your map has the same resolution, rows, cols as the river network map</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e108">E108</a></p></td>
+<td><p>The tif map has different attributes (resolution, rows,cols) than your standard map</p></td>
+<td><p>Any tif map</p></td>
+<td><p>Make sure your map has the same resolution, rows, cols as the river network map</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#e109">E109</a></p></td>
+<td><p>The meteo map (e.g. temperature, precipitation, evaporation..) has different attributes (resolution, rows,cols) than your standard map</p></td>
+<td><p>Meteo netCDF map</p></td>
+<td><dl class="simple">
+<dt>Make sure your meteo input maps have the same resolution, rows, cols as the river network map.</dt><dd><p>If it is the ET maps, it might be from another run with different mask. Please look at the option: calc_evaporation</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e110">E110</a></p></td>
+<td><p>The netcdf map with a time variable (e.g. waterdemand, land cover, lakes..) has different attributes (resolution, rows,cols) than your standard map</p></td>
+<td><p>All time depending netCDF maps appart from meteo maps</p></td>
+<td><p>Make sure your netCDF input maps have the same resolution, rows, cols as the river network map</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#e111">E111</a></p></td>
+<td><p>The netcdf maps without time is turned upside dowm</p></td>
+<td><p>Any netCDF map without time</p></td>
+<td><p>Make sure your map is in right order e.g. latitude coordinate are turned</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e112">E112</a></p></td>
+<td><p>The initial map (load_initial) stack is turned upside dowm</p></td>
+<td><p>Initload</p></td>
+<td><p>Make sure your initial map (in initial_load) is in right order e.g. latitude coordinate are turned</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#e113">E113</a></p></td>
+<td><p>The initial map stack (initial_load) has different attributes (resolution, rows,cols) than your standard map</p></td>
+<td><p>Initload</p></td>
+<td><p>Make sure your initial maps (in initial_load)has the same attributes.    Maybe your initial maps are from a different run with a different mask?</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e114">E114</a></p></td>
+<td><p>Problem reading initial maps</p></td>
+<td><p>Initload</p></td>
+<td><p>Initial maps has maybe not the same shape as the mask map. Maybe put load_initial = False</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#e115">E115</a></p></td>
+<td><p>Variable with a  True or False value can not be read</p></td>
+<td><p>Any flag (True or False)</p></td>
+<td><p>Make sure the variable has either: varname = False or varname = True. Ttrue or faalse is not working!</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e116">E116</a></p></td>
+<td><p>One of the variable names in [Option] is written wrong</p></td>
+<td><p>Any variable in [Option]</p></td>
+<td><p>A keyword in option is maybe written wrong e.g. CaaapillarRise instead CapillarRise</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#e117">E117</a></p></td>
+<td><p>One of the variable names is written wrong</p></td>
+<td><p>Any variable after [Option]</p></td>
+<td><p>A keyword in option is maybe written wrong e.g. MaaaskMap instead MaskMap. Pay attention: in Linux words are case sensitive!</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e201">E201</a></p></td>
+<td><p>Cannot load the maskmap as a file e.g. MaskMap = notexisting.tif</p></td>
+<td><p>MaskMap</p></td>
+<td><p>Make sure the file you put in MaskMap is existing and is a map e.g. <a href="#id1"><span class="problematic" id="id2">*</span></a>.nc, <a href="#id3"><span class="problematic" id="id4">*</span></a>.map, <a href="#id5"><span class="problematic" id="id6">*</span></a>.tif</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#e202">E202</a></p></td>
+<td><p>Your map is upside down</p></td>
+<td><p>Any map</p></td>
+<td><p>Make sure your map is in right order e.g. latitude coordinate are turned</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#e203">E203</a></p></td>
+<td><p>Cannot find the map, filename does not exists at this location</p></td>
+<td><p>Any map</p></td>
+<td><p>the datafile cannot be found, the location is wrong or the file is missing</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="e101">
+<h2>E101<a class="headerlink" href="#e101" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Gauges in settingsfile is not a coordinate
+e.g. Gauges = bad bad</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Gauges</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Put in pairs of coordinates or a map with coordinates</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e102">
+<h2>E102<a class="headerlink" href="#e102" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>One of the gauges is outside the map extend of the mask map</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Gauges</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure that all gauges are inside the mask map area</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e103">
+<h2>E103<a class="headerlink" href="#e103" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Maskmap is not a valid mask map nor valid coordinates nor valid point
+e.g. MaskMap = 1 2 3 4 5 6</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>MaskMap</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Put in a pair of coordinates, a defined rectangle (5 numbers) or a filename</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e104">
+<h2>E104<a class="headerlink" href="#e104" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>MaskMap point does not have a valid value in the river network (LDD)</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>MaskMap</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>You put in a coordinate as MaskMap, but at this coordinate there is no valid river network value</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e105">
+<h2>E105<a class="headerlink" href="#e105" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>The map you are loading has a different shape (different cols,rows) than the other maps</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any map</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure your map has the same resolution, rows, cols than the river network map</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e106">
+<h2>E106<a class="headerlink" href="#e106" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>The map you are loading has missing cell values (NaNs) where the river network and the mask map has valid values</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any map</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Check the map and include cell values where the river network map has valid (non NaNs) values</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e107">
+<h2>E107<a class="headerlink" href="#e107" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>The netCDF map has different attributes (resolution, rows,cols) than your standard map</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any netCDF map</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure your map has the same resolution, rows, cols as the river network map</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e108">
+<h2>E108<a class="headerlink" href="#e108" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>The tif map has different attributes (resolution, rows,cols) than your standard map</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any tif map</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure your map has the same resolution, rows, cols as the river network map</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e109">
+<h2>E109<a class="headerlink" href="#e109" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>The meteo map (e.g. temperature, precipitation, evaporation..) has different attributes (resolution, rows,cols) than your standard map</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Meteo netCDF map</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure your meteo input maps have the same resolution, rows, cols as the river network map.
+If it is the ET maps, it might be from another run with different mask. Please look at the option: calc_evaporation</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e110">
+<h2>E110<a class="headerlink" href="#e110" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>The netcdf map with a time variable (e.g. waterdemand, land cover, lakes..) has different attributes (resolution, rows,cols) than your standard map</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>All time depending netCDF maps appart from meteo maps</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure your netCDF input maps have the same resolution, rows, cols as the river network map</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e111">
+<h2>E111<a class="headerlink" href="#e111" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>The netcdf maps without time is turned upside dowm</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any netCDF map without time</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure your map is in right order e.g. latitude coordinate are turned</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e112">
+<h2>E112<a class="headerlink" href="#e112" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>The initial map (load_initial) stack is turned upside dowm</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Initload</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure your initial map (in initial_load) is in right order e.g. latitude coordinate are turned</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e113">
+<h2>E113<a class="headerlink" href="#e113" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>The initial map stack (initial_load) has different attributes (resolution, rows,cols) than your standard map</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Initload</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure your initial maps (in initial_load)has the same attributes.
+Maybe your initial maps are from a different run with a different mask?</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e114">
+<h2>E114<a class="headerlink" href="#e114" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Problem reading initial maps</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Initload</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Initial maps has maybe not the same shape as the mask map.
+Maybe put load_initial = False</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e115">
+<h2>E115<a class="headerlink" href="#e115" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Variable with a  True or False value can not be read</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any flag (True or False)</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure the variable has either: varname = False or varname = True
+Ttrue or faalse is not working!</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e116">
+<h2>E116<a class="headerlink" href="#e116" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>One of the variable names in [Option] is written wrong</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any variable in [Option]</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>A keyword in option is maybe written wrong e.g. CaaapillarRise instead CapillarRise</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e117">
+<h2>E117<a class="headerlink" href="#e117" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>One of the variable names is written wrong</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any variable after [Option]</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>A keyword in option is maybe written wrong e.g. MaaaskMap instead MaskMap
+Pay attention: in Linux words are case sensitive!</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e201">
+<h2>E201<a class="headerlink" href="#e201" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Cannot load the maskmap as a file e.g. MaskMap = notexisting.tif</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>MaskMap</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure the file you put in MaskMap is existing and is a map e.g. .nc, .map, .tif</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e202">
+<h2>E202<a class="headerlink" href="#e202" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Your map is upside down</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any map</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>Make sure your map is in right order e.g. latitude coordinate are turned</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="e203">
+<h2>E203<a class="headerlink" href="#e203" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Cannot find the map, filename does not exists at this location</p>
+</dd>
+<dt class="field-even">Where</dt>
+<dd class="field-even"><p>Any map</p>
+</dd>
+<dt class="field-odd">What to do</dt>
+<dd class="field-odd"><p>the datafile cannot be found, the location is wrong or the file is missing</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CWatM_logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">4. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">5. Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Error handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#e101">E101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e102">E102</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e103">E103</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e104">E104</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e105">E105</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e106">E106</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e107">E107</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e108">E108</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e109">E109</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e110">E110</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e111">E111</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e112">E112</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e113">E113</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e114">E114</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e115">E115</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e116">E116</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e117">E117</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e201">E201</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e202">E202</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e203">E203</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">7. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">8. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">9. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">10. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">11. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolution.html">12. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zambezi.html">13. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">14. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">15. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forum.html">16. Forum</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorial.html"
+                        title="previous chapter">5. Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="results.html"
+                        title="next chapter">7. Demo of the model</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="results.html" title="7. Demo of the model"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorial.html" title="5. Tutorial"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, PB.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>
