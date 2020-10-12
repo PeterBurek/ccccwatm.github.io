@@ -15,7 +15,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="15. Forum" href="forum.html" />
+    <link rel="next" title="17. Forum" href="forum.html" />
     <link rel="prev" title="hydrological_modules package" href="hydrological_modules.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,13 +28,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="forum.html" title="15. Forum"
+          <a href="forum.html" title="17. Forum"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="hydrological_modules.html" title="hydrological_modules package"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="sourcecode.html" accesskey="U">14. Source code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="sourcecode.html" accesskey="U">16. Source code</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -87,20 +87,6 @@ and compare if it has the same map extend</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>inBinding</strong> – parameter in settings file</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="cwatm.management_modules.data_handling.checkOptionOptinal">
-<code class="descclassname">cwatm.management_modules.data_handling.</code><code class="descname">checkOptionOptinal</code><span class="sig-paren">(</span><em>inBinding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/data_handling.html#checkOptionOptinal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.data_handling.checkOptionOptinal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test if parameter is a boolean and return an error message if not, and the boolean if everything is ok</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>inBinding</strong> – parameter in settings file</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>boolean of inBinding</p>
 </dd>
 </dl>
 </dd></dl>
@@ -346,11 +332,6 @@ variable metaNetcdfVar</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="cwatm.management_modules.data_handling.readCoordNetCDF2">
-<code class="descclassname">cwatm.management_modules.data_handling.</code><code class="descname">readCoordNetCDF2</code><span class="sig-paren">(</span><em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/data_handling.html#readCoordNetCDF2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.data_handling.readCoordNetCDF2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
 <dt id="cwatm.management_modules.data_handling.readmeteodata">
 <code class="descclassname">cwatm.management_modules.data_handling.</code><code class="descname">readmeteodata</code><span class="sig-paren">(</span><em>name</em>, <em>date</em>, <em>value='None'</em>, <em>addZeros=False</em>, <em>zeros=0.0</em>, <em>mapsscale=True</em>, <em>modflowSteady=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/data_handling.html#readmeteodata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.data_handling.readmeteodata" title="Permalink to this definition">¶</a></dt>
 <dd><p>load stack of maps 1 at each timestamp in netcdf format</p>
@@ -451,7 +432,7 @@ variable metaNetcdfVar</p>
 
 <dl class="function">
 <dt id="cwatm.management_modules.data_handling.report">
-<code class="descclassname">cwatm.management_modules.data_handling.</code><code class="descname">report</code><span class="sig-paren">(</span><em>name</em>, <em>valueIn</em>, <em>compr=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/data_handling.html#report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.data_handling.report" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cwatm.management_modules.data_handling.</code><code class="descname">report</code><span class="sig-paren">(</span><em>valueIn</em>, <em>name</em>, <em>compr=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/data_handling.html#report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.data_handling.report" title="Permalink to this definition">¶</a></dt>
 <dd><p>For debugging: Save the 2D array as .map or .tif</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -840,7 +821,7 @@ unit, long name, standard name and additional information</p>
 <span class="target" id="module-cwatm.management_modules.messages"></span><dl class="exception">
 <dt id="cwatm.management_modules.messages.CWATMError">
 <em class="property">exception </em><code class="descclassname">cwatm.management_modules.messages.</code><code class="descname">CWATMError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/management_modules/messages.html#CWATMError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.management_modules.messages.CWATMError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></p>
 <p>The error handling class
 prints out an error</p>
 <dl class="field-list simple">
@@ -931,33 +912,33 @@ prints out an error</p>
 <td><p>river network in upstream direction</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-odd"><td><p>discharge</p></td>
-<td><p>discharge</p></td>
-<td><p>m3/s</p></td>
-</tr>
-<tr class="row-even"><td><p>cellArea</p></td>
+<tr class="row-odd"><td><p>cellArea</p></td>
 <td><p>Cell area [m²] of each simulated mesh</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>sampleAdresses</p></td>
+<tr class="row-even"><td><p>sampleAdresses</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>noOutpoints</p></td>
+<tr class="row-odd"><td><p>noOutpoints</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>evalCatch</p></td>
+<tr class="row-even"><td><p>evalCatch</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>catcharea</p></td>
+<tr class="row-odd"><td><p>catcharea</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>firstout</p></td>
+<tr class="row-even"><td><p>firstout</p></td>
 <td></td>
 <td></td>
+</tr>
+<tr class="row-odd"><td><p>discharge</p></td>
+<td><p>discharge</p></td>
+<td><p>m3/s</p></td>
 </tr>
 </tbody>
 </table>
@@ -1170,24 +1151,18 @@ firstTimestep: Starting time step of the model</p>
 <li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">13. License and download info</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="sourcecode.html">14. Source code</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#source-code-on-github">Source code on Github</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="sourcecode.html#id1">Source code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#download-manual-as-pdf">Download Manual as pdf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#global-dataset">Global dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#contact-cwatm">Contact CWATM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#remarks">Remarks</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">15. License and download info</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forum.html">17. Forum</a></li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -1195,7 +1170,7 @@ firstTimestep: Starting time step of the model</p>
                         title="previous chapter">hydrological_modules package</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="forum.html"
-                        title="next chapter">15. Forum</a></p>
+                        title="next chapter">17. Forum</a></p>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1210,13 +1185,13 @@ firstTimestep: Starting time step of the model</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="forum.html" title="15. Forum"
+          <a href="forum.html" title="17. Forum"
              >next</a> |</li>
         <li class="right" >
           <a href="hydrological_modules.html" title="hydrological_modules package"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="sourcecode.html" >14. Source code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="sourcecode.html" >16. Source code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

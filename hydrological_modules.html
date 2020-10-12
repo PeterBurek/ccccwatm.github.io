@@ -34,7 +34,7 @@
           <a href="cwatm_initial.html" title="cwatm_initial module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="sourcecode.html" accesskey="U">14. Source code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="sourcecode.html" accesskey="U">16. Source code</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -171,24 +171,24 @@ all initial condition can be stored at the end of a run to be used as a <strong>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>coverTypes</p></td>
-<td><p>land cover types - forest - grassland - irrPaddy - irrNonPaddy - water - sealed</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>loadInit</p></td>
+<tr class="row-even"><td><p>loadInit</p></td>
 <td><p>Flag: if true initial conditions are loaded</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-even"><td><p>initLoadFile</p></td>
+<tr class="row-odd"><td><p>initLoadFile</p></td>
 <td><p>load file name of the initial condition data</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-odd"><td><p>saveInit</p></td>
+<tr class="row-even"><td><p>saveInit</p></td>
 <td><p>Flag: if true initial conditions are saved</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-even"><td><p>saveInitFile</p></td>
+<tr class="row-odd"><td><p>saveInitFile</p></td>
 <td><p>save file name of the initial condition data</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>coverTypes</p></td>
+<td><p>land cover types - forest - grassland - irrPaddy - irrNonPaddy - water - sealed</p></td>
 <td><p>–</p></td>
 </tr>
 </tbody>
@@ -246,41 +246,401 @@ write initital conditions into a single netcdf file</p>
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td><p>load_initial</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_gwRecharge</p></td>
+<td><p>groundwater recharge</p></td>
+<td><p>m</p></td>
+</tr>
 <tr class="row-even"><td><p>modflow</p></td>
 <td><p>Flag: True if modflow_coupling = True in settings file</p></td>
 <td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>modflow_timestep</p></td>
+<td><p>Chosen ModFlow model timestep (1day, 7days, 30days…)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sumed_sum_gwRecharge</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>GWVolumeVariation</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>snowEvap</p></td>
+<td><p>total evaporation from snow for a snow layers</p></td>
+<td><p>m</p></td>
 </tr>
 <tr class="row-odd"><td><p>maxGWCapRise</p></td>
 <td><p>influence of capillary rise above groundwater level</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>load_initial</p></td>
+<tr class="row-even"><td><p>minInterceptCap</p></td>
+<td><p>Maximum interception read from file for forest and grassland land cover</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>interceptStor</p></td>
+<td><p>simulated vegetation interception storage</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>dynamicLandcover</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>baseflow</p></td>
+<tr class="row-odd"><td><p>landcoverSum</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>act_SurfaceWaterAbst</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_interceptStor</p></td>
+<td><p>Total of simulated vegetation interception storage including all landcover types</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>fracVegCover</p></td>
+<td><p>Fraction of area covered by the corresponding landcover type</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>minCropKC</p></td>
+<td><p>minimum crop factor (default 0.2)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>minTopWaterLayer</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>rootFraction1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>maxRootDepth</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>rootDepth</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>KSat1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>KSat2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>KSat3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>alpha1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>alpha2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>alpha3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lambda1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lambda2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lambda3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>thetas1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>thetas2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>thetas3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>thetar1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>thetar2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>thetar3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuM1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuM2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuM3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuInvM1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuInvM2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuInvM3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuInvN1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>genuInvN2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>genuInvN3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>invAlpha1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>invAlpha2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>invAlpha3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ws1</p></td>
+<td><p>Maximum storage capacity in layer 1</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>ws2</p></td>
+<td><p>Maximum storage capacity in layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>ws3</p></td>
+<td><p>Maximum storage capacity in layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>wres1</p></td>
+<td><p>Residual storage capacity in layer 1</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>wres2</p></td>
+<td><p>Residual storage capacity in layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>wres3</p></td>
+<td><p>Residual storage capacity in layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>wrange1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wrange2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wrange3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wfc1</p></td>
+<td><p>Soil moisture at field capacity in layer 1</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wfc2</p></td>
+<td><p>Soil moisture at field capacity in layer 2</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wfc3</p></td>
+<td><p>Soil moisture at field capacity in layer 3</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wwp1</p></td>
+<td><p>Soil moisture at wilting point in layer 1</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>wwp2</p></td>
+<td><p>Soil moisture at wilting point in layer 2</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>wwp3</p></td>
+<td><p>Soil moisture at wilting point in layer 3</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>kUnSat3FC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>kunSatFC12</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>kunSatFC23</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>cropCoefficientNC_fi</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>interceptCapNC_filen</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>coverFractionNC_file</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_topwater</p></td>
+<td><p>quantity of water on the soil (flooding) (weighted sum for all landcover types)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_soil</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_w1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_w2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_w3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>totalSto</p></td>
+<td><p>Total soil,snow and vegetation storage for each cell including all landcover typ</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>arnoBetaOro</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>arnoBeta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>adjRoot</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>maxtopwater</p></td>
+<td><p>maximum heigth of topwater</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>totAvlWater</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>presumed_sum_gwRecha</p></td>
+<td><p>Previous groundwater recharge [m/timestep] (used for the ModFlow version)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>pretotalSto</p></td>
+<td><p>Previous totalSto</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_actBareSoilEvap</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_openWaterEvap</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>addtoevapotrans</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_runoff</p></td>
+<td><p>Runoff above the soil, more interflow, including all landcover types</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_directRunoff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_interflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_availWaterInfilt</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_capRiseFromGW</p></td>
+<td><p>capillar rise from groundwater to 3rd soil layer (summed up for all land cover c</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_act_irrConsumpti</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_perc3toGW</p></td>
+<td><p>percolation from 3rd soil layer to groundwater (summed up for all land cover cla</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_prefFlow</p></td>
+<td><p>preferential flow from soil to groundwater (summed up for all land cover classes</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>act_irrWithdrawal</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>act_nonIrrConsumptio</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>returnFlow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>cellArea</p></td>
+<td><p>Cell area [m²] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>baseflow</p></td>
 <td><p>simulated baseflow (= groundwater discharge to river)</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>sum_gwRecharge</p></td>
-<td><p>groundwater recharge</p></td>
+<tr class="row-odd"><td><p>Precipitation</p></td>
+<td><p>Precipitation (input for the model)</p></td>
 <td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>waterbalance_module</p></td>
-<td></td>
-<td></td>
 </tr>
 <tr class="row-even"><td><p>coverTypes</p></td>
 <td><p>land cover types - forest - grassland - irrPaddy - irrNonPaddy - water - sealed</p></td>
 <td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>minInterceptCap</p></td>
-<td><p>Maximum interception read from file for forest and grassland land cover</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>interceptStor</p></td>
-<td><p>simulated vegetation interception storage</p></td>
-<td><p>m</p></td>
 </tr>
 <tr class="row-odd"><td><p>Rain</p></td>
 <td><p>Precipitation less snow</p></td>
@@ -290,61 +650,21 @@ write initital conditions into a single netcdf file</p>
 <td><p>total snow melt from all layers</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>snowEvap</p></td>
-<td><p>total evaporation from snow for a snow layers</p></td>
+<tr class="row-odd"><td><p>SnowCover</p></td>
+<td><p>snow cover (sum over all layers)</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>cellArea</p></td>
-<td><p>Cell area [m²] of each simulated mesh</p></td>
+<tr class="row-even"><td><p>ElevationStD</p></td>
+<td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>dynamicLandcover</p></td>
-<td></td>
-<td></td>
+<tr class="row-odd"><td><p>prevSnowCover</p></td>
+<td><p>snow cover of previous day (only for water balance)</p></td>
+<td><p>m</p></td>
 </tr>
 <tr class="row-even"><td><p>soilLayers</p></td>
 <td><p>Number of soil layers</p></td>
 <td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>landcoverSum</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>totalET</p></td>
-<td><p>Total evapotranspiration for each cell including all landcover types</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>act_SurfaceWaterAbst</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>sum_interceptStor</p></td>
-<td><p>Total of simulated vegetation interception storage including all landcover types</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>fracVegCover</p></td>
-<td><p>Fraction of area covered by the corresponding landcover type</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>minCropKC</p></td>
-<td><p>minimum crop factor (default 0.2)</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>minTopWaterLayer</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>rootFraction1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>maxRootDepth</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>rootDepth</p></td>
-<td></td>
-<td></td>
 </tr>
 <tr class="row-odd"><td><p>soildepth</p></td>
 <td><p>Thickness of the first soil layer</p></td>
@@ -353,198 +673,6 @@ write initital conditions into a single netcdf file</p>
 <tr class="row-even"><td><p>soildepth12</p></td>
 <td><p>Total thickness of layer 2 and 3</p></td>
 <td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>KSat1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>KSat2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>KSat3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>alpha1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>alpha2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>alpha3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>lambda1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>lambda2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>lambda3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>thetas1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>thetas2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>thetas3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>thetar1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>thetar2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>thetar3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>genuM1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>genuM2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>genuM3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>genuInvM1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>genuInvM2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>genuInvM3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>genuInvN1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>genuInvN2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>genuInvN3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>invAlpha1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>invAlpha2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>invAlpha3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>ws1</p></td>
-<td><p>Maximum storage capacity in layer 1</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>ws2</p></td>
-<td><p>Maximum storage capacity in layer 2</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>ws3</p></td>
-<td><p>Maximum storage capacity in layer 3</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>wres1</p></td>
-<td><p>Residual storage capacity in layer 1</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>wres2</p></td>
-<td><p>Residual storage capacity in layer 2</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>wres3</p></td>
-<td><p>Residual storage capacity in layer 3</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>wrange1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>wrange2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>wrange3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>wfc1</p></td>
-<td><p>Soil moisture at field capacity in layer 1</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>wfc2</p></td>
-<td><p>Soil moisture at field capacity in layer 2</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>wfc3</p></td>
-<td><p>Soil moisture at field capacity in layer 3</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>wwp1</p></td>
-<td><p>Soil moisture at wilting point in layer 1</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>wwp2</p></td>
-<td><p>Soil moisture at wilting point in layer 2</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>wwp3</p></td>
-<td><p>Soil moisture at wilting point in layer 3</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>kUnSat3FC</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>kunSatFC12</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>kunSatFC23</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>cropCoefficientNC_fi</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>interceptCapNC_filen</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>coverFractionNC_file</p></td>
-<td></td>
-<td></td>
 </tr>
 <tr class="row-odd"><td><p>w1</p></td>
 <td><p>Simulated water storage in the layer 1</p></td>
@@ -562,115 +690,15 @@ write initital conditions into a single netcdf file</p>
 <td><p>quantity of water above the soil (flooding)</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>sum_topwater</p></td>
-<td><p>quantity of water on the soil (flooding) (weighted sum for all landcover types)</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>totalSto</p></td>
-<td><p>Total soil,snow and vegetation storage for each cell including all landcover typ</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>SnowCover</p></td>
-<td><p>snow cover (sum over all layers)</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>sum_w1</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>sum_w2</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>sum_w3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>arnoBetaOro</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>ElevationStD</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>arnoBeta</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>adjRoot</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>maxtopwater</p></td>
-<td><p>maximum heigth of topwater</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>landcoverSumSum</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>totAvlWater</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>modflow_timestep</p></td>
-<td><p>Chosen ModFlow model timestep (1day, 7days, 30days…)</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>presumed_sum_gwRecha</p></td>
-<td><p>Previous groundwater recharge [m/timestep] (used for the ModFlow version)</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>sumed_sum_gwRecharge</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>pretotalSto</p></td>
-<td><p>Previous totalSto</p></td>
+<tr class="row-odd"><td><p>totalET</p></td>
+<td><p>Total evapotranspiration for each cell including all landcover types</p></td>
 <td><p>m</p></td>
 </tr>
 <tr class="row-even"><td><p>sum_actTransTotal</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>sum_actBareSoilEvap</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>sum_openWaterEvap</p></td>
-<td></td>
-<td></td>
-</tr>
 <tr class="row-odd"><td><p>sum_interceptEvap</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>addtoevapotrans</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>sum_runoff</p></td>
-<td><p>Runoff above the soil, more interflow, including all landcover types</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>sum_directRunoff</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>sum_interflow</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>Precipitation</p></td>
-<td><p>Precipitation (input for the model)</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>GWVolumeVariation</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>sum_availWaterInfilt</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -765,6 +793,22 @@ Initialise the six land cover types</p>
 <td><p>Flag: True if modflow_coupling = True in settings file</p></td>
 <td><p>–</p></td>
 </tr>
+<tr class="row-odd"><td><p>modflowsteady</p></td>
+<td><p>True if modflow_steadystate = True in settings file</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>DtDay</p></td>
+<td><p>seconds in a timestep (default=86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-odd"><td><p>con_precipitation</p></td>
+<td><p>conversion factor for precipitation</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>con_e</p></td>
+<td><p>conversion factor for evaporation</p></td>
+<td><p>–</p></td>
+</tr>
 <tr class="row-odd"><td><p>TMin</p></td>
 <td><p>minimum air temperature</p></td>
 <td><p>K</p></td>
@@ -809,28 +853,12 @@ Initialise the six land cover types</p>
 <td><p>Precipitation (input for the model)</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>DtDay</p></td>
-<td><p>seconds in a timestep (default=86400)</p></td>
-<td><p>s</p></td>
-</tr>
-<tr class="row-odd"><td><p>con_precipitation</p></td>
-<td><p>conversion factor for precipitation</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-even"><td><p>con_e</p></td>
-<td><p>conversion factor for evaporation</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>meteomapsscale</p></td>
+<tr class="row-even"><td><p>meteomapsscale</p></td>
 <td><p>if meteo maps have the same extend as the other spatial static maps -&gt; meteomaps</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-even"><td><p>meteodown</p></td>
+<tr class="row-odd"><td><p>meteodown</p></td>
 <td><p>if meteo maps should be downscaled</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>modflowsteady</p></td>
-<td><p>True if modflow_steadystate = True in settings file</p></td>
 <td><p>–</p></td>
 </tr>
 <tr class="row-even"><td><p>preMaps</p></td>
@@ -912,23 +940,6 @@ Initialise the six land cover types</p>
 </tbody>
 </table>
 <p><strong>Functions</strong></p>
-<dl class="method">
-<dt id="cwatm.hydrological_modules.readmeteo.readmeteo.downscaling1">
-<code class="descname">downscaling1</code><span class="sig-paren">(</span><em>input</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo.downscaling1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo.downscaling1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Downscaling based on elevation correction for temperature and pressure</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>input</strong> – </p></li>
-<li><p><strong>downscale</strong> – 0 for no change, 1: for temperature change 6 deg per 1km , 2 for psurf</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>input - downscaled input data</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="method">
 <dt id="cwatm.hydrological_modules.readmeteo.readmeteo.downscaling2">
 <code class="descname">downscaling2</code><span class="sig-paren">(</span><em>input</em>, <em>downscaleName=''</em>, <em>wc2=0</em>, <em>wc4=0</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cwatm/hydrological_modules/readmeteo.html#readmeteo.downscaling2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cwatm.hydrological_modules.readmeteo.readmeteo.downscaling2" title="Permalink to this definition">¶</a></dt>
@@ -1026,21 +1037,21 @@ If option “inflow” is set to 1 the inflow hydrograph code is used otherwise 
 <td><p>inflow time series data</p></td>
 <td><p>m3/s</p></td>
 </tr>
-<tr class="row-odd"><td><p>QInM3Old</p></td>
-<td><p>Inflow from previous day</p></td>
-<td><p>m3</p></td>
-</tr>
-<tr class="row-even"><td><p>totalQInM3</p></td>
+<tr class="row-odd"><td><p>totalQInM3</p></td>
 <td><p>total inflow over time (for mass balance calculation)</p></td>
 <td><p>m3</p></td>
 </tr>
-<tr class="row-odd"><td><p>inflowM3</p></td>
+<tr class="row-even"><td><p>inflowM3</p></td>
 <td><p>inflow to basin</p></td>
 <td><p>m3</p></td>
 </tr>
-<tr class="row-even"><td><p>DtSec</p></td>
+<tr class="row-odd"><td><p>DtSec</p></td>
 <td><p>number of seconds per timestep (default = 86400)</p></td>
 <td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>QInM3Old</p></td>
+<td><p>Inflow from previous day</p></td>
+<td><p>m3</p></td>
 </tr>
 </tbody>
 </table>
@@ -1089,41 +1100,41 @@ snow zones 1 -7 which each occupy a part of the pixel surface</p>
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td><p>load_initial</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>DtDay</p></td>
+<td><p>seconds in a timestep (default=86400)</p></td>
+<td><p>s</p></td>
+</tr>
 <tr class="row-even"><td><p>Tavg</p></td>
 <td><p>average air Temperature (input for the model)</p></td>
 <td><p>K</p></td>
-</tr>
-<tr class="row-odd"><td><p>load_initial</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>waterbalance_module</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>Rain</p></td>
-<td><p>Precipitation less snow</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>SnowMelt</p></td>
-<td><p>total snow melt from all layers</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>SnowCover</p></td>
-<td><p>snow cover (sum over all layers)</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>ElevationStD</p></td>
-<td></td>
-<td></td>
 </tr>
 <tr class="row-odd"><td><p>Precipitation</p></td>
 <td><p>Precipitation (input for the model)</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>DtDay</p></td>
-<td><p>seconds in a timestep (default=86400)</p></td>
-<td><p>s</p></td>
+<tr class="row-even"><td><p>Rain</p></td>
+<td><p>Precipitation less snow</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnowMelt</p></td>
+<td><p>total snow melt from all layers</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>SnowCover</p></td>
+<td><p>snow cover (sum over all layers)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>ElevationStD</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>prevSnowCover</p></td>
+<td><p>snow cover of previous day (only for water balance)</p></td>
+<td><p>m</p></td>
 </tr>
 <tr class="row-odd"><td><p>numberSnowLayersFloa</p></td>
 <td></td>
@@ -1225,11 +1236,7 @@ snow zones 1 -7 which each occupy a part of the pixel surface</p>
 <td><p>array for frostindex</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>prevSnowCover</p></td>
-<td><p>snow cover of previous day (only for water balance)</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>Snow</p></td>
+<tr class="row-even"><td><p>Snow</p></td>
 <td><p>Snow (equal to a part of Precipitation)</p></td>
 <td><p>m</p></td>
 </tr>
@@ -1318,6 +1325,14 @@ Based on Penman Monteith</p>
 <td></td>
 <td></td>
 </tr>
+<tr class="row-even"><td><p>albedoLand</p></td>
+<td><p>albedo from land surface (from GlobAlbedo database)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>albedoOpenWater</p></td>
+<td><p>albedo from open water surface (from GlobAlbedo database)</p></td>
+<td><p>–</p></td>
+</tr>
 <tr class="row-even"><td><p>TMin</p></td>
 <td><p>minimum air temperature</p></td>
 <td><p>K</p></td>
@@ -1341,14 +1356,6 @@ Based on Penman Monteith</p>
 <tr class="row-odd"><td><p>Rsdl</p></td>
 <td><p>long wave downward surface radiation fluxes</p></td>
 <td><p>W/m2</p></td>
-</tr>
-<tr class="row-even"><td><p>albedoLand</p></td>
-<td><p>albedo from land surface (from GlobAlbedo database)</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>albedoOpenWater</p></td>
-<td><p>albedo from open water surface (from GlobAlbedo database)</p></td>
-<td><p>–</p></td>
 </tr>
 <tr class="row-even"><td><p>Rsds</p></td>
 <td><p>short wave downward surface radiation fluxes</p></td>
@@ -1510,16 +1517,24 @@ get crop coefficient, use potential ET, calculate potential bare soil evaporatio
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>EWRef</p></td>
-<td><p>potential evaporation rate from water surface</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>waterbalance_module</p></td>
-<td></td>
-<td></td>
-</tr>
 <tr class="row-even"><td><p>interceptCap</p></td>
 <td><p>interception capacity of vegetation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>availWaterInfiltrati</p></td>
+<td><p>quantity of water reaching the soil after interception, more snowmelt</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>interceptEvap</p></td>
+<td><p>simulated evaporation from water intercepted by vegetation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>potTranspiration</p></td>
+<td><p>Potential transpiration (after removing of evaporation)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>snowEvap</p></td>
+<td><p>total evaporation from snow for a snow layers</p></td>
 <td><p>m</p></td>
 </tr>
 <tr class="row-odd"><td><p>minInterceptCap</p></td>
@@ -1530,36 +1545,24 @@ get crop coefficient, use potential ET, calculate potential bare soil evaporatio
 <td><p>simulated vegetation interception storage</p></td>
 <td><p>m</p></td>
 </tr>
+<tr class="row-odd"><td><p>twothird</p></td>
+<td><p>2/3</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
 <tr class="row-odd"><td><p>Rain</p></td>
 <td><p>Precipitation less snow</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>availWaterInfiltrati</p></td>
-<td><p>quantity of water reaching the soil after interception, more snowmelt</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>SnowMelt</p></td>
+<tr class="row-even"><td><p>SnowMelt</p></td>
 <td><p>total snow melt from all layers</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>twothird</p></td>
-<td><p>2/3</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>interceptEvap</p></td>
-<td><p>simulated evaporation from water intercepted by vegetation</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>potTranspiration</p></td>
-<td><p>Potential transpiration (after removing of evaporation)</p></td>
 <td><p>m</p></td>
 </tr>
 <tr class="row-odd"><td><p>actualET</p></td>
 <td><p>simulated evapotranspiration from soil, flooded area and vegetation</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>snowEvap</p></td>
-<td><p>total evaporation from snow for a snow layers</p></td>
 <td><p>m</p></td>
 </tr>
 </tbody>
@@ -1613,39 +1616,35 @@ calculating interception for each land cover class</p>
 <td><p>Flag: True if modflow_coupling = True in settings file</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-odd"><td><p>EWRef</p></td>
-<td><p>potential evaporation rate from water surface</p></td>
+<tr class="row-odd"><td><p>availWaterInfiltrati</p></td>
+<td><p>quantity of water reaching the soil after interception, more snowmelt</p></td>
 <td><p>m</p></td>
 </tr>
 <tr class="row-even"><td><p>capillar</p></td>
 <td><p>Simulated flow from groundwater to the third CWATM soil layer</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>waterbalance_module</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>availWaterInfiltrati</p></td>
-<td><p>quantity of water reaching the soil after interception, more snowmelt</p></td>
+<tr class="row-odd"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>actualET</p></td>
+<tr class="row-even"><td><p>actualET</p></td>
 <td><p>simulated evapotranspiration from soil, flooded area and vegetation</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>directRunoff</p></td>
+<tr class="row-odd"><td><p>directRunoff</p></td>
 <td><p>Simulated surface runoff</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>openWaterEvap</p></td>
+<tr class="row-even"><td><p>openWaterEvap</p></td>
 <td><p>Simulated evaporation from open areas</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>actTransTotal</p></td>
+<tr class="row-odd"><td><p>actTransTotal</p></td>
 <td><p>Total actual transpiration from the three soil layers</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>actBareSoilEvap</p></td>
+<tr class="row-even"><td><p>actBareSoilEvap</p></td>
 <td><p>Simulated evaporation from the first soil layer</p></td>
 <td><p>m</p></td>
 </tr>
@@ -1696,14 +1695,6 @@ calculating interception for each land cover class</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>modflow</p></td>
-<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>storGroundwater</p></td>
-<td><p>simulated groundwater storage</p></td>
-<td><p>m</p></td>
-</tr>
 <tr class="row-even"><td><p>capRiseFrac</p></td>
 <td><p>fraction of a grid cell where capillar rise may happen</p></td>
 <td><p>m</p></td>
@@ -1712,29 +1703,29 @@ calculating interception for each land cover class</p>
 <td><p>crop coefficient for each of the 4 different land cover types (forest, irrigated</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-even"><td><p>EWRef</p></td>
-<td><p>potential evaporation rate from water surface</p></td>
+<tr class="row-even"><td><p>storGroundwater</p></td>
+<td><p>simulated groundwater storage</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>capillar</p></td>
-<td><p>Simulated flow from groundwater to the third CWATM soil layer</p></td>
-<td><p>m</p></td>
+<tr class="row-odd"><td><p>modflow</p></td>
+<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
+<td><p>–</p></td>
 </tr>
 <tr class="row-even"><td><p>availWaterInfiltrati</p></td>
 <td><p>quantity of water reaching the soil after interception, more snowmelt</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>potTranspiration</p></td>
+<tr class="row-odd"><td><p>interceptEvap</p></td>
+<td><p>simulated evaporation from water intercepted by vegetation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>potTranspiration</p></td>
 <td><p>Potential transpiration (after removing of evaporation)</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>actualET</p></td>
-<td><p>simulated evapotranspiration from soil, flooded area and vegetation</p></td>
+<tr class="row-odd"><td><p>snowEvap</p></td>
+<td><p>total evaporation from snow for a snow layers</p></td>
 <td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>soilLayers</p></td>
-<td><p>Number of soil layers</p></td>
-<td><p>–</p></td>
 </tr>
 <tr class="row-even"><td><p>fracVegCover</p></td>
 <td><p>Fraction of area covered by the corresponding landcover type</p></td>
@@ -1743,14 +1734,6 @@ calculating interception for each land cover class</p>
 <tr class="row-odd"><td><p>rootDepth</p></td>
 <td></td>
 <td></td>
-</tr>
-<tr class="row-even"><td><p>soildepth</p></td>
-<td><p>Thickness of the first soil layer</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>soildepth12</p></td>
-<td><p>Total thickness of layer 2 and 3</p></td>
-<td><p>m</p></td>
 </tr>
 <tr class="row-even"><td><p>KSat1</p></td>
 <td></td>
@@ -1856,22 +1839,6 @@ calculating interception for each land cover class</p>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>w1</p></td>
-<td><p>Simulated water storage in the layer 1</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>w2</p></td>
-<td><p>Simulated water storage in the layer 2</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>w3</p></td>
-<td><p>Simulated water storage in the layer 3</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>topwater</p></td>
-<td><p>quantity of water above the soil (flooding)</p></td>
-<td><p>m</p></td>
-</tr>
 <tr class="row-even"><td><p>arnoBeta</p></td>
 <td></td>
 <td></td>
@@ -1882,6 +1849,54 @@ calculating interception for each land cover class</p>
 </tr>
 <tr class="row-even"><td><p>maxtopwater</p></td>
 <td><p>maximum heigth of topwater</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>capillar</p></td>
+<td><p>Simulated flow from groundwater to the third CWATM soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>FrostIndexThreshold</p></td>
+<td><p>Degree Days Frost Threshold (stops infiltration, percolation and capillary rise)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>FrostIndex</p></td>
+<td><p>FrostIndex - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Floo</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>actualET</p></td>
+<td><p>simulated evapotranspiration from soil, flooded area and vegetation</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>soilLayers</p></td>
+<td><p>Number of soil layers</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>soildepth</p></td>
+<td><p>Thickness of the first soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>soildepth12</p></td>
+<td><p>Total thickness of layer 2 and 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>w1</p></td>
+<td><p>Simulated water storage in the layer 1</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>w2</p></td>
+<td><p>Simulated water storage in the layer 2</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>w3</p></td>
+<td><p>Simulated water storage in the layer 3</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>topwater</p></td>
+<td><p>quantity of water above the soil (flooding)</p></td>
 <td><p>m</p></td>
 </tr>
 <tr class="row-odd"><td><p>directRunoff</p></td>
@@ -1903,14 +1918,6 @@ calculating interception for each land cover class</p>
 <tr class="row-odd"><td><p>actBareSoilEvap</p></td>
 <td><p>Simulated evaporation from the first soil layer</p></td>
 <td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>FrostIndexThreshold</p></td>
-<td><p>Degree Days Frost Threshold (stops infiltration, percolation and capillary rise)</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>FrostIndex</p></td>
-<td><p>FrostIndex - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Floo</p></td>
-<td><p>–</p></td>
 </tr>
 <tr class="row-even"><td><p>percolationImp</p></td>
 <td><p>Fraction of area covered by the corresponding landcover type</p></td>
@@ -2052,22 +2059,6 @@ calculate cell fraction influenced by capillary rise</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>modflow</p></td>
-<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>storGroundwater</p></td>
-<td><p>simulated groundwater storage</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>specificYield</p></td>
-<td><p>groundwater reservoir parameters (if ModFlow is not used) used to compute ground</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>maxGWCapRise</p></td>
-<td><p>influence of capillary rise above groundwater level</p></td>
-<td><p>m</p></td>
-</tr>
 <tr class="row-even"><td><p>dzRel0100</p></td>
 <td><p>map of relative elevation above flood plains (max elevation above plain)</p></td>
 <td><p>m</p></td>
@@ -2120,6 +2111,22 @@ calculate cell fraction influenced by capillary rise</p>
 <td><p>fraction of a grid cell where capillar rise may happen</p></td>
 <td><p>m</p></td>
 </tr>
+<tr class="row-odd"><td><p>storGroundwater</p></td>
+<td><p>simulated groundwater storage</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>specificYield</p></td>
+<td><p>groundwater reservoir parameters (if ModFlow is not used) used to compute ground</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>modflow</p></td>
+<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>maxGWCapRise</p></td>
+<td><p>influence of capillary rise above groundwater level</p></td>
+<td><p>m</p></td>
+</tr>
 </tbody>
 </table>
 <p><strong>Functions</strong></p>
@@ -2161,47 +2168,31 @@ depending on appr. height of groundwater and relative elevation of grid cell</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>modflow</p></td>
-<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>storGroundwater</p></td>
+<tr class="row-even"><td><p>storGroundwater</p></td>
 <td><p>simulated groundwater storage</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>specificYield</p></td>
+<tr class="row-odd"><td><p>specificYield</p></td>
 <td><p>groundwater reservoir parameters (if ModFlow is not used) used to compute ground</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>recessionCoeff</p></td>
+<tr class="row-even"><td><p>recessionCoeff</p></td>
 <td><p>groundwater storage times this coefficient gives baseflow</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-even"><td><p>kSatAquifer</p></td>
+<tr class="row-odd"><td><p>kSatAquifer</p></td>
 <td><p>groundwater reservoir parameters (if ModFlow is not used), could be used to comp</p></td>
 <td><p>m day-1</p></td>
 </tr>
-<tr class="row-odd"><td><p>load_initial</p></td>
+<tr class="row-even"><td><p>load_initial</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>readAvlStorGroundwat</p></td>
+<tr class="row-odd"><td><p>readAvlStorGroundwat</p></td>
 <td><p>same as storGroundwater but equal to 0 when inferior to a treshold</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>pumping_actual</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>capillar</p></td>
-<td><p>Simulated flow from groundwater to the third CWATM soil layer</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>baseflow</p></td>
-<td><p>simulated baseflow (= groundwater discharge to river)</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-even"><td><p>gwstore</p></td>
+<tr class="row-even"><td><p>pumping_actual</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -2209,17 +2200,29 @@ depending on appr. height of groundwater and relative elevation of grid cell</p>
 <td><p>storGroundwater at the beginning of each step</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>nonFossilGroundwater</p></td>
-<td><p>groundwater abstraction which is sustainable and not using fossil resources</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>sum_gwRecharge</p></td>
+<tr class="row-even"><td><p>sum_gwRecharge</p></td>
 <td><p>groundwater recharge</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>waterbalance_module</p></td>
+<tr class="row-odd"><td><p>modflow</p></td>
+<td><p>Flag: True if modflow_coupling = True in settings file</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>gwstore</p></td>
 <td></td>
 <td></td>
+</tr>
+<tr class="row-odd"><td><p>capillar</p></td>
+<td><p>Simulated flow from groundwater to the third CWATM soil layer</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>baseflow</p></td>
+<td><p>simulated baseflow (= groundwater discharge to river)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>nonFossilGroundwater</p></td>
+<td><p>groundwater abstraction which is sustainable and not using fossil resources</p></td>
+<td><p>m</p></td>
 </tr>
 </tbody>
 </table>
@@ -2279,6 +2282,14 @@ diffusion is calculated using a triangular-weighting-function</p>
 <td></td>
 <td></td>
 </tr>
+<tr class="row-odd"><td><p>fracVegCover</p></td>
+<td><p>Fraction of area covered by the corresponding landcover type</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_interflow</p></td>
+<td></td>
+<td></td>
+</tr>
 <tr class="row-odd"><td><p>baseflow</p></td>
 <td><p>simulated baseflow (= groundwater discharge to river)</p></td>
 <td><p>m</p></td>
@@ -2288,14 +2299,6 @@ diffusion is calculated using a triangular-weighting-function</p>
 <td><p>–</p></td>
 </tr>
 <tr class="row-odd"><td><p>runoff</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>fracVegCover</p></td>
-<td><p>Fraction of area covered by the corresponding landcover type</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>sum_interflow</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -2319,21 +2322,29 @@ diffusion is calculated using a triangular-weighting-function</p>
 <td><p>runoff after concentration - triangular-weighting method</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>sum_landSurfaceRunof</p></td>
+<tr class="row-odd"><td><p>gridcell_storage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_landSurfaceRunof</p></td>
 <td><p>Runoff concentration above the soil more interflow including all landcover types</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>landSurfaceRunoff</p></td>
+<tr class="row-odd"><td><p>landSurfaceRunoff</p></td>
 <td><p>Runoff concentration above the soil more interflow</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-odd"><td><p>directRunoff</p></td>
+<tr class="row-even"><td><p>directRunoff</p></td>
 <td><p>Simulated surface runoff</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>interflow</p></td>
+<tr class="row-odd"><td><p>interflow</p></td>
 <td><p>Simulated flow reaching runoff instead of groundwater</p></td>
 <td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>prergridcell</p></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -3301,14 +3312,6 @@ has to be checked if this works in forecasting mode!</p>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>waterbalance_module</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>DtSec</p></td>
-<td><p>number of seconds per timestep (default = 86400)</p></td>
-<td><p>s</p></td>
-</tr>
 <tr class="row-odd"><td><p>saveInit</p></td>
 <td><p>Flag: if true initial conditions are saved</p></td>
 <td><p>–</p></td>
@@ -3317,24 +3320,16 @@ has to be checked if this works in forecasting mode!</p>
 <td><p>lakes/reservoirs map with a single ID for each lake/reservoir</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-odd"><td><p>UpArea1</p></td>
-<td><p>upstream area of a grid cell</p></td>
-<td><p>m2</p></td>
-</tr>
-<tr class="row-even"><td><p>waterBodyOut</p></td>
+<tr class="row-odd"><td><p>waterBodyOut</p></td>
 <td><p>biggest outlet (biggest accumulation of ldd network) of a waterbody</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-odd"><td><p>dirUp</p></td>
+<tr class="row-even"><td><p>dirUp</p></td>
 <td><p>river network in upstream direction</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-even"><td><p>ldd_LR</p></td>
+<tr class="row-odd"><td><p>ldd_LR</p></td>
 <td><p>change river network (put pits in where lakes are)</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>lddCompress</p></td>
-<td><p>compressed river network (without missing values)</p></td>
 <td><p>–</p></td>
 </tr>
 <tr class="row-even"><td><p>lddCompress_LR</p></td>
@@ -3413,48 +3408,40 @@ has to be checked if this works in forecasting mode!</p>
 <td><p>compressed map of reservoir volume</p></td>
 <td><p>Million m</p></td>
 </tr>
-<tr class="row-odd"><td><p>lakeEvaFactor</p></td>
-<td><p>a factor which increases evaporation from lake because of wind</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-even"><td><p>lakeEvaFactorC</p></td>
+<tr class="row-odd"><td><p>lakeEvaFactorC</p></td>
 <td><p>compressed map of a factor which increases evaporation from lake because of wind</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-odd"><td><p>reslakeoutflow</p></td>
+<tr class="row-even"><td><p>reslakeoutflow</p></td>
 <td></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>lakeVolume</p></td>
+<tr class="row-odd"><td><p>lakeVolume</p></td>
 <td><p>volume of lakes</p></td>
 <td><p>m3</p></td>
 </tr>
-<tr class="row-odd"><td><p>outLake</p></td>
+<tr class="row-even"><td><p>outLake</p></td>
 <td><p>outflow from lakes</p></td>
 <td><p>m</p></td>
 </tr>
-<tr class="row-even"><td><p>lakeStorage</p></td>
+<tr class="row-odd"><td><p>lakeStorage</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>lakeInflow</p></td>
+<tr class="row-even"><td><p>lakeInflow</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>lakeOutflow</p></td>
+<tr class="row-odd"><td><p>lakeOutflow</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>reservoirStorage</p></td>
+<tr class="row-even"><td><p>reservoirStorage</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>MtoM3C</p></td>
+<tr class="row-odd"><td><p>MtoM3C</p></td>
 <td><p>conversion factor from m to m3 (compressed map)</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>MtoM3</p></td>
-<td><p>Coefficient to change units</p></td>
 <td><p>–</p></td>
 </tr>
 <tr class="row-even"><td><p>EvapWaterBodyM</p></td>
@@ -3469,13 +3456,13 @@ has to be checked if this works in forecasting mode!</p>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>lakeFactor</p></td>
+<tr class="row-odd"><td><p>lakedaycorrect</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeFactor</p></td>
 <td><p>factor for the Modified Puls approach to calculate retention of the lake</p></td>
 <td><p>–</p></td>
-</tr>
-<tr class="row-even"><td><p>dtRouting</p></td>
-<td><p>number of seconds per routing timestep</p></td>
-<td><p>s</p></td>
 </tr>
 <tr class="row-odd"><td><p>lakeFactorSqr</p></td>
 <td><p>square root factor for the Modified Puls approach to calculate retention of the</p></td>
@@ -3565,39 +3552,31 @@ has to be checked if this works in forecasting mode!</p>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>waterBodyTypCTemp</p></td>
+<tr class="row-odd"><td><p>resStorage</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>sumEvapWaterBodyC</p></td>
+<tr class="row-even"><td><p>waterBodyTypCTemp</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>sumlakeResInflow</p></td>
+<tr class="row-odd"><td><p>sumEvapWaterBodyC</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>sumlakeResOutflow</p></td>
+<tr class="row-even"><td><p>sumlakeResInflow</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>lakeIn</p></td>
+<tr class="row-odd"><td><p>sumlakeResOutflow</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>lakeEvapWaterBodyC</p></td>
+<tr class="row-even"><td><p>lakeIn</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>evapWaterBodyC</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>sumLakeEvapWaterBody</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>noRoutingSteps</p></td>
+<tr class="row-odd"><td><p>lakeEvapWaterBodyC</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -3605,19 +3584,19 @@ has to be checked if this works in forecasting mode!</p>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>sumResEvapWaterBodyC</p></td>
+<tr class="row-odd"><td><p>downstruct</p></td>
 <td></td>
 <td></td>
+</tr>
+<tr class="row-even"><td><p>DtSec</p></td>
+<td><p>number of seconds per timestep (default = 86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-odd"><td><p>MtoM3</p></td>
+<td><p>Coefficient to change units</p></td>
+<td><p>–</p></td>
 </tr>
 <tr class="row-even"><td><p>InvDtSec</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>discharge</p></td>
-<td><p>discharge</p></td>
-<td><p>m3/s</p></td>
-</tr>
-<tr class="row-even"><td><p>runoff</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -3625,11 +3604,47 @@ has to be checked if this works in forecasting mode!</p>
 <td><p>Cell area [m²] of each simulated mesh</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>downstruct</p></td>
+<tr class="row-even"><td><p>UpArea1</p></td>
+<td><p>upstream area of a grid cell</p></td>
+<td><p>m2</p></td>
+</tr>
+<tr class="row-odd"><td><p>lddCompress</p></td>
+<td><p>compressed river network (without missing values)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>lakeEvaFactor</p></td>
+<td><p>a factor which increases evaporation from lake because of wind</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>dtRouting</p></td>
+<td><p>number of seconds per routing timestep</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>evapWaterBodyC</p></td>
 <td></td>
 <td></td>
 </tr>
+<tr class="row-odd"><td><p>sumLakeEvapWaterBody</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>noRoutingSteps</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sumResEvapWaterBodyC</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>discharge</p></td>
+<td><p>discharge</p></td>
+<td><p>m3/s</p></td>
+</tr>
 <tr class="row-odd"><td><p>prelakeResStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>runoff</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -3723,87 +3738,63 @@ See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>EWRef</p></td>
-<td><p>potential evaporation rate from water surface</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>load_initial</p></td>
+<tr class="row-even"><td><p>load_initial</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>waterbalance_module</p></td>
+<tr class="row-odd"><td><p>smallpart</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>DtSec</p></td>
-<td><p>number of seconds per timestep (default = 86400)</p></td>
-<td><p>s</p></td>
-</tr>
-<tr class="row-even"><td><p>lakeEvaFactor</p></td>
-<td><p>a factor which increases evaporation from lake because of wind</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>InvDtSec</p></td>
+<tr class="row-even"><td><p>smalllakeArea</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>runoff</p></td>
+<tr class="row-odd"><td><p>smalllakeDis0</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>cellArea</p></td>
-<td><p>Cell area [m²] of each simulated mesh</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>smallpart</p></td>
+<tr class="row-even"><td><p>smalllakeA</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>smalllakeArea</p></td>
+<tr class="row-odd"><td><p>smalllakeFactor</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>smalllakeDis0</p></td>
+<tr class="row-even"><td><p>smalllakeFactorSqr</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>smalllakeA</p></td>
+<tr class="row-odd"><td><p>smalllakeInflowOld</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>smalllakeFactor</p></td>
+<tr class="row-even"><td><p>smalllakeVolumeM3</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>smalllakeFactorSqr</p></td>
+<tr class="row-odd"><td><p>smalllakeOutflow</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>smalllakeInflowOld</p></td>
+<tr class="row-even"><td><p>smalllakeLevel</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>smalllakeVolumeM3</p></td>
+<tr class="row-odd"><td><p>smalllakeStorage</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>smalllakeOutflow</p></td>
+<tr class="row-even"><td><p>minsmalllakeVolumeM3</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>smalllakeLevel</p></td>
+<tr class="row-odd"><td><p>preSmalllakeStorage</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>smalllakeStorage</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>minsmalllakeVolumeM3</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>preSmalllakeStorage</p></td>
+<tr class="row-even"><td><p>smallLakedaycorrect</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -3819,11 +3810,31 @@ See also: LISFLOOD manual Annex 3 (Burek et al. 2013)</p>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>smallLakeDiff</p></td>
+<tr class="row-even"><td><p>smallrunoffDiff</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>smallrunoffDiff</p></td>
+<tr class="row-odd"><td><p>DtSec</p></td>
+<td><p>number of seconds per timestep (default = 86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>InvDtSec</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>cellArea</p></td>
+<td><p>Cell area [m²] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeEvaFactor</p></td>
+<td><p>a factor which increases evaporation from lake because of wind</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>runoff</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -3880,44 +3891,20 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>EWRef</p></td>
-<td><p>potential evaporation rate from water surface</p></td>
-<td><p>m</p></td>
-</tr>
-<tr class="row-odd"><td><p>load_initial</p></td>
+<tr class="row-even"><td><p>load_initial</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>waterbalance_module</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>QInM3Old</p></td>
-<td><p>Inflow from previous day</p></td>
-<td><p>m3</p></td>
-</tr>
-<tr class="row-even"><td><p>inflowM3</p></td>
+<tr class="row-odd"><td><p>inflowM3</p></td>
 <td><p>inflow to basin</p></td>
 <td><p>m3</p></td>
-</tr>
-<tr class="row-odd"><td><p>DtSec</p></td>
-<td><p>number of seconds per timestep (default = 86400)</p></td>
-<td><p>s</p></td>
 </tr>
 <tr class="row-even"><td><p>waterBodyID</p></td>
 <td><p>lakes/reservoirs map with a single ID for each lake/reservoir</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-odd"><td><p>UpArea1</p></td>
-<td><p>upstream area of a grid cell</p></td>
-<td><p>m2</p></td>
-</tr>
-<tr class="row-even"><td><p>dirUp</p></td>
+<tr class="row-odd"><td><p>dirUp</p></td>
 <td><p>river network in upstream direction</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>lddCompress</p></td>
-<td><p>compressed river network (without missing values)</p></td>
 <td><p>–</p></td>
 </tr>
 <tr class="row-even"><td><p>dirupLen_LR</p></td>
@@ -3944,33 +3931,73 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <td><p>area of each lake/reservoir</p></td>
 <td><p>m2</p></td>
 </tr>
-<tr class="row-even"><td><p>lakeEvaFactor</p></td>
-<td><p>a factor which increases evaporation from lake because of wind</p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>lakeEvaFactorC</p></td>
+<tr class="row-even"><td><p>lakeEvaFactorC</p></td>
 <td><p>compressed map of a factor which increases evaporation from lake because of wind</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-even"><td><p>EvapWaterBodyM</p></td>
+<tr class="row-odd"><td><p>EvapWaterBodyM</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>lakeResInflowM</p></td>
+<tr class="row-even"><td><p>lakeResInflowM</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>lakeResOutflowM</p></td>
+<tr class="row-odd"><td><p>lakeResOutflowM</p></td>
 <td></td>
 <td></td>
-</tr>
-<tr class="row-odd"><td><p>dtRouting</p></td>
-<td><p>number of seconds per routing timestep</p></td>
-<td><p>s</p></td>
 </tr>
 <tr class="row-even"><td><p>lakeResStorage</p></td>
 <td></td>
 <td></td>
+</tr>
+<tr class="row-odd"><td><p>downstruct</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>act_SurfaceWaterAbst</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>fracVegCover</p></td>
+<td><p>Fraction of area covered by the corresponding landcover type</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>returnFlow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>DtSec</p></td>
+<td><p>number of seconds per timestep (default = 86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>cellArea</p></td>
+<td><p>Cell area [m²] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>EWRef</p></td>
+<td><p>potential evaporation rate from water surface</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>QInM3Old</p></td>
+<td><p>Inflow from previous day</p></td>
+<td><p>m3</p></td>
+</tr>
+<tr class="row-odd"><td><p>UpArea1</p></td>
+<td><p>upstream area of a grid cell</p></td>
+<td><p>m2</p></td>
+</tr>
+<tr class="row-even"><td><p>lddCompress</p></td>
+<td><p>compressed river network (without missing values)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>lakeEvaFactor</p></td>
+<td><p>a factor which increases evaporation from lake because of wind</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>dtRouting</p></td>
+<td><p>number of seconds per routing timestep</p></td>
+<td><p>s</p></td>
 </tr>
 <tr class="row-odd"><td><p>evapWaterBodyC</p></td>
 <td></td>
@@ -3992,35 +4019,27 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <td><p>discharge</p></td>
 <td><p>m3/s</p></td>
 </tr>
-<tr class="row-even"><td><p>runoff</p></td>
+<tr class="row-even"><td><p>prelakeResStorage</p></td>
 <td></td>
 <td></td>
-</tr>
-<tr class="row-odd"><td><p>cellArea</p></td>
-<td><p>Cell area [m²] of each simulated mesh</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>downstruct</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>prelakeResStorage</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>act_SurfaceWaterAbst</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>fracVegCover</p></td>
-<td><p>Fraction of area covered by the corresponding landcover type</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>openWaterEvap</p></td>
-<td><p>Simulated evaporation from open areas</p></td>
-<td><p>m</p></td>
 </tr>
 <tr class="row-odd"><td><p>catchmentAll</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sumsideflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>EvapoChannel</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>prechannelStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>channelStorage</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -4108,23 +4127,7 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>channelStorage</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>riverbedExchange</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>sumbalance</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>prechannelStorage</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>EvapoChannel</p></td>
+<tr class="row-odd"><td><p>riverbedExchange</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -4140,17 +4143,21 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>returnFlow</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>sumsideflow</p></td>
-<td></td>
-<td></td>
-</tr>
 <tr class="row-odd"><td><p>inflowDt</p></td>
 <td></td>
 <td></td>
+</tr>
+<tr class="row-even"><td><p>dis_outlet</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>runoff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>openWaterEvap</p></td>
+<td><p>Simulated evaporation from open areas</p></td>
+<td><p>m</p></td>
 </tr>
 </tbody>
 </table>
@@ -4447,6 +4454,206 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td><p>storGroundwater</p></td>
+<td><p>simulated groundwater storage</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>prestorGroundwater</p></td>
+<td><p>storGroundwater at the beginning of each step</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>sum_gwRecharge</p></td>
+<td><p>groundwater recharge</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>snowEvap</p></td>
+<td><p>total evaporation from snow for a snow layers</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>smalllakeStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>preSmalllakeStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smallLakedaycorrect</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smallLakeIn</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>smallevapWaterBody</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>smallLakeout</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>EvapWaterBodyM</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeResInflowM</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>lakeResOutflowM</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeResStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>resStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>act_SurfaceWaterAbst</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>totalSto</p></td>
+<td><p>Total soil,snow and vegetation storage for each cell including all landcover typ</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>pretotalSto</p></td>
+<td><p>Previous totalSto</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_actBareSoilEvap</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_openWaterEvap</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>addtoevapotrans</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_directRunoff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sum_interflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_capRiseFromGW</p></td>
+<td><p>capillar rise from groundwater to 3rd soil layer (summed up for all land cover c</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_act_irrConsumpti</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_perc3toGW</p></td>
+<td><p>percolation from 3rd soil layer to groundwater (summed up for all land cover cla</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_prefFlow</p></td>
+<td><p>preferential flow from soil to groundwater (summed up for all land cover classes</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>act_irrWithdrawal</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>act_nonIrrConsumptio</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>returnFlow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>DtSec</p></td>
+<td><p>number of seconds per timestep (default = 86400)</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>cellArea</p></td>
+<td><p>Cell area [m²] of each simulated mesh</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>baseflow</p></td>
+<td><p>simulated baseflow (= groundwater discharge to river)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>Precipitation</p></td>
+<td><p>Precipitation (input for the model)</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>lddCompress</p></td>
+<td><p>compressed river network (without missing values)</p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>discharge</p></td>
+<td><p>discharge</p></td>
+<td><p>m3/s</p></td>
+</tr>
+<tr class="row-odd"><td><p>prelakeResStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>catchmentAll</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sumsideflow</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>EvapoChannel</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>prechannelStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>channelStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>runoff</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>gridcell_storage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>nonFossilGroundwater</p></td>
+<td><p>groundwater abstraction which is sustainable and not using fossil resources</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-even"><td><p>totalET</p></td>
+<td><p>Total evapotranspiration for each cell including all landcover types</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>sum_actTransTotal</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sum_interceptEvap</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>prergridcell</p></td>
+<td></td>
+<td></td>
+</tr>
 <tr class="row-even"><td><p>nonIrrReturnFlow</p></td>
 <td></td>
 <td></td>
@@ -4459,15 +4666,39 @@ area, location, initial average discharge, type: reservoir or lake) etc.</p>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>sum_balanceStore</p></td>
+<tr class="row-odd"><td><p>sumbalance</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>sum_balanceFlux</p></td>
+<tr class="row-even"><td><p>sum_balanceStore</p></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>catchmentAll</p></td>
+<tr class="row-odd"><td><p>sum_balanceFlux</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>unmetDemand</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>act_nonIrrWithdrawal</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>returnflowIrr</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>nonIrrReturnFlowFrac</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lakeReservoirStorage</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>unmet_lost</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -4562,24 +4793,18 @@ and sums it up for a catchment</p>
 <li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">13. License and download info</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="sourcecode.html">14. Source code</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#source-code-on-github">Source code on Github</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="sourcecode.html#id1">Source code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#download-manual-as-pdf">Download Manual as pdf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#global-dataset">Global dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#contact-cwatm">Contact CWATM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#remarks">Remarks</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">15. License and download info</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forum.html">17. Forum</a></li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -4608,7 +4833,7 @@ and sums it up for a catchment</p>
           <a href="cwatm_initial.html" title="cwatm_initial module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="sourcecode.html" >14. Source code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="sourcecode.html" >16. Source code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
