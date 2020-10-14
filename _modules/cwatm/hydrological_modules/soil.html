@@ -63,20 +63,16 @@
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
-<span class="sd">    storGroundwater       simulated groundwater storage                                                     m        </span>
 <span class="sd">    capRiseFrac           fraction of a grid cell where capillar rise may happen                            m        </span>
 <span class="sd">    cropKC                crop coefficient for each of the 4 different land cover types (forest, irrigated  --       </span>
-<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
-<span class="sd">    capillar              Simulated flow from groundwater to the third CWATM soil layer                     m        </span>
+<span class="sd">    storGroundwater       simulated groundwater storage                                                     m        </span>
+<span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
 <span class="sd">    availWaterInfiltrati  quantity of water reaching the soil after interception, more snowmelt             m        </span>
+<span class="sd">    interceptEvap         simulated evaporation from water intercepted by vegetation                        m        </span>
 <span class="sd">    potTranspiration      Potential transpiration (after removing of evaporation)                           m        </span>
-<span class="sd">    actualET              simulated evapotranspiration from soil, flooded area and vegetation               m        </span>
-<span class="sd">    soilLayers            Number of soil layers                                                             --       </span>
+<span class="sd">    snowEvap              total evaporation from snow for a snow layers                                     m        </span>
 <span class="sd">    fracVegCover          Fraction of area covered by the corresponding landcover type                               </span>
 <span class="sd">    rootDepth                                                                                                        </span>
-<span class="sd">    soildepth             Thickness of the first soil layer                                                 m        </span>
-<span class="sd">    soildepth12           Total thickness of layer 2 and 3                                                  m        </span>
 <span class="sd">    KSat1                                                                                                            </span>
 <span class="sd">    KSat2                                                                                                            </span>
 <span class="sd">    KSat3                                                                                                            </span>
@@ -103,20 +99,26 @@
 <span class="sd">    wwp3                  Soil moisture at wilting point in layer 3                                                  </span>
 <span class="sd">    kunSatFC12                                                                                                       </span>
 <span class="sd">    kunSatFC23                                                                                                       </span>
+<span class="sd">    arnoBeta                                                                                                         </span>
+<span class="sd">    adjRoot                                                                                                          </span>
+<span class="sd">    maxtopwater           maximum heigth of topwater                                                        m        </span>
+<span class="sd">    capillar              Simulated flow from groundwater to the third CWATM soil layer                     m        </span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
+<span class="sd">    FrostIndexThreshold   Degree Days Frost Threshold (stops infiltration, percolation and capillary rise)  --       </span>
+<span class="sd">    FrostIndex            FrostIndex - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Floo  --       </span>
+<span class="sd">    actualET              simulated evapotranspiration from soil, flooded area and vegetation               m        </span>
+<span class="sd">    soilLayers            Number of soil layers                                                             --       </span>
+<span class="sd">    soildepth             Thickness of the first soil layer                                                 m        </span>
+<span class="sd">    soildepth12           Total thickness of layer 2 and 3                                                  m        </span>
 <span class="sd">    w1                    Simulated water storage in the layer 1                                            m        </span>
 <span class="sd">    w2                    Simulated water storage in the layer 2                                            m        </span>
 <span class="sd">    w3                    Simulated water storage in the layer 3                                            m        </span>
 <span class="sd">    topwater              quantity of water above the soil (flooding)                                       m        </span>
-<span class="sd">    arnoBeta                                                                                                         </span>
-<span class="sd">    adjRoot                                                                                                          </span>
-<span class="sd">    maxtopwater           maximum heigth of topwater                                                        m        </span>
 <span class="sd">    directRunoff          Simulated surface runoff                                                          m        </span>
 <span class="sd">    interflow             Simulated flow reaching runoff instead of groundwater                             m        </span>
 <span class="sd">    openWaterEvap         Simulated evaporation from open areas                                             m        </span>
 <span class="sd">    actTransTotal         Total actual transpiration from the three soil layers                             m        </span>
 <span class="sd">    actBareSoilEvap       Simulated evaporation from the first soil layer                                   m        </span>
-<span class="sd">    FrostIndexThreshold   Degree Days Frost Threshold (stops infiltration, percolation and capillary rise)  --       </span>
-<span class="sd">    FrostIndex            FrostIndex - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Floo  --       </span>
 <span class="sd">    percolationImp        Fraction of area covered by the corresponding landcover type                      m        </span>
 <span class="sd">    cropGroupNumber       soil water depletion fraction, Van Diepen et al., 1988: WOFOST 6.0, p.86, Dooren  --       </span>
 <span class="sd">    cPrefFlow             Factor influencing preferential flow (flow from surface to GW)                    --       </span>
@@ -662,36 +664,36 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwRecharge</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">percolationImp</span><span class="p">)</span> <span class="o">*</span> <span class="n">toGWorInterflow</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">capRiseFromGW</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
 
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        if checkOption(&#39;calcWaterBalance&#39;):</span>
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.availWaterInfiltration[No], self.var.capRiseFromGW[No], self.var.irrConsumption[No]],  # In  water demand included in availwater</span>
-<span class="sd">                [self.var.directRunoff[No],self.var.perc3toGW[No], self.var.prefFlow[No] ,</span>
-<span class="sd">                 self.var.actTransTotal[No], self.var.actBareSoilEvap[No], self.var.openWaterEvap[No]],  # Out</span>
-<span class="sd">                [ preStor1, preStor2, preStor3,pretopwater],  # prev storage</span>
-<span class="sd">                [self.var.w1[No], self.var.w2[No], self.var.w3[No],self.var.topwater],</span>
-<span class="sd">                &quot;Soil_1_&quot;+str(No), False)</span>
+
+        <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">availWaterInfiltration</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">capRiseFromGW</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrConsumption</span><span class="p">[</span><span class="n">No</span><span class="p">]],</span>  <span class="c1"># In  water demand included in availwater</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">directRunoff</span><span class="p">[</span><span class="n">No</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">perc3toGW</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prefFlow</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actBareSoilEvap</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">openWaterEvap</span><span class="p">[</span><span class="n">No</span><span class="p">]],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span> <span class="n">preStor1</span><span class="p">,</span> <span class="n">preStor2</span><span class="p">,</span> <span class="n">preStor3</span><span class="p">,</span><span class="n">pretopwater</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w1</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w2</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w3</span><span class="p">[</span><span class="n">No</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">topwater</span><span class="p">],</span>
+                <span class="s2">&quot;Soil_1_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">No</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span>
 
 
-<span class="sd">        if checkOption(&#39;calcWaterBalance&#39;):</span>
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.availWaterInfiltration[No], self.var.irrConsumption[No]],  # In</span>
-<span class="sd">                [self.var.directRunoff[No], self.var.interflow[No],self.var.gwRecharge[No],</span>
-<span class="sd">                 self.var.actTransTotal[No], self.var.actBareSoilEvap[No], self.var.openWaterEvap[No]],  # Out</span>
-<span class="sd">                [ preStor1, preStor2, preStor3,pretopwater],  # prev storage</span>
-<span class="sd">                [self.var.w1[No], self.var.w2[No], self.var.w3[No],self.var.topwater],</span>
-<span class="sd">                &quot;Soil_2&quot;, False)</span>
-<span class="sd">            # openWaterEvap in because it is taken from availWater directly, out because it taken out immediatly. It is not a soil process indeed</span>
+        <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">availWaterInfiltration</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrConsumption</span><span class="p">[</span><span class="n">No</span><span class="p">]],</span>  <span class="c1"># In</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">directRunoff</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interflow</span><span class="p">[</span><span class="n">No</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwRecharge</span><span class="p">[</span><span class="n">No</span><span class="p">],</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actBareSoilEvap</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">openWaterEvap</span><span class="p">[</span><span class="n">No</span><span class="p">]],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span> <span class="n">preStor1</span><span class="p">,</span> <span class="n">preStor2</span><span class="p">,</span> <span class="n">preStor3</span><span class="p">,</span><span class="n">pretopwater</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w1</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w2</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w3</span><span class="p">[</span><span class="n">No</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">topwater</span><span class="p">],</span>
+                <span class="s2">&quot;Soil_2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="c1"># openWaterEvap in because it is taken from availWater directly, out because it taken out immediatly. It is not a soil process indeed</span>
 
-<span class="sd">        if option[&#39;calcWaterBalance&#39;]:</span>
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.availWaterInfiltration[No], self.var.irrConsumption[No],self.var.snowEvap,self.var.interceptEvap[No]],  # In</span>
-<span class="sd">                [self.var.directRunoff[No], self.var.interflow[No],self.var.gwRecharge[No],</span>
-<span class="sd">                 self.var.actualET[No]],  # Out</span>
-<span class="sd">                [preStor1, preStor2, preStor3,pretopwater],  # prev storage</span>
-<span class="sd">                [self.var.w1[No], self.var.w2[No], self.var.w3[No],self.var.topwater],</span>
-<span class="sd">                &quot;Soil_AllSoil&quot;, False)</span>
-<span class="sd">        &quot;&quot;&quot;</span></div></div>
+        <span class="k">if</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">availWaterInfiltration</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrConsumption</span><span class="p">[</span><span class="n">No</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interceptEvap</span><span class="p">[</span><span class="n">No</span><span class="p">]],</span>  <span class="c1"># In</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">directRunoff</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">interflow</span><span class="p">[</span><span class="n">No</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwRecharge</span><span class="p">[</span><span class="n">No</span><span class="p">],</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actualET</span><span class="p">[</span><span class="n">No</span><span class="p">]],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="n">preStor1</span><span class="p">,</span> <span class="n">preStor2</span><span class="p">,</span> <span class="n">preStor3</span><span class="p">,</span><span class="n">pretopwater</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w1</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w2</span><span class="p">[</span><span class="n">No</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">w3</span><span class="p">[</span><span class="n">No</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">topwater</span><span class="p">],</span>
+                <span class="s2">&quot;Soil_AllSoil&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div></div>
+
 
 
 
@@ -713,16 +715,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html">13. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">14. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
         </div>

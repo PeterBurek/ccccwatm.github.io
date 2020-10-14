@@ -78,13 +78,13 @@
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    dirUp                 river network in upstream direction                                               --       </span>
-<span class="sd">    discharge             discharge                                                                         m3/s     </span>
 <span class="sd">    cellArea              Cell area [m²] of each simulated mesh                                                      </span>
 <span class="sd">    sampleAdresses                                                                                                   </span>
 <span class="sd">    noOutpoints                                                                                                      </span>
 <span class="sd">    evalCatch                                                                                                        </span>
 <span class="sd">    catcharea                                                                                                        </span>
 <span class="sd">    firstout                                                                                                         </span>
+<span class="sd">    discharge             discharge                                                                         m3/s     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 
 <span class="sd">    **Functions**</span>
@@ -143,7 +143,7 @@
                                 <span class="c1">#info.append(TimeoutputTimeseries2(name, self.var, outpoints, noHeader=False))</span>
                                 <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking output file path </span><span class="se">\n</span><span class="s2">&quot;</span>
+                            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 220: Checking output file path </span><span class="se">\n</span><span class="s2">&quot;</span>
                             <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">outDir</span><span class="p">[</span><span class="n">sec</span><span class="p">],</span> <span class="n">msg</span><span class="p">)</span>
                         <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
                         <span class="k">if</span> <span class="n">ismap</span><span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># flag set False for initial writing if it is a map</span>
@@ -180,9 +180,9 @@
                 <span class="n">outpoints</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="n">where</span><span class="p">,</span> <span class="n">local</span> <span class="o">=</span> <span class="n">localGauges</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking output-points file</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 221: Checking output-points file</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Coordinates are not pairs</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 129: Coordinates are not pairs</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">outpoints</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="s2">&quot;Gauges&quot;</span><span class="p">)</span>
 
             <span class="c1"># self.var.Tss[tss] = TimeoutputTimeseries(cbinding(tss), self.var, outpoints, noHeader=Flags[&#39;noheader&#39;])</span>
@@ -239,11 +239,11 @@
         <span class="c1"># check if timing of output is in outputTypTss  (globals.py)</span>
         <span class="k">for</span> <span class="n">out</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">outTss</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
             <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">outputTypTss</span><span class="p">):</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Output is not possible!</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 130: Output is not possible!</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">out</span> <span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> is not one of these: daily, monthend, monthtot, monthavg, annualend, annualtot, annualavg&quot;</span>
                 <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">outputTypTss2</span><span class="p">):</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Output is not possible!</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 131: Output is not possible!</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">out</span> <span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> is not one of these: TSS for point value, AreaSum for sum of area, AreaAvg for average of area&quot;</span>
                 <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
@@ -281,7 +281,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">vari</span> <span class="ow">in</span> <span class="n">space</span><span class="p">):</span>
                 <span class="n">closest</span> <span class="o">=</span> <span class="n">difflib</span><span class="o">.</span><span class="n">get_close_matches</span><span class="p">(</span><span class="n">vari</span><span class="p">,</span> <span class="n">space</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">closest</span><span class="p">:</span> <span class="n">closest</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;- no match -&quot;</span><span class="p">]</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Variable </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">vari</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> is not defined in </span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span> <span class="n">name</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 132: Variable </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">vari</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> is not defined in </span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span> <span class="n">name</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
                 <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Closest variable to this name is: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">closest</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
                 <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
@@ -708,16 +708,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html">13. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">14. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
         </div>

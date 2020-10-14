@@ -71,14 +71,7 @@
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
 <span class="sd">    load_initial                                                                                                     </span>
-<span class="sd">    waterbalance_module                                                                                              </span>
-<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
-<span class="sd">    lakeEvaFactor         a factor which increases evaporation from lake because of wind                    --       </span>
-<span class="sd">    InvDtSec                                                                                                         </span>
-<span class="sd">    runoff                                                                                                           </span>
-<span class="sd">    cellArea              Cell area [m²] of each simulated mesh                                                      </span>
 <span class="sd">    smallpart                                                                                                        </span>
 <span class="sd">    smalllakeArea                                                                                                    </span>
 <span class="sd">    smalllakeDis0                                                                                                    </span>
@@ -92,11 +85,17 @@
 <span class="sd">    smalllakeStorage                                                                                                 </span>
 <span class="sd">    minsmalllakeVolumeM3                                                                                             </span>
 <span class="sd">    preSmalllakeStorage                                                                                              </span>
+<span class="sd">    smallLakedaycorrect                                                                                              </span>
 <span class="sd">    smallLakeIn                                                                                                      </span>
 <span class="sd">    smallevapWaterBody                                                                                               </span>
 <span class="sd">    smallLakeout                                                                                                     </span>
-<span class="sd">    smallLakeDiff                                                                                                    </span>
 <span class="sd">    smallrunoffDiff                                                                                                  </span>
+<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
+<span class="sd">    InvDtSec                                                                                                         </span>
+<span class="sd">    cellArea              Cell area [m²] of each simulated mesh                                                      </span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
+<span class="sd">    lakeEvaFactor         a factor which increases evaporation from lake because of wind                    --       </span>
+<span class="sd">    runoff                                                                                                           </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 
 <span class="sd">    **Functions**</span>
@@ -173,11 +172,6 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">minsmalllakeVolumeM3</span> <span class="o">=</span> <span class="mf">9.e99</span></div>
 
 
-
-
-
-
-
    <span class="c1"># ------------------ End init ------------------------------------------------------------------------------------</span>
    <span class="c1"># ----------------------------------------------------------------------------------------------------------------</span>
 
@@ -215,13 +209,20 @@
             <span class="c1">#    ii = 1</span>
 
             <span class="n">inflowM3S</span> <span class="o">=</span> <span class="n">inflow</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span>
+
+            <span class="c1"># just for day to day waterbalance -&gt; get X as difference</span>
+            <span class="c1"># lakeIn = in + X -&gt;  (in + old) * 0.5 = in + X  -&gt;   in + old = 2in + 2X -&gt; in - 2in +old = 2x</span>
+            <span class="c1"># -&gt; (old - in) * 0.5 = X</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakedaycorrect</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">-</span> <span class="n">inflow</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
+
             <span class="c1"># Lake inflow in [m3/s]</span>
             <span class="n">lakeIn</span> <span class="o">=</span> <span class="p">(</span><span class="n">inflowM3S</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeInflowOld</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
             <span class="c1"># for Modified Puls Method: (S2/dtime + Qout2/2) = (S1/dtime + Qout1/2) - Qout1 + (Qin1 + Qin2)/2</span>
             <span class="c1"># here: (Qin1 + Qin2)/2</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span> <span class="o">=</span> <span class="n">lakeIn</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>  <span class="c1"># in [m]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span> <span class="o">=</span> <span class="n">lakeIn</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>  <span class="c1"># in [m]</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeEvaFactor</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EWRef</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeArea</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeVolumeM3</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span>
             <span class="c1"># lakestorage - evaporation from lakes</span>
@@ -252,13 +253,28 @@
 
 
             <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
-                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span><span class="p">],</span>  <span class="c1"># In</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">inflow</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="p">],</span>  <span class="c1"># In [m3]</span>
+                    <span class="p">[</span><span class="n">QsmallLakeOut</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="p">]</span>  <span class="p">,</span>  <span class="c1"># Out</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakedaycorrect</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                    <span class="s2">&quot;smalllake1&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span><span class="p">],</span>  <span class="c1"># In [m]</span>
                     <span class="p">[</span><span class="n">QsmallLakeOut</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="p">]</span>  <span class="p">,</span>  <span class="c1"># Out</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
-                    <span class="s2">&quot;smalllake&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                    <span class="s2">&quot;smalllake2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">inflow</span><span class="p">],</span>  <span class="c1"># In [m3]</span>
+                    <span class="p">[</span><span class="n">lakeIn</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span><span class="p">]</span>  <span class="p">,</span>  <span class="c1"># Out</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakedaycorrect</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                    <span class="p">[],</span>
+                    <span class="s2">&quot;smalllake3&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 
             <span class="k">return</span> <span class="n">QsmallLakeOut</span>
@@ -273,8 +289,8 @@
         <span class="c1"># Small lake and reservoirs</span>
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;useSmallLakes&#39;</span><span class="p">):</span>
-
-
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+                <span class="n">runoffold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
             <span class="c1"># check years</span>
             <span class="k">if</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newStart&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newYear&#39;</span><span class="p">]:</span>
@@ -303,26 +319,40 @@
             <span class="c1"># runoff to the lake as a part of the cell basin</span>
             <span class="n">inflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>  <span class="c1"># inflow in m3</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span> <span class="o">=</span> <span class="n">dynamic_smalllakes</span><span class="p">(</span><span class="n">inflow</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>     <span class="c1"># back to [m]</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeDiff</span> <span class="o">=</span>   <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallrunoffDiff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span>
-
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallpart</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span>    <span class="c1"># back to [m]  # with and without in m3</span>
-
 
             <span class="c1"># ------------------------------------------------------------</span>
             <span class="c1">#report(decompress(runoff_LR), &quot;C:\work\output3/run.map&quot;)</span>
 
             <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
-                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span><span class="p">],</span>  <span class="c1"># In</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span><span class="p">],</span>  <span class="c1"># In [m]</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span><span class="p">],</span>  <span class="c1"># Out</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
                     <span class="s2">&quot;smalllake1&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-            <span class="k">return</span></div></div>
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">inflow</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakedaycorrect</span> <span class="p">],</span>  <span class="c1"># In [m]</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="p">]</span>  <span class="p">,</span>  <span class="c1"># Out</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                    <span class="s2">&quot;smalllake7&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">runoffold</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakedaycorrect</span> <span class="p">],</span>  <span class="c1"># In [m]</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span> <span class="p">]</span>  <span class="p">,</span>  <span class="c1"># Out</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                    <span class="s2">&quot;smalllake8&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallrunoffDiff</span> <span class="o">=</span> <span class="mi">0</span></div></div>
 
 
 <span class="c1"># --------------------------------------------------------------------------</span>
@@ -344,16 +374,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html">13. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">14. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
         </div>

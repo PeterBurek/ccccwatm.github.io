@@ -157,7 +157,7 @@
 <span class="n">outMap</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">outTss</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">outsection</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">outputTypMap</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="s1">&#39;monthtot&#39;</span><span class="p">,</span><span class="s1">&#39;monthavg&#39;</span><span class="p">,</span> <span class="s1">&#39;monthend&#39;</span><span class="p">,</span><span class="s1">&#39;annualtot&#39;</span><span class="p">,</span><span class="s1">&#39;annualavg&#39;</span><span class="p">,</span><span class="s1">&#39;annualend&#39;</span><span class="p">,</span><span class="s1">&#39;totaltot&#39;</span><span class="p">,</span><span class="s1">&#39;totalavg&#39;</span><span class="p">,</span><span class="s1">&#39;totalend&#39;</span><span class="p">,</span><span class="s1">&#39;once&#39;</span><span class="p">,</span><span class="s1">&#39;12month&#39;</span><span class="p">]</span>
+<span class="n">outputTypMap</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="s1">&#39;monthtot&#39;</span><span class="p">,</span><span class="s1">&#39;monthavg&#39;</span><span class="p">,</span> <span class="s1">&#39;monthend&#39;</span><span class="p">,</span> <span class="s1">&#39;monthmid&#39;</span><span class="p">,</span><span class="s1">&#39;annualtot&#39;</span><span class="p">,</span><span class="s1">&#39;annualavg&#39;</span><span class="p">,</span><span class="s1">&#39;annualend&#39;</span><span class="p">,</span><span class="s1">&#39;totaltot&#39;</span><span class="p">,</span><span class="s1">&#39;totalavg&#39;</span><span class="p">,</span><span class="s1">&#39;totalend&#39;</span><span class="p">,</span><span class="s1">&#39;once&#39;</span><span class="p">,</span><span class="s1">&#39;12month&#39;</span><span class="p">]</span>
 <span class="n">outputTypTss</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="s1">&#39;monthtot&#39;</span><span class="p">,</span><span class="s1">&#39;monthavg&#39;</span><span class="p">,</span> <span class="s1">&#39;monthend&#39;</span><span class="p">,</span><span class="s1">&#39;annualtot&#39;</span><span class="p">,</span><span class="s1">&#39;annualavg&#39;</span><span class="p">,</span><span class="s1">&#39;annualend&#39;</span><span class="p">,</span><span class="s1">&#39;totaltot&#39;</span><span class="p">,</span><span class="s1">&#39;totalavg&#39;</span><span class="p">]</span>
 <span class="n">outputTypTss2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tss&#39;</span><span class="p">,</span> <span class="s1">&#39;areasum&#39;</span><span class="p">,</span><span class="s1">&#39;areaavg&#39;</span><span class="p">]</span>
 
@@ -212,7 +212,7 @@
 <span class="n">python_bit</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">sizeof</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_voidp</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span>
 <span class="c1">#print &quot;Running under platform: &quot;, platform1</span>
 <span class="k">if</span> <span class="n">python_bit</span>  <span class="o">&lt;</span> <span class="mi">64</span><span class="p">:</span>
-   <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The Python version used is not a 64 bit version! Python &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">python_bit</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;bit&quot;</span>
+   <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 301: The Python version used is not a 64 bit version! Python &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">python_bit</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;bit&quot;</span>
    <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
 <span class="n">path_global</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
@@ -317,16 +317,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html">13. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">14. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
         </div>

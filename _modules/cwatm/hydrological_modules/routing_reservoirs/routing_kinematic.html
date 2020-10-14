@@ -64,42 +64,44 @@
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
 <span class="sd">    load_initial                                                                                                     </span>
-<span class="sd">    waterbalance_module                                                                                              </span>
-<span class="sd">    QInM3Old              Inflow from previous day                                                          m3       </span>
 <span class="sd">    inflowM3              inflow to basin                                                                   m3       </span>
-<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
 <span class="sd">    waterBodyID           lakes/reservoirs map with a single ID for each lake/reservoir                     --       </span>
-<span class="sd">    UpArea1               upstream area of a grid cell                                                      m2       </span>
 <span class="sd">    dirUp                 river network in upstream direction                                               --       </span>
-<span class="sd">    lddCompress           compressed river network (without missing values)                                 --       </span>
 <span class="sd">    dirupLen_LR           number of bifurcation upstream lake/reservoir                                     --       </span>
 <span class="sd">    dirupID_LR            index river upstream lake/reservoir                                               --       </span>
 <span class="sd">    dirDown_LR            river network direktion downstream lake/reservoir                                 --       </span>
 <span class="sd">    lendirDown_LR         number of river network connections lake/reservoir                                --       </span>
 <span class="sd">    compress_LR           boolean map as mask map for compressing lake/reservoir                            --       </span>
 <span class="sd">    lakeArea              area of each lake/reservoir                                                       m2       </span>
-<span class="sd">    lakeEvaFactor         a factor which increases evaporation from lake because of wind                    --       </span>
 <span class="sd">    lakeEvaFactorC        compressed map of a factor which increases evaporation from lake because of wind  --       </span>
 <span class="sd">    EvapWaterBodyM                                                                                                   </span>
 <span class="sd">    lakeResInflowM                                                                                                   </span>
 <span class="sd">    lakeResOutflowM                                                                                                  </span>
-<span class="sd">    dtRouting             number of seconds per routing timestep                                            s        </span>
 <span class="sd">    lakeResStorage                                                                                                   </span>
+<span class="sd">    downstruct                                                                                                       </span>
+<span class="sd">    act_SurfaceWaterAbst                                                                                             </span>
+<span class="sd">    fracVegCover          Fraction of area covered by the corresponding landcover type                               </span>
+<span class="sd">    returnFlow                                                                                                       </span>
+<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
+<span class="sd">    cellArea              Cell area [m²] of each simulated mesh                                                      </span>
+<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
+<span class="sd">    QInM3Old              Inflow from previous day                                                          m3       </span>
+<span class="sd">    UpArea1               upstream area of a grid cell                                                      m2       </span>
+<span class="sd">    lddCompress           compressed river network (without missing values)                                 --       </span>
+<span class="sd">    lakeEvaFactor         a factor which increases evaporation from lake because of wind                    --       </span>
+<span class="sd">    dtRouting             number of seconds per routing timestep                                            s        </span>
 <span class="sd">    evapWaterBodyC                                                                                                   </span>
 <span class="sd">    sumLakeEvapWaterBody                                                                                             </span>
 <span class="sd">    noRoutingSteps                                                                                                   </span>
 <span class="sd">    sumResEvapWaterBodyC                                                                                             </span>
 <span class="sd">    discharge             discharge                                                                         m3/s     </span>
-<span class="sd">    runoff                                                                                                           </span>
-<span class="sd">    cellArea              Cell area [m²] of each simulated mesh                                                      </span>
-<span class="sd">    downstruct                                                                                                       </span>
 <span class="sd">    prelakeResStorage                                                                                                </span>
-<span class="sd">    act_SurfaceWaterAbst                                                                                             </span>
-<span class="sd">    fracVegCover          Fraction of area covered by the corresponding landcover type                               </span>
-<span class="sd">    openWaterEvap         Simulated evaporation from open areas                                             m        </span>
 <span class="sd">    catchmentAll                                                                                                     </span>
+<span class="sd">    sumsideflow                                                                                                      </span>
+<span class="sd">    EvapoChannel                                                                                                     </span>
+<span class="sd">    prechannelStorage                                                                                                </span>
+<span class="sd">    channelStorage                                                                                                   </span>
 <span class="sd">    chanLength                                                                                                       </span>
 <span class="sd">    totalCrossSectionAre                                                                                             </span>
 <span class="sd">    dirupLen                                                                                                         </span>
@@ -121,17 +123,14 @@
 <span class="sd">    alpPower                                                                                                         </span>
 <span class="sd">    channelAlpha                                                                                                     </span>
 <span class="sd">    invchannelAlpha                                                                                                  </span>
-<span class="sd">    channelStorage                                                                                                   </span>
 <span class="sd">    riverbedExchange                                                                                                 </span>
-<span class="sd">    sumbalance                                                                                                       </span>
-<span class="sd">    prechannelStorage                                                                                                </span>
-<span class="sd">    EvapoChannel                                                                                                     </span>
 <span class="sd">    QDelta                                                                                                           </span>
 <span class="sd">    act_bigLakeResAbst                                                                                               </span>
 <span class="sd">    act_smallLakeResAbst                                                                                             </span>
-<span class="sd">    returnFlow                                                                                                       </span>
-<span class="sd">    sumsideflow                                                                                                      </span>
 <span class="sd">    inflowDt                                                                                                         </span>
+<span class="sd">    dis_outlet                                                                                                       </span>
+<span class="sd">    runoff                                                                                                           </span>
+<span class="sd">    openWaterEvap         Simulated evaporation from open areas                                             m        </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 
 <span class="sd">    **Functions**</span>
@@ -316,9 +315,9 @@
 
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">catchmentAll</span> <span class="o">=</span> <span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">)</span><span class="o">*</span><span class="mf">0.</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">catchmentAll</span> <span class="o">=</span> <span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">,</span><span class="n">local</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span></div>
             <span class="c1">#self.var.catchmentNo = int(loadmap(&#39;CatchmentNo&#39;))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumbalance</span> <span class="o">=</span> <span class="mi">0</span></div>
+            <span class="c1">#self.var.sumbalance = 0</span>
 
 
 
@@ -419,12 +418,16 @@
             <span class="c1"># In waterdemand.py: self.var.act_SurfaceWaterAbstract = self.var.act_SurfaceWaterAbstract + self.var.act_bigLakeResAbst + self.var.act_smallLakeResAbst</span>
             <span class="c1"># The abstractions from lakes and reservoirs have already been dealt with by removing these amounts from their storages in the same module</span>
             <span class="c1"># The water abstractions from the channel are thus the surface water abstractions subtract the lake and reservoir abstractions</span>
-            
-             <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_bigLakeResAbst</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_smallLakeResAbst</span><span class="p">)</span>
-             <span class="c1">#return flow from (m) non irrigation water demand</span>
-             <span class="c1">#WDAddM3Dt = WDAddM3Dt - self.var.nonIrrReturnFlowFraction * self.var.act_nonIrrDemand</span>
-             <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="n">WDAddM3Dt</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnFlow</span>
-             <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="n">WDAddM3Dt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">noRoutingSteps</span>
+
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">):</span>
+                <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_bigLakeResAbst</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_smallLakeResAbst</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span>
+
+            <span class="c1">#return flow from (m) non irrigation water demand</span>
+            <span class="c1">#WDAddM3Dt = WDAddM3Dt - self.var.nonIrrReturnFlowFraction * self.var.act_nonIrrDemand</span>
+            <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="n">WDAddM3Dt</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnFlow</span>
+            <span class="n">WDAddM3Dt</span> <span class="o">=</span> <span class="n">WDAddM3Dt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">noRoutingSteps</span>
 
             <span class="c1">#sideflowChanM3 -= self.var.sum_act_SurfaceWaterAbstract * self.var.cellArea</span>
             <span class="c1"># return flow from (m) non irrigation water demand</span>
@@ -438,9 +441,6 @@
 
         <span class="n">runoffM3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">noRoutingSteps</span>
 
-
-
-
         <span class="c1"># ************************************************************</span>
         <span class="c1"># ***** KINEMATIC WAVE                        ****************</span>
         <span class="c1"># ************************************************************</span>
@@ -449,7 +449,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prechannelStorage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelAlpha</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">chanLength</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">beta</span>
         <span class="n">avgDis</span> <span class="o">=</span> <span class="mi">0</span>
 
-
         <span class="k">for</span> <span class="n">subrouting</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">noRoutingSteps</span><span class="p">):</span>
 
             <span class="n">sideflowChanM3</span> <span class="o">=</span> <span class="n">runoffM3</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -457,7 +456,6 @@
             <span class="n">sideflowChanM3</span> <span class="o">-=</span> <span class="n">EvapoChannelM3Dt</span>
             <span class="c1"># minus riverbed exchange</span>
             <span class="c1">#sideflowChanM3 -= riverbedExchangeDt</span>
-
 
             <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterDemand&#39;</span><span class="p">):</span>
                 <span class="n">sideflowChanM3</span> <span class="o">-=</span> <span class="n">WDAddM3Dt</span>
@@ -475,7 +473,6 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">lakesResOut</span> <span class="o">=</span> <span class="mi">0</span>
 
-
             <span class="c1">#sideflowChan = sideflowChanM3 * self.var.invchanLength * self.var.InvDtSec</span>
             <span class="n">sideflowChan</span> <span class="o">=</span> <span class="n">sideflowChanM3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">invchanLength</span> <span class="o">*</span> <span class="mi">1</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dtRouting</span>
 
@@ -486,97 +483,100 @@
                <span class="n">lib2</span><span class="o">.</span><span class="n">kinematic</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span><span class="p">,</span> <span class="n">sideflowChan</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dirDown</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dirupLen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dirupID</span><span class="p">,</span> <span class="n">Qnew</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelAlpha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">beta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dtRouting</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">chanLength</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lendirDown</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span> <span class="o">=</span> <span class="n">Qnew</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-
-
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsideflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsideflow</span> <span class="o">+</span> <span class="n">sideflowChanM3</span>
             <span class="n">avgDis</span> <span class="o">=</span> <span class="n">avgDis</span>  <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">noRoutingSteps</span>
 
         <span class="c1"># -- end substeping ---------------------</span>
+
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">):</span>
             <span class="c1"># if there is a lake no discharge is calculated in the routing routine.</span>
             <span class="c1"># therefore this is filled up with the discharge which goes outof the lake</span>
             <span class="c1"># these outflow is used for the whole lake</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterBodyID</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lakeOutflowDis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span><span class="p">)</span>
+        <span class="c1"># discharge at the end of a time step</span>
 
+        <span class="n">preStor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorage</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelAlpha</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">chanLength</span> <span class="o">*</span> <span class="n">Qnew</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">beta</span>
 
+        <span class="c1"># discharge only at the outlets to sea or endorheic lakes, otherwise value is 0.</span>
+        <span class="c1"># as avarge discharge over timestep e.g. 1 day</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dis_outlet</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lddCompress</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span> <span class="n">avgDis</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;inflow&#39;</span><span class="p">):</span>
              <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">QInM3Old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">inflowM3</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-            <span class="n">ch1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prechannelStorage</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
-            <span class="n">ch2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorage</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
-            <span class="n">avgArea</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">catchmentAll</span><span class="p">)</span>
-            <span class="n">DisOut</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
-            <span class="c1">#DisOut = (self.var.disold +self.var.discharge) /2  * self.var.DtSec / self.var.cellArea</span>
+        <span class="c1"># maybe later, but for now it is known as m3</span>
+        <span class="c1">#self.var.EvapoChannel = self.var.EvapoChannel / self.var.cellArea</span>
 
-            <span class="c1">## DisOut = self.var.discharge  * self.var.DtSec / avgArea</span>
-            <span class="c1">#self.var.disold = self.var.discharge.copy()</span>
-            <span class="c1">## DisOut = avgDis * self.var.DtSec / avgArea</span>
-            <span class="c1">## DisOut = np.where(self.var.lddCompress == 5, DisOut, 0.)</span>
-            <span class="n">sumside</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsideflow</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
+
+<span class="c1">#---------------------------------------------------------------------------------------</span>
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeResInflowM</span><span class="p">],</span>  <span class="c1"># In</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeResOutflowM</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EvapWaterBodyM</span><span class="p">]</span>  <span class="p">,</span>  <span class="c1"># Out  self.var.evapWaterBodyC</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prelakeResStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">]</span> <span class="p">,</span>  <span class="c1"># prev storage</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeResStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
                     <span class="s2">&quot;lake_res&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-
 <span class="c1">#### IMPORTANT set Routingstep to 1 to test!</span>
-
-
-        <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">runoffM3</span><span class="p">,</span> <span class="n">lakesResOut</span> <span class="p">],</span>  <span class="c1"># In</span>
-                <span class="p">[</span><span class="n">sideflowChanM3</span><span class="p">,</span><span class="n">EvapoChannelM3Dt</span><span class="p">,</span> <span class="n">WDAddM3Dt</span><span class="p">],</span>  <span class="c1"># Out</span>
-                <span class="p">[],</span>   <span class="c1"># prev storage</span>
-                <span class="p">[],</span>
-                <span class="s2">&quot;rout1&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheckSum</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnFlow</span><span class="p">,</span> <span class="n">lakesResOut</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># In</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsideflow</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EvapoChannel</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span><span class="p">,</span> <span class="p">],</span>  <span class="c1"># Out</span>
-                <span class="p">[],</span>  <span class="c1"># prev storage</span>
-                <span class="p">[],</span>
-                <span class="s2">&quot;rout2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-
-
-
-        <span class="c1">#if (dateVar[&#39;curr&#39;] == 99):</span>
-        <span class="c1">#   ii = 1</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        if checkOption(&#39;calcWaterBalance&#39;):</span>
-<span class="sd">            self.var.sumbalance = self.var.sumbalance + self.var.waterbalance_module.waterBalanceCheckSum(</span>
-<span class="sd">                [sumside ],  # In</span>
-<span class="sd">                [DisOut],  # Out</span>
-<span class="sd">                [ch1],   # prev storage</span>
-<span class="sd">                [ch2],</span>
-<span class="sd">                &quot;rout3&quot;, False)</span>
-<span class="sd">            #print &quot;  &quot;,self.var.sumbalance,&quot;   &quot;, avgDis[0],&quot;   &quot;,</span>
+<span class="sd">            self.model.waterbalance_module.waterBalanceCheck(</span>
+<span class="sd">                [runoffM3, lakesResOut ],  # In</span>
+<span class="sd">                [sideflowChanM3,EvapoChannelM3Dt, WDAddM3Dt],  # Out</span>
+<span class="sd">                [],   # prev storage</span>
+<span class="sd">                [],</span>
+<span class="sd">                &quot;rout1&quot;, False)</span>
+
+
+<span class="sd">            self.model.waterbalance_module.waterBalanceCheckSum(</span>
+<span class="sd">                [self.var.runoff, self.var.returnFlow, lakesResOut / self.var.cellArea, ],  # In</span>
+<span class="sd">                [self.var.sumsideflow / self.var.cellArea, self.var.EvapoChannel / self.var.cellArea,  WDAddM3Dt/self.var.cellArea],  # Out</span>
+<span class="sd">                [],  # prev storage</span>
+<span class="sd">                [],</span>
+<span class="sd">                &quot;rout2&quot;, False)</span>
+
+<span class="sd">            self.model.waterbalance_module.waterBalanceCheckSum(</span>
+<span class="sd">                [self.var.sumsideflow],  # In</span>
+<span class="sd">                [self.var.dis_outlet * self.var.DtSec],  # Out</span>
+<span class="sd">                [self.var.prechannelStorage],  # prev storage</span>
+<span class="sd">                [self.var.channelStorage],</span>
+<span class="sd">                &quot;rout3&quot;, False) # [m3] without waterbody</span>
+
+<span class="sd">        if checkOption(&#39;calcWaterBalance&#39;):  # [m]</span>
+<span class="sd">            self.model.waterbalance_module.waterBalanceCheckSum(</span>
+<span class="sd">                [self.var.runoff],  # In</span>
+<span class="sd">                [self.var.dis_outlet * self.var.DtSec / self.var.cellArea, self.var.EvapoChannel / self.var.cellArea],  # Out</span>
+<span class="sd">                [self.var.prechannelStorage/self.var.cellArea],   # prev storage</span>
+<span class="sd">                [self.var.channelStorage/self.var.cellArea],</span>
+<span class="sd">                &quot;rout4&quot;, False) # without waterbody</span>
+
+<span class="sd">        if checkOption(&#39;calcWaterBalance&#39;):  # [m]</span>
+<span class="sd">            self.model.waterbalance_module.waterBalanceCheckSum(</span>
+<span class="sd">                [self.var.runoff, self.var.returnFlow, lakesResOut / self.var.cellArea],  # In</span>
+<span class="sd">                [self.var.dis_outlet * self.var.DtSec / self.var.cellArea, self.var.EvapoChannel / self.var.cellArea,self.var.act_SurfaceWaterAbstract ],  # Out</span>
+<span class="sd">                [self.var.prechannelStorage/self.var.cellArea],   # prev storage</span>
+<span class="sd">                [self.var.channelStorage/self.var.cellArea],</span>
+<span class="sd">                &quot;rout5&quot;, False) # without waterbody</span>
+
+<span class="sd">        if checkOption(&#39;calcWaterBalance&#39;): # [m3] without waterbodies</span>
+<span class="sd">            self.model.waterbalance_module.waterBalanceCheckSum(</span>
+<span class="sd">                [self.var.runoff * self.var.cellArea ],  # In</span>
+<span class="sd">                [self.var.dis_outlet * self.var.DtSec, self.var.EvapoChannel],  # Out</span>
+<span class="sd">                [self.var.prechannelStorage],   # prev storage</span>
+<span class="sd">                [self.var.channelStorage],</span>
+<span class="sd">                &quot;rout6&quot;, False)  # without waterbody</span>
+
+<span class="sd">        if checkOption(&#39;calcWaterBalance&#39;): # [m3] without waterbodies</span>
+<span class="sd">            self.model.waterbalance_module.waterBalanceCheckSum(</span>
+<span class="sd">                [self.var.runoff * self.var.cellArea],  # In</span>
+<span class="sd">                [self.var.dis_outlet * self.var.DtSec, self.var.EvapoChannel, self.var.EvapWaterBodyM * self.var.cellArea],  # Out</span>
+<span class="sd">                [self.var.prechannelStorage, self.var.prelakeResStorage],   # prev storage</span>
+<span class="sd">                [self.var.channelStorage, self.var.lakeResStorage],</span>
+<span class="sd">                &quot;rout8&quot;, False)  # without waterbody</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheckSum</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnFlow</span> <span class="p">],</span>  <span class="c1"># In</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsideflow</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EvapoChannel</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span><span class="p">],</span>  <span class="c1"># Out</span>
-                <span class="p">[],</span>   <span class="c1"># prev storage</span>
-                <span class="p">[],</span>
-                <span class="s2">&quot;rout4&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheckSum</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnFlow</span><span class="p">,</span> <span class="n">lakesResOut</span><span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># In</span>
-                <span class="p">[</span><span class="n">DisOut</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EvapoChannel</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span> <span class="p">],</span>  <span class="c1"># Out</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prechannelStorage</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>   <span class="c1"># prev storage</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorage</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
-                <span class="s2">&quot;rout5&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-
-
 
 
         <span class="sd">&quot;&quot;&quot;</span>
@@ -609,16 +609,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">13. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../sourcecode.html">14. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../forum.html">17. Forum</a></li>
 </ul>
 
         </div>

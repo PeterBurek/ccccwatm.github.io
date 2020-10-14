@@ -62,12 +62,68 @@
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    storGroundwater       simulated groundwater storage                                                     m        </span>
+<span class="sd">    prestorGroundwater    storGroundwater at the beginning of each step                                     m        </span>
+<span class="sd">    sum_gwRecharge        groundwater recharge                                                              m        </span>
+<span class="sd">    snowEvap              total evaporation from snow for a snow layers                                     m        </span>
+<span class="sd">    smalllakeStorage                                                                                                 </span>
+<span class="sd">    preSmalllakeStorage                                                                                              </span>
+<span class="sd">    smallLakedaycorrect                                                                                              </span>
+<span class="sd">    smallLakeIn                                                                                                      </span>
+<span class="sd">    smallevapWaterBody                                                                                               </span>
+<span class="sd">    smallLakeout                                                                                                     </span>
+<span class="sd">    lakeStorage                                                                                                      </span>
+<span class="sd">    EvapWaterBodyM                                                                                                   </span>
+<span class="sd">    lakeResInflowM                                                                                                   </span>
+<span class="sd">    lakeResOutflowM                                                                                                  </span>
+<span class="sd">    lakeResStorage                                                                                                   </span>
+<span class="sd">    resStorage                                                                                                       </span>
+<span class="sd">    act_SurfaceWaterAbst                                                                                             </span>
+<span class="sd">    totalSto              Total soil,snow and vegetation storage for each cell including all landcover typ  m        </span>
+<span class="sd">    pretotalSto           Previous totalSto                                                                 m        </span>
+<span class="sd">    sum_actBareSoilEvap                                                                                              </span>
+<span class="sd">    sum_openWaterEvap                                                                                                </span>
+<span class="sd">    addtoevapotrans                                                                                                  </span>
+<span class="sd">    sum_directRunoff                                                                                                 </span>
+<span class="sd">    sum_interflow                                                                                                    </span>
+<span class="sd">    sum_capRiseFromGW     capillar rise from groundwater to 3rd soil layer (summed up for all land cover c  m        </span>
+<span class="sd">    sum_act_irrConsumpti                                                                                             </span>
+<span class="sd">    sum_perc3toGW         percolation from 3rd soil layer to groundwater (summed up for all land cover cla  m        </span>
+<span class="sd">    sum_prefFlow          preferential flow from soil to groundwater (summed up for all land cover classes  m        </span>
+<span class="sd">    act_irrWithdrawal                                                                                                </span>
+<span class="sd">    act_nonIrrConsumptio                                                                                             </span>
+<span class="sd">    returnFlow                                                                                                       </span>
+<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
+<span class="sd">    cellArea              Cell area [m²] of each simulated mesh                                                      </span>
+<span class="sd">    baseflow              simulated baseflow (= groundwater discharge to river)                             m        </span>
+<span class="sd">    Precipitation         Precipitation (input for the model)                                               m        </span>
+<span class="sd">    lddCompress           compressed river network (without missing values)                                 --       </span>
+<span class="sd">    discharge             discharge                                                                         m3/s     </span>
+<span class="sd">    prelakeResStorage                                                                                                </span>
+<span class="sd">    catchmentAll                                                                                                     </span>
+<span class="sd">    sumsideflow                                                                                                      </span>
+<span class="sd">    EvapoChannel                                                                                                     </span>
+<span class="sd">    prechannelStorage                                                                                                </span>
+<span class="sd">    channelStorage                                                                                                   </span>
+<span class="sd">    runoff                                                                                                           </span>
+<span class="sd">    gridcell_storage                                                                                                 </span>
+<span class="sd">    nonFossilGroundwater  groundwater abstraction which is sustainable and not using fossil resources       m        </span>
+<span class="sd">    totalET               Total evapotranspiration for each cell including all landcover types              m        </span>
+<span class="sd">    sum_actTransTotal                                                                                                </span>
+<span class="sd">    sum_interceptEvap                                                                                                </span>
+<span class="sd">    prergridcell                                                                                                     </span>
 <span class="sd">    nonIrrReturnFlow                                                                                                 </span>
 <span class="sd">    localQW                                                                                                          </span>
 <span class="sd">    channelStorageBefore                                                                                             </span>
+<span class="sd">    sumbalance                                                                                                       </span>
 <span class="sd">    sum_balanceStore                                                                                                 </span>
 <span class="sd">    sum_balanceFlux                                                                                                  </span>
-<span class="sd">    catchmentAll                                                                                                     </span>
+<span class="sd">    unmetDemand                                                                                                      </span>
+<span class="sd">    act_nonIrrWithdrawal                                                                                             </span>
+<span class="sd">    returnflowIrr                                                                                                    </span>
+<span class="sd">    nonIrrReturnFlowFrac                                                                                             </span>
+<span class="sd">    lakeReservoirStorage                                                                                             </span>
+<span class="sd">    unmet_lost                                                                                                       </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 
 <span class="sd">    **Functions**</span>
@@ -85,11 +141,17 @@
 <span class="sd">        Initial part of the water balance module</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrReturnFlow</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">localQW</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorageBefore</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prergridcell</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">catchmentAll</span> <span class="o">=</span> <span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">,</span><span class="n">local</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+            <span class="c1">#self.var.catchmentNo = int(loadmap(&#39;CatchmentNo&#39;))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumbalance</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="sd">&quot;&quot;&quot; store the initial storage volume of snow, soil etc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -149,11 +211,13 @@
             <span class="c1">#meanB = np.average(balance, axis=0)</span>
             <span class="c1">#meanB = 0.0</span>
 
-            <span class="c1"># print (&quot;     %s %10.8f &quot; % (processName, maxBB),)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;     </span><span class="si">%s</span><span class="s2"> </span><span class="si">%10.8f</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">processName</span><span class="p">,</span> <span class="n">maxBB</span><span class="p">),)</span>
             <span class="c1">#if maxBB &gt; 0.00000001:</span>
             <span class="c1">#    sys.exit()</span>
-            <span class="k">if</span> <span class="n">maxBB</span> <span class="o">&gt;</span> <span class="mf">0.0000000001</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     </span><span class="si">%s</span><span class="s2"> </span><span class="si">%10.8f</span><span class="s2"> </span><span class="si">%10.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">processName</span><span class="p">,</span> <span class="n">minB</span><span class="p">,</span><span class="n">maxB</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">maxBB</span> <span class="o">&gt;</span> <span class="mf">0.0000001</span><span class="p">:</span>
+                <span class="c1">#print(&quot;     %s %10.8f %10.8f&quot; % (processName, minB,maxB), end=&#39; &#39;)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     </span><span class="si">%s</span><span class="s2"> </span><span class="si">%10.8f</span><span class="s2"> </span><span class="si">%10.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">processName</span><span class="p">,</span> <span class="n">minB</span><span class="p">,</span> <span class="n">maxB</span><span class="p">))</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
                 <span class="c1">#quit()</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">minB</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.00001</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">maxB</span> <span class="o">&gt;</span> <span class="mf">0.00001</span><span class="p">):</span>
                    <span class="n">i</span><span class="o">=</span><span class="mi">11111</span>
@@ -212,7 +276,7 @@
             <span class="c1">#print &quot;     %s %10.8f &quot; % (processName, maxBB),</span>
             <span class="c1">#print &quot;     %s %10.8f %10.8f&quot; % (processName, minB,maxB),</span>
             <span class="c1">#print &quot;     %s %10.8f&quot; % (processName, balance[no]),</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     </span><span class="si">%s</span><span class="s2"> </span><span class="si">%10.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">processName</span><span class="p">,</span> <span class="n">balance</span><span class="p">[</span><span class="n">no</span><span class="p">]),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     </span><span class="si">%s</span><span class="s2"> </span><span class="si">%10.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">processName</span><span class="p">,</span> <span class="n">balance</span><span class="p">[</span><span class="n">no</span><span class="p">])</span> <span class="p">)</span>
 
             <span class="c1">#avgArea = npareaaverage(self.var.cellArea, self.var.catchmentAll)</span>
             <span class="c1">#dis = balance[no] * avgArea[0] / self.var.DtSec</span>
@@ -233,212 +297,167 @@
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
 
-            <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.Precipitation, self.var.sumirrConsumption],</span>
-<span class="sd">                [self.var.sum_directRunoff, self.var.sum_interflow, self.var.sum_gwRecharge,self.var.totalET],  # Out</span>
-<span class="sd">                [self.var.pretotalSto],  # prev storage</span>
-<span class="sd">                [self.var.totalSto],</span>
-<span class="sd">                &quot;Soil_all&quot;, False)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_gwRecharge</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalET</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">],</span>
+                <span class="s2">&quot;Soil_all&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
 
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.Precipitation, self.var.sumirrConsumption,self.var.sum_capRiseFromGW],</span>
-<span class="sd">                [self.var.sum_directRunoff, self.var.sum_perc3toGW, self.var.sum_prefFlow,</span>
-<span class="sd">                 self.var.totalET],  # Out</span>
-<span class="sd">                [self.var.pretotalSto],  # prev storage</span>
-<span class="sd">                [self.var.totalSto],</span>
-<span class="sd">                &quot;Soil_all1&quot;, False)</span>
-
-
-
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.Precipitation, self.var.sumirrConsumption,self.var.sum_capRiseFromGW],</span>
-<span class="sd">                [self.var.sum_directRunoff, self.var.sum_perc3toGW, self.var.sum_prefFlow,</span>
-<span class="sd">                 self.var.sum_actTransTotal, self.var.sum_actBareSoilEvap, self.var.sum_openWaterEvap, self.var.sum_interceptEvap, self.var.snowEvap],  # Out</span>
-<span class="sd">                [self.var.pretotalSto],  # prev storage</span>
-<span class="sd">                [self.var.totalSto],</span>
-<span class="sd">                &quot;Soil_all2&quot;, False)</span>
-
-<span class="sd">            #if self.var.sumirrConsumption &gt; 0:</span>
-<span class="sd">            #    iii =1</span>
-
-
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.Precipitation, self.var.sumirrConsumption],</span>
-<span class="sd">                [self.var.sum_directRunoff, self.var.sum_interflow, self.var.nonFossilGroundwaterAbs,self.var.baseflow,</span>
-<span class="sd">                 self.var.sum_actTransTotal, self.var.sum_actBareSoilEvap, self.var.sum_openWaterEvap, self.var.sum_interceptEvap, self.var.snowEvap],  # Out</span>
-<span class="sd">                [self.var.pretotalSto,self.var.prestorGroundwater],  # prev storage</span>
-<span class="sd">                [self.var.totalSto,self.var.storGroundwater],</span>
-<span class="sd">                &quot;Soil+G&quot;, False)</span>
-
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.unmetDemand,self.var.nonFossilGroundwaterAbs, self.var.act_SurfaceWaterAbstract], # In</span>
-<span class="sd">                [self.var.act_irrDemand,self.var.act_nonIrrDemand],     # Out</span>
-<span class="sd">                [globals.inZero],</span>
-<span class="sd">                [globals.inZero],</span>
-<span class="sd">                &quot;Waterdemand1&quot;, False)</span>
-
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.act_irrDemand],  # In</span>
-<span class="sd">                [self.var.sumirrConsumption, self.var.returnflowIrr,self.var.addtoevapotrans],  # Out</span>
-<span class="sd">                [globals.inZero],</span>
-<span class="sd">                [globals.inZero],</span>
-<span class="sd">                &quot;Waterdemand2&quot;, False)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_capRiseFromGW</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_perc3toGW</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_prefFlow</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalET</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">],</span>
+                <span class="s2">&quot;Soil_all1&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 
 
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheckSum(</span>
-<span class="sd">                [self.var.Precipitation, self.var.act_irrDemand],</span>
-<span class="sd">                [self.var.sum_directRunoff, self.var.sum_interflow, self.var.nonFossilGroundwaterAbs,self.var.baseflow,</span>
-<span class="sd">                 self.var.sum_actTransTotal, self.var.sum_actBareSoilEvap, self.var.sum_openWaterEvap, self.var.sum_interceptEvap, self.var.snowEvap,</span>
-<span class="sd">                 self.var.returnflowIrr, self.var.addtoevapotrans],  # Out</span>
-<span class="sd">                [self.var.pretotalSto,self.var.prestorGroundwater],  # prev storage</span>
-<span class="sd">                [self.var.totalSto,self.var.storGroundwater],</span>
-<span class="sd">                &quot;Soil+G+WD&quot;, False)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_capRiseFromGW</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_perc3toGW</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_prefFlow</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">],</span>
+                <span class="s2">&quot;Soil_all2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                [self.var.Precipitation, self.var.act_irrDemand],</span>
-<span class="sd">                [self.var.totalET, self.var.runoff, self.var.nonFossilGroundwaterAbs, self.var.returnflowIrr],  # Out</span>
-<span class="sd">                [self.var.pretotalSto,self.var.prestorGroundwater],  # prev storage</span>
-<span class="sd">                [self.var.totalSto,self.var.storGroundwater],</span>
-<span class="sd">                &quot;Soil+G+WD2&quot;, False)</span>
-
-<span class="sd">            nonIrrReturn = self.var.nonIrrReturnFlowFraction * self.var.act_nonIrrDemand</span>
-<span class="sd">            nonIrruse = self.var.act_nonIrrDemand - nonIrrReturn</span>
-
-<span class="sd">            if checkOption(&#39;includeWaterBodies&#39;):</span>
-<span class="sd">                self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                    [self.var.Precipitation, self.var.unmetDemand, self.var.act_SurfaceWaterAbstract],</span>
-<span class="sd">                    [self.var.totalET, self.var.runoff, self.var.returnflowIrr, self.var.act_nonIrrDemand,  self.var.smallrunoffDiff ],  # Out</span>
-<span class="sd">                    [self.var.pretotalSto,self.var.prestorGroundwater],  # prev storage</span>
-<span class="sd">                    [self.var.totalSto,self.var.storGroundwater],</span>
-<span class="sd">                    &quot;Soil+G+WD31&quot;, False)</span>
-
-<span class="sd">                self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                    [self.var.Precipitation, self.var.unmetDemand, self.var.act_SurfaceWaterAbstract],</span>
-<span class="sd">                    [self.var.totalET, self.var.runoff, self.var.returnFlow, nonIrruse, self.var.smallrunoffDiff],  # Out</span>
-<span class="sd">                    [self.var.pretotalSto,self.var.prestorGroundwater],  # prev storage</span>
-<span class="sd">                    [self.var.totalSto,self.var.storGroundwater ],</span>
-<span class="sd">                    &quot;Soil+G+WD32&quot;, False)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonFossilGroundwaterAbs</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prestorGroundwater</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span><span class="p">],</span>
+                <span class="s2">&quot;Soil+G&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 
-<span class="sd">                if checkOption(&#39;calcWaterBalance&#39;):</span>
-<span class="sd">                    self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                        [self.var.lakeResInflowM],  # In</span>
-<span class="sd">                        [self.var.lakeResOutflowM, self.var.EvapWaterBodyM],  # Out  self.var.evapWaterBodyC</span>
-<span class="sd">                        [self.var.prelakeResStorage / self.var.cellArea],  # prev storage</span>
-<span class="sd">                        [self.var.lakeResStorage / self.var.cellArea],</span>
-<span class="sd">                        &quot;LR1&quot;, False)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">unmetDemand</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonFossilGroundwaterAbs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span><span class="p">],</span> <span class="c1"># In</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_nonIrrWithdrawal</span><span class="p">],</span>     <span class="c1"># Out</span>
+                <span class="p">[</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">],</span>
+                <span class="p">[</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">],</span>
+                <span class="s2">&quot;Waterdemand1&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-<span class="sd">                if checkOption(&#39;calcWaterBalance&#39;) and returnBool(&#39;useSmallLakes&#39;):</span>
-<span class="sd">                    self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                        [self.var.smallLakeIn],  # In</span>
-<span class="sd">                        [self.var.smallLakeout,  self.var.smallevapWaterBody],  # Out</span>
-<span class="sd">                        [self.var.preSmalllakeStorage / self.var.cellArea],  # prev storage</span>
-<span class="sd">                        [self.var.smalllakeStorage / self.var.cellArea],</span>
-<span class="sd">                        &quot;LR2&quot;, False)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span><span class="p">],</span>  <span class="c1"># In</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnflowIrr</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">addtoevapotrans</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">],</span>
+                <span class="p">[</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">],</span>
+                <span class="s2">&quot;Waterdemand2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheckSum</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonFossilGroundwaterAbs</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnflowIrr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">addtoevapotrans</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prestorGroundwater</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span><span class="p">],</span>
+                <span class="s2">&quot;Soil+G+WD&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-<span class="sd">                self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                    [self.var.Precipitation, self.var.unmetDemand, self.var.act_SurfaceWaterAbstract],</span>
-<span class="sd">                    [self.var.totalET, self.var.runoff, self.var.returnFlow, nonIrruse, self.var.lakeResOutflowM - self.var.lakeResInflowM, self.var.EvapWaterBodyM,</span>
-<span class="sd">                     self.var.smallrunoffDiff],  # Out</span>
-<span class="sd">                    [self.var.pretotalSto,self.var.prestorGroundwater, self.var.prelakeResStorage/ self.var.cellArea, ],  # prev storage</span>
-<span class="sd">                    [self.var.totalSto,self.var.storGroundwater, self.var.lakeResStorage/ self.var.cellArea],</span>
-<span class="sd">                    &quot;Soil+G+WD+LR&quot;, False)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">addtoevapotrans</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonFossilGroundwaterAbs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnflowIrr</span><span class="p">,</span> <span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prestorGroundwater</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span><span class="p">],</span>
+                <span class="s2">&quot;Soil+G+WD&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-<span class="sd">                if checkOption(&#39;calcWaterBalance&#39;) and returnBool(&#39;useSmallLakes&#39;):</span>
-<span class="sd">                    self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                        [self.var.Precipitation, self.var.unmetDemand, self.var.act_SurfaceWaterAbstract],</span>
-<span class="sd">                        [self.var.totalET, self.var.runoff, self.var.returnFlow, nonIrruse, self.var.lakeResOutflowM - self.var.lakeResInflowM ,</span>
-<span class="sd">                         self.var.smallLakeout - self.var.smallLakeIn, self.var.EvapWaterBodyM,  self.var.smallevapWaterBody, self.var.smallrunoffDiff],  # Out</span>
-<span class="sd">                        [self.var.pretotalSto,self.var.prestorGroundwater, self.var.prelakeResStorage/ self.var.cellArea, self.var.preSmalllakeStorage / self.var.cellArea],  # prev storage</span>
-<span class="sd">                        [self.var.totalSto,self.var.storGroundwater, self.var.lakeResStorage/ self.var.cellArea, self.var.smalllakeStorage / self.var.cellArea ],</span>
-<span class="sd">                        &quot;Soil+G+WD+LR2&quot;, False)</span>
+            <span class="n">nonIrrReturn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrReturnFlowFraction</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span>
+            <span class="n">nonIrruse</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span> <span class="o">-</span> <span class="n">nonIrrReturn</span>
 
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
 
-<span class="sd">                if checkOption(&#39;calcWaterBalance&#39;) and returnBool(&#39;useSmallLakes&#39;):</span>
-<span class="sd">                    self.var.waterbalance_module.waterBalanceCheck(</span>
-<span class="sd">                        [self.var.Precipitation, self.var.unmetDemand, self.var.act_SurfaceWaterAbstract],</span>
-<span class="sd">                        [self.var.totalET, self.var.runoff, self.var.returnFlow, nonIrruse,self.var.lakeResOutflowM - self.var.lakeResInflowM ,</span>
-<span class="sd">                         self.var.EvapWaterBodyM,  self.var.smallevapWaterBody,  self.var.smallLakeDiff],  # Out</span>
-<span class="sd">                        [self.var.pretotalSto,self.var.prestorGroundwater, self.var.prelakeResStorage/ self.var.cellArea, self.var.preSmalllakeStorage / self.var.cellArea],  # prev storage</span>
-<span class="sd">                        [self.var.totalSto,self.var.storGroundwater, self.var.lakeResStorage/ self.var.cellArea, self.var.smalllakeStorage / self.var.cellArea ],</span>
-<span class="sd">                        &quot;Soil+G+WD+LR22&quot;, False)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeResInflowM</span><span class="p">],</span>  <span class="c1"># In</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeResOutflowM</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EvapWaterBodyM</span><span class="p">],</span>  <span class="c1"># Out  self.var.evapWaterBodyC</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prelakeResStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeResStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                        <span class="s2">&quot;LR1&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
-<span class="sd">#### IMPORTANT set Routingstep to 1 to test!</span>
-
-<span class="sd">            DisOut = self.var.discharge * self.var.DtSec / self.var.cellArea</span>
-<span class="sd">            DisOut = np.where(self.var.lddCompress == 5, DisOut, 0.)</span>
-
-
-
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheckSum(</span>
-<span class="sd">                [self.var.runoff, self.var.returnFlow],  # In</span>
-<span class="sd">                [self.var.sumsideflow / self.var.cellArea, self.var.EvapoChannel / self.var.cellArea, self.var.act_SurfaceWaterAbstract, ],  # Out</span>
-<span class="sd">                [],  # prev storage</span>
-<span class="sd">                [],</span>
-<span class="sd">                &quot;rout1&quot;, False)</span>
-
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheckSum(</span>
-<span class="sd">                [self.var.runoff, self.var.returnFlow],  # In</span>
-<span class="sd">                [DisOut, self.var.EvapoChannel / self.var.cellArea, self.var.act_SurfaceWaterAbstract],  # Out</span>
-<span class="sd">                [self.var.prechannelStorage / self.var.cellArea],  # prev storage</span>
-<span class="sd">                [self.var.channelStorage / self.var.cellArea],</span>
-<span class="sd">                &quot;rout4&quot;, False)</span>
-
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheckSum(</span>
-<span class="sd">                [self.var.Precipitation, self.var.unmetDemand],</span>
-<span class="sd">                [self.var.totalET, self.var.EvapoChannel / self.var.cellArea, nonIrruse, DisOut ],  # Out</span>
-<span class="sd">                [self.var.pretotalSto,self.var.prestorGroundwater, self.var.prechannelStorage / self.var.cellArea],  # prev storage</span>
-<span class="sd">                [self.var.totalSto,self.var.storGroundwater, self.var.channelStorage / self.var.cellArea ],</span>
-<span class="sd">                &quot;Soil+G+WD+R&quot;, False)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeReservoirStorage</span><span class="p">],</span>  <span class="c1"># In</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lakeStorage</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resStorage</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span><span class="p">],</span>  <span class="c1"># Out  self.var.evapWaterBodyC</span>
+                        <span class="p">[],</span>  <span class="c1"># prev storage</span>
+                        <span class="p">[],</span>
+                        <span class="s2">&quot;LR1a&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
 
+                <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;useSmallLakes&#39;</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeIn</span><span class="p">],</span>  <span class="c1"># In</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakeout</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span><span class="p">],</span>  <span class="c1"># Out</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                        <span class="s2">&quot;LR2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-<span class="sd">            #print self.var.channelStorageBefore[10],</span>
-<span class="sd">            # print &quot;%10.8f %10.8f %10.8f &quot; % (income[10], out[10], store[10]),</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+                <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;useSmallLakes&#39;</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallLakedaycorrect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">unmetDemand</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span> <span class="p">],</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalET</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smallevapWaterBody</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_nonIrrConsumption</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnFlow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">unmet_lost</span> <span class="p">],</span>  <span class="c1"># Out</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prestorGroundwater</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prergridcell</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">preSmalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gridcell_storage</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">smalllakeStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                        <span class="s2">&quot;Soil+G+WD+LR3&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># without waterdemand</span>
 
+            <span class="c1">#### IMPORTANT set Routingstep to 1 to test!</span>
+
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
+                <span class="n">DisOut</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">discharge</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">DtSec</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span>
+                <span class="n">DisOut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">lddCompress</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span> <span class="n">DisOut</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheckSum</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnFlow</span><span class="p">],</span>  <span class="c1"># In</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sumsideflow</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EvapoChannel</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span><span class="p">,</span> <span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[],</span>
+                <span class="s2">&quot;rout11&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheckSum</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span><span class="p">],</span>  <span class="c1"># In</span>
+                <span class="p">[</span><span class="n">DisOut</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EvapoChannel</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prechannelStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                <span class="s2">&quot;rout2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheckSum</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">runoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnFlow</span><span class="p">],</span>  <span class="c1"># In</span>
+                <span class="p">[</span><span class="n">DisOut</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">EvapoChannel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prechannelStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>  <span class="c1"># prev storage</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">channelStorage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">],</span>
+                <span class="s2">&quot;rout4&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+            <span class="c1">#print self.var.channelStorageBefore[10],</span>
+            <span class="c1"># print &quot;%10.8f %10.8f %10.8f &quot; % (income[10], out[10], store[10]),</span>
 
         <span class="c1"># +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span>
 
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;sumWaterBalance&#39;</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheckSum(</span>
-<span class="sd">                [self.var.nonFossilGroundwaterAbs, self.var.unmetDemand, self.var.act_SurfaceWaterAbstract],  # In</span>
-<span class="sd">                [self.var.waterWithdrawal],  # Out</span>
-<span class="sd">                [globals.inZero],</span>
-<span class="sd">                [globals.inZero],</span>
-<span class="sd">                &quot;WaterdemandSum&quot;, False)</span>
 
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheckSum(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheckSum</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonFossilGroundwaterAbs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">unmetDemand</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_SurfaceWaterAbstract</span><span class="p">],</span>  <span class="c1"># In</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_totalWaterWithdrawal</span><span class="p">],</span>  <span class="c1"># Out</span>
+                <span class="p">[</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">],</span>
+                <span class="p">[</span><span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="p">],</span>
+                <span class="s2">&quot;WaterdemandSum&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            self.model.waterbalance_module.waterBalanceCheckSum(</span>
 <span class="sd">                [self.var.Precipitation, self.var.surfaceWaterInf,self.var.sumIrrDemand,self.var.nonIrrReturnFlow],    # In</span>
 <span class="sd">                [self.var.totalET,   self.var.localQW, self.var.riverbedExchange * self.var.InvCellArea, self.var.nonFossilGroundwaterAbs, self.var.act_SurfaceWaterAbstract],</span>
 <span class="sd">                [self.var.pretotalSto,self.var.prestorGroundwater,self.var.prechannelStorage * self.var.InvCellArea],       # prev storage</span>
 <span class="sd">                [self.var.totalSto,self.var.storGroundwater,self.var.channelStorageBefore * self.var.InvCellArea],</span>
 <span class="sd">                &quot;S+G+Rout1Sum&quot;, False)</span>
-<span class="sd">            &quot;&quot;&quot;</span>
 
-            <span class="c1"># discharge at outlets of catchments</span>
-            <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            DisOut = self.var.discharge * self.var.DtSec</span>
-<span class="sd">            DisOut = np.where(self.var.outlets &gt; 0, DisOut, 0.)</span>
-
-<span class="sd">            self.var.waterbalance_module.waterBalanceCheckSum(</span>
-<span class="sd">                [self.var.Precipitation * self.var.cellArea, self.var.surfaceWaterInf * self.var.cellArea, self.var.sum_irrDemand * self.var.cellArea,self.var.nonIrrReturnFlow * self.var.cellArea],    # In</span>
-<span class="sd">                [self.var.totalET  * self.var.cellArea,   self.var.localQW  * self.var.cellArea, self.var.riverbedExchange, self.var.nonFossilGroundwaterAbs * self.var.cellArea, self.var.sum_act_SurfaceWaterAbstract * self.var.cellArea, DisOut],</span>
-<span class="sd">                [self.var.prevSnowCover * self.var.cellArea, self.var.pretotalSoil * self.var.cellArea,self.var.prestorGroundwater * self.var.cellArea,self.var.prechannelStorage],       # prev storage</span>
-<span class="sd">                [self.var.SnowCover * self.var.cellArea, self.var.totalSoil * self.var.cellArea,self.var.storGroundwater * self.var.cellArea,self.var.channelStorage],</span>
-<span class="sd">                &quot;S+G+Rout2Sum&quot;, False)</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        if checkOption(&#39;budyko&#39;):</span>
-
-
 <span class="sd">            # in mm</span>
 <span class="sd">            self.var.sumETRef =[]</span>
 <span class="sd">            self.var.sumP = []</span>
@@ -459,7 +478,6 @@
 <span class="sd">            #self.var.sumDelta1 = 1000 * npareatotal((self.var.SnowCover + self.var.totalSoil + self.var.storGroundwater) * self.var.cellArea , self.var.catchment)/self.var.area</span>
 <span class="sd">            #self.var.sumDelta2 = 1000 * npareatotal((self.var.prevSnowCover + self.var.pretotalSoil + self.var.prestorGroundwater) * self.var.cellArea , self.var.catchment)/self.var.area</span>
 <span class="sd">            #self.var.sumAll = self.var.sumDelta1- self.var.sumDelta2</span>
-
 
 <span class="sd">            #report(decompress(self.var.sumRunoff), &quot;C:\work\output3/sumRun.map&quot;)</span>
 
@@ -501,16 +519,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html">13. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">14. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
         </div>

@@ -65,15 +65,15 @@
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    Tavg                  average air Temperature (input for the model)                                     K        </span>
 <span class="sd">    load_initial                                                                                                     </span>
-<span class="sd">    waterbalance_module                                                                                              </span>
+<span class="sd">    DtDay                 seconds in a timestep (default=86400)                                             s        </span>
+<span class="sd">    Tavg                  average air Temperature (input for the model)                                     K        </span>
+<span class="sd">    Precipitation         Precipitation (input for the model)                                               m        </span>
 <span class="sd">    Rain                  Precipitation less snow                                                           m        </span>
 <span class="sd">    SnowMelt              total snow melt from all layers                                                   m        </span>
 <span class="sd">    SnowCover             snow cover (sum over all layers)                                                  m        </span>
 <span class="sd">    ElevationStD                                                                                                     </span>
-<span class="sd">    Precipitation         Precipitation (input for the model)                                               m        </span>
-<span class="sd">    DtDay                 seconds in a timestep (default=86400)                                             s        </span>
+<span class="sd">    prevSnowCover         snow cover of previous day (only for water balance)                               m        </span>
 <span class="sd">    numberSnowLayersFloa                                                                                             </span>
 <span class="sd">    numberSnowLayers      Number of snow layers (up to 10)                                                  --       </span>
 <span class="sd">    glaciertransportZone  Number of layers which can be mimiced as glacier transport zone                   --       </span>
@@ -99,7 +99,6 @@
 <span class="sd">    frostInd1             forstindex 1                                                                               </span>
 <span class="sd">    frostInd2             frostindex 2                                                                               </span>
 <span class="sd">    frostindexS           array for frostindex                                                                       </span>
-<span class="sd">    prevSnowCover         snow cover of previous day (only for water balance)                               m        </span>
 <span class="sd">    Snow                  Snow (equal to a part of Precipitation)                                           m        </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 
@@ -309,7 +308,7 @@
 
         <span class="c1"># DEBUG Snow</span>
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Snow</span><span class="p">],</span>  <span class="c1"># In</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowMelt</span><span class="p">],</span>  <span class="c1"># Out</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prevSnowCover</span><span class="p">],</span>   <span class="c1"># prev storage</span>
@@ -366,16 +365,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html">13. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">14. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
         </div>

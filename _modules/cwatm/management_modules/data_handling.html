@@ -84,7 +84,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">coord</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">xy</span><span class="p">))</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Gauges: &quot;</span> <span class="o">+</span> <span class="n">xy</span> <span class="o">+</span> <span class="s2">&quot; in &quot;</span> <span class="o">+</span> <span class="n">coordstr</span> <span class="o">+</span> <span class="s2">&quot; is not a coordinate&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 101: Gauges in settings file: &quot;</span> <span class="o">+</span> <span class="n">xy</span> <span class="o">+</span> <span class="s2">&quot; in &quot;</span> <span class="o">+</span> <span class="n">coordstr</span> <span class="o">+</span> <span class="s2">&quot; is not a coordinate&quot;</span>
             <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
 
@@ -114,7 +114,7 @@
 
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%2s</span><span class="s2"> </span><span class="si">%-17s</span><span class="s2"> </span><span class="si">%10s</span><span class="s2"> </span><span class="si">%8s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;time[s]&quot;</span><span class="p">,</span> <span class="s2">&quot;%&quot;</span><span class="p">))</span>
 
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Coordinates: x = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;  y = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 102: Coordinates: x = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;  y = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
                 <span class="n">coord</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; of gauge is outside mask map</span><span class="se">\n\n</span><span class="s2">&quot;</span>
             <span class="n">msg</span> <span class="o">+=</span> <span class="n">box</span>
             <span class="n">msg</span> <span class="o">+=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Please have a look at </span><span class="se">\&quot;</span><span class="s2">MaskMap</span><span class="se">\&quot;</span><span class="s2"> or </span><span class="se">\&quot;</span><span class="s2">Gauges</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
@@ -200,8 +200,7 @@
             <span class="n">y1</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">ylast</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="c1"># swap to make y1 the biggest number</span>
-            <span class="k">if</span> <span class="n">y1</span> <span class="o">&lt;</span> <span class="n">ylast</span><span class="p">:</span>
-                <span class="n">y1</span><span class="p">,</span> <span class="n">ylast</span> <span class="o">=</span> <span class="n">ylast</span><span class="p">,</span> <span class="n">y1</span>
+            <span class="k">if</span> <span class="n">y1</span> <span class="o">&lt;</span> <span class="n">ylast</span><span class="p">:</span>  <span class="n">y1</span><span class="p">,</span> <span class="n">ylast</span> <span class="o">=</span> <span class="n">ylast</span><span class="p">,</span> <span class="n">y1</span>
 
             <span class="n">cellSize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span>
             <span class="n">invcell</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">cellSize</span><span class="p">)</span>
@@ -238,7 +237,7 @@
                 <span class="n">flagmap</span> <span class="o">=</span> <span class="kc">True</span>
 
             <span class="k">except</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 201: File reading Error</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
 
 
@@ -247,7 +246,7 @@
 
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Maskmap: &quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot; is not a valid mask map nor valid coordinates nor valid point</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 103: Maskmap: &quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot; is not a valid mask map nor valid coordinates nor valid point</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">msg</span> <span class="o">+=</span><span class="s2">&quot;Or there is a whitespace or undefined character in Maskmap&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
@@ -293,7 +292,7 @@
     <span class="k">if</span> <span class="s2">&quot;coverresult&quot;</span> <span class="ow">in</span> <span class="n">binding</span><span class="p">:</span>
         <span class="n">coverresult</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">returnBool</span><span class="p">(</span><span class="s1">&#39;coverresult&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">coverresult</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="n">cover</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;covermap&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">cover</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;covermap&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cut</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
             <span class="n">cover</span><span class="p">[</span><span class="n">cover</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">cover</span><span class="p">[</span><span class="n">cover</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">coverresult</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cover</span>
@@ -312,7 +311,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">xleft</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;MaskMap point does not have a valid value in the river network (LDD)&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 104: MaskMap point does not have a valid value in the river network (LDD)&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="n">x</span> <span class="o">=</span> <span class="n">xleft</span> <span class="o">*</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
@@ -378,6 +377,10 @@
             <span class="c1">#nf1 = Dataset(filename, &#39;r&#39;)</span>
             <span class="n">value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
 
+            <span class="k">if</span> <span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 202: Latitude is in wrong order</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
             <span class="k">if</span> <span class="ow">not</span> <span class="n">timestepInit</span><span class="p">:</span>
                 <span class="c1">#with np.errstate(invalid=&#39;ignore&#39;):</span>
                 <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
@@ -395,7 +398,7 @@
                     <span class="k">else</span><span class="p">:</span> <span class="n">timestepI</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestepI</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span>
 
                     <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">timestepI</span> <span class="ow">in</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][:]):</span>
-                        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;time step &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timestepI</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; not stored in &quot;</span><span class="o">+</span> <span class="n">filename</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 105 time step &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timestepI</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; not stored in &quot;</span><span class="o">+</span> <span class="n">filename</span>
                         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
                     <span class="n">itime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][:]</span> <span class="o">==</span> <span class="n">timestepI</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
                     <span class="k">if</span> <span class="n">cut</span><span class="p">:</span>
@@ -423,7 +426,8 @@
                         <span class="n">cut0</span><span class="p">,</span> <span class="n">cut1</span><span class="p">,</span> <span class="n">cut2</span><span class="p">,</span> <span class="n">cut3</span> <span class="o">=</span> <span class="n">mapattrTiff</span><span class="p">(</span><span class="n">nf2</span><span class="p">)</span>
                         <span class="n">mapnp</span> <span class="o">=</span> <span class="n">mapnp</span><span class="p">[</span><span class="n">cut2</span><span class="p">:</span><span class="n">cut3</span><span class="p">,</span> <span class="n">cut0</span><span class="p">:</span><span class="n">cut1</span><span class="p">]</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">sname</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 203: File does not exists&quot;</span>
+                <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="n">sname</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">maskinfo</span><span class="p">)</span> <span class="ow">and</span> <span class="n">compress</span><span class="p">:</span> <span class="n">mapnp</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span>
@@ -457,14 +461,16 @@
 <span class="sd">    :param zeros: add zeros (default= 0) if values of map are to big or too small</span>
 <span class="sd">    :return: Compressed 1D array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    <span class="k">if</span> <span class="nb">map</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 105: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; has less a different shape than area or ldd </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="n">mapnp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">])</span>
     <span class="n">mapC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">compressed</span><span class="p">(</span><span class="n">mapnp1</span><span class="p">)</span>
     <span class="c1"># if fill: mapC[np.isnan(mapC)]=0</span>
     <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mapC</span><span class="p">)):</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; has less valid pixels than area or ldd </span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 106:&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; has less valid pixels than area or ldd </span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="c1"># test if map has less valid pixel than area.map (or ldd)</span>
     <span class="c1"># if a value is bigger or smaller than 1e20, -1e20 than the standard value is taken</span>
@@ -537,7 +543,7 @@
            <span class="n">metadataNCDF</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="vm">__dict__</span>
         <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Trying to get metadata from netcdf </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 204: Trying to get metadata from netcdf</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">),</span><span class="n">msg</span><span class="p">)</span></div>
 
 
@@ -558,9 +564,11 @@
     <span class="k">except</span><span class="p">:</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">nc</span><span class="p">:</span>
-        <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcell</span> <span class="o">=</span> <span class="n">readCoordNetCDF</span><span class="p">(</span><span class="n">namenc</span><span class="p">)</span>
+        <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcell</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">readCoordNetCDF</span><span class="p">(</span><span class="n">namenc</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">raster</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">RasterYSize</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">RasterXSize</span>
         <span class="n">gt</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">GetGeoTransform</span><span class="p">()</span>
 
         <span class="n">cell</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -574,29 +582,7 @@
         <span class="n">lat</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
 
 
-    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span><span class="n">invcell</span></div>
-
-
-<div class="viewcode-block" id="readCoordNetCDF2"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.readCoordNetCDF2">[docs]</a><span class="k">def</span> <span class="nf">readCoordNetCDF2</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">check</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-
-
-    <span class="k">if</span> <span class="n">check</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking netcdf map </span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># if subroutine is called already from inside a try command</span>
-        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-
-    <span class="n">lons</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][:]</span>
-    <span class="n">lats</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][:]</span>
-    <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">lats</span><span class="p">,</span> <span class="n">lons</span></div>
-
-
-
+    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcell</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span></div>
 
 <div class="viewcode-block" id="readCoordNetCDF"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.readCoordNetCDF">[docs]</a><span class="k">def</span> <span class="nf">readCoordNetCDF</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">check</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -613,11 +599,14 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking netcdf map </span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 205: Checking netcdf map </span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># if subroutine is called already from inside a try command</span>
         <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="n">lon0</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">lon1</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
@@ -633,7 +622,7 @@
     <span class="n">lon</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">lon0</span> <span class="o">-</span> <span class="n">cell</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
     <span class="n">lat</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">lat0</span> <span class="o">+</span> <span class="n">cell</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span><span class="n">invcell</span></div>
+    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span><span class="n">invcell</span><span class="p">,</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span></div>
 
 <div class="viewcode-block" id="readCalendar"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.readCalendar">[docs]</a><span class="k">def</span> <span class="nf">readCalendar</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
@@ -655,7 +644,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">meteodata</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking netcdf map </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 206: Checking netcdf map </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">meteodata</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
 
     <span class="n">lonM0</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -678,7 +667,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">wordclimdata</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking netcdf map </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 207: Checking netcdf map </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">wordclimdata</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
 
     <span class="n">lonW0</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -721,10 +710,10 @@
 <span class="sd">    :raises if cell size is different: :meth:`management_modules.messages.CWATMError`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcell</span> <span class="o">=</span> <span class="n">readCoord</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcell</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">readCoord</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;invcell&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">invcell</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Cell size different in maskmap: &quot;</span> <span class="o">+</span> \
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 107: Cell size different in maskmap: &quot;</span> <span class="o">+</span> \
             <span class="n">binding</span><span class="p">[</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; and: &quot;</span> <span class="o">+</span> <span class="n">name</span>
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
@@ -748,7 +737,7 @@
 <span class="sd">    :return: cut0,cut1,cut2,cut3,cut4,cut5,cut6,cut7</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcell</span> <span class="o">=</span> <span class="n">readCoordNetCDF</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
+    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcell</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">readCoordNetCDF</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
 
     <span class="c1"># x0,xend, y0,yend - borders of fine resolution map</span>
     <span class="n">lon0</span> <span class="o">=</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
@@ -819,11 +808,13 @@
 
     <span class="c1"># getgeotransform only delivers single precision!</span>
     <span class="n">cellSize</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">invcell</span>
-    <span class="n">x1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="nb">round</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">)),</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
-    <span class="n">y1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="nb">round</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">)),</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">y1</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">y1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;invcell&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">invcell</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Cell size different in maskmap: &quot;</span> <span class="o">+</span> \
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 108: Cell size different in maskmap: &quot;</span> <span class="o">+</span> \
             <span class="n">binding</span><span class="p">[</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">]</span>
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
@@ -855,7 +846,8 @@
         <span class="n">name</span> <span class="o">=</span> <span class="n">cbinding</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
         <span class="n">nameall</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">nameall</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="n">maps</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span><span class="s2">&quot;Error 208: File missing </span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="n">maps</span><span class="p">)</span>
         <span class="n">nameall</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="n">meteolist</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">startfile</span> <span class="o">=</span> <span class="mi">0</span>
@@ -864,7 +856,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf map stacks:&quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 209: Netcdf map stacks: &quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="n">maps</span><span class="p">)</span>
             <span class="n">nctime</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
 
@@ -956,13 +948,13 @@
             <span class="n">filename</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">meteoInfo</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">date1</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%02d</span><span class="s2">/</span><span class="si">%02d</span><span class="s2">/</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf map error for: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; -&gt; &quot;</span> <span class="o">+</span> <span class="n">cbinding</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; on: &quot;</span> <span class="o">+</span> <span class="n">date1</span> <span class="o">+</span> <span class="s2">&quot;: </span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 210: Netcdf map error for: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; -&gt; &quot;</span> <span class="o">+</span> <span class="n">cbinding</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; on: &quot;</span> <span class="o">+</span> <span class="n">date1</span> <span class="o">+</span> <span class="s2">&quot;: </span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf map stacks: </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 211: Netcdf map stacks: </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span> <span class="n">sname</span> <span class="o">=</span> <span class="n">name</span><span class="p">)</span>
 
     <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
@@ -979,11 +971,21 @@
     <span class="n">cutcheck</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">if</span> <span class="n">cutcheckmask</span> <span class="o">==</span> <span class="n">cutcheckmap</span><span class="p">:</span> <span class="n">cutcheck</span> <span class="o">=</span> <span class="kc">False</span>
 
+    <span class="c1">#checkif latitude is reversed</span>
+    <span class="n">turn_latitude</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">turn_latitude</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">mapnp</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">cutcheck</span><span class="p">:</span>
-        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">turn_latitude</span><span class="p">:</span>
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">mapnp</span><span class="p">[</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">turn_latitude</span><span class="p">):</span>
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">mapnp</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
         <span class="n">mapnp</span> <span class="o">=</span> <span class="n">mapnp</span><span class="o">.</span><span class="n">data</span>
@@ -999,7 +1001,7 @@
 
     <span class="k">if</span> <span class="n">mapsscale</span><span class="p">:</span>  <span class="c1"># if meteo maps have the same extend as the other spatial static maps -&gt; meteomapsscale = True</span>
         <span class="k">if</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shapeflat&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span> <span class="n">mapnp</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; has less or more valid pixels than the mask map </span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 109: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; has less or more valid pixels than the mask map </span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;if it is the ET maps, it might be from another run with different mask. Please look at the option: calc_evaporation&quot;</span>
             <span class="k">raise</span> <span class="n">CWATMWarning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
@@ -1059,7 +1061,7 @@
     <span class="k">try</span><span class="p">:</span>
        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf map stacks: </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 212: Netcdf map stacks: </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span> <span class="n">sname</span> <span class="o">=</span> <span class="n">namebinding</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
@@ -1102,11 +1104,24 @@
             <span class="k">if</span> <span class="n">meteo</span><span class="p">:</span> <span class="n">inputcounter</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span>
 
 
-    <span class="c1">#mapnp = nf1.variables[value][idx, cutmap[2]:cutmap[3], cutmap[0]:cutmap[1]].astype(np.float64)</span>
+    <span class="c1">#checkif latitude is reversed</span>
+    <span class="n">turn_latitude</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+           <span class="n">turn_latitude</span> <span class="o">=</span> <span class="kc">True</span>
+           <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+           <span class="n">mapnp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">mapnp</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+       <span class="n">ii</span> <span class="o">=</span> <span class="mi">1</span>
+
     <span class="k">if</span> <span class="n">cut</span><span class="p">:</span>
-        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">turn_latitude</span><span class="p">:</span>
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">mapnp</span><span class="p">[</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">turn_latitude</span><span class="p">):</span>
+            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">mapnp</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
         <span class="n">mapnp</span> <span class="o">=</span> <span class="n">mapnp</span><span class="o">.</span><span class="n">data</span>
@@ -1120,8 +1135,7 @@
         <span class="k">return</span> <span class="n">mapnp</span>
 
     <span class="k">if</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shapeflat&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span> <span class="n">mapnp</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; has less or more valid pixels than the mask map </span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;if it is the ET maps, it might be from another run with different mask. Please look at the option: calc_evaporation&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 110: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; has less or more valid pixels than the mask map </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMWarning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
@@ -1144,10 +1158,14 @@
     <span class="k">try</span><span class="p">:</span>
        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf map stacks: </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 213: Netcdf map stacks: </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 111: Latitude is in wrong order</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
 
     <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -1176,11 +1194,15 @@
     <span class="k">try</span><span class="p">:</span>
        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Netcdf Initial file: </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 214: Netcdf Initial file: </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1">#mapnp = nf1.variables[value][cutmap[2]:cutmap[3], cutmap[0]:cutmap[1]]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 112: Latitude is in wrong order</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
             <span class="n">mapnp</span> <span class="o">=</span> <span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][:]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
             <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">mapC</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">mapnp</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
@@ -1188,28 +1210,23 @@
                 <span class="n">checkmap</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mapnp</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">mapC</span><span class="p">)</span>
             <span class="n">a</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span>
             <span class="k">if</span> <span class="n">mapC</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 113: map shape is different than mask shape</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">mapC</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="c1">#nf1.close()</span>
-            <span class="n">msg</span> <span class="o">=</span><span class="s2">&quot;===== Problem reading initial data ====== </span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span><span class="s2">&quot;Error 114: ===== Problem reading initial data ====== </span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Initial value: &quot;</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s2">&quot; is has not the same shape as the mask map</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Maybe put</span><span class="se">\&quot;</span><span class="s2">load_initial = False</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
     <span class="k">else</span><span class="p">:</span>
         <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Initial value: &quot;</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s2">&quot; is not included in: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; - using default: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Warning: Initial value: &quot;</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s2">&quot; is not included in: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; - using default: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">CWATMWarning</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">default</span></div>
 
-
-
-
-
-
 <span class="c1"># --------------------------------------------------------------------------------------------</span>
-
 
 <div class="viewcode-block" id="writenetcdf"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.writenetcdf">[docs]</a><span class="k">def</span> <span class="nf">writenetcdf</span><span class="p">(</span><span class="n">netfile</span><span class="p">,</span><span class="n">prename</span><span class="p">,</span><span class="n">addname</span><span class="p">,</span><span class="n">varunits</span><span class="p">,</span><span class="n">inputmap</span><span class="p">,</span> <span class="n">timeStamp</span><span class="p">,</span> <span class="n">posCnt</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span><span class="n">flagTime</span><span class="p">,</span> <span class="n">nrdays</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dateunit</span><span class="o">=</span><span class="s2">&quot;days&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1546,7 +1563,7 @@
 <span class="c1"># --------------------------------------------------------------------------------------------</span>
 <span class="c1"># report .tif and .maps</span>
 
-<div class="viewcode-block" id="report"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.report">[docs]</a><span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">valueIn</span><span class="p">,</span><span class="n">compr</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="report"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.report">[docs]</a><span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">valueIn</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">compr</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    For debugging: Save the 2D array as .map or .tif</span>
 
@@ -1562,7 +1579,6 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-
     <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">pcmap</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">filename</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;.map&quot;</span><span class="p">:</span>   <span class="n">pcmap</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1571,6 +1587,7 @@
         <span class="n">value</span> <span class="o">=</span> <span class="n">decompress</span><span class="p">(</span><span class="n">valueIn</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">valueIn</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">data</span>
 
     <span class="n">checkint</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">char</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">typecodes</span><span class="p">[</span><span class="s1">&#39;AllInteger&#39;</span><span class="p">]</span>
     <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span>
@@ -1632,27 +1649,8 @@
     <span class="k">if</span> <span class="n">btrue</span> <span class="ow">or</span> <span class="n">bfalse</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">btrue</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Value in: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">inBinding</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> is not True or False! </span><span class="se">\n</span><span class="s2">but: &quot;</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 115: Value in: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">inBinding</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> is not True or False! </span><span class="se">\n</span><span class="s2">but: &quot;</span> <span class="o">+</span> <span class="n">b</span>
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="checkOptionOptinal"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.checkOptionOptinal">[docs]</a><span class="k">def</span> <span class="nf">checkOptionOptinal</span><span class="p">(</span><span class="n">inBinding</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Test if parameter is a boolean and return an error message if not, and the boolean if everything is ok</span>
-
-<span class="sd">    :param inBinding: parameter in settings file</span>
-<span class="sd">    :return: boolean of inBinding</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">b</span> <span class="o">=</span> <span class="n">cbinding</span><span class="p">(</span><span class="n">inBinding</span><span class="p">)</span>
-    <span class="n">btrue</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;yes&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span>
-    <span class="n">bfalse</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">btrue</span> <span class="ow">or</span> <span class="n">bfalse</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">btrue</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Value in: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">inBinding</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> is not True or False! </span><span class="se">\n</span><span class="s2">but: &quot;</span> <span class="o">+</span> <span class="n">b</span>
-        <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
-
 
 <div class="viewcode-block" id="checkOption"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.checkOption">[docs]</a><span class="k">def</span> <span class="nf">checkOption</span><span class="p">(</span><span class="n">inBinding</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1679,7 +1677,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">closest</span> <span class="o">=</span> <span class="s2">&quot;- no match -&quot;</span>
 
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No key with the name: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">inBinding</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> in the settings file: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">settingsfile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 116: No key with the name: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">inBinding</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> in the settings file: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">settingsfile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
         <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Closest key to the required one is: </span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span> <span class="n">closest</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
         <span class="n">msg</span> <span class="o">+=</span> <span class="n">lineclosest</span>
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
@@ -1711,7 +1709,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">closest</span> <span class="o">=</span> <span class="s2">&quot;- no match -&quot;</span>
 
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No key with the name: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">inBinding</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> in the settings file: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">settingsfile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 117: No key with the name: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">inBinding</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> in the settings file: </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">settingsfile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
         <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Closest key to the required one is: </span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">+</span> <span class="n">closest</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
         <span class="n">msg</span> <span class="o">+=</span> <span class="n">lineclosest</span>
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
@@ -1755,16 +1753,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html">13. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">14. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
         </div>

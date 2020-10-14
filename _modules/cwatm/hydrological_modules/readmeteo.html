@@ -62,6 +62,10 @@
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
+<span class="sd">    modflowsteady         True if modflow_steadystate = True in settings file                               --       </span>
+<span class="sd">    DtDay                 seconds in a timestep (default=86400)                                             s        </span>
+<span class="sd">    con_precipitation     conversion factor for precipitation                                               --       </span>
+<span class="sd">    con_e                 conversion factor for evaporation                                                 --       </span>
 <span class="sd">    TMin                  minimum air temperature                                                           K        </span>
 <span class="sd">    TMax                  maximum air temperature                                                           K        </span>
 <span class="sd">    Psurf                 Instantaneous surface pressure                                                    Pa       </span>
@@ -73,12 +77,8 @@
 <span class="sd">    ETRef                 potential evapotranspiration rate from reference crop                             m        </span>
 <span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
 <span class="sd">    Precipitation         Precipitation (input for the model)                                               m        </span>
-<span class="sd">    DtDay                 seconds in a timestep (default=86400)                                             s        </span>
-<span class="sd">    con_precipitation     conversion factor for precipitation                                               --       </span>
-<span class="sd">    con_e                 conversion factor for evaporation                                                 --       </span>
 <span class="sd">    meteomapsscale        if meteo maps have the same extend as the other spatial static maps -&gt; meteomaps  --       </span>
 <span class="sd">    meteodown             if meteo maps should be downscaled                                                --       </span>
-<span class="sd">    modflowsteady         True if modflow_steadystate = True in settings file                               --       </span>
 <span class="sd">    preMaps               choose between steady state precipitation maps for steady state modflow or norma  --       </span>
 <span class="sd">    tempMaps              choose between steady state temperature maps for steady state modflow or normal   --       </span>
 <span class="sd">    evaTMaps              choose between steady state ETP water maps for steady state modflow or normal ma  --       </span>
@@ -120,14 +120,15 @@
         <span class="n">name</span> <span class="o">=</span> <span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">)</span>
         <span class="n">nameall</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">nameall</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 215: In readmeteo, cannot find precipitation maps &quot;</span>
+            <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">sname</span><span class="o">=</span><span class="s1">&#39;PrecipitationMaps&#39;</span><span class="p">)</span>
         <span class="n">namemeteo</span> <span class="o">=</span> <span class="n">nameall</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">latmeteo</span><span class="p">,</span> <span class="n">lonmeteo</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcellmeteo</span> <span class="o">=</span> <span class="n">readCoordNetCDF</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">)</span>
+        <span class="n">latmeteo</span><span class="p">,</span> <span class="n">lonmeteo</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcellmeteo</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">readCoordNetCDF</span><span class="p">(</span><span class="n">namemeteo</span><span class="p">)</span>
 
         <span class="n">nameldd</span> <span class="o">=</span> <span class="n">cbinding</span><span class="p">(</span><span class="s1">&#39;Ldd&#39;</span><span class="p">)</span>
         <span class="c1">#nameldd = os.path.splitext(nameldd)[0] + &#39;.nc&#39;</span>
-        <span class="c1">#latldd, lonldd, cell, invcellldd = readCoordNetCDF(nameldd)</span>
-        <span class="n">latldd</span><span class="p">,</span> <span class="n">lonldd</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcellldd</span> <span class="o">=</span> <span class="n">readCoord</span><span class="p">(</span><span class="n">nameldd</span><span class="p">)</span>
+        <span class="c1">#latldd, lonldd, cell, invcellldd, row, cols = readCoordNetCDF(nameldd)</span>
+        <span class="n">latldd</span><span class="p">,</span> <span class="n">lonldd</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcellldd</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">readCoord</span><span class="p">(</span><span class="n">nameldd</span><span class="p">)</span>
         <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;reso_mask_meteo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">invcellldd</span> <span class="o">/</span> <span class="n">invcellmeteo</span><span class="p">)</span>
 
         <span class="c1"># if meteo maps have the same extend as the other spatial static maps -&gt; meteomapsscale = True</span>
@@ -234,7 +235,7 @@
 <span class="sd">        demAnomaly = demHigh - demLow</span>
 <span class="sd">        self.var.demHigh = compressArray(demHigh[cutmapVfine[2]:cutmapVfine[3], cutmapVfine[0]:cutmapVfine[1]],pcr = False)</span>
 <span class="sd">        self.var.demAnomaly = compressArray(demAnomaly[cutmapVfine[2]:cutmapVfine[3], cutmapVfine[0]:cutmapVfine[1]],pcr = False)</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        &quot;&quot;&quot;</span>
 
 
 
@@ -242,7 +243,7 @@
 <span class="c1"># --------------------------------------------------------------------------</span>
 <span class="c1"># --------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="readmeteo.downscaling1"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.readmeteo.readmeteo.downscaling1">[docs]</a>    <span class="k">def</span> <span class="nf">downscaling1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">input</span><span class="p">,</span> <span class="n">downscale</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="c1">#def downscaling1(self,input, downscale = 0):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Downscaling based on elevation correction for temperature and pressure</span>
 
@@ -251,32 +252,32 @@
 <span class="sd">        :return: input - downscaled input data</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        # if meteo maps have the same extend as the other spatial static maps -&gt; meteomapsscale = True</span>
+<span class="sd">        if not self.var.meteomapsscale:</span>
+<span class="sd">            down1 = np.kron(input, np.ones((6, 6)))</span>
+<span class="sd">            down2 = down1[cutmapVfine[2]:cutmapVfine[3], cutmapVfine[0]:cutmapVfine[1]].astype(np.float64)</span>
+<span class="sd">            down3 = compressArray(down2)</span>
+<span class="sd">            if downscale == 0:</span>
+<span class="sd">                input = down3</span>
 
-        <span class="c1"># if meteo maps have the same extend as the other spatial static maps -&gt; meteomapsscale = True</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteomapsscale</span><span class="p">:</span>
-            <span class="n">down1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
-            <span class="n">down2</span> <span class="o">=</span> <span class="n">down1</span><span class="p">[</span><span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmapVfine</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-            <span class="n">down3</span> <span class="o">=</span> <span class="n">compressArray</span><span class="p">(</span><span class="n">down2</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">downscale</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">input</span> <span class="o">=</span> <span class="n">down3</span>
-
-            <span class="k">if</span> <span class="n">downscale</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="c1"># temperature scaling 6 deg per 1000m difference in altitude</span>
-                <span class="c1"># see overview in Minder et al 2010 - http://onlinelibrary.wiley.com/doi/10.1029/2009JD013493/full</span>
-                <span class="n">tempdiff</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.006</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">demAnomaly</span>
-                <span class="nb">input</span> <span class="o">=</span> <span class="n">down3</span> <span class="o">+</span> <span class="n">tempdiff</span>
-            <span class="k">if</span> <span class="n">downscale</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="c1"># psurf correction</span>
-                <span class="c1"># https://www.sandhurstweather.org.uk/barometric.pdf</span>
-                <span class="c1"># factor = exp(-elevation / (Temp x 29.263)  Temp in deg K</span>
-                <span class="n">demLow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">demHigh</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">demAnomaly</span>
-                <span class="n">tavgK</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Tavg</span> <span class="o">+</span> <span class="mf">273.15</span>
-                <span class="n">factor1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">demLow</span> <span class="o">/</span> <span class="p">(</span><span class="n">tavgK</span> <span class="o">*</span> <span class="mf">29.263</span><span class="p">))</span>
-                <span class="n">factor2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">demHigh</span> <span class="o">/</span> <span class="p">(</span><span class="n">tavgK</span> <span class="o">*</span> <span class="mf">29.263</span><span class="p">))</span>
-                <span class="n">sealevelpressure</span> <span class="o">=</span> <span class="n">down3</span> <span class="o">/</span> <span class="n">factor1</span>
-                <span class="nb">input</span> <span class="o">=</span> <span class="n">sealevelpressure</span> <span class="o">*</span> <span class="n">factor2</span>
-        <span class="k">return</span> <span class="nb">input</span></div>
-
+<span class="sd">            if downscale == 1:</span>
+<span class="sd">                # temperature scaling 6 deg per 1000m difference in altitude</span>
+<span class="sd">                # see overview in Minder et al 2010 - http://onlinelibrary.wiley.com/doi/10.1029/2009JD013493/full</span>
+<span class="sd">                tempdiff = -0.006 * self.var.demAnomaly</span>
+<span class="sd">                input = down3 + tempdiff</span>
+<span class="sd">            if downscale == 2:</span>
+<span class="sd">                # psurf correction</span>
+<span class="sd">                # https://www.sandhurstweather.org.uk/barometric.pdf</span>
+<span class="sd">                # factor = exp(-elevation / (Temp x 29.263)  Temp in deg K</span>
+<span class="sd">                demLow = self.var.demHigh - self.var.demAnomaly</span>
+<span class="sd">                tavgK = self.var.Tavg + 273.15</span>
+<span class="sd">                factor1 = np.exp(-1 * demLow / (tavgK * 29.263))</span>
+<span class="sd">                factor2 = np.exp(-1 * self.var.demHigh / (tavgK * 29.263))</span>
+<span class="sd">                sealevelpressure = down3 / factor1</span>
+<span class="sd">                input = sealevelpressure * factor2</span>
+<span class="sd">        return input</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
 <div class="viewcode-block" id="readmeteo.downscaling2"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.readmeteo.readmeteo.downscaling2">[docs]</a>    <span class="k">def</span> <span class="nf">downscaling2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">input</span><span class="p">,</span> <span class="n">downscaleName</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">wc2</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">wc4</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">downscale</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -427,7 +428,8 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">downscaling2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMin</span><span class="p">,</span> <span class="s2">&quot;downscale_wordclim_tmin&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">wc2_tmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">wc4_tmin</span><span class="p">,</span> <span class="n">downscale</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span> <span class="n">checkmap</span><span class="p">(</span><span class="s1">&#39;TminMaps&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Tmin</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Tmin</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span>
+                <span class="n">checkmap</span><span class="p">(</span><span class="s1">&#39;TminMaps&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMin</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMin</span><span class="p">)</span>
 
             <span class="c1">#self.var.TMax = readnetcdf2(&#39;TmaxMaps&#39;, dateVar[&#39;currDate&#39;], addZeros = True, zeros = ZeroKelvin, meteo = True)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMax</span> <span class="o">=</span> <span class="n">readmeteodata</span><span class="p">(</span><span class="s1">&#39;TmaxMaps&#39;</span><span class="p">,</span> <span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;currDate&#39;</span><span class="p">],</span> <span class="n">addZeros</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">zeros</span><span class="o">=</span><span class="n">ZeroKelvin</span><span class="p">,</span> <span class="n">mapsscale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">meteomapsscale</span><span class="p">)</span>
@@ -436,7 +438,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">downscaling2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMax</span><span class="p">,</span> <span class="s2">&quot;downscale_wordclim_tmin&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">wc2_tmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">wc4_tmax</span><span class="p">,</span> <span class="n">downscale</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span> <span class="n">checkmap</span><span class="p">(</span><span class="s1">&#39;TmaxMaps&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Tmax</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Tmax</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Flags</span><span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]:</span> <span class="n">checkmap</span><span class="p">(</span><span class="s1">&#39;TmaxMaps&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMax</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">TMax</span><span class="p">)</span>
 
 
             <span class="c1">#self.var.Psurf = readnetcdf2(&#39;PSurfMaps&#39;, dateVar[&#39;currDate&#39;], addZeros = True, meteo = True)</span>
@@ -534,16 +536,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../results.html">6. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">7. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">8. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">9. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">10. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">11. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">12. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html">13. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">14. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">15. Forum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
         </div>
