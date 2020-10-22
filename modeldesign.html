@@ -134,8 +134,8 @@ Including snow- and glacier melt.</p>
 <h4>Water demand<a class="headerlink" href="#water-demand" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>including water demand from industry and domestic land use via precalculated monhly spatial maps</p></li>
-<li><p>including agricultural water use from calculation of plant water demand</p></li>
-<li><p>Return flows</p></li>
+<li><p>including agricultural water use from calculation of plant water demand and livestock water demand</p></li>
+<li><p>Return flows ((water withdrawn but not consumed and returned to the water circle)</p></li>
 </ul>
 </div>
 <div class="section" id="vegetation">
@@ -143,7 +143,7 @@ Including snow- and glacier melt.</p>
 <p>Vegetation taken into account for calculating</p>
 <ul class="simple">
 <li><p>Albedo</p></li>
-<li><p>Transpiration</p></li>
+<li><p>Transpiration (including rooting depth, crop  phenology, and potential evapotranspiration)</p></li>
 <li><p>Interception</p></li>
 </ul>
 </div>
@@ -166,8 +166,10 @@ Including snow- and glacier melt.</p>
 </div>
 <div class="section" id="lakes-reservoirs">
 <h4>Lakes &amp; Reservoirs<a class="headerlink" href="#lakes-reservoirs" title="Permalink to this headline">¶</a></h4>
-<p>Lakes are simulated with the weir function
-Reservoirs are simulated  as outflow function between three storage limits (conservative, normal,flood) and three outflow functions (minimum, normal, non-damaging)</p>
+<ul class="simple">
+<li><p>Lakes are simulated with weir function from Poleni for rectangular weir.</p></li>
+<li><p>Reservoirs are simulated  as outflow function between three storage limits (conservative, normal,flood) and three outflow functions (minimum, normal, non-damaging)</p></li>
+</ul>
 </div>
 <div class="section" id="routing">
 <h4>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h4>
@@ -190,19 +192,22 @@ Reservoirs are simulated  as outflow function between three storage limits (cons
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Community driven</p></td>
+<tr class="row-even"><td><p>Programming Language</p></td>
+<td><p>Python 3.x with some C++ for computational demanding processes e.g. river routing</p></td>
+</tr>
+<tr class="row-odd"><td><p>Community driven</p></td>
 <td><p>Open-source but lead by IIASA <a class="reference external" href="https://github.com/CWatM">GitHub repository</a></p></td>
 </tr>
-<tr class="row-odd"><td><p>Well documented</p></td>
+<tr class="row-even"><td><p>Well documented</p></td>
 <td><p>Documentation, automatic source code documentation <a class="reference external" href="https://cwatm.github.io">GitHub Docu</a></p></td>
 </tr>
-<tr class="row-even"><td><p>Easy handling</p></td>
+<tr class="row-odd"><td><p>Easy handling</p></td>
 <td><p>Use of a setting file with all necessary information for the user  <a class="reference internal" href="setup.html#rst-setting"><span class="std std-ref">Complete settings file</span></a> and  <a class="reference internal" href="setup.html#rst-metadata"><span class="std std-ref">Output Meta NetCDF information</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p>Multi-platform</p></td>
-<td><p>Windows, Mac, Linux, Unix - to be used on different platforms (PC, clusters, super-computers)</p></td>
+<tr class="row-even"><td><p>Multi-platform</p></td>
+<td><p>Python 3.x on Windows, Mac, Linux, Unix - to be used on different platforms (PC, clusters, super-computers)</p></td>
 </tr>
-<tr class="row-even"><td><p>Modular</p></td>
+<tr class="row-odd"><td><p>Modular</p></td>
 <td><p>Processes in subprograms, easy to adapt to the requirements of options/ solutions <a class="reference external" href="https://github.com/CWatM/CWatM">Modular structure</a></p></td>
 </tr>
 </tbody>

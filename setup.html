@@ -69,7 +69,7 @@
 </li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#windows-executeable-python-version" id="id18">Windows executeable Python version</a></p></li>
+<li><p><a class="reference internal" href="#windows-executable-python-version" id="id18">Windows executable Python version</a></p></li>
 <li><p><a class="reference internal" href="#netcdf-meta-data" id="id19">NetCDF meta data</a></p></li>
 <li><p><a class="reference internal" href="#test-the-data" id="id20">Test the data</a></p></li>
 <li><p><a class="reference internal" href="#settings-file" id="id21">Settings file</a></p>
@@ -320,8 +320,8 @@
 </div>
 </div>
 </div>
-<div class="section" id="windows-executeable-python-version">
-<h2><a class="toc-backref" href="#id18">Windows executeable Python version</a><a class="headerlink" href="#windows-executeable-python-version" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="windows-executable-python-version">
+<h2><a class="toc-backref" href="#id18">Windows executable Python version</a><a class="headerlink" href="#windows-executable-python-version" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">A CWatM executable cwatm.exe can be used instead of the Python version</div>
 </div>
@@ -2561,23 +2561,24 @@ metaNetcdfFile = $(FILE_PATHS:PathRoot)/cwatm/metaNetcdf.xml
 <li><p>The initial state of the internal storage variables are unknown and a <strong>first</strong> guess has to be used e.g. all storage variables are half filled.</p></li>
 <li><p>The initial state is known from a previous run, where the variables are stored at a certain time step. This is called <strong>warm start</strong></p></li>
 </ol>
-<p>The the <strong>warm start</strong> is usful for:</p>
+<p>The <strong>warm start</strong> is usful for:</p>
 <ul class="simple">
 <li><p>using a long pre-run to find the steady-state storage of the groundwater storage and use it as initial value</p></li>
 <li><p>using the stored variables to shorten the warm-up period</p></li>
-<li><p>using the stored variables to restart every day with the values from the pre3vious day (forecasting mode)</p></li>
+<li><p>using the stored variables to restart every day with the values from the previous day (forecasting mode)</p></li>
 </ul>
 <div class="section" id="example-of-soil-moisture">
 <h3><a class="toc-backref" href="#id37">Example of soil moisture</a><a class="headerlink" href="#example-of-soil-moisture" title="Permalink to this headline">¶</a></h3>
 <p>The next figure shows the impact of different initial condition on the soil moisture of the lower soil.
-In one of the simulations the soil is initially almost ompletely saturated. In another simulation the soil is completely dry and the third simulation starts with initial conditions in between the two extremes.</p>
+In one of the simulations the soil is initially almost completely saturated. In another simulation the soil is completely dry and the third simulation starts with initial conditions in between the two extremes.</p>
 <p>In the beginning the effect of different initial condition can be seen clearly. But after one year the three curves converge. The <strong>memory</strong> of the lower soil goes back for about one year.</p>
-<p>For all the initial condition apart from groundwater the memory is about 12 month. That means practically a spin-up of one year is sufficient to habve enough warm-up time.</p>
+<p>For all the initial condition apart from groundwater, lakes and reservoirs the memory is about 12 month.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/init_soilmoisture.jpg"><img alt="_images/init_soilmoisture.jpg" src="_images/init_soilmoisture.jpg" style="width: 600px;" /></a>
 </div>
 <p>Figure: Simulation of soil moisture in the lower soil with different initial conditions</p>
-<p>For the groundwater zone a longer warm-up period is needed, because of the slow response of groundwater. Here a rather fast reacting groundwater storage is shown with the three curves coverge after two years.</p>
+<p>For the groundwater zone a longer warm-up period is needed, because of the slow response of groundwater. Here a rather fast reacting groundwater storage is shown with the three curves coverge after two years.
+We propose a warm-up of several decades. The longer the better.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/init_groundwater.jpg"><img alt="_images/init_groundwater.jpg" src="_images/init_groundwater.jpg" style="width: 600px;" /></a>
 </div>
@@ -2619,7 +2620,7 @@ A list of variables and their default value for a <strong>cold start</strong> is
 </div>
 <div class="section" id="storing-initial-variables">
 <h3><a class="toc-backref" href="#id40">Storing initial variables</a><a class="headerlink" href="#storing-initial-variables" title="Permalink to this headline">¶</a></h3>
-<p>In the settings file the option <strong>save_intitisal</strong> has to be set to <strong>True</strong></p>
+<p>In the settings file the option <strong>save_initial</strong> has to be set to <strong>True</strong></p>
 <p>The name of the initial netCDF4 file has to be put in <strong>initsave</strong></p>
 <p>and one or more dates have to be specified in StepInit</p>
 <div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>154
@@ -2637,10 +2638,10 @@ A list of variables and their default value for a <strong>cold start</strong> is
 <div class="section" id="warm-start">
 <h3><a class="toc-backref" href="#id41">Warm start</a><a class="headerlink" href="#warm-start" title="Permalink to this headline">¶</a></h3>
 <p>CWatM can write internal variables to a netCDF file for choosen timesteps. These netCDF files can be used as the initial conditions for a suceeding simulation.</p>
-<p>This is useful for establishing a steady-state with a long-term run and then using this steady-state for succeding simulations or for an every day run (forecasting mode)</p>
+<p>This is useful for establishing a steady-state after a long-term run and then using this steady-state for succeding simulations or for an every day run (forecasting mode)</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If the parameters are changes after a run(especially the groundwater parameters) the stored initial values do not represent the conditions of the storage variables. Stored initial conditions should <strong>not</strong> be used as initial values for a model run with another set of parameters. If you do this during calibration, you will not be able to reproduce the calibration results!</p>
+<p>If the parameters are changed after a run(especially the groundwater, lakes and reservoir parameters) the stored initial values do not represent the conditions of the storage variables. Stored initial conditions should <strong>not</strong> be used as initial values for a model run with another set of parameters. If you do this during calibration, you will not be able to reproduce the calibration results!</p>
 </div>
 <div class="section" id="id4">
 <h4><a class="toc-backref" href="#id42">Set up a cold start in the settingsfile</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
