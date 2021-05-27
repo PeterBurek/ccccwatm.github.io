@@ -1,53 +1,227 @@
 
-<!DOCTYPE html>
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5. Tutorial &#8212; Community Water Model</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>5. Tutorial &mdash; Community Water Model</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/iiasa.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. Error handling" href="errorHandling.html" />
     <link rel="prev" title="4. Setup of the model" href="setup.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="errorHandling.html" title="6. Error handling"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="setup.html" title="4. Setup of the model"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">5. </span>Tutorial</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Community Water Model
+          
+
+          
+            
+            <img src="_static/iiasa_logo_white.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                -1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">4. Setup of the model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#python-version">Python version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libraries">Libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows-executeable-python-version">Windows executeable Python version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-the-executable-model-version">Test the executable model version</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-1">Test 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-2">Test 2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-the-python-model-version">Test the Python model version</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#error-because-you-did-not-run-it-with-python">Error because you did not run it with Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-because-python-is-not-added-to-the-path">Error because python is not added to the PATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-because-the-path-has-white-spaces-included">Error because the path has white spaces included</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-because-the-python-libraries-are-installed-incorrectly">Error because the python libraries are installed incorrectly</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-model-1">Running the model 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-and-installing-the-spatial-dataset">Downloading and installing the spatial dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-the-settings-file">Changing the Settings file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-and-exception-handling">Error and exception handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-model-2">Running the model 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-parameters-of-the-model">Changing parameters of the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-the-output">Changing the Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output-variables">Output variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#daily-monthly-at-the-end-or-average">Daily, monthly - at the end or average</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-series-as-point-infomation-or-catchment-sum-or-average">Time series as point infomation or catchment sum or average</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#most-important-output-variables-a-selection">Most important output variables - a selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-list-of-all-variables">A list of all variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forum.html">17. Forum</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Community Water Model</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">5. </span>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="tutorial">
 <h1><a class="toc-backref" href="#id3"><span class="section-number">5. </span>Tutorial</a><a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
-<p class="topic-title first">Contents</p>
+<p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#tutorial" id="id3">Tutorial</a></p>
 <ul>
@@ -199,7 +373,7 @@ downloaded at <a class="reference external" href="http://www.lfd.uci.edu/~gohlke
 <span id="rst-output1"></span><h2><a class="toc-backref" href="#id12">Test the Python model version</a><a class="headerlink" href="#test-the-python-model-version" title="Permalink to this headline">¶</a></h2>
 <p><strong>Windows and Linux</strong> (and maybe Mac, but not tested)</p>
 <p>Please try:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">&lt;</span><span class="n">modelpath</span><span class="o">&gt;/</span><span class="n">run_cwatm</span><span class="o">.</span><span class="n">py</span>  <span class="p">(</span><span class="k">for</span> <span class="n">the</span> <span class="n">Python3</span><span class="o">.</span><span class="mi">7</span> <span class="n">version</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">&lt;</span><span class="n">modelpath</span><span class="o">&gt;/</span><span class="n">run_cwatm</span><span class="o">.</span><span class="n">py</span>  <span class="p">(</span><span class="k">for</span> <span class="n">the</span> <span class="n">Python3</span><span class="mf">.7</span> <span class="n">version</span><span class="p">)</span>
 <span class="ow">or</span><span class="p">:</span>
 <span class="o">&lt;</span><span class="n">modelpath</span><span class="o">&gt;/</span><span class="n">cwatm</span>  <span class="p">(</span><span class="k">for</span> <span class="n">the</span> <span class="o">.</span><span class="n">exe</span> <span class="n">version</span><span class="p">)</span>
 </pre></div>
@@ -512,68 +686,51 @@ You find this list at <a class="reference internal" href="listVariables.html#rst
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/CWatM_logo.png" alt="Logo"/>
-            </a></p>
-<h3><a href="index.html">Table of Contents</a></h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modeldesign.html">2. Model Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="publication.html">3. Publication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup.html">4. Setup of the model</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="errorHandling.html">6. Error handling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="listVariables.html">7. List of output variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">8. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">9. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">10. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calibration.html">11. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calibration_tutorial.html">12. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resolution.html">13. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zambezi.html">14. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">15. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">16. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="forum.html">17. Forum</a></li>
-</ul>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="errorHandling.html" class="btn btn-neutral float-right" title="6. Error handling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="setup.html" class="btn btn-neutral float-left" title="4. Setup of the model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="setup.html"
-                        title="previous chapter"><span class="section-number">4. </span>Setup of the model</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="errorHandling.html"
-                        title="next chapter"><span class="section-number">6. </span>Error handling</a></p>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017, PB.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="errorHandling.html" title="6. Error handling"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="setup.html" title="4. Setup of the model"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CWAT Model</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">5. </span>Tutorial</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2017, PB.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

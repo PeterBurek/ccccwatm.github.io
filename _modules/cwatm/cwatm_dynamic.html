@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cwatm.cwatm_dynamic &#8212; Community Water Model</title>
-    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -26,7 +26,8 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cwatm.cwatm_dynamic</a></li> 
       </ul>
     </div>  
 
@@ -46,8 +47,8 @@
 <span class="c1"># Copyright:   (c) burekpe 2016</span>
 <span class="c1"># -------------------------------------------------------------------------</span>
 
-<span class="kn">from</span> <span class="nn">cwatm.management_modules.data_handling</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cwatm.management_modules.messages</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">cwatm.management_modules.data_handling</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">cwatm.management_modules.messages</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
 
@@ -190,6 +191,7 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">environflow_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
             <span class="c1"># in case environmental flow is calculated last</span>
+            <span class="c1"># overFlo error from Flo Roemer</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">output_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
             <span class="n">timemeasure</span><span class="p">(</span><span class="s2">&quot;Output&quot;</span><span class="p">)</span>  <span class="c1"># 12. timing</span>
@@ -230,7 +232,8 @@
             <span class="c1">#We also need to save variable states at the end (like storage in CWATM and ModFlow layers) to import them for the next step&quot;&quot;&quot;</span>
 
             <span class="n">start1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">compteur</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Ndays_steady</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+
+            <span class="k">for</span> <span class="n">compteur</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Ndays_steady</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
             <span class="c1">#for compteur in range(1, 1 + 1):</span>
 
                 <span class="k">if</span> <span class="n">compteur</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -238,15 +241,20 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">evaporationPot_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
                     <span class="c1">#self.snowfrost_module.dynamic()</span>
                     <span class="c1"># for steady state no snow, because once there is snow -&gt; no melt -&gt; no recharge</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Rain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">SnowCover</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">SnowMelt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Snow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">FrostIndex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowCover</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">SnowMelt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Snow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">FrostIndex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span> <span class="o">*</span> <span class="mi">0</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic_fracIrrigation</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">dateVar</span><span class="p">[</span><span class="s1">&#39;newYear&#39;</span><span class="p">],</span> <span class="n">dynamic</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dynamicLandcover</span><span class="p">)</span>
 
                     <span class="c1"># initial run of soil to get recharge in steady state</span>
-                    <span class="k">for</span> <span class="n">days</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">365</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">no_days</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">init_days_of_soil</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">no_days</span> <span class="o">=</span> <span class="mi">365</span>
+
+                    <span class="k">for</span> <span class="n">days</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">no_days</span><span class="p">):</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">landcoverType_module</span><span class="o">.</span><span class="n">dynamic</span><span class="p">()</span>
                         <span class="nb">print</span> <span class="p">(</span><span class="n">days</span><span class="p">)</span>
 
@@ -259,13 +267,16 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   modflow -&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start2</span><span class="p">)</span>
 
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;runtime -&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start1</span><span class="p">)</span>
-            <span class="n">ii</span> <span class="o">=</span><span class="mi">1</span></div></div>
+
+            <span class="c1"># for pytest set this to 0 to get a positive test</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">firstout</span> <span class="o">=</span> <span class="mf">0.</span></div></div>
 
 
 
 		
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -309,12 +320,13 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cwatm.cwatm_dynamic</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, PB.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
     </div>
   </body>
 </html>
