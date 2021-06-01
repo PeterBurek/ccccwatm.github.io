@@ -1,40 +1,181 @@
 
-<!DOCTYPE html>
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>cwatm.hydrological_modules.soil &#8212; Community Water Model</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cwatm.hydrological_modules.soil &mdash; Community Water Model</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/iiasa.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">cwatm.hydrological_modules.soil</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Community Water Model
+          
+
+          
+            
+            <img src="../../../_static/iiasa_logo_white.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modeldesign.html">2. Model Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Community Water Model</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cwatm.hydrological_modules.soil</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <h1>Source code for cwatm.hydrological_modules.soil</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -------------------------------------------------------------------------</span>
@@ -65,14 +206,15 @@
 <span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 <span class="sd">    capRiseFrac           fraction of a grid cell where capillar rise may happen                            m        </span>
-<span class="sd">    cropKC                crop coefficient for each of the 4 different land cover types (forest, irrigated  --       </span>
 <span class="sd">    storGroundwater       simulated groundwater storage                                                     m        </span>
 <span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
+<span class="sd">    includeCrops          1=includeCrops option in settings file is True, 0=otherwise                                </span>
+<span class="sd">    Crops                 Internal: List of specific crops and Kc/Ky parameters                                      </span>
 <span class="sd">    availWaterInfiltrati  quantity of water reaching the soil after interception, more snowmelt             m        </span>
 <span class="sd">    interceptEvap         simulated evaporation from water intercepted by vegetation                        m        </span>
 <span class="sd">    potTranspiration      Potential transpiration (after removing of evaporation)                           m        </span>
 <span class="sd">    snowEvap              total evaporation from snow for a snow layers                                     m        </span>
-<span class="sd">    fracVegCover          Fraction of area covered by the corresponding landcover type                               </span>
+<span class="sd">    cropKC                crop coefficient for each of the 4 different land cover types (forest, irrigated  --       </span>
 <span class="sd">    rootDepth                                                                                                        </span>
 <span class="sd">    KSat1                                                                                                            </span>
 <span class="sd">    KSat2                                                                                                            </span>
@@ -109,6 +251,7 @@
 <span class="sd">    FrostIndex            FrostIndex - Molnau and Bissel (1983), A Continuous Frozen Ground Index for Floo  --       </span>
 <span class="sd">    actualET              simulated evapotranspiration from soil, flooded area and vegetation               m        </span>
 <span class="sd">    soilLayers            Number of soil layers                                                             --       </span>
+<span class="sd">    fracVegCover          Fraction of specific land covers (0=forest, 1=grasslands, etc.)                   %        </span>
 <span class="sd">    soildepth             Thickness of the first soil layer                                                 m        </span>
 <span class="sd">    soildepth12           Total thickness of layer 2 and 3                                                  m        </span>
 <span class="sd">    w1                    Simulated water storage in the layer 1                                            m        </span>
@@ -123,7 +266,6 @@
 <span class="sd">    percolationImp        Fraction of area covered by the corresponding landcover type                      m        </span>
 <span class="sd">    cropGroupNumber       soil water depletion fraction, Van Diepen et al., 1988: WOFOST 6.0, p.86, Dooren  --       </span>
 <span class="sd">    cPrefFlow             Factor influencing preferential flow (flow from surface to GW)                    --       </span>
-<span class="sd">    act_irrConsumption    actual irrgation water consumption                                                m        </span>
 <span class="sd">    potBareSoilEvap       potential bare soil evaporation (calculated with minus snow evaporation)          m        </span>
 <span class="sd">    totalPotET            Potential evaporation per land use class                                          m        </span>
 <span class="sd">    rws                   Transpiration reduction factor (in case of water stress)                          --       </span>
@@ -137,12 +279,19 @@
 <span class="sd">    theta1                fraction of water in soil compartment 1 for each land use class                   --       </span>
 <span class="sd">    theta2                fraction of water in soil compartment 2 for each land use class                   --       </span>
 <span class="sd">    theta3                fraction of water in soil compartment 3 for each land use class                   --       </span>
-<span class="sd">    actTransTotal_forest                                                                                             </span>
-<span class="sd">    actTransTotal_grassl                                                                                             </span>
-<span class="sd">    actTransTotal_paddy                                                                                              </span>
-<span class="sd">    actTransTotal_nonpad                                                                                             </span>
-<span class="sd">    before                                                                                                           </span>
+<span class="sd">    actTransTotal_forest  Transpiration from forest land cover                                              m        </span>
+<span class="sd">    actTransTotal_grassl  Transpiration from grasslands land cover                                          m        </span>
+<span class="sd">    actTransTotal_paddy   Transpiration from paddy land cover                                               m        </span>
+<span class="sd">    actTransTotal_nonpad  Transpiration from non-paddy land cover                                           m        </span>
+<span class="sd">    actTransTotal_crops_  Transpiration associated with specific irrigated crops                            m        </span>
+<span class="sd">    fracCrops_Irr         Fraction of cell currently planted with specific irrigated crops                  %        </span>
+<span class="sd">    currentKC             Current crop coefficient for specific crops                                                </span>
+<span class="sd">    actTransTotal_month_  Internal variable: Running total of  transpiration for specific irrigated crops   m        </span>
+<span class="sd">    actTransTotal_crops_  Transpiration associated with specific non-irr crops                              m        </span>
+<span class="sd">    fracCrops_nonIrr      Fraction of cell currently planted with specific non-irr crops                             </span>
+<span class="sd">    actTransTotal_month_  Internal variable: Running total of  transpiration for specific non-irrigated cr  m        </span>
 <span class="sd">    gwRecharge            groundwater recharge                                                              m        </span>
+<span class="sd">    act_irrConsumption    actual irrigation water consumption                                               m        </span>
 <span class="sd">    ====================  ================================================================================  =========</span>
 
 <span class="sd">    **Functions**</span>
@@ -431,6 +580,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prefFlow</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">availWaterInfiltration</span> <span class="o">*</span> <span class="n">relSat</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cPrefFlow</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prefFlow</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">FrostIndex</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">FrostIndexThreshold</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prefFlow</span><span class="p">[</span><span class="n">No</span><span class="p">])</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">modflow</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prefFlow</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prefFlow</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+                        <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">capriseindex</span><span class="p">)</span>  <span class="c1"># multiplied by the fraction of ModFlow unsaturated cells</span>
+
         <span class="c1"># ---------------------------------------------------------</span>
         <span class="c1"># calculate infiltration</span>
         <span class="c1"># infiltration, limited with KSat1 and available water in topWaterLayer</span>
@@ -599,7 +752,12 @@
             <span class="c1"># Flux from top- to subsoil</span>
             <span class="n">subperc1to2</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">availWater1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">kUnSat1</span> <span class="o">*</span> <span class="n">DtSub</span><span class="p">,</span> <span class="n">capLayer2</span><span class="p">))</span>
             <span class="n">subperc2to3</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">availWater2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">kUnSat2</span> <span class="o">*</span> <span class="n">DtSub</span><span class="p">,</span> <span class="n">capLayer3</span><span class="p">))</span>
-            <span class="n">subperc3toGW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">availWater3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">kUnSat3</span> <span class="o">*</span> <span class="n">DtSub</span><span class="p">,</span> <span class="n">availWater3</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">modflow</span><span class="p">:</span>
+                <span class="n">subperc3toGW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">availWater3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">kUnSat3</span> <span class="o">*</span> <span class="n">DtSub</span><span class="p">,</span> <span class="n">availWater3</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span>
+                            <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">capriseindex</span><span class="p">)</span>  <span class="c1"># multiplied by the fraction of ModFlow unsaturated cells</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">subperc3toGW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">availWater3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">kUnSat3</span> <span class="o">*</span> <span class="n">DtSub</span><span class="p">,</span> <span class="n">availWater3</span><span class="p">))</span>
 
             <span class="c1"># Update water balance for all layers</span>
             <span class="n">availWater1</span> <span class="o">=</span> <span class="n">availWater1</span> <span class="o">-</span> <span class="n">subperc1to2</span>
@@ -642,7 +800,34 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_paddy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_nonpaddy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">before</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actualET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">includeCrops</span><span class="p">:</span> <span class="c1">#checkOption(&#39;includeCrops&#39;) and checkOption(&#39;includeCropSpecificWaterUse&#39;):</span>
+            <span class="k">if</span> <span class="n">No</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+
+                <span class="c1">#Method 1: Simple</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                for c in range(len(self.var.Crops)):</span>
+<span class="sd">                    self.var.actTransTotal_crops_Irr[c] = np.where(self.var.fracVegCover[3]&gt;0, self.var.fracCrops_Irr[c]/self.var.fracVegCover[3], 0) * self.var.actTransTotal_nonpaddy</span>
+<span class="sd">                    self.var.actTransTotal_crops_nonIrr[c] = np.where(self.var.fracVegCover[1]&gt;0, self.var.fracCrops_nonIrr[c]/self.var.fracVegCover[1], 0) * self.var.actTransTotal_paddy</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="c1"># Crop-specific transpiration (m) scales the land-class specific transpiration according to its</span>
+                <span class="c1"># specific potential evapotranspiration and the land-class specific potential evapotranspiration</span>
+
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Crops</span><span class="p">)):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_crops_Irr</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracCrops_Irr</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">currentKC</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span>
+                                                                                      <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+                                                                   <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_nonpaddy</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_month_Irr</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_crops_Irr</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_crops_nonIrr</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                                                                      <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracCrops_nonIrr</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">*</span>
+                                                                       <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">currentKC</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span>
+                                                                                  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span>
+                                                                                  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cropKC</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                                                                      <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_grasslands</span> <span class="c1">#self.var.actTransTotal_paddy</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_month_nonIrr</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_crops_nonIrr</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+
 
         <span class="c1"># total actual evaporation + transpiration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actualET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actualET</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actBareSoilEvap</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">openWaterEvap</span><span class="p">[</span><span class="n">No</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal</span><span class="p">[</span><span class="n">No</span><span class="p">]</span>
@@ -693,57 +878,47 @@
 
 </pre></div>
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../../../index.html">
-              <img class="logo" src="../../../_static/CWatM_logo.png" alt="Logo"/>
-            </a></p>
-<h3><a href="../../../index.html">Table of Contents</a></h3>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../intro.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../modeldesign.html">2. Model Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../publication.html">3. Publication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">4. Setup of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">5. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../errorHandling.html">6. Error handling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../listVariables.html">7. List of output variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../results.html">8. Demo of the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../todo.html">9. The Model Itself</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">10. Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html">11. Calibration tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../calibration_tutorial.html">12. Calibration tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resolution.html">13. Increasing resolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../zambezi.html">14. Example Zambezi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html">15. License and download info</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sourcecode.html">16. Source code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
-</ul>
+          <footer>
 
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, IIASA Water Security.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">CWAT Model</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">cwatm.hydrological_modules.soil</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2017, PB.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>
