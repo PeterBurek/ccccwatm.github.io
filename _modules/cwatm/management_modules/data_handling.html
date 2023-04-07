@@ -1,99 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>cwatm.management_modules.data_handling &mdash; Community Water Model</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/iiasa.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/iiasa.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../index.html" class="icon icon-home"> Community Water Model
           
-
-          
-            
-            <img src="../../../_static/iiasa_logo_white.png" class="logo" alt="Logo"/>
-          
+          <a href="../../../index.html" class="icon icon-home">
+            Community Water Model
+              <img src="../../../_static/IIASA_logo_white.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
               <div class="version">
                 1.0.6
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modeldesign.html">2. Model Design</a></li>
@@ -114,69 +63,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">Community Water Model</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-        
-      <li>cwatm.management_modules.data_handling</li>
-    
-    
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cwatm.management_modules.data_handling</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for cwatm.management_modules.data_handling</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -------------------------------------------------------------------------</span>
 <span class="c1"># Name:        Data handling</span>
@@ -286,11 +196,12 @@
     <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mf">1e9</span><span class="p">:</span>
             <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="nb">round</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mf">1e9</span><span class="p">:</span>
             <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+    <span class="c1"># This is still not ok! Some rounding issues still appear sometimes</span>
 
     <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
     <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
@@ -608,6 +519,7 @@
     <span class="k">if</span> <span class="nb">map</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 105: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; has a different shape than area or ldd </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    
     <span class="n">mapnp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">])</span>
     <span class="n">mapC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">compressed</span><span class="p">(</span><span class="n">mapnp1</span><span class="p">)</span>
     <span class="c1"># if fill: mapC[np.isnan(mapC)]=0</span>
@@ -716,13 +628,14 @@
 
         <span class="n">cell</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">invcell</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">cell</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">invcell</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">invcell</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">cell</span>
 
         <span class="c1"># getgeotransform only delivers single precision!</span>
         <span class="n">cell</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">invcell</span>
-        <span class="n">x1</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">y1</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-        <span class="n">lon</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
-        <span class="n">lat</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="c1">#lon = 1 / round(1 / (x1 - int(x1)), 4) + int(x1)</span>
+        <span class="c1">#lat = 1 / round(1 / (y1 - int(y1)), 4) + int(y1)</span>
 
 
     <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">invcell</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span></div>
@@ -873,8 +786,11 @@
 
     <span class="n">xx</span> <span class="o">=</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
     <span class="n">yy</span> <span class="o">=</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
-    <span class="n">cut0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.0001</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xx</span> <span class="o">-</span> <span class="n">lon</span><span class="p">)</span> <span class="o">*</span> <span class="n">invcell</span><span class="p">)</span>  <span class="c1"># argmin() ??</span>
-    <span class="n">cut2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.0001</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yy</span> <span class="o">-</span> <span class="n">lat</span><span class="p">)</span> <span class="o">*</span> <span class="n">invcell</span><span class="p">)</span>
+    <span class="c1">#cut0 = int(0.0001 + np.abs(xx - lon) * invcell) # argmin() ??</span>
+    <span class="c1">#cut2 = int(0.0001 + np.abs(yy - lat) * invcell) #</span>
+    <span class="n">cut0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xx</span> <span class="o">+</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">lon</span><span class="p">)</span> <span class="o">*</span> <span class="n">invcell</span><span class="p">)</span> <span class="c1"># argmin() ??</span>
+    <span class="n">cut2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yy</span> <span class="o">-</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">lat</span><span class="p">)</span> <span class="o">*</span> <span class="n">invcell</span><span class="p">)</span> <span class="c1">#</span>
+
 
     <span class="n">cut1</span> <span class="o">=</span> <span class="n">cut0</span> <span class="o">+</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;col&#39;</span><span class="p">]</span>
     <span class="n">cut3</span> <span class="o">=</span> <span class="n">cut2</span> <span class="o">+</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;row&#39;</span><span class="p">]</span>
@@ -958,7 +874,7 @@
     <span class="n">cellSize</span> <span class="o">=</span> <span class="n">geotransform</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1">#invcell = round(1/cellSize,0)</span>
-    <span class="k">if</span> <span class="n">cellSize</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cellSize</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">invcell</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">cellSize</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">invcell</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">cellSize</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
@@ -1025,14 +941,14 @@
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">datediv</span> <span class="o">=</span> <span class="mi">1</span>
 
-            <span class="n">datestart</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span><span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
+            <span class="n">datestart</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">nctime</span><span class="p">[:][</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span><span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
 
             <span class="c1"># sometime daily records have a strange hour to start with -&gt; it is changed to 0:00 to haqve the same record</span>
             <span class="n">datestart</span> <span class="o">=</span> <span class="n">datestart</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-            <span class="n">dateend</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
+            <span class="n">dateend</span> <span class="o">=</span> <span class="n">num2date</span><span class="p">(</span><span class="n">nctime</span><span class="p">[:][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">nctime</span><span class="o">.</span><span class="n">calendar</span><span class="p">)</span>
 
             <span class="n">datestartint</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">//</span> <span class="n">datediv</span>
-            <span class="n">dateendint</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nctime</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="n">datediv</span>
+            <span class="n">dateendint</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nctime</span><span class="p">[:][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="n">datediv</span>
 
             <span class="n">dateend</span> <span class="o">=</span> <span class="n">dateend</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="c1">#if dateVar[&#39;leapYear&#39;] &gt; 0:</span>
@@ -1080,7 +996,7 @@
 
 
 
-<div class="viewcode-block" id="readmeteodata"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.readmeteodata">[docs]</a><span class="k">def</span> <span class="nf">readmeteodata</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span><span class="n">mapsscale</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">modflowSteady</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="readmeteodata"><a class="viewcode-back" href="../../../management_modules.html#cwatm.management_modules.data_handling.readmeteodata">[docs]</a><span class="k">def</span> <span class="nf">readmeteodata</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">addZeros</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span><span class="n">mapsscale</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">buffering</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    load stack of maps 1 at each timestamp in netcdf format</span>
 
@@ -1090,24 +1006,21 @@
 <span class="sd">    :param addZeros:</span>
 <span class="sd">    :param zeros: default value</span>
 <span class="sd">    :param mapsscale: if meteo maps have the same extend as the other spatial static m</span>
+<span class="sd">    :param buffering: if buffer should be applied before cutting the map to the mask extent</span>
 <span class="sd">    :return: Compressed 1D array of meteo data</span>
 
 <span class="sd">    :raises if data is wrong: :meth:`management_modules.messages.CWATMError`</span>
 <span class="sd">    :raises if meteo netcdf file cannot be opened: :meth:`management_modules.messages.CWATMFileError`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">modflowSteady</span><span class="p">:</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">cbinding</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">meteoInfo</span> <span class="o">=</span> <span class="n">meteofiles</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">flagmeteo</span><span class="p">[</span><span class="n">name</span><span class="p">]]</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="n">inputcounter</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-            <span class="n">filename</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">meteoInfo</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">date1</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%02d</span><span class="s2">/</span><span class="si">%02d</span><span class="s2">/</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 210: Netcdf map error for: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; -&gt; &quot;</span> <span class="o">+</span> <span class="n">cbinding</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; on: &quot;</span> <span class="o">+</span> <span class="n">date1</span> <span class="o">+</span> <span class="s2">&quot;: </span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">meteoInfo</span> <span class="o">=</span> <span class="n">meteofiles</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">flagmeteo</span><span class="p">[</span><span class="n">name</span><span class="p">]]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">inputcounter</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">filename</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">meteoInfo</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">date1</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%02d</span><span class="s2">/</span><span class="si">%02d</span><span class="s2">/</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 210: Netcdf map error for: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; -&gt; &quot;</span> <span class="o">+</span> <span class="n">cbinding</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; on: &quot;</span> <span class="o">+</span> <span class="n">date1</span> <span class="o">+</span> <span class="s2">&quot;: </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">CWATMError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
        <span class="n">nf1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
@@ -1118,10 +1031,10 @@
     <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">]:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
                <span class="n">value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="o">-</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-               <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">])</span> <span class="p">:</span> <span class="k">break</span>
+               <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">])</span> <span class="p">:</span> <span class="k">break</span>
 
     <span class="c1"># check if mask = map size -&gt; if yes do not cut the map</span>
     <span class="n">cutcheckmask</span> <span class="o">=</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">maskinfo</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
@@ -1139,8 +1052,45 @@
     <span class="k">if</span> <span class="n">cutcheck</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">turn_latitude</span><span class="p">:</span>
             <span class="n">mapnp</span> <span class="o">=</span> <span class="n">mapnp</span><span class="p">[</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="c1">#TODO: make buffering work if lattitude is turned</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">buffering</span><span class="p">:</span>
+                <span class="n">buffer</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="c1">#          buffer1</span>
+                <span class="c1">#         ---------</span>
+                <span class="c1"># buffer3¦        ¦ buffer4</span>
+                <span class="c1">#        ¦        ¦</span>
+                <span class="c1">#         ---------</span>
+                <span class="c1">#          buffer2</span>
+                <span class="n">buffer4</span><span class="p">,</span> <span class="n">buffer2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+                <span class="c1">#if the input map should be used until the last column there is no buffer</span>
+                <span class="k">if</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">buffer4</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="c1"># if the input map should be used at the last row there is no buffer</span>
+                <span class="k">if</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                    <span class="n">buffer2</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="c1"># if the input map should be used at the first row or column there is no buffer</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">buffer2</span><span class="p">,</span>
+                            <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">buffer4</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+                    <span class="n">buffer1</span><span class="p">,</span> <span class="n">buffer3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+                <span class="c1"># if the input map should be used at the first row there is no buffer</span>
+                <span class="k">elif</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">buffer2</span><span class="p">,</span>
+                            <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">buffer</span><span class="p">:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">buffer4</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+                    <span class="n">buffer1</span><span class="p">,</span> <span class="n">buffer3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="c1"># if the input map should be used at the first column there is no buffer</span>
+                <span class="k">elif</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">buffer</span><span class="p">:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">buffer2</span><span class="p">,</span>
+                            <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">buffer4</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+                    <span class="n">buffer1</span><span class="p">,</span> <span class="n">buffer3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">buffer</span><span class="p">:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">buffer2</span><span class="p">,</span>
+                            <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">buffer</span><span class="p">:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">buffer4</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+                    <span class="n">buffer1</span><span class="p">,</span> <span class="n">buffer3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">,</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmapFine</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmapFine</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">turn_latitude</span><span class="p">):</span>
             <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -1177,13 +1127,16 @@
     <span class="c1">#        ii = 1  # dummmy for not doing anything</span>
     <span class="c1">#    else:</span>
 
-    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">modflowSteady</span><span class="p">):</span>
-        <span class="n">inputcounter</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">inputcounter</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">meteoInfo</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
-            <span class="n">inputcounter</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">flagmeteo</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">inputcounter</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">inputcounter</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">meteoInfo</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="n">inputcounter</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">flagmeteo</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">return</span> <span class="n">mapC</span></div>
+    <span class="k">if</span> <span class="n">buffering</span><span class="p">:</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="p">[</span><span class="n">buffer1</span><span class="p">,</span> <span class="n">buffer2</span><span class="p">,</span> <span class="n">buffer3</span><span class="p">,</span> <span class="n">buffer4</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">mapC</span><span class="p">,</span> <span class="n">buffer</span></div>
 
 
 
@@ -1321,9 +1274,11 @@
     <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the last variable name</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;coordy&#39;</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;coordy&#39;</span><span class="p">]][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error 111: Latitude is in wrong order</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="k">raise</span> <span class="n">CWATMFileError</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    if (nf1.variables[maskmapAttr[&#39;coordy&#39;]][0] - nf1.variables[maskmapAttr[&#39;coordy&#39;]][-1]) &lt; 0:</span>
+<span class="sd">        msg = &quot;Error 111: Latitude is in wrong order\n&quot;</span>
+<span class="sd">        raise CWATMFileError(filename, msg)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">mapnp</span> <span class="o">=</span> <span class="n">nf1</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">value</span><span class="p">][</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">cutmap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">cutmap</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">nf1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -1439,6 +1394,10 @@
         <span class="n">nf1</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">cbinding</span> <span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
         <span class="n">nf1</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="s1">&#39;CWATM output maps&#39;</span>
         <span class="n">nf1</span><span class="o">.</span><span class="n">Conventions</span> <span class="o">=</span> <span class="s1">&#39;CF-1.6&#39;</span>
+        <span class="k">if</span> <span class="s1">&#39;save_git&#39;</span> <span class="ow">in</span> <span class="n">option</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s2">&quot;save_git&quot;</span><span class="p">):</span>
+                <span class="kn">import</span> <span class="nn">git</span>
+                <span class="n">nf1</span><span class="o">.</span><span class="n">git_commit</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">Repo</span><span class="p">(</span><span class="n">search_parent_directories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">hexsha</span>
 
         <span class="c1"># put the additional genaral meta data information from the xml file into the netcdf file</span>
         <span class="c1"># infomation from the settingsfile comes first</span>
@@ -1751,6 +1710,7 @@
 
     <span class="n">checkint</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">char</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">typecodes</span><span class="p">[</span><span class="s1">&#39;AllInteger&#39;</span><span class="p">]</span>
     <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">geo</span> <span class="o">=</span> <span class="p">(</span><span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="n">maskmapAttr</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">pcmap</span><span class="p">:</span> <span class="c1"># if it is a map</span>
         <span class="n">raster</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s1">&#39;PCRaster&#39;</span><span class="p">)</span>
@@ -1760,7 +1720,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ds</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GDT_Float32</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;PCRASTER_VALUESCALE=VS_SCALAR&quot;</span><span class="p">])</span>
 
-        <span class="n">ds</span><span class="o">.</span><span class="n">SetGeoTransform</span><span class="p">(</span><span class="n">geotrans</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># specify coords</span>
+
+        <span class="c1">#ds.SetGeoTransform(geotrans[0])  # specify coords</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">SetGeoTransform</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>  <span class="c1"># specify coords</span>
         <span class="n">outband</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="c1"># set NoData value</span>
         <span class="c1"># outband.SetNoDataValue(np.nan)</span>
@@ -1774,7 +1736,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ds</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s1">&#39;GTiff&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GDT_Float32</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;COMPRESS=LZW&#39;</span><span class="p">])</span>
 
-        <span class="n">ds</span><span class="o">.</span><span class="n">SetGeoTransform</span><span class="p">(</span><span class="n">geotrans</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># specify coords</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">SetGeoTransform</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>  <span class="c1"># specify coords</span>
         <span class="n">srs</span> <span class="o">=</span> <span class="n">osr</span><span class="o">.</span><span class="n">SpatialReference</span><span class="p">()</span>  <span class="c1"># establish encoding</span>
         <span class="n">srs</span><span class="o">.</span><span class="n">ImportFromEPSG</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>  <span class="c1"># WGS84 lat/long</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">SetProjection</span><span class="p">(</span><span class="n">srs</span><span class="o">.</span><span class="n">ExportToWkt</span><span class="p">())</span>  <span class="c1"># export coords to file</span>
@@ -1817,6 +1779,8 @@
 <span class="sd">    Check if option in settings file has a counterpart in the source code</span>
 
 <span class="sd">    :param inBinding: parameter in settings file</span>
+
+<span class="sd">    Not tested because you need to change the name eg gridSizeUserDefined = True -&gt; gridSizeUser = True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lineclosest</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">test</span> <span class="o">=</span> <span class="n">inBinding</span> <span class="ow">in</span> <span class="n">option</span>
@@ -1847,6 +1811,8 @@
 <span class="sd">    Check if variable in settings file has a counterpart in the source code</span>
 
 <span class="sd">    :param inBinding: parameter in settings file</span>
+
+<span class="sd">    Not tested because you need to change the name eg PrecipiationMaps = ... -&gt; Precipitation = ...</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">lineclosest</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -1899,46 +1865,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, IIASA Water Security.
-
-    </p>
+    <p>&#169; Copyright 2021, IIASA Water Security.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

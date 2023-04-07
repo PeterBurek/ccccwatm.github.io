@@ -1,99 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>cwatm.hydrological_modules.waterbalance &mdash; Community Water Model</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/iiasa.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/iiasa.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../index.html" class="icon icon-home"> Community Water Model
           
-
-          
-            
-            <img src="../../../_static/iiasa_logo_white.png" class="logo" alt="Logo"/>
-          
+          <a href="../../../index.html" class="icon icon-home">
+            Community Water Model
+              <img src="../../../_static/IIASA_logo_white.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
               <div class="version">
                 1.0.6
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modeldesign.html">2. Model Design</a></li>
@@ -114,69 +63,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">Community Water Model</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-        
-      <li>cwatm.hydrological_modules.waterbalance</li>
-    
-    
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cwatm.hydrological_modules.waterbalance</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for cwatm.hydrological_modules.waterbalance</h1><div class="highlight"><pre>
 <span></span><span class="c1">#-------------------------------------------------------------------------</span>
 <span class="c1">#Name:        Water Balance module</span>
@@ -195,79 +105,79 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    WATER BALANCE</span>
 <span class="sd">    </span>
-<span class="sd">    * check if water balnace per time step is ok ( = 0)</span>
+<span class="sd">    * check if water balance per time step is closed ( = 0)</span>
 <span class="sd">    * produce an annual overview - income, outcome storage</span>
 
 
 <span class="sd">    **Global variables**</span>
 
-<span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
-<span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    storGroundwater       simulated groundwater storage                                                     m        </span>
-<span class="sd">    prestorGroundwater    storGroundwater at the beginning of each step                                     m        </span>
-<span class="sd">    sum_gwRecharge        groundwater recharge                                                              m        </span>
-<span class="sd">    snowEvap              total evaporation from snow for a snow layers                                     m        </span>
-<span class="sd">    preSmalllakeStorage                                                                                              </span>
-<span class="sd">    smallLakedaycorrect                                                                                              </span>
-<span class="sd">    smallLakeIn                                                                                                      </span>
-<span class="sd">    smallevapWaterBody                                                                                               </span>
-<span class="sd">    smallLakeout                                                                                                     </span>
-<span class="sd">    lakeStorage                                                                                                      </span>
-<span class="sd">    EvapWaterBodyM                                                                                                   </span>
-<span class="sd">    lakeResInflowM                                                                                                   </span>
-<span class="sd">    lakeResOutflowM                                                                                                  </span>
-<span class="sd">    resStorage                                                                                                       </span>
-<span class="sd">    totalSto              Total soil,snow and vegetation storage for each cell including all landcover typ  m        </span>
-<span class="sd">    pretotalSto           Previous totalSto                                                                 m        </span>
-<span class="sd">    sum_actBareSoilEvap                                                                                              </span>
-<span class="sd">    sum_openWaterEvap                                                                                                </span>
-<span class="sd">    sum_directRunoff                                                                                                 </span>
-<span class="sd">    sum_interflow                                                                                                    </span>
-<span class="sd">    sum_capRiseFromGW     capillar rise from groundwater to 3rd soil layer (summed up for all land cover c  m        </span>
-<span class="sd">    sum_act_irrConsumpti                                                                                             </span>
-<span class="sd">    sum_perc3toGW         percolation from 3rd soil layer to groundwater (summed up for all land cover cla  m        </span>
-<span class="sd">    sum_prefFlow          preferential flow from soil to groundwater (summed up for all land cover classes  m        </span>
-<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
-<span class="sd">    cellArea              Area of cell                                                                      m2       </span>
-<span class="sd">    baseflow              simulated baseflow (= groundwater discharge to river)                             m        </span>
-<span class="sd">    Precipitation         Precipitation (input for the model)                                               m        </span>
-<span class="sd">    lddCompress           compressed river network (without missing values)                                 --       </span>
-<span class="sd">    discharge             discharge                                                                         m3/s     </span>
-<span class="sd">    prelakeResStorage                                                                                                </span>
-<span class="sd">    catchmentAll                                                                                                     </span>
-<span class="sd">    sumsideflow                                                                                                      </span>
-<span class="sd">    EvapoChannel                                                                                                     </span>
-<span class="sd">    prechannelStorage                                                                                                </span>
-<span class="sd">    channelStorage                                                                                                   </span>
-<span class="sd">    runoff                                                                                                           </span>
-<span class="sd">    gridcell_storage                                                                                                 </span>
-<span class="sd">    nonFossilGroundwater  groundwater abstraction which is sustainable and not using fossil resources       m        </span>
-<span class="sd">    lakeResStorage                                                                                                   </span>
-<span class="sd">    smalllakeStorage                                                                                                 </span>
-<span class="sd">    act_SurfaceWaterAbst                                                                                             </span>
-<span class="sd">    addtoevapotrans                                                                                                  </span>
-<span class="sd">    act_irrWithdrawal                                                                                                </span>
-<span class="sd">    act_nonIrrConsumptio                                                                                             </span>
-<span class="sd">    returnFlow                                                                                                       </span>
-<span class="sd">    unmetDemand                                                                                                      </span>
-<span class="sd">    act_nonIrrWithdrawal                                                                                             </span>
-<span class="sd">    returnflowIrr                                                                                                    </span>
-<span class="sd">    nonIrrReturnFlowFrac                                                                                             </span>
-<span class="sd">    unmet_lost                                                                                                       </span>
-<span class="sd">    act_totalWaterWithdr                                                                                             </span>
-<span class="sd">    totalET               Total evapotranspiration for each cell including all landcover types              m        </span>
-<span class="sd">    sum_actTransTotal                                                                                                </span>
-<span class="sd">    sum_interceptEvap                                                                                                </span>
-<span class="sd">    prergridcell                                                                                                     </span>
-<span class="sd">    nonIrrReturnFlow                                                                                                 </span>
-<span class="sd">    localQW                                                                                                          </span>
-<span class="sd">    channelStorageBefore                                                                                             </span>
-<span class="sd">    sumbalance                                                                                                       </span>
-<span class="sd">    sum_balanceStore                                                                                                 </span>
-<span class="sd">    sum_balanceFlux                                                                                                  </span>
-<span class="sd">    lakeReservoirStorage                                                                                             </span>
-<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    =====================================  ======================================================================  =====</span>
+<span class="sd">    Variable [self.var]                    Description                                                             Unit </span>
+<span class="sd">    =====================================  ======================================================================  =====</span>
+<span class="sd">    lakeReservoirStorage                                                                                           --   </span>
+<span class="sd">    snowEvap                               total evaporation from snow for a snow layers                           m    </span>
+<span class="sd">    storGroundwater                        Groundwater storage (non-fossil). This is primarily used when not usin  m    </span>
+<span class="sd">    prestorGroundwater                     storGroundwater at the beginning of each step                           m    </span>
+<span class="sd">    preSmalllakeStorage                                                                                            --   </span>
+<span class="sd">    smallLakedaycorrect                                                                                            --   </span>
+<span class="sd">    smallLakeIn                                                                                                    --   </span>
+<span class="sd">    smallevapWaterBody                                                                                             --   </span>
+<span class="sd">    smallLakeout                                                                                                   --   </span>
+<span class="sd">    EvapWaterBodyM                         Evaporation from lakes and reservoirs                                   m    </span>
+<span class="sd">    lakeResInflowM                                                                                                 --   </span>
+<span class="sd">    lakeResOutflowM                                                                                                --   </span>
+<span class="sd">    sum_gwRecharge                         groundwater recharge                                                    m    </span>
+<span class="sd">    lakeStorage                                                                                                    --   </span>
+<span class="sd">    resStorage                                                                                                     --   </span>
+<span class="sd">    totalSto                               Total soil,snow and vegetation storage for each cell including all lan  m    </span>
+<span class="sd">    pretotalSto                            Previous totalSto                                                       m    </span>
+<span class="sd">    sum_prefFlow                           Preferential flow from soil to groundwater (summed up for all land cov  m    </span>
+<span class="sd">    sum_perc3toGW                          Percolation from 3rd soil layer to groundwater (summed up for all land  m    </span>
+<span class="sd">    sum_actBareSoilEvap                                                                                            --   </span>
+<span class="sd">    sum_openWaterEvap                                                                                              --   </span>
+<span class="sd">    sum_directRunoff                                                                                               --   </span>
+<span class="sd">    sum_interflow                                                                                                  --   </span>
+<span class="sd">    sum_capRiseFromGW                      Capillary rise from groundwater to 3rd soil layer (summed up for all l  m    </span>
+<span class="sd">    sum_act_irrConsumption                                                                                         --   </span>
+<span class="sd">    cellArea                               Area of cell                                                            m2   </span>
+<span class="sd">    DtSec                                  number of seconds per timestep (default = 86400)                        s    </span>
+<span class="sd">    Precipitation                          Precipitation (input for the model)                                     m    </span>
+<span class="sd">    lddCompress                            compressed river network (without missing values)                       --   </span>
+<span class="sd">    discharge                              Channel discharge                                                       m3/s </span>
+<span class="sd">    prelakeResStorage                                                                                              --   </span>
+<span class="sd">    catchmentAll                                                                                                   --   </span>
+<span class="sd">    sumsideflow                                                                                                    --   </span>
+<span class="sd">    EvapoChannel                           Channel evaporation                                                     m3   </span>
+<span class="sd">    prechannelStorage                                                                                              --   </span>
+<span class="sd">    runoff                                                                                                         --   </span>
+<span class="sd">    gridcell_storage                                                                                               --   </span>
+<span class="sd">    baseflow                               simulated baseflow (= groundwater discharge to river)                   m    </span>
+<span class="sd">    nonFossilGroundwaterAbs                Non-fossil groundwater abstraction. Used primarily without MODFLOW.     m    </span>
+<span class="sd">    lakeResStorage                                                                                                 --   </span>
+<span class="sd">    smalllakeStorage                                                                                               --   </span>
+<span class="sd">    act_SurfaceWaterAbstract               Surface water abstractions                                              m    </span>
+<span class="sd">    addtoevapotrans                        Irrigation application loss to evaporation                              m    </span>
+<span class="sd">    act_irrWithdrawal                      Irrigation withdrawals                                                  m    </span>
+<span class="sd">    act_nonIrrConsumption                  Non-irrigation consumption                                              m    </span>
+<span class="sd">    returnFlow                                                                                                     --   </span>
+<span class="sd">    unmetDemand                            Unmet groundwater demand to determine potential fossil groundwaterwate  m    </span>
+<span class="sd">    act_nonIrrWithdrawal                   Non-irrigation withdrawals                                              m    </span>
+<span class="sd">    returnflowIrr                                                                                                  --   </span>
+<span class="sd">    nonIrrReturnFlowFraction                                                                                       --   </span>
+<span class="sd">    unmet_lost                             Fossil water that disappears instead of becoming return flow            m    </span>
+<span class="sd">    channelStorage                         Channel water storage                                                   m3   </span>
+<span class="sd">    act_totalWaterWithdrawal               Total water withdrawals                                                 m    </span>
+<span class="sd">    totalET                                Total evapotranspiration for each cell including all landcover types    m    </span>
+<span class="sd">    sum_actTransTotal                                                                                              --   </span>
+<span class="sd">    sum_interceptEvap                                                                                              --   </span>
+<span class="sd">    prergridcell                                                                                                   --   </span>
+<span class="sd">    nonIrrReturnFlow                                                                                               --   </span>
+<span class="sd">    localQW                                                                                                        --   </span>
+<span class="sd">    channelStorageBefore                                                                                           --   </span>
+<span class="sd">    sumbalance                                                                                                     --   </span>
+<span class="sd">    sum_balanceStore                                                                                               --   </span>
+<span class="sd">    sum_balanceFlux                                                                                                --   </span>
+<span class="sd">    =====================================  ======================================================================  =====</span>
 
 <span class="sd">    **Functions**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -283,7 +193,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial part of the water balance module</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
 
@@ -303,7 +212,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_balanceStore</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SnowCover&#39;</span><span class="p">,</span><span class="s1">&#39;sum_interceptStor&#39;</span><span class="p">,</span><span class="s1">&#39;sum_topWaterLayer&#39;</span><span class="p">]</span>
 
             <span class="c1"># variable of fluxes</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_balanceFlux</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Precipitation&#39;</span><span class="p">,</span><span class="s1">&#39;SnowMelt&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;sum_interceptEvap&#39;</span><span class="p">,</span><span class="s1">&#39;actualET&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_balanceFlux</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Precipitation&#39;</span><span class="p">,</span><span class="s1">&#39;SnowMelt&#39;</span><span class="p">,</span><span class="s1">&#39;IceMelt&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;sum_interceptEvap&#39;</span><span class="p">,</span><span class="s1">&#39;actualET&#39;</span><span class="p">]</span>
 
             <span class="c1">#for variable in self.var.sum_balanceStore:</span>
                 <span class="c1"># vars(self.var)[&quot;sumup_&quot; + variable] =  vars(self.var)[variable]</span>
@@ -442,15 +351,15 @@
 
 
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rain</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Snow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">],</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_gwRecharge</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalET</span><span class="p">],</span>  <span class="c1"># Out</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">],</span>  <span class="c1"># prev storage</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">],</span>
-                <span class="s2">&quot;Soil_all&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="s2">&quot;Soil_all&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_capRiseFromGW</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rain</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Snow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_capRiseFromGW</span><span class="p">],</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_perc3toGW</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_prefFlow</span><span class="p">,</span>
                  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalET</span><span class="p">],</span>  <span class="c1"># Out</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">],</span>  <span class="c1"># prev storage</span>
@@ -460,17 +369,17 @@
 
 
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_capRiseFromGW</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rain</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Snow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_capRiseFromGW</span><span class="p">],</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_perc3toGW</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_prefFlow</span><span class="p">,</span>
-                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">],</span>  <span class="c1"># Out</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">iceEvap</span><span class="p">],</span>  <span class="c1"># Out</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">],</span>  <span class="c1"># prev storage</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">],</span>
                 <span class="s2">&quot;Soil_all2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rain</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Snow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_act_irrConsumption</span><span class="p">],</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonFossilGroundwaterAbs</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span><span class="p">,</span>
-                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">],</span>  <span class="c1"># Out</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">iceEvap</span><span class="p">],</span>  <span class="c1"># Out</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prestorGroundwater</span><span class="p">],</span>  <span class="c1"># prev storage</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span><span class="p">],</span>
                 <span class="s2">&quot;Soil+G&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -491,23 +400,23 @@
                 <span class="s2">&quot;Waterdemand2&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheckSum</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rain</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Snow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span><span class="p">],</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonFossilGroundwaterAbs</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span><span class="p">,</span>
-                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">iceEvap</span><span class="p">,</span>
                  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnflowIrr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">addtoevapotrans</span><span class="p">],</span>  <span class="c1"># Out</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prestorGroundwater</span><span class="p">],</span>  <span class="c1"># prev storage</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span><span class="p">],</span>
                 <span class="s2">&quot;Soil+G+WD&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">waterbalance_module</span><span class="o">.</span><span class="n">waterBalanceCheck</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Precipitation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Rain</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Snow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span><span class="p">],</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_directRunoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interflow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span><span class="p">,</span>
                  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actTransTotal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_actBareSoilEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span><span class="p">,</span>
-                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">addtoevapotrans</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_interceptEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">snowEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">iceEvap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">addtoevapotrans</span><span class="p">,</span>
                  <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonFossilGroundwaterAbs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">returnflowIrr</span><span class="p">,</span> <span class="p">],</span>  <span class="c1"># Out</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pretotalSto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">prestorGroundwater</span><span class="p">],</span>  <span class="c1"># prev storage</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">totalSto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span><span class="p">],</span>
-                <span class="s2">&quot;Soil+G+WD&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="s2">&quot;Soil+G+WD&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
             <span class="n">nonIrrReturn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">nonIrrReturnFlowFraction</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span>
             <span class="n">nonIrruse</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span> <span class="o">-</span> <span class="n">nonIrrReturn</span>
@@ -622,7 +531,7 @@
 <span class="sd">            #self.var.sumDelta2 = 1000 * npareatotal((self.var.prevSnowCover + self.var.pretotalSoil + self.var.prestorGroundwater) * self.var.cellArea , self.var.catchment)/self.var.area</span>
 <span class="sd">            #self.var.sumAll = self.var.sumDelta1- self.var.sumDelta2</span>
 
-<span class="sd">            #report(decompress(self.var.sumRunoff), &quot;C:\work\output3/sumRun.map&quot;)</span>
+<span class="sd">            #report(decompress(self.var.sumRunoff), r&quot;C:\work\output3/sumRun.map&quot;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
@@ -648,46 +557,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, IIASA Water Security.
-
-    </p>
+    <p>&#169; Copyright 2021, IIASA Water Security.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

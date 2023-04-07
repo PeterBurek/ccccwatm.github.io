@@ -1,99 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>cwatm.hydrological_modules.routing_reservoirs.routing_kinematic &mdash; Community Water Model</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/iiasa.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/iiasa.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../../index.html" class="icon icon-home"> Community Water Model
           
-
-          
-            
-            <img src="../../../../_static/iiasa_logo_white.png" class="logo" alt="Logo"/>
-          
+          <a href="../../../../index.html" class="icon icon-home">
+            Community Water Model
+              <img src="../../../../_static/IIASA_logo_white.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
               <div class="version">
                 1.0.6
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../modeldesign.html">2. Model Design</a></li>
@@ -114,69 +63,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../forum.html">17. Forum</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../index.html">Community Water Model</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../../index.html">Module code</a> &raquo;</li>
-        
-      <li>cwatm.hydrological_modules.routing_reservoirs.routing_kinematic</li>
-    
-    
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cwatm.hydrological_modules.routing_reservoirs.routing_kinematic</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for cwatm.hydrological_modules.routing_reservoirs.routing_kinematic</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -------------------------------------------------------------------------</span>
 <span class="c1"># Name:        Routing module - Kinematic wave</span>
@@ -203,77 +113,104 @@
 
 <span class="sd">    **Global variables**</span>
 
-<span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
-<span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    load_initial                                                                                                     </span>
-<span class="sd">    inflowM3              inflow to basin                                                                   m3       </span>
-<span class="sd">    waterBodyID           lakes/reservoirs map with a single ID for each lake/reservoir                     --       </span>
-<span class="sd">    dirUp                 river network in upstream direction                                               --       </span>
-<span class="sd">    dirupLen_LR           number of bifurcation upstream lake/reservoir                                     --       </span>
-<span class="sd">    dirupID_LR            index river upstream lake/reservoir                                               --       </span>
-<span class="sd">    dirDown_LR            river network direktion downstream lake/reservoir                                 --       </span>
-<span class="sd">    lendirDown_LR         number of river network connections lake/reservoir                                --       </span>
-<span class="sd">    compress_LR           boolean map as mask map for compressing lake/reservoir                            --       </span>
-<span class="sd">    lakeArea              area of each lake/reservoir                                                       m2       </span>
-<span class="sd">    lakeEvaFactorC        compressed map of a factor which increases evaporation from lake because of wind  --       </span>
-<span class="sd">    EvapWaterBodyM                                                                                                   </span>
-<span class="sd">    lakeResInflowM                                                                                                   </span>
-<span class="sd">    lakeResOutflowM                                                                                                  </span>
-<span class="sd">    downstruct                                                                                                       </span>
-<span class="sd">    DtSec                 number of seconds per timestep (default = 86400)                                  s        </span>
-<span class="sd">    cellArea              Area of cell                                                                      m2       </span>
-<span class="sd">    EWRef                 potential evaporation rate from water surface                                     m        </span>
-<span class="sd">    QInM3Old              Inflow from previous day                                                          m3       </span>
-<span class="sd">    UpArea1               upstream area of a grid cell                                                      m2       </span>
-<span class="sd">    lddCompress           compressed river network (without missing values)                                 --       </span>
-<span class="sd">    lakeEvaFactor         a factor which increases evaporation from lake because of wind                    --       </span>
-<span class="sd">    dtRouting             number of seconds per routing timestep                                            s        </span>
-<span class="sd">    evapWaterBodyC                                                                                                   </span>
-<span class="sd">    sumLakeEvapWaterBody                                                                                             </span>
-<span class="sd">    noRoutingSteps                                                                                                   </span>
-<span class="sd">    sumResEvapWaterBodyC                                                                                             </span>
-<span class="sd">    discharge             discharge                                                                         m3/s     </span>
-<span class="sd">    prelakeResStorage                                                                                                </span>
-<span class="sd">    catchmentAll                                                                                                     </span>
-<span class="sd">    sumsideflow                                                                                                      </span>
-<span class="sd">    EvapoChannel                                                                                                     </span>
-<span class="sd">    prechannelStorage                                                                                                </span>
-<span class="sd">    channelStorage                                                                                                   </span>
-<span class="sd">    chanLength                                                                                                       </span>
-<span class="sd">    totalCrossSectionAre                                                                                             </span>
-<span class="sd">    dirupLen                                                                                                         </span>
-<span class="sd">    dirupID                                                                                                          </span>
-<span class="sd">    catchment                                                                                                        </span>
-<span class="sd">    dirDown                                                                                                          </span>
-<span class="sd">    lendirDown                                                                                                       </span>
-<span class="sd">    UpArea                                                                                                           </span>
-<span class="sd">    beta                                                                                                             </span>
-<span class="sd">    chanMan                                                                                                          </span>
-<span class="sd">    chanGrad                                                                                                         </span>
-<span class="sd">    chanWidth                                                                                                        </span>
-<span class="sd">    chanDepth                                                                                                        </span>
-<span class="sd">    invbeta                                                                                                          </span>
-<span class="sd">    invchanLength                                                                                                    </span>
-<span class="sd">    invdtRouting                                                                                                     </span>
-<span class="sd">    totalCrossSectionAre                                                                                             </span>
-<span class="sd">    chanWettedPerimeterA                                                                                             </span>
-<span class="sd">    alpPower                                                                                                         </span>
-<span class="sd">    channelAlpha                                                                                                     </span>
-<span class="sd">    invchannelAlpha                                                                                                  </span>
-<span class="sd">    riverbedExchange                                                                                                 </span>
-<span class="sd">    QDelta                                                                                                           </span>
-<span class="sd">    inflowDt                                                                                                         </span>
-<span class="sd">    dis_outlet                                                                                                       </span>
-<span class="sd">    runoff                                                                                                           </span>
-<span class="sd">    fracVegCover          Fraction of specific land covers (0=forest, 1=grasslands, etc.)                   %        </span>
-<span class="sd">    openWaterEvap         Simulated evaporation from open areas                                             m        </span>
-<span class="sd">    lakeResStorage                                                                                                   </span>
-<span class="sd">    act_SurfaceWaterAbst                                                                                             </span>
-<span class="sd">    returnFlow                                                                                                       </span>
-<span class="sd">    act_bigLakeResAbst                                                                                               </span>
-<span class="sd">    act_smallLakeResAbst                                                                                             </span>
-<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    =====================================  ======================================================================  =====</span>
+<span class="sd">    Variable [self.var]                    Description                                                             Unit </span>
+<span class="sd">    =====================================  ======================================================================  =====</span>
+<span class="sd">    modflow                                Flag: True if modflow_coupling = True in settings file                  --   </span>
+<span class="sd">    load_initial                           Settings initLoad holds initial conditions for variables                input</span>
+<span class="sd">    inflowM3                               inflow to basin                                                         m3   </span>
+<span class="sd">    Crops                                  Internal: List of specific crops and Kc/Ky parameters                   --   </span>
+<span class="sd">    waterBodyID                            lakes/reservoirs map with a single ID for each lake/reservoir           --   </span>
+<span class="sd">    dirUp                                  river network in upstream direction                                     --   </span>
+<span class="sd">    dirupLen_LR                            number of bifurcation upstream lake/reservoir                           --   </span>
+<span class="sd">    dirupID_LR                             index river upstream lake/reservoir                                     --   </span>
+<span class="sd">    dirDown_LR                             river network direktion downstream lake/reservoir                       --   </span>
+<span class="sd">    lendirDown_LR                          number of river network connections lake/reservoir                      --   </span>
+<span class="sd">    compress_LR                            boolean map as mask map for compressing lake/reservoir                  --   </span>
+<span class="sd">    lakeArea                               area of each lake/reservoir                                             m2   </span>
+<span class="sd">    lakeEvaFactorC                         compressed map of a factor which increases evaporation from lake becau  --   </span>
+<span class="sd">    EvapWaterBodyM                         Evaporation from lakes and reservoirs                                   m    </span>
+<span class="sd">    lakeResInflowM                                                                                                 --   </span>
+<span class="sd">    lakeResOutflowM                                                                                                --   </span>
+<span class="sd">    downstruct                                                                                                     --   </span>
+<span class="sd">    riverbedExchangeM3                                                                                             --   </span>
+<span class="sd">    sum_openWaterEvap                                                                                              --   </span>
+<span class="sd">    cellArea                               Area of cell                                                            m2   </span>
+<span class="sd">    DtSec                                  number of seconds per timestep (default = 86400)                        s    </span>
+<span class="sd">    ETRef                                  potential evapotranspiration rate from reference crop                   m    </span>
+<span class="sd">    EWRef                                  potential evaporation rate from water surface                           m    </span>
+<span class="sd">    QInM3Old                               Inflow from previous day                                                m3   </span>
+<span class="sd">    UpArea1                                upstream area of a grid cell                                            m2   </span>
+<span class="sd">    lddCompress                            compressed river network (without missing values)                       --   </span>
+<span class="sd">    lakeEvaFactor                          a factor which increases evaporation from lake because of wind          --   </span>
+<span class="sd">    dtRouting                              number of seconds per routing timestep                                  s    </span>
+<span class="sd">    evapWaterBodyC                         Compressed version of EvapWaterBodyM                                    m    </span>
+<span class="sd">    sumLakeEvapWaterBodyC                                                                                          --   </span>
+<span class="sd">    noRoutingSteps                                                                                                 --   </span>
+<span class="sd">    sumResEvapWaterBodyC                                                                                           --   </span>
+<span class="sd">    discharge                              Channel discharge                                                       m3/s </span>
+<span class="sd">    inflowDt                                                                                                       --   </span>
+<span class="sd">    prelakeResStorage                                                                                              --   </span>
+<span class="sd">    catchmentAll                                                                                                   --   </span>
+<span class="sd">    sumsideflow                                                                                                    --   </span>
+<span class="sd">    EvapoChannel                           Channel evaporation                                                     m3   </span>
+<span class="sd">    prechannelStorage                                                                                              --   </span>
+<span class="sd">    chanLength                             Input, Channel length                                                   m    </span>
+<span class="sd">    totalCrossSectionArea                                                                                          --   </span>
+<span class="sd">    dirupLen                                                                                                       --   </span>
+<span class="sd">    dirupID                                                                                                        --   </span>
+<span class="sd">    catchment                                                                                                      --   </span>
+<span class="sd">    dirDown                                                                                                        --   </span>
+<span class="sd">    lendirDown                                                                                                     --   </span>
+<span class="sd">    UpArea                                                                                                         --   </span>
+<span class="sd">    beta                                                                                                           --   </span>
+<span class="sd">    chanMan                                Input, Channel Manning&#39;s roughness coefficient                          --   </span>
+<span class="sd">    chanGrad                                                                                                       --   </span>
+<span class="sd">    chanWidth                              Input, Channel width                                                    m    </span>
+<span class="sd">    chanDepth                              Input, Channel depth                                                    m    </span>
+<span class="sd">    invbeta                                                                                                        --   </span>
+<span class="sd">    invchanLength                                                                                                  --   </span>
+<span class="sd">    invdtRouting                                                                                                   --   </span>
+<span class="sd">    totalCrossSectionAreaBankFull                                                                                  --   </span>
+<span class="sd">    chanWettedPerimeterAlpha                                                                                       --   </span>
+<span class="sd">    alpPower                                                                                                       --   </span>
+<span class="sd">    channelAlpha                                                                                                   --   </span>
+<span class="sd">    invchannelAlpha                                                                                                --   </span>
+<span class="sd">    riverbedExchange                                                                                               --   </span>
+<span class="sd">    Xcel                                                                                                           --   </span>
+<span class="sd">    QDelta                                                                                                         --   </span>
+<span class="sd">    dis_outlet                                                                                                     --   </span>
+<span class="sd">    humanConsumption                                                                                               --   </span>
+<span class="sd">    humanUse                                                                                                       --   </span>
+<span class="sd">    natureUse                                                                                                      --   </span>
+<span class="sd">    ETRefAverage_segments                                                                                          --   </span>
+<span class="sd">    precipEffectiveAverage_segments                                                                                --   </span>
+<span class="sd">    head_segments                          Simulated water level, averaged over adminSegments [masl]               --   </span>
+<span class="sd">    gwdepth_adjusted_segments              Adjusted depth to groundwater table, averaged over adminSegments        m    </span>
+<span class="sd">    gwdepth_segments                       Groundwater depth, averaged over adminSegments                          m    </span>
+<span class="sd">    adminSegments_area                     Spatial area of domestic agents                                         m2   </span>
+<span class="sd">    runoff                                                                                                         --   </span>
+<span class="sd">    openWaterEvap                          Simulated evaporation from open areas                                   m    </span>
+<span class="sd">    infiltration                           Water actually infiltrating the soil                                    m    </span>
+<span class="sd">    actTransTotal_paddy                    Transpiration from paddy land cover                                     m    </span>
+<span class="sd">    actTransTotal_nonpaddy                 Transpiration from non-paddy land cover                                 m    </span>
+<span class="sd">    actTransTotal_crops_nonIrr             Transpiration associated with specific non-irr crops                    m    </span>
+<span class="sd">    head                                   Simulated ModFlow water level [masl]                                    m    </span>
+<span class="sd">    gwdepth_adjusted                       Adjusted depth to groundwater table                                     m    </span>
+<span class="sd">    gwdepth                                Depth to groundwater table                                              m    </span>
+<span class="sd">    fracVegCover                           Fraction of specific land covers (0=forest, 1=grasslands, etc.)         %    </span>
+<span class="sd">    adminSegments                          Domestic agents                                                         Int  </span>
+<span class="sd">    lakeResStorage                                                                                                 --   </span>
+<span class="sd">    act_SurfaceWaterAbstract               Surface water abstractions                                              m    </span>
+<span class="sd">    addtoevapotrans                        Irrigation application loss to evaporation                              m    </span>
+<span class="sd">    act_irrWithdrawal                      Irrigation withdrawals                                                  m    </span>
+<span class="sd">    act_nonIrrConsumption                  Non-irrigation consumption                                              m    </span>
+<span class="sd">    returnFlow                                                                                                     --   </span>
+<span class="sd">    act_nonIrrWithdrawal                   Non-irrigation withdrawals                                              m    </span>
+<span class="sd">    channelStorage                         Channel water storage                                                   m3   </span>
+<span class="sd">    act_bigLakeResAbst                     Abstractions to satisfy demands from lakes and reservoirs               m    </span>
+<span class="sd">    act_smallLakeResAbst                   Abstractions from small lakes at demand location                        m    </span>
+<span class="sd">    =====================================  ======================================================================  =====</span>
 
 <span class="sd">    **Functions**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -353,12 +290,18 @@
         <span class="c1">#self.var.ups = upstreamArea(dirDown, dirshort, self.var.cellArea)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">UpArea1</span> <span class="o">=</span> <span class="n">upstreamArea</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dirDown</span><span class="p">,</span> <span class="n">dirshort</span><span class="p">,</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">UpArea</span> <span class="o">=</span> <span class="n">upstreamArea</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">dirDown</span><span class="p">,</span> <span class="n">dirshort</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">)</span>
-        <span class="c1">#d1 =downstream1(self.var.dirUp, self.var.UpArea1)</span>
-        <span class="c1">#up1 = upstream1( self.var.downstruct,self.var.UpArea1)</span>
 
 
-        <span class="c1">#lib2.kinematic(Qold, q, dd, dl, di, Qnew, alpha, 0.6, deltaT, deltaX, len(dirDown))</span>
-        <span class="c1">#lib2.kinematic(Qold, q, self.var.dirDown, self.var.dirupLen, self.var.dirupID, Qnew, alpha, 0.6, deltaT, deltaX, self.var.lendirDown)</span>
+        <span class="n">basin</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="s1">&#39;savebasinmap&#39;</span> <span class="ow">in</span> <span class="n">option</span><span class="p">:</span>
+            <span class="n">basin</span> <span class="o">=</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;savebasinmap&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">basin</span><span class="p">:</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outDir</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">outDir</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="s2">&quot;basin.tif&quot;</span><span class="p">)</span>
+            <span class="n">report</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">catchment</span><span class="p">,</span><span class="n">file</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Basin area map in: &quot;</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outDir</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">outDir</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="s2">&quot;ups.tif&quot;</span><span class="p">)</span>
+            <span class="n">report</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">UpArea</span><span class="p">,</span><span class="n">file</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upstream area map in: &quot;</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
 
         <span class="c1">#---------------------------------------------------------------</span>
         <span class="c1">#Calibration</span>
@@ -457,10 +400,11 @@
 
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">catchmentAll</span> <span class="o">=</span> <span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">,</span><span class="n">local</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">catchmentAll</span> <span class="o">=</span> <span class="p">(</span><span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;MaskMap&#39;</span><span class="p">,</span><span class="n">local</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
             <span class="c1">#self.var.catchmentNo = int(loadmap(&#39;CatchmentNo&#39;))</span>
             <span class="c1">#self.var.sumbalance = 0</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Xcel</span> <span class="o">=</span> <span class="p">[]</span></div>
 
 
     <span class="c1"># --------------------------------------------------------------------------</span>
@@ -655,6 +599,34 @@
         <span class="c1">#self.var.EvapoChannel = self.var.EvapoChannel / self.var.cellArea</span>
 
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">humanConsumption</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">humanUse</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">natureUse</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;includeCrops&#39;</span> <span class="ow">in</span> <span class="n">option</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeCrops&#39;</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">Crops</span><span class="p">)):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">humanConsumption</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_crops_nonIrr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">humanUse</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_crops_nonIrr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c1">#self.var.natureUse = actTransTotal_grasslands - self.var.humanUse + self.var.EvapoChannel + self.var.sum_actBareSoilEvap + self.var.sum_interceptEvap + self.var.EvapWaterBodyM</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">humanConsumption</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_nonIrrConsumption</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_paddy</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">addtoevapotrans</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">actTransTotal_nonpaddy</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_openWaterEvap</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">humanUse</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_nonIrrWithdrawal</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">act_irrWithdrawal</span> <span class="c1">#+ self.var.sum_openWaterEvap #+ self.var.leakage #+reservoir evaporation</span>
+
+        <span class="k">if</span> <span class="s1">&#39;adminSegments&#39;</span> <span class="ow">in</span> <span class="n">binding</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ETRefAverage_segments</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">ETRef</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">adminSegments</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">precipEffectiveAverage_segments</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">infiltration</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">adminSegments</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">modflow</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">head_segments</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">adminSegments</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwdepth_adjusted_segments</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwdepth_adjusted</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">adminSegments</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwdepth_segments</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwdepth</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">adminSegments</span><span class="p">)</span>
+
+            <span class="c1">#self.var.precipEffectiveAverage_segments = npareaaverage(self.var.Rain-self.var.interceptEvap[1]-self.var.actBareSoilEvap[1], self.var.adminSegments)</span>
+            <span class="c1">#self.var.head_development_segments = npareaaverage(self.var.head_development, self.var.adminSegments)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">adminSegments_area</span> <span class="o">=</span> <span class="n">npareaaverage</span><span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">fracVegCover</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">cellArea</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">adminSegments</span><span class="p">)</span>
+
 <span class="c1">#---------------------------------------------------------------------------------------</span>
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;includeWaterBodies&#39;</span><span class="p">):</span>
@@ -741,46 +713,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, IIASA Water Security.
-
-    </p>
+    <p>&#169; Copyright 2021, IIASA Water Security.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

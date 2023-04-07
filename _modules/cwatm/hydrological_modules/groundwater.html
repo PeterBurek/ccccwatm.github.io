@@ -1,99 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>cwatm.hydrological_modules.groundwater &mdash; Community Water Model</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/iiasa.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/iiasa.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../index.html" class="icon icon-home"> Community Water Model
           
-
-          
-            
-            <img src="../../../_static/iiasa_logo_white.png" class="logo" alt="Logo"/>
-          
+          <a href="../../../index.html" class="icon icon-home">
+            Community Water Model
+              <img src="../../../_static/IIASA_logo_white.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
               <div class="version">
                 1.0.6
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modeldesign.html">2. Model Design</a></li>
@@ -114,69 +63,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../forum.html">17. Forum</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">Community Water Model</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-        
-      <li>cwatm.hydrological_modules.groundwater</li>
-    
-    
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cwatm.hydrological_modules.groundwater</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for cwatm.hydrological_modules.groundwater</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -------------------------------------------------------------------------</span>
 <span class="c1"># Name:        Groundwater module</span>
@@ -198,24 +108,21 @@
 
 <span class="sd">    **Global variables**</span>
 
-<span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    Variable [self.var]   Description                                                                       Unit     </span>
-<span class="sd">    ====================  ================================================================================  =========</span>
-<span class="sd">    storGroundwater       simulated groundwater storage                                                     m        </span>
-<span class="sd">    specificYield         groundwater reservoir parameters (if ModFlow is not used) used to compute ground  m        </span>
-<span class="sd">    recessionCoeff        groundwater storage times this coefficient gives baseflow                         --       </span>
-<span class="sd">    kSatAquifer           groundwater reservoir parameters (if ModFlow is not used), could be used to comp  m day-1  </span>
-<span class="sd">    load_initial                                                                                                     </span>
-<span class="sd">    readAvlStorGroundwat  same as storGroundwater but equal to 0 when inferior to a treshold                m        </span>
-<span class="sd">    pumping_actual                                                                                                   </span>
-<span class="sd">    prestorGroundwater    storGroundwater at the beginning of each step                                     m        </span>
-<span class="sd">    sum_gwRecharge        groundwater recharge                                                              m        </span>
-<span class="sd">    modflow               Flag: True if modflow_coupling = True in settings file                            --       </span>
-<span class="sd">    gwstore                                                                                                          </span>
-<span class="sd">    capillar              Simulated flow from groundwater to the third CWATM soil layer                     m        </span>
-<span class="sd">    baseflow              simulated baseflow (= groundwater discharge to river)                             m        </span>
-<span class="sd">    nonFossilGroundwater  groundwater abstraction which is sustainable and not using fossil resources       m        </span>
-<span class="sd">    ====================  ================================================================================  =========</span>
+<span class="sd">    =====================================  ======================================================================  =====</span>
+<span class="sd">    Variable [self.var]                    Description                                                             Unit </span>
+<span class="sd">    =====================================  ======================================================================  =====</span>
+<span class="sd">    modflow                                Flag: True if modflow_coupling = True in settings file                  --   </span>
+<span class="sd">    load_initial                           Settings initLoad holds initial conditions for variables                input</span>
+<span class="sd">    storGroundwater                        Groundwater storage (non-fossil). This is primarily used when not usin  m    </span>
+<span class="sd">    specificYield                          groundwater reservoir parameters (if ModFlow is not used) used to comp  m    </span>
+<span class="sd">    recessionCoeff                         groundwater storage times this coefficient gives baseflow               frac </span>
+<span class="sd">    readAvlStorGroundwater                 same as storGroundwater but equal to 0 when inferior to a treshold      m    </span>
+<span class="sd">    prestorGroundwater                     storGroundwater at the beginning of each step                           m    </span>
+<span class="sd">    sum_gwRecharge                         groundwater recharge                                                    m    </span>
+<span class="sd">    baseflow                               simulated baseflow (= groundwater discharge to river)                   m    </span>
+<span class="sd">    capillar                               Flow from groundwater to the third CWATM soil layer. Used with MODFLOW  m    </span>
+<span class="sd">    nonFossilGroundwaterAbs                Non-fossil groundwater abstraction. Used primarily without MODFLOW.     m    </span>
+<span class="sd">    =====================================  ======================================================================  =====</span>
 
 <span class="sd">    **Functions**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -238,17 +145,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span> <span class="o">*</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;recessionCoeff_factor&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span>
 
-
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;specificYield&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">kSatAquifer</span> <span class="o">=</span> <span class="n">loadmap</span><span class="p">(</span><span class="s1">&#39;kSatAquifer&#39;</span><span class="p">)</span>
 
         <span class="c1"># init calculation recession coefficient, speciefic yield, ksatAquifer</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">5.e-4</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.000</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.010</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.000</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">kSatAquifer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.010</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">kSatAquifer</span><span class="p">)</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">5.e-4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.000</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.010</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.000</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">specificYield</span><span class="p">)</span>
 
         <span class="c1"># initial conditions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">load_initial</span><span class="p">(</span><span class="s1">&#39;storGroundwater&#39;</span><span class="p">)</span>
@@ -256,16 +159,8 @@
 
         <span class="c1"># for water demand to have some initial value</span>
         <span class="n">tresholdStorGroundwater</span> <span class="o">=</span> <span class="mf">0.00001</span>  <span class="c1"># 0.01 mm</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">readAvlStorGroundwater</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">&gt;</span> <span class="n">tresholdStorGroundwater</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">-</span> <span class="n">tresholdStorGroundwater</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">pumping_actual</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">capillar</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">gwstore</span> <span class="o">=</span> <span class="nb">globals</span><span class="o">.</span><span class="n">inZero</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
-
-        <span class="c1">#PB for Bejing</span>
-        <span class="c1">#self.var.area1 = loadmap(&#39;MaskMap&#39;)</span>
-        <span class="c1">#ii = 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">readAvlStorGroundwater</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">&gt;</span> <span class="n">tresholdStorGroundwater</span><span class="p">,</span>
+                                                   <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">-</span> <span class="n">tresholdStorGroundwater</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span></div>
 
 
 <span class="c1"># --------------------------------------------------------------------------</span>
@@ -273,7 +168,7 @@
 <div class="viewcode-block" id="groundwater.dynamic"><a class="viewcode-back" href="../../../hydrological_modules.html#cwatm.hydrological_modules.groundwater.groundwater.dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic part of the groundwater module</span>
-<span class="sd">        Calculate groundweater storage and baseflow</span>
+<span class="sd">        Calculate groundwater storage and baseflow</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
@@ -286,12 +181,6 @@
         <span class="c1"># unmetDemand (m), satisfied by fossil gwAbstractions (and/or desalinization or other sources)</span>
         <span class="c1"># (equal to zero if limitAbstraction = True)</span>
 
-
-
-        <span class="c1"># get riverbed infiltration from the previous time step (from routing)</span>
-        <span class="c1">#self_.var_.surfaceWaterInf = self.var._riverbedExchange * self.var.InvCellArea</span>
-        <span class="c1">#self.var.storGroundwater = self.var.storGroundwater + self_.var_.surfaceWaterInf</span>
-
         <span class="c1"># get net recharge (percolation-capRise) and update storage:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">sum_gwRecharge</span><span class="p">)</span>
 
@@ -300,8 +189,6 @@
            <span class="c1"># Groundwater baseflow from modflow or if modflow is not included calculate baseflow with linear storage function</span>
            <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">recessionCoeff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span><span class="p">))</span>
 
-        <span class="c1">#MS</span>
-        <span class="c1">#self.var.storGroundwater = np.maximum(0., self.var.storGroundwater - self.var.baseflow - self.var.capillar)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">baseflow</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">modflow</span><span class="p">:</span>
             <span class="c1"># In the non-MODFLOW version, capillary rise is already dealt with previously be being removed from groundwater recharge</span>
@@ -310,54 +197,6 @@
         <span class="c1"># to avoid small values and to avoid excessive abstractions from dry groundwater</span>
         <span class="n">tresholdStorGroundwater</span> <span class="o">=</span> <span class="mf">0.00001</span>  <span class="c1"># 0.01 mm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">readAvlStorGroundwater</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">&gt;</span> <span class="n">tresholdStorGroundwater</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">storGroundwater</span> <span class="o">-</span> <span class="n">tresholdStorGroundwater</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)</span>
-
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        ## PB for Bejing</span>
-<span class="sd">        area = self.var.area1.astype(np.int64)</span>
-<span class="sd">        #diff  = 1000*1000*1000.</span>
-<span class="sd">        diff = 1.</span>
-<span class="sd">        #aream =  npareatotal(self.var.cellArea,area)</span>
-
-<span class="sd">        gwstor = self.var.storGroundwater * self.var.MtoM3 / diff</span>
-<span class="sd">        self_.var.sumgwstor = npareatotal(gwstor,area)</span>
-
-<span class="sd">        pf = self_.var.sum_prefFlow * self.var.MtoM3 / diff</span>
-<span class="sd">        self_.var.sumpf = npareatotal(pf,area)</span>
-
-<span class="sd">        perc = self.var.sum_perc3toGW * self.var.MtoM3 / diff</span>
-<span class="sd">        self_.var.sumperc = npareatotal(perc,area)</span>
-
-<span class="sd">        cap = self_.var.sum_capRiseFromGW * self.var.MtoM3 / diff</span>
-<span class="sd">        self_.var.sumcap = npareatotal(cap,area)</span>
-
-
-
-<span class="sd">        gw = self.var.sum_gwRecharge * self.var.MtoM3 / diff</span>
-<span class="sd">        self_.var.sumgw = npareatotal(gw,area)</span>
-
-
-<span class="sd">        gw = self.var.sum_gwRecharge * self.var.MtoM3 / diff</span>
-<span class="sd">        self._var.sumgw = npareatotal(gw,area)</span>
-
-
-<span class="sd">        #pr = self.var.Precipitation * self.var.MtoM3 / diff</span>
-<span class="sd">        #self.var._sumpr = npareatotal(pr,area)</span>
-<span class="sd">        self.var._avgpr = npareaaverage(self.var.Precipitation, area)</span>
-<span class="sd">        run = (self.var.sum_landSurfaceRunoff + self.var.baseflow) * self.var.MtoM3 / diff</span>
-<span class="sd">        self.var._sumrunoff = npareatotal(run,area)</span>
-<span class="sd">        et = self.var.totalET * self.var.MtoM3 / diff</span>
-<span class="sd">        self_.var.sumtotalET = npareatotal(et, area)</span>
-
-<span class="sd">        etpot = self.var.ETRef * self.var.MtoM3 / diff</span>
-<span class="sd">        self_.var.sumETRef = npareatotal(etpot, area)</span>
-
-<span class="sd">        base = self.var.baseflow * self.var.MtoM3 / diff</span>
-<span class="sd">        self_.var.sumbaseflow = npareatotal(base, area)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-
 
 
         <span class="k">if</span> <span class="n">checkOption</span><span class="p">(</span><span class="s1">&#39;calcWaterBalance&#39;</span><span class="p">):</span>
@@ -374,46 +213,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, IIASA Water Security.
-
-    </p>
+    <p>&#169; Copyright 2021, IIASA Water Security.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
